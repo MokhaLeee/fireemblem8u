@@ -1541,8 +1541,8 @@ extern u16 gUnknown_0859EFC0[];
 // extern ??? Img_PhaseChangeOther
 // extern ??? Pal_PhaseChangeOther
 // extern ??? Img_PhaseChangeSquares
-// extern ??? gUnknown_085A0838
-// extern ??? gUnknown_085A08F0
+// extern ??? TSA_unk_085A0838
+// extern ??? TSA_unk_085A08F0
 // extern ??? gTSA_BattleForecastStandard
 // extern ??? gTSA_BattleForecastExtended
 // extern ??? gBattleForecast_x2x4Gfx

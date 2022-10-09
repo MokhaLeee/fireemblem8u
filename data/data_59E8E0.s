@@ -78,59 +78,60 @@ gUnknown_0859F000:  @ 0x0859F000
 
 	.global Img_PhaseChangeUnk
 Img_PhaseChangeUnk:  @ 0x0859F020
-	.incbin "baserom.gba", 0x59F020, 0x3D8
+	.incbin "graphics/bmfx_misc/PhaseChangeUnk.4bpp.lz"
 
 	.global Img_PhaseChangePlayer
 Img_PhaseChangePlayer:  @ 0x0859F3F8
-	.incbin "baserom.gba", 0x59F3F8, 0x634
+	.incbin "graphics/bmfx_misc/PhaseChangePlayer.4bpp.lz"
 
 	.global Pal_PhaseChangePlayer
 Pal_PhaseChangePlayer:  @ 0x0859FA2C
-	.incbin "baserom.gba", 0x59FA2C, 0x20
+	.incbin "graphics/bmfx_misc/PhaseChangePlayer.gbapal", 0x0, 0x20
 
 	.global Img_PhaseChangeEnemy
 Img_PhaseChangeEnemy:  @ 0x0859FA4C
-	.incbin "baserom.gba", 0x59FA4C, 0x61C
+	.incbin "graphics/bmfx_misc/PhaseChangeEnemy.4bpp.lz"
 
 	.global Pal_PhaseChangeEnemy
 Pal_PhaseChangeEnemy:  @ 0x085A0068
-	.incbin "baserom.gba", 0x5A0068, 0x20
+	.incbin "graphics/bmfx_misc/PhaseChangeEnemy.gbapal", 0x0, 0x20
 
 	.global Img_PhaseChangeOther
 Img_PhaseChangeOther:  @ 0x085A0088
-	.incbin "baserom.gba", 0x5A0088, 0x610
+	.incbin "graphics/bmfx_misc/PhaseChangeOther.4bpp.lz"
 
 	.global Pal_PhaseChangeOther
 Pal_PhaseChangeOther:  @ 0x085A0698
-	.incbin "baserom.gba", 0x5A0698, 0x40
+	.incbin "graphics/bmfx_misc/PhaseChangeOther.gbapal", 0x0, 0x40
+	/* I think that the palette is only 0x20 long, so here may be lie a bug */
 
 	.global Img_PhaseChangeSquares
 Img_PhaseChangeSquares:  @ 0x085A06D8
-	.incbin "baserom.gba", 0x5A06D8, 0x160
+	.incbin "graphics/bmfx_misc/PhaseChangeSquares.4bpp.lz"
 
-	.global gUnknown_085A0838
-gUnknown_085A0838:  @ 0x085A0838
-	.incbin "baserom.gba", 0x5A0838, 0xB8
+	.global TSA_unk_085A0838
+TSA_unk_085A0838:  @ 0x085A0838
+	.incbin "graphics/bmfx_misc/TSA_unk_085A0838.tsa.bin"
 
-	.global gUnknown_085A08F0
-gUnknown_085A08F0:  @ 0x085A08F0
-	.incbin "baserom.gba", 0x5A08F0, 0xB8
+	.global TSA_unk_085A08F0
+TSA_unk_085A08F0:  @ 0x085A08F0
+	.incbin "graphics/bmfx_misc/TSA_unk_085A08F0.tsa.bin"
 
 	.global gTSA_BattleForecastStandard
 gTSA_BattleForecastStandard:  @ 0x085A09A8
-	.incbin "baserom.gba", 0x5A09A8, 0x144
+	.incbin "graphics/bmfx_misc/BattleForecastStandard.tsa.bin"
 
 	.global gTSA_BattleForecastExtended
 gTSA_BattleForecastExtended:  @ 0x085A0AEC
-	.incbin "baserom.gba", 0x5A0AEC, 0x194
+	.incbin "graphics/bmfx_misc/BattleForecastExtended.tsa.bin"
 
 	.global gBattleForecast_x2x4Gfx
 gBattleForecast_x2x4Gfx:  @ 0x085A0C80
-	.incbin "baserom.gba", 0x5A0C80, 0xAC
+	.incbin "graphics/bmfx_misc/BattleForecast_x2x4.4bpp.lz"
 
 	.global gBattleForecast_x2x4Pal
 gBattleForecast_x2x4Pal:  @ 0x085A0D2C
-	.incbin "baserom.gba", 0x5A0D2C, 0x20
+	.incbin "graphics/bmfx_misc/BattleForecast_x2x4.gbapal", 0x0, 0x20
 
 	.global gUnknown_085A0D4C
 gUnknown_085A0D4C:  @ 0x085A0D4C
@@ -150,23 +151,23 @@ SpriteAnim_GasTrapHorizontal:  @ 0x085A129C
 
 	.global Img_GasTrapVertical
 Img_GasTrapVertical:  @ 0x085A1510
-	.incbin "baserom.gba", 0x5A1510, 0x5E8
+	.incbin "graphics/bmfx_misc/GasTrapVertical.4bpp.lz"
 
 	.global Img_GasTrapHorizontal
 Img_GasTrapHorizontal:  @ 0x085A1AF8
-	.incbin "baserom.gba", 0x5A1AF8, 0x574
+	.incbin "graphics/bmfx_misc/GasTrapHorizontal.4bpp.lz"
 
 	.global Pal_GasTrap
 Pal_GasTrap:  @ 0x085A206C
-	.incbin "baserom.gba", 0x5A206C, 0x20
+	.incbin "graphics/bmfx_misc/GasTrapHorizontal.gbapal", 0x0, 0x20
 
 	.global Pal_ArrowTrap
 Pal_ArrowTrap:  @ 0x085A208C
-	.incbin "baserom.gba", 0x5A208C, 0x20
+	.incbin "graphics/bmfx_misc/ArrowTrap.gbapal", 0x0, 0x20
 
 	.global Img_ArrowTrap
 Img_ArrowTrap:  @ 0x085A20AC
-	.incbin "baserom.gba", 0x5A20AC, 0x2D8
+	.incbin "graphics/bmfx_misc/ArrowTrap.4bpp.lz"
 
 	.global SpriteAnim_ArrowTrap
 SpriteAnim_ArrowTrap:  @ 0x085A2384
@@ -174,11 +175,11 @@ SpriteAnim_ArrowTrap:  @ 0x085A2384
 
 	.global Img_FireTrap
 Img_FireTrap:  @ 0x085A2940
-	.incbin "baserom.gba", 0x5A2940, 0x49C
+	.incbin "graphics/bmfx_misc/FireTrap.4bpp.lz"
 
 	.global Pal_FireTrap
 Pal_FireTrap:  @ 0x085A2DDC
-	.incbin "baserom.gba", 0x5A2DDC, 0x20
+	.incbin "graphics/bmfx_misc/FireTrap.gbapal", 0x0, 0x20
 
 	.global SpriteAnim_FireTrap
 SpriteAnim_FireTrap:  @ 0x085A2DFC

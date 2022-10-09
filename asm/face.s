@@ -910,7 +910,7 @@ sub_8005B78: @ 0x08005B78
 	ldrb r5, [r2, #0x14]
 	subs r5, #1
 	ldrb r4, [r2, #0x15]
-	ldr r1, _08005BC8  @ gUnknown_085A0838
+	ldr r1, _08005BC8  @ TSA_unk_085A0838
 	lsls r2, r7, #0x10
 	lsrs r2, r2, #0x10
 	bl CallARM_FillTileRect
@@ -944,7 +944,7 @@ sub_8005B78: @ 0x08005B78
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08005BC8: .4byte gUnknown_085A0838
+_08005BC8: .4byte TSA_unk_085A0838
 
 	THUMB_FUNC_END sub_8005B78
 
@@ -957,7 +957,7 @@ sub_8005BCC: @ 0x08005BCC
 	subs r5, #1
 	ldrb r4, [r2, #0x15]
 	subs r4, #1
-	ldr r1, _08005C20  @ gUnknown_085A08F0
+	ldr r1, _08005C20  @ TSA_unk_085A08F0
 	lsls r2, r7, #0x10
 	lsrs r2, r2, #0x10
 	bl CallARM_FillTileRect
@@ -991,7 +991,7 @@ sub_8005BCC: @ 0x08005BCC
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08005C20: .4byte gUnknown_085A08F0
+_08005C20: .4byte TSA_unk_085A08F0
 
 	THUMB_FUNC_END sub_8005BCC
 

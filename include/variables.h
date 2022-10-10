@@ -1566,12 +1566,12 @@ extern u16 CONST_DATA gUnknown_085A0EA0[]; // ap
 // extern ??? Pal_PikeTrap
 
 // Weather graphics
-extern const u8  gUnknown_085A3964[]; // sandstorm particle 4bpp image (compressed)
-extern const u8  gUnknown_085A39EC[]; // snowstorm particle 4bpp image (compressed)
-extern const u8  gUnknown_085A3A84[]; // flames particle 4bpp image (compressed)
-extern const u16 gUnknown_085A3AC0[]; // flames particle palette
-extern const u8  gUnknown_085A3B00[]; // clouds 4bpp image (compressed)
-extern const u16 gUnknown_085A401C[]; // clouds palette
+extern const u8  Img_WfxSnowStorm1[]; // sandstorm particle 4bpp image (compressed)
+extern const u8  Img_WfxSnowStorm2[]; // snowstorm particle 4bpp image (compressed)
+extern const u8  Img_WfxFrame[]; // flames particle 4bpp image (compressed)
+extern const u16 Pal_WfxFrame[]; // flames particle palette
+extern const u8  Img_WfxClouds[]; // clouds 4bpp image (compressed)
+extern const u16 Pal_WfxClouds[]; // clouds palette
 
 extern u16 CONST_DATA Img_LightRune[];
 extern u16 CONST_DATA Pal_LightRune[];

@@ -453,7 +453,7 @@ void WfxSandStorm_Init(void) {
 
     AllocWeatherParticles(gRAMChapterData.chapterWeatherId);
 
-    CopyDataWithPossibleUncomp(gUnknown_085A3964, gUnknown_02020188);
+    CopyDataWithPossibleUncomp(Img_WfxSnowStorm1, gUnknown_02020188);
     CopyTileGfxForObj(gUnknown_02020188, OBJ_VRAM0 + 0x1C * 0x20, 4, 4);
 
     for (i = 0; i < 0x40; ++i) {
@@ -493,7 +493,7 @@ void WfxSnowStorm_Init(void) {
 
     AllocWeatherParticles(gRAMChapterData.chapterWeatherId);
 
-    CopyDataWithPossibleUncomp(gUnknown_085A39EC, gUnknown_02020188);
+    CopyDataWithPossibleUncomp(Img_WfxSnowStorm2, gUnknown_02020188);
     CopyTileGfxForObj(gUnknown_02020188, OBJ_VRAM0 + 0x18 * 0x20, 8, 4);
 
     for (i = 0; i < 0x40; ++i) {
@@ -648,8 +648,8 @@ void WfxFlamesInitParticles(void) {
     int i;
 
     AllocWeatherParticles(gRAMChapterData.chapterWeatherId);
-    CopyDataWithPossibleUncomp(gUnknown_085A3A84, OBJ_VRAM0 + 0x18 * 0x20);
-    CopyToPaletteBuffer(gUnknown_085A3AC0, 0x340, 0x20);
+    CopyDataWithPossibleUncomp(Img_WfxFrame, OBJ_VRAM0 + 0x18 * 0x20);
+    CopyToPaletteBuffer(Pal_WfxFrame, 0x340, 0x20);
 
     for (i = 0; i < 0x10; ++i) {
         sWeatherEffect.particles[i].xPosition = AdvanceGetLCGRNValue();
@@ -770,12 +770,12 @@ void WfxClouds_Init(void) {
     AllocWeatherParticles(WEATHER_NONE);
 
     CopyDataWithPossibleUncomp(
-        gUnknown_085A3B00,
+        Img_WfxClouds,
         sWeatherEffect.gfxData
     );
 
     CopyToPaletteBuffer(
-        gUnknown_085A401C,
+        Pal_WfxClouds,
         ((0x10 + BM_OBJPAL_10) * 0x10 * sizeof(u16)),
         0x10 * sizeof(u16)
     );

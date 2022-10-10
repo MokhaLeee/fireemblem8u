@@ -102,8 +102,11 @@ Img_PhaseChangeOther:  @ 0x085A0088
 
 	.global Pal_PhaseChangeOther
 Pal_PhaseChangeOther:  @ 0x085A0698
-	.incbin "graphics/bmfx_misc/PhaseChangeOther.gbapal", 0x0, 0x40
+	.incbin "graphics/bmfx_misc/PhaseChangeOther.gbapal", 0x0, 0x20
 	/* I think that the palette is only 0x20 long, so here may be lie a bug */
+
+unk_85A06B8: @ 0x085A06B8
+	.incbin "baserom.gba", 0x5A06B8, 0x20
 
 	.global Img_PhaseChangeSquares
 Img_PhaseChangeSquares:  @ 0x085A06D8
@@ -187,11 +190,11 @@ SpriteAnim_FireTrap:  @ 0x085A2DFC
 
 	.global Pal_FireTrap2
 Pal_FireTrap2:  @ 0x085A3490
-	.incbin "baserom.gba", 0x5A3490, 0x20
+	.incbin "graphics/bmfx_misc/FireTrap2.gbapal", 0x0, 0x20
 
 	.global Img_PikeTrap
 Img_PikeTrap:  @ 0x085A34B0
-	.incbin "baserom.gba", 0x5A34B0, 0x280
+	.incbin "graphics/bmfx_misc/PikeTrap.4bpp.lz"
 
 	.global SpriteAnim_PikeTrap
 SpriteAnim_PikeTrap:  @ 0x085A3730
@@ -199,31 +202,34 @@ SpriteAnim_PikeTrap:  @ 0x085A3730
 
 	.global Pal_PikeTrap
 Pal_PikeTrap:  @ 0x085A3944
-	.incbin "baserom.gba", 0x5A3944, 0x20
+	.incbin "graphics/bmfx_misc/PikeTrap.gbapal", 0x0, 0x20
 
-	.global gUnknown_085A3964
-gUnknown_085A3964:  @ 0x085A3964
+	.global Img_WfxSnowStorm1
+Img_WfxSnowStorm1:  @ 0x085A3964
 	.incbin "baserom.gba", 0x5A3964, 0x88
 
-	.global gUnknown_085A39EC
-gUnknown_085A39EC:  @ 0x085A39EC
+	.global Img_WfxSnowStorm2
+Img_WfxSnowStorm2:  @ 0x085A39EC
 	.incbin "baserom.gba", 0x5A39EC, 0x98
 
-	.global gUnknown_085A3A84
-gUnknown_085A3A84:  @ 0x085A3A84
-	.incbin "baserom.gba", 0x5A3A84, 0x3C
+	.global Img_WfxFrame
+Img_WfxFrame:  @ 0x085A3A84
+	.incbin "graphics/bmfx_misc/WfxFrame.4bpp.lz"
 
-	.global gUnknown_085A3AC0
-gUnknown_085A3AC0:  @ 0x085A3AC0
-	.incbin "baserom.gba", 0x5A3AC0, 0x40
+	.global Pal_WfxFrame
+Pal_WfxFrame:  @ 0x085A3AC0
+	.incbin "graphics/bmfx_misc/WfxFrame.gbapal", 0x0, 0x20
 
-	.global gUnknown_085A3B00
-gUnknown_085A3B00:  @ 0x085A3B00
-	.incbin "baserom.gba", 0x5A3B00, 0x51C
+unk_85A3AE0: @ 0x085A3AE0
+	.incbin "baserom.gba", 0x5A3AE0, 0x20
 
-	.global gUnknown_085A401C
-gUnknown_085A401C:  @ 0x085A401C
-	.incbin "baserom.gba", 0x5A401C, 0x20
+	.global Img_WfxClouds
+Img_WfxClouds:  @ 0x085A3B00
+	.incbin "graphics/bmfx_misc/WfxClouds.4bpp.lz"
+
+	.global Pal_WfxClouds
+Pal_WfxClouds:  @ 0x085A401C
+	.incbin "graphics/bmfx_misc/WfxClouds.gbapal", 0x0, 0x20
 
 	.global Img_LightRune
 Img_LightRune:  @ 0x085A403C

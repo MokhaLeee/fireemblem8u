@@ -56,7 +56,7 @@ void sub_801240C();
 // code.s
 s8 IsCharacterForceDeployed(int);
 void SortPlayerUnitsForPrepScreen();
-bool8 sub_8094FF4();
+u8 sub_8094FF4();
 int sub_809541C();
 int sub_8095970();
 void sub_8096454(ProcPtr);
@@ -553,7 +553,7 @@ void PrepScreenProc_StartMapMenu(struct UnknownSALLYCURSORProc* proc) {
 
     SetPrepScreenMenuItem(8, *PrepMapMenu_OnOptions, 0, 0x592, 0x5BD);
 
-    if ((sub_8094FF4() << 0x18) != 0) {
+    if (sub_8094FF4() != 0) {
         SetPrepScreenMenuItem(9, *PrepMapMenu_OnSave, 0, 0x579, 0x5BE);
     } else {
         SetPrepScreenMenuItem(9, *PrepMapMenu_OnSave, 1, 0x579, 0x5BE);

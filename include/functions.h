@@ -3910,7 +3910,7 @@ s8 IsCharacterForceDeployed(int char_id);
 // ??? sub_809541C(???);
 // ??? SomeLeftoverFunctionThatReturns0(???);
 s8 IsUnitInCurrentRoster(struct Unit *unit);
-// ??? sub_8095498(???);
+// ??? AtMenu_AddPrepScreenSupportMenuItem(???);
 s8 CanPrepScreenCheckMap();
 void AtMenu_InitPrepScreenMenu(struct ProcAtMenu*);
 // ??? sub_8095674(???);

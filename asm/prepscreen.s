@@ -47,7 +47,7 @@ AtMenu_InitPrepScreenMenu: @ 0x08095524
 	movs r2, #0
 	bl SetPrepScreenMenuItem
 	adds r0, r5, #0
-	bl sub_8095498
+	bl AtMenu_AddPrepScreenSupportMenuItem
 	bl CanPrepScreenCheckMap
 	lsls r0, r0, #0x18
 	asrs r0, r0, #0x18

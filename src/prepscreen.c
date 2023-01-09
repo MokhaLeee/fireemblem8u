@@ -207,8 +207,7 @@ s8 IsUnitInCurrentRoster(struct Unit *unit)
     return 1;
 }
 
-// AtMenu_AddPrepScreenSupportMenuItem
-void sub_8095498(struct ProcAtMenu *proc)
+void AtMenu_AddPrepScreenSupportMenuItem(struct ProcAtMenu *proc)
 {
     int i;
     int color = 0;
@@ -229,3 +228,4 @@ void sub_8095498(struct ProcAtMenu *proc)
 
     SetPrepScreenMenuItem(4, PrepScreenMenu_OnSupport, color, 0x577, 0);
 }
+

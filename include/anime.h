@@ -188,9 +188,9 @@ void AnimDelete(struct Anim * anim);
 void AnimDisplay(struct Anim * anim);
 
 bool PrepareBattleGraphicsMaybe(void);
-u16 sub_8057CAC(struct Unit * unit, const struct BattleAnimDef * pBattleAnimDef, u16, int * out);
-s8 sub_8057DA8(u16, u16);
-s8 sub_8057ED0(u16, u16);
+u16 GetBanimTriUnitPaletteID(struct Unit * unit, const struct BattleAnimDef * pBattleAnimDef, u16, int * out);
+s8 GetAnimTerrain(u16, u16);
+s8 GetBanimBackGround(u16, u16);
 // ??? GetSpellAnimId(???);
 // ??? sub_80581A0(???);
 void ParseBattleHitToBanimCmd(void);

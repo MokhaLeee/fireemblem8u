@@ -163,7 +163,9 @@ SECTIONS
         src/banim-ekrbattlestarting.o(.text);
         src/banim-ekrbattleending.o(.text);
         src/banim-ekrbattleintro.o(.text);
-        asm/banim-ekrcheckenable.o(.text);
+        asm/banim-checken.o(.text);
+        asm/banim-prepare.o(.text);
+        asm/banim-cmdparse.o(.text);
         src/banim-ekrcmd.o(.text);
         src/banim-main.o(.text);
         src/banim-ekrmain.o(.text);
@@ -257,6 +259,7 @@ SECTIONS
         asm/savedraw.o(.text);
         src/savedrawcursor.o(.text);
         src/difficultymenu.o(.text);
+        asm/code_80AC6AC.o(.text);
         asm/code_80A882C.o(.text);
         src/soundroom.o(.text);
         src/extramenu_unk.o(.text);

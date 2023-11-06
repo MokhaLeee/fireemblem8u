@@ -1,16 +1,16 @@
 #include "banim_data.h"
 __attribute__((section(".data.banim_array")))
 struct BattleAnim banim_data[] = {
-	{"lorm_sp1", &banim_lorm_sp1_modes_bin, &banim_lorm_sp1_motion_o, &banim_lorm_sp1_oam_r_bin, &banim_lorm_sp1_oam_l_bin, &banim_lorm_sp1_agbpal}, // 0x0
-	{"lorm_sp1", &banim_lorm_sp1_2_modes_bin, &banim_lorm_sp1_2_motion_o, &banim_lorm_sp1_2_oam_r_bin, &banim_lorm_sp1_2_oam_l_bin, &banim_lorm_sp1_2_agbpal}, // 0x1
-	{"lorf_sw1", &banim_lorf_sw1_modes_bin, &banim_lorf_sw1_motion_o, &banim_lorf_sw1_oam_r_bin, &banim_lorf_sw1_oam_l_bin, &banim_lorf_sw1_agbpal}, // 0x2
-	{"lorf_sw1", &banim_lorf_sw1_2_modes_bin, &banim_lorf_sw1_2_motion_o, &banim_lorf_sw1_2_oam_r_bin, &banim_lorf_sw1_2_oam_l_bin, &banim_lorf_sw1_2_agbpal}, // 0x3
-	{"lomm_sp1", &banim_lomm_sp1_modes_bin, &banim_lomm_sp1_motion_o, &banim_lomm_sp1_oam_r_bin, &banim_lomm_sp1_oam_l_bin, &banim_lomm_sp1_agbpal}, // 0x4
-	{"lorf_sw1", &banim_lorf_sw1_3_modes_bin, &banim_lorf_sw1_3_motion_o, &banim_lorf_sw1_3_oam_r_bin, &banim_lorf_sw1_3_oam_l_bin, &banim_lorf_sw1_3_agbpal}, // 0x5
-	{"lomm_sp1", &banim_lomm_sp1_2_modes_bin, &banim_lomm_sp1_2_motion_o, &banim_lomm_sp1_2_oam_r_bin, &banim_lomm_sp1_2_oam_l_bin, &banim_lomm_sp1_2_agbpal}, // 0x6
-	{"lomf_sw1", &banim_lomf_sw1_modes_bin, &banim_lomf_sw1_motion_o, &banim_lomf_sw1_oam_r_bin, &banim_lomf_sw1_oam_l_bin, &banim_lomf_sw1_agbpal}, // 0x7
-	{"lorf_sw1", &banim_lorf_sw1_4_modes_bin, &banim_lorf_sw1_4_motion_o, &banim_lorf_sw1_4_oam_r_bin, &banim_lorf_sw1_4_oam_l_bin, &banim_lorf_sw1_4_agbpal}, // 0x8
-	{"lomf_sw1", &banim_lomf_sw1_2_modes_bin, &banim_lomf_sw1_2_motion_o, &banim_lomf_sw1_2_oam_r_bin, &banim_lomf_sw1_2_oam_l_bin, &banim_lomf_sw1_2_agbpal}, // 0x9
+	{"merm_sw1", &banim_merm_sw1_modes_bin, &banim_merm_sw1_motion_o, &banim_merm_sw1_oam_r_bin, &banim_merm_sw1_oam_l_bin, &banim_merm_sw1_agbpal}, 
+	{"merm_sw1", &banim_merm_sw1_modes_bin, &banim_merm_sw1_motion_o, &banim_merm_sw1_oam_r_bin, &banim_merm_sw1_oam_l_bin, &banim_merm_sw1_agbpal}, 
+	{"merm_sw1", &banim_merm_sw1_modes_bin, &banim_merm_sw1_motion_o, &banim_merm_sw1_oam_r_bin, &banim_merm_sw1_oam_l_bin, &banim_merm_sw1_agbpal}, 
+	{"merm_sw1", &banim_merm_sw1_modes_bin, &banim_merm_sw1_motion_o, &banim_merm_sw1_oam_r_bin, &banim_merm_sw1_oam_l_bin, &banim_merm_sw1_agbpal}, 
+	{"merm_sw1", &banim_merm_sw1_modes_bin, &banim_merm_sw1_motion_o, &banim_merm_sw1_oam_r_bin, &banim_merm_sw1_oam_l_bin, &banim_merm_sw1_agbpal}, 
+	{"merm_sw1", &banim_merm_sw1_modes_bin, &banim_merm_sw1_motion_o, &banim_merm_sw1_oam_r_bin, &banim_merm_sw1_oam_l_bin, &banim_merm_sw1_agbpal}, 
+	{"merm_sw1", &banim_merm_sw1_modes_bin, &banim_merm_sw1_motion_o, &banim_merm_sw1_oam_r_bin, &banim_merm_sw1_oam_l_bin, &banim_merm_sw1_agbpal}, 
+	{"merm_sw1", &banim_merm_sw1_modes_bin, &banim_merm_sw1_motion_o, &banim_merm_sw1_oam_r_bin, &banim_merm_sw1_oam_l_bin, &banim_merm_sw1_agbpal}, 
+	{"merm_sw1", &banim_merm_sw1_modes_bin, &banim_merm_sw1_motion_o, &banim_merm_sw1_oam_r_bin, &banim_merm_sw1_oam_l_bin, &banim_merm_sw1_agbpal}, 
+	{"merm_sw1", &banim_merm_sw1_modes_bin, &banim_merm_sw1_motion_o, &banim_merm_sw1_oam_r_bin, &banim_merm_sw1_oam_l_bin, &banim_merm_sw1_agbpal}, 
 	{"merm_sw1", &banim_merm_sw1_modes_bin, &banim_merm_sw1_motion_o, &banim_merm_sw1_oam_r_bin, &banim_merm_sw1_oam_l_bin, &banim_merm_sw1_agbpal}, // 0xA
 	{"merm_sw1", &banim_merm_sw1_2_modes_bin, &banim_merm_sw1_2_motion_o, &banim_merm_sw1_2_oam_r_bin, &banim_merm_sw1_2_oam_l_bin, &banim_merm_sw1_2_agbpal}, // 0xB
 	{"bram_sw1", &banim_bram_sw1_modes_bin, &banim_bram_sw1_motion_o, &banim_bram_sw1_oam_r_bin, &banim_bram_sw1_oam_l_bin, &banim_bram_sw1_agbpal}, // 0xC
@@ -157,42 +157,41 @@ struct BattleAnim banim_data[] = {
 	{"pirm_ax1", &banim_pirm_ax1_modes_bin, &banim_pirm_ax1_motion_o, &banim_pirm_ax1_oam_r_bin, &banim_pirm_ax1_oam_l_bin, &banim_pirm_ax1_agbpal}, // 0x99
 	{"pirm_ax1", &banim_pirm_ax1_2_modes_bin, &banim_pirm_ax1_2_motion_o, &banim_pirm_ax1_2_oam_r_bin, &banim_pirm_ax1_2_oam_l_bin, &banim_pirm_ax1_2_agbpal}, // 0x9A
 	{"pirm_ax1", &banim_pirm_ax1_3_modes_bin, &banim_pirm_ax1_3_motion_o, &banim_pirm_ax1_3_oam_r_bin, &banim_pirm_ax1_3_oam_l_bin, &banim_pirm_ax1_3_agbpal}, // 0x9B
-	{"necm_mg1", &banim_necm_mg1_modes_bin, &banim_necm_mg1_motion_o, &banim_necm_mg1_oam_r_bin, &banim_necm_mg1_oam_l_bin, &banim_necm_mg1_agbpal}, // 0x9C
-	{"necm_ro1", &banim_necm_ro1_modes_bin, &banim_necm_ro1_motion_o, &banim_necm_ro1_oam_r_bin, &banim_necm_ro1_oam_l_bin, &banim_necm_ro1_agbpal}, // 0x9D
-	{"stam_ar1", &banim_stam_ar1_modes_bin, &banim_stam_ar1_motion_o, &banim_stam_ar1_oam_r_bin, &banim_stam_ar1_oam_l_bin, &banim_stam_ar1_agbpal}, // 0x9E
-	{"zom_at1", &banim_zom_at1_modes_bin, &banim_zom_at1_motion_o, &banim_zom_at1_oam_r_bin, &banim_zom_at1_oam_l_bin, &banim_zom_at1_agbpal}, // 0x9F
-	{"zom_at1", &banim_zom_at1_2_modes_bin, &banim_zom_at1_2_motion_o, &banim_zom_at1_2_oam_r_bin, &banim_zom_at1_2_oam_l_bin, &banim_zom_at1_2_agbpal}, // 0xA0
-	{"sks_sw1", &banim_sks_sw1_modes_bin, &banim_sks_sw1_motion_o, &banim_sks_sw1_oam_r_bin, &banim_sks_sw1_oam_l_bin, &banim_sks_sw1_agbpal}, // 0xA1
-	{"sks_sp1", &banim_sks_sp1_modes_bin, &banim_sks_sp1_motion_o, &banim_sks_sp1_oam_r_bin, &banim_sks_sp1_oam_l_bin, &banim_sks_sp1_agbpal}, // 0xA2
-	{"sks_sw1", &banim_sks_sw1_2_modes_bin, &banim_sks_sw1_2_motion_o, &banim_sks_sw1_2_oam_r_bin, &banim_sks_sw1_2_oam_l_bin, &banim_sks_sw1_2_agbpal}, // 0xA3
-	{"ska_ar1", &banim_ska_ar1_modes_bin, &banim_ska_ar1_motion_o, &banim_ska_ar1_oam_r_bin, &banim_ska_ar1_oam_l_bin, &banim_ska_ar1_agbpal}, // 0xA4
-	{"sks_sw1", &banim_sks_sw1_3_modes_bin, &banim_sks_sw1_3_motion_o, &banim_sks_sw1_3_oam_r_bin, &banim_sks_sw1_3_oam_l_bin, &banim_sks_sw1_3_agbpal}, // 0xA5
-	{"sks_sw1", &banim_sks_sw1_4_modes_bin, &banim_sks_sw1_4_motion_o, &banim_sks_sw1_4_oam_r_bin, &banim_sks_sw1_4_oam_l_bin, &banim_sks_sw1_4_agbpal}, // 0xA6
-	{"sks_sp1", &banim_sks_sp1_2_modes_bin, &banim_sks_sp1_2_motion_o, &banim_sks_sp1_2_oam_r_bin, &banim_sks_sp1_2_oam_l_bin, &banim_sks_sp1_2_agbpal}, // 0xA7
-	{"sks_sw1", &banim_sks_sw1_5_modes_bin, &banim_sks_sw1_5_motion_o, &banim_sks_sw1_5_oam_r_bin, &banim_sks_sw1_5_oam_l_bin, &banim_sks_sw1_5_agbpal}, // 0xA8
-	{"ska_ar1", &banim_ska_ar1_2_modes_bin, &banim_ska_ar1_2_motion_o, &banim_ska_ar1_2_oam_r_bin, &banim_ska_ar1_2_oam_l_bin, &banim_ska_ar1_2_agbpal}, // 0xA9
-	{"sks_sw1", &banim_sks_sw1_6_modes_bin, &banim_sks_sw1_6_motion_o, &banim_sks_sw1_6_oam_r_bin, &banim_sks_sw1_6_oam_l_bin, &banim_sks_sw1_6_agbpal}, // 0xAA
-	{"bae_at1", &banim_bae_at1_modes_bin, &banim_bae_at1_motion_o, &banim_bae_at1_oam_r_bin, &banim_bae_at1_oam_l_bin, &banim_bae_at1_agbpal}, // 0xAB
-	{"bae_at1", &banim_bae_at1_2_modes_bin, &banim_bae_at1_2_motion_o, &banim_bae_at1_2_oam_r_bin, &banim_bae_at1_2_oam_l_bin, &banim_bae_at1_2_agbpal}, // 0xAC
-	{"cyc_ax1", &banim_cyc_ax1_modes_bin, &banim_cyc_ax1_motion_o, &banim_cyc_ax1_oam_r_bin, &banim_cyc_ax1_oam_l_bin, &banim_cyc_ax1_agbpal}, // 0xAD
-	{"cyc_ax1", &banim_cyc_ax1_2_modes_bin, &banim_cyc_ax1_2_motion_o, &banim_cyc_ax1_2_oam_r_bin, &banim_cyc_ax1_2_oam_l_bin, &banim_cyc_ax1_2_agbpal}, // 0xAE
-	{"cyc_ax1", &banim_cyc_ax1_3_modes_bin, &banim_cyc_ax1_3_motion_o, &banim_cyc_ax1_3_oam_r_bin, &banim_cyc_ax1_3_oam_l_bin, &banim_cyc_ax1_3_agbpal}, // 0xAF
-	{"mdg_at1", &banim_mdg_at1_modes_bin, &banim_mdg_at1_motion_o, &banim_mdg_at1_oam_r_bin, &banim_mdg_at1_oam_l_bin, &banim_mdg_at1_agbpal}, // 0xB0
-	{"cer_at1", &banim_cer_at1_modes_bin, &banim_cer_at1_motion_o, &banim_cer_at1_oam_r_bin, &banim_cer_at1_oam_l_bin, &banim_cer_at1_agbpal}, // 0xB1
-	{"mcd_ax1", &banim_mcd_ax1_modes_bin, &banim_mcd_ax1_motion_o, &banim_mcd_ax1_oam_r_bin, &banim_mcd_ax1_oam_l_bin, &banim_mcd_ax1_agbpal}, // 0xB2
-	{"mcd_ax1", &banim_mcd_ax1_2_modes_bin, &banim_mcd_ax1_2_motion_o, &banim_mcd_ax1_2_oam_r_bin, &banim_mcd_ax1_2_oam_l_bin, &banim_mcd_ax1_2_agbpal}, // 0xB3
-	{"mcd_ax1", &banim_mcd_ax1_3_modes_bin, &banim_mcd_ax1_3_motion_o, &banim_mcd_ax1_3_oam_r_bin, &banim_mcd_ax1_3_oam_l_bin, &banim_mcd_ax1_3_agbpal}, // 0xB4
-	{"mcd_ax1", &banim_mcd_ax1_4_modes_bin, &banim_mcd_ax1_4_motion_o, &banim_mcd_ax1_4_oam_r_bin, &banim_mcd_ax1_4_oam_l_bin, &banim_mcd_ax1_4_agbpal}, // 0xB5
-	{"mcd_ax1", &banim_mcd_ax1_5_modes_bin, &banim_mcd_ax1_5_motion_o, &banim_mcd_ax1_5_oam_r_bin, &banim_mcd_ax1_5_oam_l_bin, &banim_mcd_ax1_5_agbpal}, // 0xB6
-	{"mcd_ar1", &banim_mcd_ar1_modes_bin, &banim_mcd_ar1_motion_o, &banim_mcd_ar1_oam_r_bin, &banim_mcd_ar1_oam_l_bin, &banim_mcd_ar1_agbpal}, // 0xB7
-	{"mcd_ax1", &banim_mcd_ax1_6_modes_bin, &banim_mcd_ax1_6_motion_o, &banim_mcd_ax1_6_oam_r_bin, &banim_mcd_ax1_6_oam_l_bin, &banim_mcd_ax1_6_agbpal}, // 0xB8
-	{"bgl_mg1", &banim_bgl_mg1_modes_bin, &banim_bgl_mg1_motion_o, &banim_bgl_mg1_oam_r_bin, &banim_bgl_mg1_oam_l_bin, &banim_bgl_mg1_agbpal}, // 0xB9
-	{"bgl_mg1", &banim_bgl_mg1_2_modes_bin, &banim_bgl_mg1_2_motion_o, &banim_bgl_mg1_2_oam_r_bin, &banim_bgl_mg1_2_oam_l_bin, &banim_bgl_mg1_2_agbpal}, // 0xBA
-	{"gog_mg1", &banim_gog_mg1_modes_bin, &banim_gog_mg1_motion_o, &banim_gog_mg1_oam_r_bin, &banim_gog_mg1_oam_l_bin, &banim_gog_mg1_agbpal}, // 0xBB
-	{"gar_sp1", &banim_gar_sp1_modes_bin, &banim_gar_sp1_motion_o, &banim_gar_sp1_oam_r_bin, &banim_gar_sp1_oam_l_bin, &banim_gar_sp1_agbpal}, // 0xBC
-	{"gar_sp1", &banim_gar_sp1_2_modes_bin, &banim_gar_sp1_2_motion_o, &banim_gar_sp1_2_oam_r_bin, &banim_gar_sp1_2_oam_l_bin, &banim_gar_sp1_2_agbpal}, // 0xBD
-	{"gar_sp1", &banim_gar_sp1_3_modes_bin, &banim_gar_sp1_3_motion_o, &banim_gar_sp1_3_oam_r_bin, &banim_gar_sp1_3_oam_l_bin, &banim_gar_sp1_3_agbpal}, // 0xBE
-	{"gar_sp1", &banim_gar_sp1_4_modes_bin, &banim_gar_sp1_4_motion_o, &banim_gar_sp1_4_oam_r_bin, &banim_gar_sp1_4_oam_l_bin, &banim_gar_sp1_4_agbpal}, // 0xBF
+	{"merm_sw1", &banim_merm_sw1_modes_bin, &banim_merm_sw1_motion_o, &banim_merm_sw1_oam_r_bin, &banim_merm_sw1_oam_l_bin, &banim_merm_sw1_agbpal}, 
+	{"merm_sw1", &banim_merm_sw1_modes_bin, &banim_merm_sw1_motion_o, &banim_merm_sw1_oam_r_bin, &banim_merm_sw1_oam_l_bin, &banim_merm_sw1_agbpal}, 
+	{"merm_sw1", &banim_merm_sw1_modes_bin, &banim_merm_sw1_motion_o, &banim_merm_sw1_oam_r_bin, &banim_merm_sw1_oam_l_bin, &banim_merm_sw1_agbpal}, 
+{"merm_sw1", &banim_merm_sw1_modes_bin, &banim_merm_sw1_motion_o, &banim_merm_sw1_oam_r_bin, &banim_merm_sw1_oam_l_bin, &banim_merm_sw1_agbpal}, 
+{"merm_sw1", &banim_merm_sw1_modes_bin, &banim_merm_sw1_motion_o, &banim_merm_sw1_oam_r_bin, &banim_merm_sw1_oam_l_bin, &banim_merm_sw1_agbpal}, 
+{"merm_sw1", &banim_merm_sw1_modes_bin, &banim_merm_sw1_motion_o, &banim_merm_sw1_oam_r_bin, &banim_merm_sw1_oam_l_bin, &banim_merm_sw1_agbpal}, 
+{"merm_sw1", &banim_merm_sw1_modes_bin, &banim_merm_sw1_motion_o, &banim_merm_sw1_oam_r_bin, &banim_merm_sw1_oam_l_bin, &banim_merm_sw1_agbpal}, 
+{"merm_sw1", &banim_merm_sw1_modes_bin, &banim_merm_sw1_motion_o, &banim_merm_sw1_oam_r_bin, &banim_merm_sw1_oam_l_bin, &banim_merm_sw1_agbpal}, 
+{"merm_sw1", &banim_merm_sw1_modes_bin, &banim_merm_sw1_motion_o, &banim_merm_sw1_oam_r_bin, &banim_merm_sw1_oam_l_bin, &banim_merm_sw1_agbpal}, 
+{"merm_sw1", &banim_merm_sw1_modes_bin, &banim_merm_sw1_motion_o, &banim_merm_sw1_oam_r_bin, &banim_merm_sw1_oam_l_bin, &banim_merm_sw1_agbpal}, 
+{"merm_sw1", &banim_merm_sw1_modes_bin, &banim_merm_sw1_motion_o, &banim_merm_sw1_oam_r_bin, &banim_merm_sw1_oam_l_bin, &banim_merm_sw1_agbpal}, 
+{"merm_sw1", &banim_merm_sw1_modes_bin, &banim_merm_sw1_motion_o, &banim_merm_sw1_oam_r_bin, &banim_merm_sw1_oam_l_bin, &banim_merm_sw1_agbpal}, 
+{"merm_sw1", &banim_merm_sw1_modes_bin, &banim_merm_sw1_motion_o, &banim_merm_sw1_oam_r_bin, &banim_merm_sw1_oam_l_bin, &banim_merm_sw1_agbpal}, 
+{"merm_sw1", &banim_merm_sw1_modes_bin, &banim_merm_sw1_motion_o, &banim_merm_sw1_oam_r_bin, &banim_merm_sw1_oam_l_bin, &banim_merm_sw1_agbpal}, 
+{"merm_sw1", &banim_merm_sw1_modes_bin, &banim_merm_sw1_motion_o, &banim_merm_sw1_oam_r_bin, &banim_merm_sw1_oam_l_bin, &banim_merm_sw1_agbpal}, 
+{"merm_sw1", &banim_merm_sw1_modes_bin, &banim_merm_sw1_motion_o, &banim_merm_sw1_oam_r_bin, &banim_merm_sw1_oam_l_bin, &banim_merm_sw1_agbpal}, 
+{"merm_sw1", &banim_merm_sw1_modes_bin, &banim_merm_sw1_motion_o, &banim_merm_sw1_oam_r_bin, &banim_merm_sw1_oam_l_bin, &banim_merm_sw1_agbpal}, 
+{"merm_sw1", &banim_merm_sw1_modes_bin, &banim_merm_sw1_motion_o, &banim_merm_sw1_oam_r_bin, &banim_merm_sw1_oam_l_bin, &banim_merm_sw1_agbpal}, 
+{"merm_sw1", &banim_merm_sw1_modes_bin, &banim_merm_sw1_motion_o, &banim_merm_sw1_oam_r_bin, &banim_merm_sw1_oam_l_bin, &banim_merm_sw1_agbpal}, 
+{"merm_sw1", &banim_merm_sw1_modes_bin, &banim_merm_sw1_motion_o, &banim_merm_sw1_oam_r_bin, &banim_merm_sw1_oam_l_bin, &banim_merm_sw1_agbpal}, 
+{"merm_sw1", &banim_merm_sw1_modes_bin, &banim_merm_sw1_motion_o, &banim_merm_sw1_oam_r_bin, &banim_merm_sw1_oam_l_bin, &banim_merm_sw1_agbpal}, 
+{"merm_sw1", &banim_merm_sw1_modes_bin, &banim_merm_sw1_motion_o, &banim_merm_sw1_oam_r_bin, &banim_merm_sw1_oam_l_bin, &banim_merm_sw1_agbpal}, 
+{"merm_sw1", &banim_merm_sw1_modes_bin, &banim_merm_sw1_motion_o, &banim_merm_sw1_oam_r_bin, &banim_merm_sw1_oam_l_bin, &banim_merm_sw1_agbpal}, 
+{"merm_sw1", &banim_merm_sw1_modes_bin, &banim_merm_sw1_motion_o, &banim_merm_sw1_oam_r_bin, &banim_merm_sw1_oam_l_bin, &banim_merm_sw1_agbpal}, 
+{"merm_sw1", &banim_merm_sw1_modes_bin, &banim_merm_sw1_motion_o, &banim_merm_sw1_oam_r_bin, &banim_merm_sw1_oam_l_bin, &banim_merm_sw1_agbpal}, 
+{"merm_sw1", &banim_merm_sw1_modes_bin, &banim_merm_sw1_motion_o, &banim_merm_sw1_oam_r_bin, &banim_merm_sw1_oam_l_bin, &banim_merm_sw1_agbpal}, 
+{"merm_sw1", &banim_merm_sw1_modes_bin, &banim_merm_sw1_motion_o, &banim_merm_sw1_oam_r_bin, &banim_merm_sw1_oam_l_bin, &banim_merm_sw1_agbpal}, 
+{"merm_sw1", &banim_merm_sw1_modes_bin, &banim_merm_sw1_motion_o, &banim_merm_sw1_oam_r_bin, &banim_merm_sw1_oam_l_bin, &banim_merm_sw1_agbpal}, 
+{"merm_sw1", &banim_merm_sw1_modes_bin, &banim_merm_sw1_motion_o, &banim_merm_sw1_oam_r_bin, &banim_merm_sw1_oam_l_bin, &banim_merm_sw1_agbpal}, 
+{"merm_sw1", &banim_merm_sw1_modes_bin, &banim_merm_sw1_motion_o, &banim_merm_sw1_oam_r_bin, &banim_merm_sw1_oam_l_bin, &banim_merm_sw1_agbpal}, 
+{"merm_sw1", &banim_merm_sw1_modes_bin, &banim_merm_sw1_motion_o, &banim_merm_sw1_oam_r_bin, &banim_merm_sw1_oam_l_bin, &banim_merm_sw1_agbpal}, 
+{"merm_sw1", &banim_merm_sw1_modes_bin, &banim_merm_sw1_motion_o, &banim_merm_sw1_oam_r_bin, &banim_merm_sw1_oam_l_bin, &banim_merm_sw1_agbpal}, 
+{"merm_sw1", &banim_merm_sw1_modes_bin, &banim_merm_sw1_motion_o, &banim_merm_sw1_oam_r_bin, &banim_merm_sw1_oam_l_bin, &banim_merm_sw1_agbpal}, 
+{"merm_sw1", &banim_merm_sw1_modes_bin, &banim_merm_sw1_motion_o, &banim_merm_sw1_oam_r_bin, &banim_merm_sw1_oam_l_bin, &banim_merm_sw1_agbpal}, 
+{"merm_sw1", &banim_merm_sw1_modes_bin, &banim_merm_sw1_motion_o, &banim_merm_sw1_oam_r_bin, &banim_merm_sw1_oam_l_bin, &banim_merm_sw1_agbpal}, 
 	{"drz_mg1", &banim_drz_mg1_modes_bin, &banim_drz_mg1_motion_o, &banim_drz_mg1_oam_r_bin, &banim_drz_mg1_oam_l_bin, &banim_drz_mg1_agbpal}, // 0xC0
 	{"bos_at1", &banim_bos_at1_modes_bin, &banim_bos_at1_motion_o, &banim_bos_at1_oam_r_bin, &banim_bos_at1_oam_l_bin, &banim_bos_at1_agbpal}, // 0xC1
 	{"bos_at1", &banim_bos_at1_2_modes_bin, &banim_bos_at1_2_motion_o, &banim_bos_at1_2_oam_r_bin, &banim_bos_at1_2_oam_l_bin, &banim_bos_at1_2_agbpal}, // 0xC2

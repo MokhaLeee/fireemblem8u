@@ -29,6 +29,7 @@ _08042DD6:
 
 	THUMB_FUNC_END sub_8042DC8
 
+/*
 	THUMB_FUNC_START sub_8042DE8
 sub_8042DE8: @ 0x08042DE8
 	push {r4, r5, r6, lr}
@@ -131,6 +132,7 @@ sub_8042E88: @ 0x08042E88
 _08042E94: .4byte gBmSt
 
 	THUMB_FUNC_END sub_8042E88
+*/
 
 	THUMB_FUNC_START CheckInLinkArena
 CheckInLinkArena: @ 0x08042E98
@@ -147,6 +149,9 @@ _08042EA4: .4byte gBmSt
 
 	THUMB_FUNC_START sub_8042EA8
 sub_8042EA8: @ 0x08042EA8
+	bx lr
+	.align 2, 0
+/*
 	ldr r1, _08042EB0  @ gUnknown_0203DA24
 	movs r0, #0xff
 	strb r0, [r1, #4]
@@ -13412,9 +13417,12 @@ _08049780: .4byte gUnknown_03001818
 _08049784: .4byte gUnknown_0203DD9A
 
 	THUMB_FUNC_END sub_8049744
-
+*/
 	THUMB_FUNC_START sub_8049788
 sub_8049788: @ 0x08049788
+	bx lr
+	.align 2, 0
+/*
 	push {lr}
 	ldr r0, _08049798  @ gUnknown_085AD9CC
 	ldr r1, _0804979C  @ 0x06013E00
@@ -23051,5 +23059,5 @@ _0804E070: .4byte 0x04000128
 _0804E074: .4byte 0x0000795C
 
 	THUMB_FUNC_END sub_804E03C
-
+*/
 .align 2, 0

@@ -775,7 +775,7 @@ u8 DebugChargeMenu_Idle(struct MenuProc* menuProc, struct MenuItemProc* menuItem
 }
 
 struct ProcCmd CONST_DATA gProcScr_DebugStartNameEntry[] = {
-    PROC_CALL(sub_8048260),
+    PROC_CALL(nullsub_7),
     PROC_SLEEP(0),
 
     PROC_END,

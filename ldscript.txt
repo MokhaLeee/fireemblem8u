@@ -143,8 +143,13 @@ SECTIONS
         src/cp_0803E2F4.o(.text);
         src/cp_staff.o(.text);
         src/cpextra_80407F0.o(.text);
+
+/*
         src/sio_core.o(.text);
+*/
         asm/code_sio.o(.text);
+
+        . = 0x4e078;
         src/uiutils.o(.text);
         src/uimenu.o(.text);
         src/uiselecttarget.o(.text);
@@ -420,7 +425,11 @@ SECTIONS
         . = ALIGN(4); src/cp_0803E2F4.o(.rodata);
         . = ALIGN(4); src/cp_staff.o(.rodata);
         . = ALIGN(4); src/cpextra_80407F0.o(.rodata);
+
+/*
         . = ALIGN(4); data/const_data_D8714.o(.rodata);
+*/
+        . = 0xda2f4;
         . = ALIGN(4); src/uiutils.o(.rodata);
         . = ALIGN(4); src/uimenu.o(.rodata);
         . = ALIGN(4); src/uiselecttarget.o(.rodata);
@@ -605,8 +614,13 @@ SECTIONS
         . = ALIGN(4); src/cp_0803E2F4.o(.data);
         . = ALIGN(4); src/cp_staff.o(.data);
         . = ALIGN(4); src/cpextra_80407F0.o(.data);
+
+/*
         . = ALIGN(4); src/sio_core.o(.data);
         . = ALIGN(4); data/data_5A92E0.o(.data);
+*/
+
+        . = 0x5b6430;
         . = ALIGN(4); src/uiutils.o(.data);
         . = ALIGN(4); src/uimenu.o(.data);
         . = ALIGN(4); src/uiselecttarget.o(.data);

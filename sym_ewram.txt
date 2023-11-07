@@ -290,6 +290,8 @@
 . = 0x03AA94; gAiDecision = .;
 . = 0x03AAA0;
 . = ALIGN(4); src/cp_0803E2F4.o(ewram_data);
+
+/*
 . = ALIGN(4); src/sio_core.o(ewram_data);
 . = 0x03DA24; gUnknown_0203DA24 = .;
 . = 0x03DA78; gUnknown_0203DA78 = .;
@@ -319,6 +321,8 @@
 . = 0x03DD9F; gUnknown_0203DD9F = .;
 . = 0x03DDB4; gUnknown_0203DDB4 = .;
 . = 0x03DDDC; gUnknown_0203DDDC = .;
+*/
+
 . = 0x03DDE0; src/uiutils.o(ewram_data);
 . = ALIGN(4); src/uiselecttarget.o(ewram_data);
 . = 0x03E0F0; gBanimLinkArenaFlag = .;

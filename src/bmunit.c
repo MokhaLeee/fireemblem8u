@@ -24,13 +24,13 @@
 #include "muctrl.h"
 #include "eventcall.h"
 
+EWRAM_DATA struct Unit gUnitArrayGreen[20] = {}; // Green units
+EWRAM_DATA struct Unit gUnitArrayRed[50]   = {}; // Red units
+EWRAM_DATA struct Unit gUnitArrayBlue[62]  = {}; // Player units
+EWRAM_DATA struct Unit gUnitArrayPurple[5] = {}; // Purple units
+
 EWRAM_DATA u8 gActiveUnitId = 0;
 EWRAM_DATA struct Vec2 gActiveUnitMoveOrigin = {};
-
-EWRAM_DATA struct Unit gUnitArrayBlue[62]  = {}; // Player units
-EWRAM_DATA struct Unit gUnitArrayRed[50]   = {}; // Red units
-EWRAM_DATA struct Unit gUnitArrayGreen[20] = {}; // Green units
-EWRAM_DATA struct Unit gUnitArrayPurple[5] = {}; // Purple units
 
 CONST_DATA static int sStatusNameTextIdLookup[] = {
     // TODO: TEXT ID DEFINITIONS

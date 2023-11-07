@@ -798,6 +798,17 @@ SECTIONS
         . = ALIGN(4); data/data_AA7760.o(.data);
         . = ALIGN(4); data/data_opanim_gfx.o(.data);
 
+        . = ALIGN(4); src/banim_terrain_data.o(.data.banim_terrain_head); src/banim_terrain_data.o(.data.banim_terrain_ptr_table);
+        . = ALIGN(4); data/data_banim_terrain.o(.data);
+        . = ALIGN(4);
+        _banim_pal_start = .;
+        src/banim_pal_chara.o(.data.banim_pal_head);
+        src/banim_pal_chara.o(.data.banim_pal_ptr_table);
+        FILL(0x00);
+        . = _banim_pal_start + 0x1000; data/data_banim_pal.o(.data);
+
+        FreeSpace1 = .;
+
         . = 0xB12614;
         . = ALIGN(4); src/classchg-main.o(.data);
         . = ALIGN(4); src/classchg-handler.o(.data);
@@ -811,21 +822,15 @@ SECTIONS
         . = ALIGN(4); *libc.a:locale.o(.data);
         . = ALIGN(4); *libc.a:mallocr.o(.data);
         . = ALIGN(4); data/data_B1FE7C.o(.data);
+
+        FreeSpace2 = .;
+
         FILL(0xFF);
         . = 0xC00000; src/banim_data.o(.data.banim_array_len);
         . = 0xC00008; src/banim_data.o(.data.banim_array);
         FILL(0x00); /* TODO: This padding is handled by banim linking process itself? */
         . = 0xC02000; data/banim/data_banim.o(.data);
-        . = ALIGN(4); src/banim_terrain_data.o(.data.banim_terrain_head); src/banim_terrain_data.o(.data.banim_terrain_ptr_table);
-        . = ALIGN(4); data/data_banim_terrain.o(.data);
-        . = ALIGN(4);
-        _banim_pal_start = .;
-        src/banim_pal_chara.o(.data.banim_pal_head);
-        src/banim_pal_chara.o(.data.banim_pal_ptr_table);
-        FILL(0x00);
-        . = _banim_pal_start + 0x1000; data/data_banim_pal.o(.data);
-        _banim_pal_end = .;
-        _banim_pal_size = . - _banim_pal_start;
+        ROM_END = .;
     } = 0
 
   /* Stabs debugging sections.  */

@@ -2,6 +2,7 @@
 
 	.SYNTAX UNIFIED
 
+/*
 	THUMB_FUNC_START OpAnimPreparefxEirika
 OpAnimPreparefxEirika: @ 0x080C7CF8
 	push {r4, r5, r6, r7, lr}
@@ -7845,15 +7846,16 @@ _080CBD6A:
 	bx r0
 
 	THUMB_FUNC_END sub_80CBC40
+*/
 
 	THUMB_FUNC_START sub_80CBD7C
 sub_80CBD7C: @ 0x080CBD7C
 	push {r4, lr}
 	bl EndAllProcChildren
-	bl EndProc08AA6D04
+	// bl EndProc08AA6D04
 	movs r0, #0
 	bl SetPrimaryHBlankHandler
-	bl EndOpAnimfxTerminator
+	// bl EndOpAnimfxTerminator
 	ldr r4, _080CBDCC  @ gLCDControlBuffer
 	ldrb r1, [r4]
 	movs r0, #0x41

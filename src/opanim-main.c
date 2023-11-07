@@ -7,6 +7,7 @@
 #include "gamecontrol.h"
 #include "opanim.h"
 
+#if 0
 void OpAnimInit(struct ProcOpAnim * proc)
 {
     Sound_FadeOutBGM(1);
@@ -68,7 +69,7 @@ void NewProcOpAnimFadeIn(int max, ProcPtr parent)
     proc = Proc_Start(ProcScr_OpAnimFadeIn, parent);
     proc->max = max;
 }
-
+#endif
 void BgAffineSetOpAnim(int scaling_radio, int angle)
 {
     struct BgAffineSrcData data;
@@ -82,7 +83,7 @@ void BgAffineSetOpAnim(int scaling_radio, int angle)
 
     BgAffineSet(&data, gOpAnimBgAffineDstData, 1);
 }
-
+#if 0
 void SetupOpAnimWorldMapfx(struct ProcOpAnim * proc)
 {
     int i;
@@ -987,3 +988,15 @@ void OpAnimEphraimExit(struct ProcOpAnim * proc)
     }
     proc->timer++;
 }
+#endif
+
+void AutoSkilOpAnim(struct Proc * proc)
+{
+    SetNextGameActionId(GAME_ACTION_USR_SKIPPED);
+    Proc_Goto(proc->proc_parent, 99);
+}
+
+struct ProcCmd CONST_DATA ProcScr_OpAnim[] = {
+    PROC_CALL(AutoSkilOpAnim),
+    PROC_END,
+};

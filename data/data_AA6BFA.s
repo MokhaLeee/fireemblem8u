@@ -1,5 +1,5 @@
     .section .data
-
+/*
 	.global gUnknown_08AA704C
 gUnknown_08AA704C:  @ 0x08AA704C
         @ PROC_REPEAT
@@ -72,3 +72,4 @@ gUnknown_08AA715C:  @ 0x08AA715C
 	.global gUnknown_08AA7194
 gUnknown_08AA7194:  @ 0x08AA7194
 	.incbin "baserom.gba", 0xAA7194, 0x34
+*/

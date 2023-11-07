@@ -1,7 +1,7 @@
 	.INCLUDE "macro.inc"
 
 	.SYNTAX UNIFIED
-
+/*
 	THUMB_FUNC_START sub_80C689C
 sub_80C689C: @ 0x080C689C
 	push {r4, r5, r6, r7, lr}
@@ -148,7 +148,7 @@ _080C6994:
 	bx r0
 
 	THUMB_FUNC_END sub_80C689C
-
+*/
 	THUMB_FUNC_START sub_80C69B0
 sub_80C69B0: @ 0x080C69B0
 	push {r4, r5, r6, r7, lr}
@@ -237,3 +237,4 @@ _080C69E2:
 	THUMB_FUNC_END sub_80C69B0
 
 .align 2, 0
+

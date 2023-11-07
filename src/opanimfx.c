@@ -3,7 +3,7 @@
 #include "hardware.h"
 #include "gamecontrol.h"
 #include "opanim.h"
-
+#if 0
 CONST_DATA u16 unk_AA6BB8[] = {
     2,
     0x0000, 0x4000, 0x0000,
@@ -382,3 +382,4 @@ void TsaModifyFirstPalMaybe(s16 end, s16 start, u8 unused, u16 bg, u16 * src1, u
     }
     BG_SetPosition(bg, end + 0x10, 0);
 }
+#endif

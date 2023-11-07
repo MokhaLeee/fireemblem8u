@@ -1,5 +1,5 @@
 	.section .data
-
+/*
     .global ProcScr_OpAnim
 ProcScr_OpAnim:  @ 0x08AA71C8
     @ PROC_YIELD
@@ -455,3 +455,4 @@ ProcScr_OpAnim:  @ 0x08AA71C8
     @ PROC_END
     .short 0x0, 0x0
     .word 0x0
+*/

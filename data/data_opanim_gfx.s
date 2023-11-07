@@ -1,5 +1,5 @@
 	.section .data
-
+/*
 	.global Img_OpAnimWorldMap
 Img_OpAnimWorldMap:  @ 0x08AB21D8
 	#.incbin "graphics/op_anim/world_map.4bpp.lz"
@@ -1572,7 +1572,7 @@ tsa_opanim100:
 	.global pal_08B103D8
 pal_08B103D8:  @ 0x08B103D8
 	.incbin "baserom.gba", 0xB103D8, 0x100
-
+*/
 	.global Tsa_GameIntroNintendo
 Tsa_GameIntroNintendo:  @ 0x08B104D8
 	.incbin "baserom.gba", 0xB104D8, 0x158

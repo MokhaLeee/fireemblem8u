@@ -2,25 +2,6 @@
 
 	.SYNTAX UNIFIED
 
-	THUMB_FUNC_START sub_8014CA4
-sub_8014CA4: @ 0x08014CA4
-	push {r4, r5, r6, lr}
-	adds r4, r0, #0
-	adds r0, r1, #0
-	adds r5, r2, #0
-	adds r6, r3, #0
-	lsls r4, r4, #0xc
-	adds r1, r4, #0
-	bl DivArm
-	adds r1, r5, #0
-	adds r2, r6, #0
-	bl sub_800A42C
-	pop {r4, r5, r6}
-	pop {r1}
-	bx r1
-
-	THUMB_FUNC_END sub_8014CA4
-
 	THUMB_FUNC_START sub_8014CC4
 sub_8014CC4: @ 0x08014CC4
 	push {r4, r5, r6, lr}

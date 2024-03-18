@@ -254,11 +254,16 @@ extern struct Font gUnknown_02000920;
 extern struct Text gUnknown_02000938;
 
 struct Unknown03004990 {
-    /* 000 */ u8 unk[0x79E - 0x000];
+    /* 000 */ int unk_00;
+
+    STRUCT_PAD(0x004, 0x79C);
+
+    /* 79C */ s8 unk_79C;
+    /* 79D */ s8 unk_79D;
     /* 79E */ u8 unk_79E;
 };
 
-extern struct Unknown03004990* gUnknown_03004990;
+extern struct Unknown03004990 * gUnknown_03004990;
 
 extern u16 Sprite_08A20570[];
 extern u16 Sprite_08A20578[];

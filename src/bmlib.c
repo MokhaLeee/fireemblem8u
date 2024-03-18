@@ -9,6 +9,7 @@
 #include "soundwrapper.h"
 #include "fontgrp.h"
 #include "bmlib.h"
+#include "spline.h"
 
 struct Struct8012F98 {
     u8* dst;
@@ -2013,4 +2014,9 @@ void PutDrawTextCentered(struct Text * text, int x, int y, char const * str, int
     Text_DrawString(text, str);
 
     PutText(text, gBG0TilemapBuffer + TILEMAP_INDEX(x, y));
+}
+
+int sub_8014CA4(int time, int speed, int start, int end)
+{
+    sub_800A42C(DivArm(speed, time * 0x1000), start, end);
 }

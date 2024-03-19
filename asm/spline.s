@@ -10,34 +10,61 @@ sub_800A518: @ 0x0800A518
 	mov r5, r8
 	push {r5, r6, r7}
 	sub sp, #0x20
+
+	@ arg1
 	str r1, [sp]
+
+	@ arg2
 	str r2, [sp, #4]
+
+	@ buf->unk00
 	movs r2, #0
 	ldrsh r1, [r0, r2]
 	str r1, [sp, #0x14]
+
+	@ buf1->unk14
 	ldr r1, [r0, #0x14]
+
+	@ buf1->unk02
 	movs r4, #2
 	ldrsh r5, [r0, r4]
+
+	@ buf1->unk04
 	movs r7, #4
 	ldrsh r3, [r0, r7]
+
+	@ buf1->unk06
 	movs r4, #6
 	ldrsh r2, [r0, r4]
+
+	@ buf1->unk08
 	ldr r7, [r0, #8]
 	str r7, [sp, #0x18]
+
+	@ buf1->unk0C
 	ldr r4, [r0, #0xc]
 	str r4, [sp, #0x1c]
+
+	@ buf1->unk10
 	ldr r0, [r0, #0x10]
 	mov r9, r0
+
+	@ 0x1000 - buf1->unk14->unk00
 	movs r7, #0
 	ldrsh r0, [r1, r7]
 	movs r6, #0x80
 	lsls r6, r6, #5
 	subs r4, r6, r0
+
+	@ buf1->unk14->unk02
 	movs r7, #2
 	ldrsh r0, [r1, r7]
 	mov r8, r0
+
+	@ buf1->unk14->unk04
 	movs r0, #4
 	ldrsh r7, [r1, r0]
+
 	cmp r2, r5
 	beq _0800A564
 	cmp r2, r3
@@ -57,6 +84,7 @@ _0800A56A:
 	bl DivArm
 	str r0, [sp, #0x10]
 _0800A580:
+
 	adds r5, r7, #0
 	cmp r7, #0
 	bge _0800A588
@@ -103,6 +131,7 @@ _0800A588:
 	adds r0, r6, #0
 	bl DivArm
 	str r0, [sp, #0xc]
+
 	ldr r7, [sp, #0x14]
 	cmp r7, #0
 	ble _0800A66E

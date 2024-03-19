@@ -19,29 +19,39 @@ struct Struct02003BE8
 
 int sub_800A42C(int val, int start, int end);
 
+struct SplineUnkStruct1;
+struct SplineUnkStruct2;
+struct SplineUnkStruct3;
+
 struct SplineUnkStruct1 {
     u16 unk00;
     u16 unk02;
     int unk04;
-    int unk08;
+    struct SplineUnkStruct3 * unk08;
 
 };
 
 struct SplineUnkStruct2 {
-    u16 unk00;
-    u16 unk02;
-    u16 unk04;
-    u16 unk06;
+    s16 unk00;
+    s16 unk02;
+    s16 unk04;
+    s16 unk06;
     int unk08;
     int unk0C;
     int unk10;
-    int unk14;
-    int unk18;
-    int unk1C;
+    struct SplineUnkStruct3 * unk14;
+    struct SplineUnkStruct3 * unk18;
+    struct SplineUnkStruct3 * unk1C;
+};
+
+struct SplineUnkStruct3 {
+    s16 unk00;
+    s16 unk02;
+    s16 unk04;
 };
 
 void sub_800A4E8(struct SplineUnkStruct1 * src, struct SplineUnkStruct2 * dst);
-// ??? sub_800A518(???);
+void sub_800A518(struct SplineUnkStruct2 * dst, int * buf2, int num);
 // ??? sub_800A680(???);
 // ??? sub_800A7D8(???);
 // ??? sub_800A8D8(???);

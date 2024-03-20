@@ -527,7 +527,127 @@ Tsa_GorgonHatchCloud_F:  @ 0x089B82F0
 
 	.global Tsa_GorgonHatchCloud_G
 Tsa_GorgonHatchCloud_G:  @ 0x089B835C
-	.incbin "baserom.gba", 0x9B835C, 0x9E714C - 0x9B835C
+	.incbin "baserom.gba", 0x9B835C, 0x9B83C0 - 0x9B835C
+
+	.global Img_MapAnimfx089A40AC_1
+Img_MapAnimfx089A40AC_1:
+	.incbin "baserom.gba", 0x9B83C0, 0x9B89C4 - 0x9B83C0
+
+	.global Img_MapAnimfx089A40AC_2
+Img_MapAnimfx089A40AC_2:
+	.incbin "baserom.gba", 0x9B89C4, 0x9B90D8 - 0x9B89C4
+
+	.global Img_MapAnimfx089A40AC_3
+Img_MapAnimfx089A40AC_3:
+	.incbin "baserom.gba", 0x9B90D8, 0x9B98DC - 0x9B90D8
+
+	.global Img_MapAnimfx089A40AC_4
+Img_MapAnimfx089A40AC_4:
+	.incbin "baserom.gba", 0x9B98DC, 0x9BA190 - 0x9B98DC
+
+	.global Img_MapAnimfx089A40AC_5
+Img_MapAnimfx089A40AC_5:
+	.incbin "baserom.gba", 0x9BA190, 0x9BA9D8 - 0x9BA190
+
+	.global Img_MapAnimfx089A40AC_6
+Img_MapAnimfx089A40AC_6:
+	.incbin "baserom.gba", 0x9BA9D8, 0x9BB2C8 - 0x9BA9D8
+
+	.global Img_MapAnimfx089A40AC_7
+Img_MapAnimfx089A40AC_7:
+	.incbin "baserom.gba", 0x9BB2C8, 0x9BBD68 - 0x9BB2C8
+
+	.global Img_MapAnimfx089A40AC_8
+Img_MapAnimfx089A40AC_8:
+	.incbin "baserom.gba", 0x9BBD68, 0x9BC884 - 0x9BBD68
+
+	.global Img_MapAnimfx089A40AC_9
+Img_MapAnimfx089A40AC_9:
+	.incbin "baserom.gba", 0x9BC884, 0x9BD3B4 - 0x9BC884
+
+	.global Img_MapAnimfx089A40AC_10
+Img_MapAnimfx089A40AC_10:
+	.incbin "baserom.gba", 0x9BD3B4, 0x9BDEE8 - 0x9BD3B4
+
+	.global Img_MapAnimfx089A40AC_11
+Img_MapAnimfx089A40AC_11:
+	.incbin "baserom.gba", 0x9BDEE8, 0x9BEA90 - 0x9BDEE8
+
+	.global Img_MapAnimfx089A40AC_12
+Img_MapAnimfx089A40AC_12:
+	.incbin "baserom.gba", 0x9BEA90, 0x9BF5FC - 0x9BEA90
+
+	.global Img_MapAnimfx089A40AC_13
+Img_MapAnimfx089A40AC_13:
+	.incbin "baserom.gba", 0x9BF5FC, 0x9BFF64 - 0x9BF5FC
+
+	.global Img_MapAnimfx089A40AC_14
+Img_MapAnimfx089A40AC_14:
+	.incbin "baserom.gba", 0x9BFF64, 0x9C08C0 - 0x9BFF64
+
+	.global Img_MapAnimfx089A40AC_15
+Img_MapAnimfx089A40AC_15:
+	.incbin "baserom.gba", 0x9C08C0, 0x9C1190 - 0x9C08C0
+
+	.global Img_MapAnimfx089A40AC_16
+Img_MapAnimfx089A40AC_16:
+	.incbin "baserom.gba", 0x9C1190, 0x9C1BA8 - 0x9C1190
+
+	.global Img_MapAnimfx089A40AC_17
+Img_MapAnimfx089A40AC_17:
+	.incbin "baserom.gba", 0x9C1BA8, 0x9C247C - 0x9C1BA8
+
+	.global Img_MapAnimfx089A40AC_18
+Img_MapAnimfx089A40AC_18:
+	.incbin "baserom.gba", 0x9C247C, 0x9C2BF0 - 0x9C247C
+
+	.global Img_MapAnimfx089A40AC_19
+Img_MapAnimfx089A40AC_19:
+	.incbin "baserom.gba", 0x9C2BF0, 0x9C32A4 - 0x9C2BF0
+
+	.global Img_MapAnimfx089A40AC_20
+Img_MapAnimfx089A40AC_20:
+	.incbin "baserom.gba", 0x9C32A4, 0x9D23D8 - 0x9C32A4
+
+	.global Pal_MapAnimfx089A40AC_1
+Pal_MapAnimfx089A40AC_1:
+	.incbin "baserom.gba", 0x9D23D8, 0x9D23F8 - 0x9D23D8
+
+	.global Pal_MapAnimfx089A40AC_2
+Pal_MapAnimfx089A40AC_2:
+	.incbin "baserom.gba", 0x9D23F8, 0x9D2418 - 0x9D23F8
+
+	.global Pal_MapAnimfx089A40AC_3
+Pal_MapAnimfx089A40AC_3:
+	.incbin "baserom.gba", 0x9D2418, 0x9D2438 - 0x9D2418
+
+	.global Pal_MapAnimfx089A40AC_4
+Pal_MapAnimfx089A40AC_4:
+	.incbin "baserom.gba", 0x9D2438, 0x9D2458 - 0x9D2438
+
+	.global Pal_MapAnimfx089A40AC_5
+Pal_MapAnimfx089A40AC_5:
+	.incbin "baserom.gba", 0x9D2458, 0x9D2478 - 0x9D2458
+
+	.global Pal_MapAnimfx089A40AC_6
+Pal_MapAnimfx089A40AC_6:
+	.incbin "baserom.gba", 0x9D2478, 0x9D2498 - 0x9D2478
+
+	.global Pal_MapAnimfx089A40AC_7
+Pal_MapAnimfx089A40AC_7:
+	.incbin "baserom.gba", 0x9D2498, 0x9D24B8 - 0x9D2498
+
+	.global Pal_MapAnimfx089A40AC_8
+Pal_MapAnimfx089A40AC_8:
+	.incbin "baserom.gba", 0x9D24B8, 0x9D24D8 - 0x9D24B8
+
+	.global Pal_MapAnimfx089A40AC_9
+Pal_MapAnimfx089A40AC_9:
+	.incbin "baserom.gba", 0x9D24D8, 0x9D24F8 - 0x9D24D8
+
+	.global Pal_MapAnimfx089A40AC_10
+Pal_MapAnimfx089A40AC_10:
+	.incbin "baserom.gba", 0x9D24F8, 0x9E714C - 0x9D24F8
 
 	.global gUnknown_089E714C
 gUnknown_089E714C:  @ 0x089E714C

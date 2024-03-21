@@ -472,7 +472,7 @@ extern struct Text Texts_0203DAB0;
 
 extern struct Text Texts_0203DB14[10];
 // extern ??? gUnk_Sio_0203DB1C
-extern struct Font Font_0203DB64;
+extern struct Font SioTacticianFont;
 // extern ??? gUnk_Sio_0203DB7C
 // extern ??? gUnk_Sio_0203DC44
 // extern ??? gUnk_Sio_0203DC48

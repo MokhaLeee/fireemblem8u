@@ -838,7 +838,7 @@ _08043968:
 	cmp r2, #0
 	bge _08043968
 	bl EnablePaletteSync
-	ldr r0, _08043AF8  @ Font_0203DB64
+	ldr r0, _08043AF8  @ SioTacticianFont
 	bl SetTextFont
 	bl InitSystemTextFont
 	bl ResetTextFont
@@ -1004,7 +1004,7 @@ _08043AE8: .4byte gUnknown_085AC604
 _08043AEC: .4byte 0x06016000
 _08043AF0: .4byte gUnknown_08A1BD00
 _08043AF4: .4byte gPaletteBuffer
-_08043AF8: .4byte Font_0203DB64
+_08043AF8: .4byte SioTacticianFont
 _08043AFC: .4byte gLinkArenaSt
 _08043B00: .4byte gLCDControlBuffer
 _08043B04: .4byte gUnknown_080D9D5E

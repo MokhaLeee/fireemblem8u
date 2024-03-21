@@ -92,7 +92,7 @@ void Tactician_InitScreen(struct ProcTactician * proc)
     ApplyPalette(Pal_TacticianSelObj, 0x13);
     ApplyPalette(Pal_085ADE68, 0x14);
     CallARM_FillTileRect(TILEMAP_LOCATED(gBG2TilemapBuffer, 0, 8), Tsa_085AE190, 0x1000);
-    SetTextFont(&Font_0203DB64);
+    SetTextFont(&SioTacticianFont);
     InitSystemTextFont();
     ResetTextFont();
 

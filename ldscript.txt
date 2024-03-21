@@ -235,7 +235,7 @@ SECTIONS
         . = 0x0203DB10 - __ewram_overlay_end; gSioSaveConfig = .;
         . = 0x0203DB14 - __ewram_overlay_end; Texts_0203DB14 = .;
         . = 0x0203DB1C - __ewram_overlay_end; gUnk_Sio_0203DB1C = .;
-        . = 0x0203DB64 - __ewram_overlay_end; Font_0203DB64 = .;
+        . = 0x0203DB64 - __ewram_overlay_end; SioTacticianFont = .;
         . = 0x0203DB7C - __ewram_overlay_end; gUnk_Sio_0203DB7C = .;
         . = 0x0203DC44 - __ewram_overlay_end; gUnk_Sio_0203DC44 = .;
         . = 0x0203DC48 - __ewram_overlay_end; gUnk_Sio_0203DC48 = .;

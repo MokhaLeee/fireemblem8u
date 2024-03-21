@@ -1518,7 +1518,7 @@ _08045DFC:
 	ldrb r0, [r4, #3]
 	add r1, sp, #4
 	bl ReadMultiArenaSaveTeamName
-	ldr r0, _08045EEC  @ Font_0203DB64
+	ldr r0, _08045EEC  @ SioTacticianFont
 	bl SetTextFont
 	bl InitSystemTextFont
 	bl ResetTextFont
@@ -1607,7 +1607,7 @@ _08045EDC: .4byte gUnknown_085AC604
 _08045EE0: .4byte 0x06016800
 _08045EE4: .4byte gUnknown_085ADDA8
 _08045EE8: .4byte gLinkArenaSt
-_08045EEC: .4byte Font_0203DB64
+_08045EEC: .4byte SioTacticianFont
 _08045EF0: .4byte gUnknown_03004E86
 _08045EF4: .4byte gUnknown_085A9864
 _08045EF8: .4byte gUnknown_080D9D5E
@@ -2796,7 +2796,7 @@ sub_8046838: @ 0x08046838
 	lsls r2, r2, #5
 	adds r1, r4, #0
 	bl CallARM_FillTileRect
-	ldr r0, _08046990  @ Font_0203DB64
+	ldr r0, _08046990  @ SioTacticianFont
 	bl SetTextFont
 	bl ResetTextFont
 	bl sub_8043164
@@ -2885,7 +2885,7 @@ _08046980: .4byte Pal_TacticianSelObj
 _08046984: .4byte gUnknown_085AE778
 _08046988: .4byte gGenericBuffer
 _0804698C: .4byte gBG2TilemapBuffer+0x142
-_08046990: .4byte Font_0203DB64
+_08046990: .4byte SioTacticianFont
 _08046994: .4byte gUnknown_080D9E50
 _08046998: .4byte gLinkArenaSt+0x0C
 _0804699C: .4byte gBG0TilemapBuffer+0x00C
@@ -2938,7 +2938,7 @@ sub_80469C4: @ 0x080469C4
 	ldr r0, _08046AB8  @ Img_TacticianSelObj
 	ldr r1, _08046ABC  @ 0x06014800
 	bl Decompress
-	ldr r0, _08046AC0  @ Font_0203DB64
+	ldr r0, _08046AC0  @ SioTacticianFont
 	bl SetTextFont
 	bl InitSystemTextFont
 	bl ResetTextFont
@@ -3031,7 +3031,7 @@ _08046AAC:
 	.align 2, 0
 _08046AB8: .4byte Img_TacticianSelObj
 _08046ABC: .4byte 0x06014800
-_08046AC0: .4byte Font_0203DB64
+_08046AC0: .4byte SioTacticianFont
 _08046AC4: .4byte gSioTexts
 _08046AC8: .4byte 0x0000074C
 _08046ACC: .4byte 0x0000074D
@@ -3768,7 +3768,7 @@ sub_8047008: @ 0x08047008
 	movs r2, #0x80
 	lsls r2, r2, #5
 	bl CallARM_FillTileRect
-	ldr r0, _080471E0  @ Font_0203DB64
+	ldr r0, _080471E0  @ SioTacticianFont
 	bl SetTextFont
 	bl InitSystemTextFont
 	bl ResetTextFont
@@ -3926,7 +3926,7 @@ _080471D0: .4byte 0x06014800
 _080471D4: .4byte Pal_TacticianSelObj
 _080471D8: .4byte gBG2TilemapBuffer+0x102
 _080471DC: .4byte gUnknown_085AE464
-_080471E0: .4byte Font_0203DB64
+_080471E0: .4byte SioTacticianFont
 _080471E4: .4byte Texts_0203DB14
 _080471E8: .4byte gSioTexts
 _080471EC: .4byte 0x00000772
@@ -4133,7 +4133,7 @@ sub_8047324: @ 0x08047324
 	movs r2, #0x80
 	lsls r2, r2, #5
 	bl CallARM_FillTileRect
-	ldr r0, _08047548  @ Font_0203DB64
+	ldr r0, _08047548  @ SioTacticianFont
 	bl SetTextFont
 	bl InitSystemTextFont
 	bl ResetTextFont
@@ -4323,7 +4323,7 @@ _08047538: .4byte 0x06016000
 _0804753C: .4byte gUnknown_085ADE08
 _08047540: .4byte gBG2TilemapBuffer+0x102
 _08047544: .4byte gUnknown_085AE464
-_08047548: .4byte Font_0203DB64
+_08047548: .4byte SioTacticianFont
 _0804754C: .4byte Texts_0203DB14
 _08047550: .4byte gSioTexts
 _08047554: .4byte 0x00000772
@@ -4661,7 +4661,7 @@ sub_8047780: @ 0x08047780
 	lsls r2, r2, #5
 	adds r1, r4, #0
 	bl CallARM_FillTileRect
-	ldr r0, _08047910  @ Font_0203DB64
+	ldr r0, _08047910  @ SioTacticianFont
 	bl SetTextFont
 	bl ResetTextFont
 	bl sub_8043164
@@ -4778,7 +4778,7 @@ _08047900: .4byte Pal_TacticianSelObj
 _08047904: .4byte gUnknown_085AE778
 _08047908: .4byte gGenericBuffer
 _0804790C: .4byte gBG2TilemapBuffer+0x142
-_08047910: .4byte Font_0203DB64
+_08047910: .4byte SioTacticianFont
 _08047914: .4byte gUnknown_080D9E50
 _08047918: .4byte gLinkArenaSt+0x0C
 _0804791C: .4byte gBG0TilemapBuffer+0x00C
@@ -5088,7 +5088,7 @@ sub_8047B34: @ 0x08047B34
 	lsls r1, r1, #2
 	movs r2, #0x60
 	bl CopyToPaletteBuffer
-	ldr r0, _08047BD4  @ Font_0203DB64
+	ldr r0, _08047BD4  @ SioTacticianFont
 	bl SetTextFont
 	bl InitSystemTextFont
 	bl ResetTextFont
@@ -5126,7 +5126,7 @@ _08047BC4: .4byte gSioSaveConfig
 _08047BC8: .4byte gUnknown_085AB358
 _08047BCC: .4byte 0x06014800
 _08047BD0: .4byte gUnknown_085ADBE8
-_08047BD4: .4byte Font_0203DB64
+_08047BD4: .4byte SioTacticianFont
 _08047BD8:
 	movs r1, #1
 	movs r0, #4
@@ -5375,7 +5375,7 @@ sub_8047D88: @ 0x08047D88
 	lsls r1, r1, #2
 	movs r2, #0x60
 	bl CopyToPaletteBuffer
-	ldr r0, _08047E30  @ Font_0203DB64
+	ldr r0, _08047E30  @ SioTacticianFont
 	bl SetTextFont
 	bl InitSystemTextFont
 	bl ResetTextFont
@@ -5413,7 +5413,7 @@ _08047E20: .4byte gSioSaveConfig
 _08047E24: .4byte gUnknown_085AB358
 _08047E28: .4byte 0x06014800
 _08047E2C: .4byte gUnknown_085ADBE8
-_08047E30: .4byte Font_0203DB64
+_08047E30: .4byte SioTacticianFont
 _08047E34:
 	movs r1, #1
 	movs r0, #4
@@ -5882,7 +5882,7 @@ sub_80481E0: @ 0x080481E0
 	push {r4, lr}
 	adds r4, r0, #0
 	bl LoadUiFrameGraphics
-	ldr r0, _08048248  @ Font_0203DB64
+	ldr r0, _08048248  @ SioTacticianFont
 	ldr r1, _0804824C  @ 0x06001800
 	movs r2, #0xc0
 	movs r3, #0
@@ -5923,7 +5923,7 @@ _08048204:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_08048248: .4byte Font_0203DB64
+_08048248: .4byte SioTacticianFont
 _0804824C: .4byte 0x06001800
 _08048250: .4byte gLinkArenaSt
 _08048254: .4byte gPlaySt
@@ -5958,7 +5958,7 @@ StartTacticianNameSelect: @ 0x08048280
 	adds r4, r0, #0
 	bl LoadLegacyUiFrameGraphics
 	bl UnsetBmStLinkArenaFlag
-	ldr r0, _080482CC  @ Font_0203DB64
+	ldr r0, _080482CC  @ SioTacticianFont
 	ldr r1, _080482D0  @ 0x06001800
 	movs r2, #0xc0
 	movs r3, #0
@@ -5988,7 +5988,7 @@ StartTacticianNameSelect: @ 0x08048280
 	pop {r0}
 	bx r0
 	.align 2, 0
-_080482CC: .4byte Font_0203DB64
+_080482CC: .4byte SioTacticianFont
 _080482D0: .4byte 0x06001800
 _080482D4: .4byte gLinkArenaSt
 _080482D8: .4byte gPlaySt
@@ -6421,7 +6421,7 @@ sub_8048604: @ 0x08048604
 	push {r4, r5, r6, lr}
 	sub sp, #4
 	adds r6, r0, #0
-	ldr r0, _08048648  @ Font_0203DB64
+	ldr r0, _08048648  @ SioTacticianFont
 	bl SetTextFont
 	bl InitSystemTextFont
 	ldr r0, _0804864C  @ gSioSt
@@ -6448,7 +6448,7 @@ sub_8048604: @ 0x08048604
 	bl StartSioBigSend
 	b _0804866A
 	.align 2, 0
-_08048648: .4byte Font_0203DB64
+_08048648: .4byte SioTacticianFont
 _0804864C: .4byte gSioSt
 _08048650: .4byte ReadSramFast
 _08048654: .4byte 0x0E007400
@@ -6582,7 +6582,7 @@ sub_8048730: @ 0x08048730
 	movs r2, #0x10
 	movs r3, #6
 	bl DrawUiFrame2
-	ldr r0, _0804878C  @ Font_0203DB64
+	ldr r0, _0804878C  @ SioTacticianFont
 	bl SetTextFont
 	bl InitSystemTextFont
 	ldr r4, _08048790  @ gUnk_Sio_0203DA88
@@ -6610,7 +6610,7 @@ sub_8048730: @ 0x08048730
 	pop {r0}
 	bx r0
 	.align 2, 0
-_0804878C: .4byte Font_0203DB64
+_0804878C: .4byte SioTacticianFont
 _08048790: .4byte gUnk_Sio_0203DA88
 _08048794: .4byte 0x0000077E
 _08048798: .4byte gBG0TilemapBuffer+0x3DC
@@ -6662,7 +6662,7 @@ _080487D0:
 	ldr r1, [r0]
 	movs r0, #3
 	strb r0, [r1]
-	ldr r0, _08048814  @ Font_0203DB64
+	ldr r0, _08048814  @ SioTacticianFont
 	bl SetTextFont
 	bl InitSystemTextFont
 	ldr r0, _08048818  @ gUnk_Sio_0203DA88
@@ -6675,7 +6675,7 @@ _080487D0:
 	bx r0
 	.align 2, 0
 _08048810: .4byte gSioSt
-_08048814: .4byte Font_0203DB64
+_08048814: .4byte SioTacticianFont
 _08048818: .4byte gUnk_Sio_0203DA88
 
 	THUMB_FUNC_END sub_80487C0

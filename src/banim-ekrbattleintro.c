@@ -21,7 +21,7 @@ EWRAM_DATA s16 gBanimBG = 0;
 EWRAM_DATA s16 gEkrInitialHitSide = 0;
 EWRAM_DATA s16 gEkrSnowWeather = 0;
 EWRAM_DATA s16 gBanimValid[2] = {0};
-EWRAM_DATA s16 gEkrInitialPosition[2] = {0};
+EWRAM_DATA s16 gBanimIsEnemy[2] = {0};
 EWRAM_DATA u16 gBanimIdx_bak[2] = {0};
 EWRAM_DATA s16 gBanimUniquePal[2] = {0};
 EWRAM_DATA s16 gBanimFactionPal[2] = {0};
@@ -842,17 +842,17 @@ void EkrBaseAppearMain(struct ProcEkrIntroWindow * proc)
     BG_SetPosition(BG_2, 0, iy);
 }
 
-static inline s16 GetPosFunc(int faction1, int faction2)
+static inline s16 GetBanimAllyPosition(int animfac_act, int animfac_tar)
 {
-    int pos = EKR_POS_L;
+    int pos = POS_L;
     if (GetBanimLinkArenaFlag() != true)
     {
-        if (FACTION_ID_BLUE == (s16)faction1)
-            pos = EKR_POS_R;
-        else if (FACTION_ID_RED == (s16)faction1)
-            pos = EKR_POS_R;
-        else if (FACTION_ID_GREEN == (s16)faction1 && FACTION_ID_GREEN == faction2)
-            pos = EKR_POS_R;
+        if (BANIMPAL_BLUE == (s16)animfac_act)
+            pos = POS_R;
+        else if (BANIMPAL_GREEN == (s16)animfac_act)
+            pos = POS_R;
+        else if (BANIMPAL_RED == (s16)animfac_act && BANIMPAL_RED == animfac_tar)
+            pos = POS_R;
     }
     return pos;
 }
@@ -899,16 +899,14 @@ bool PrepareBattleGraphicsMaybe(void)
         bu1 = gpEkrBattleUnitLeft = &gBattleActor;
         bu2 = gpEkrBattleUnitRight = &gBattleTarget;
 
-        gEkrInitialPosition[POS_L] = gEkrInitialPosition[POS_R] = 0;
+        gBanimIsEnemy[POS_L] = gBanimIsEnemy[POS_R] = false;
         gBanimValid[EKR_POS_R] = gBanimValid[EKR_POS_L] = true;
     }
     else
     {
         int pos;
-        u8 i1 = -0x40 & gBattleActor.unit.index;
-        u16 faction1 = GetBanimFactionPalette(i1);
-        u8 i2 = -0x40 & gBattleTarget.unit.index;
-        u16 faction2 = GetBanimFactionPalette(i2);
+        u16 animfac_act = GetBanimFactionPalette((u8)UNIT_FACTION(&gBattleActor.unit));
+        u16 animfac_tar = GetBanimFactionPalette((u8)UNIT_FACTION(&gBattleTarget.unit));
 
         if (gBattleStats.config & BATTLE_CONFIG_REFRESH)
             char_cnt = 2;
@@ -917,29 +915,37 @@ bool PrepareBattleGraphicsMaybe(void)
         else
             char_cnt = GetSpellAssocCharCount(GetItemIndex(gBattleActor.weaponBefore));
 
-        gBanimValid[EKR_POS_L] = gBanimValid[EKR_POS_R] = true;
+        gBanimValid[POS_L] = gBanimValid[POS_R] = true;
 
-        if (EKR_POS_R == GetPosFunc(faction1, faction2))
+        if (POS_R == GetBanimAllyPosition(animfac_act, animfac_tar))
         {
+            /**
+             * POS_R: ally battle actor
+             * POS_L: enemy battle target
+             */
             bu1 = gpEkrBattleUnitLeft = &gBattleTarget;
             bu2 = gpEkrBattleUnitRight = &gBattleActor;
 
-            gEkrInitialPosition[POS_L] = true;
-            gEkrInitialPosition[POS_R] = false;
+            gBanimIsEnemy[BATTLE_ATTACKER] = true;
+            gBanimIsEnemy[BATTLE_DEFENDER] = false;
 
             if (char_cnt == 1)
-                gBanimValid[EKR_POS_L] = false;
+                gBanimValid[POS_L] = false;
         }
         else
         {
+            /**
+             * POS_R: ally battle target
+             * POS_L: enemy battle actor
+             */
             bu1 = gpEkrBattleUnitLeft = &gBattleActor;
             bu2 = gpEkrBattleUnitRight = &gBattleTarget;
 
-            gEkrInitialPosition[POS_L] = false;
-            gEkrInitialPosition[POS_R] = true;
+            gBanimIsEnemy[BATTLE_ATTACKER] = false;
+            gBanimIsEnemy[BATTLE_DEFENDER] = true;
 
             if (char_cnt == 1)
-                gBanimValid[EKR_POS_R] = false;
+                gBanimValid[POS_R] = false;
         }
     }
 

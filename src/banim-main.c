@@ -353,8 +353,8 @@ void BattleAIS_ExecCommands(void)
                 case ANIM_CMD_WAIT_13:
                     if (!(anim->state3 & ANIM_BIT3_BLOCKING)) {
                         anim->state3 |= ANIM_BIT3_BLOCKING;
-                    } else if (gUnknown_02017758 == 1) {
-                        gUnknown_02017758 = 0;
+                    } else if (gBanimTeonoEnd == 1) {
+                        gBanimTeonoEnd = 0;
                         anim->state3 &= ~ANIM_BIT3_BLOCKING;
                         anim->pScrCurrent = anim->pScrCurrent + 1;
                     }

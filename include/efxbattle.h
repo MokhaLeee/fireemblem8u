@@ -520,15 +520,15 @@ extern u32 gEkrDeadEventExist;
 extern u32 gUnknown_0201773C;
 extern u32 gUnknown_02017740;
 extern u32 gEkrInitPosReal;
-extern u32 gUnknown_02017748;
+extern u32 gDisableEfxQuake;
 extern u32 gEfxBgSemaphore;
-extern u32 gUnknown_02017750;
-extern u32 gUnknown_02017754;
-extern u32 gUnknown_02017758;
+extern u32 gBanimHpDrainKind;
+extern u32 gBanim_Unused_02017754;
+extern u32 gBanimTeonoEnd;
 extern u32 gUnknown_0201775C;
 struct Vec2 gEkrBg2QuakeVec;
-extern s16 gUnknown_02017764[2];
-extern s16 gUnknown_02017768[2];
+extern s16 gBanim_Unused_02017764[2];
+extern s16 gBanimSpecialEffectDisplayed[2];
 
 extern s16 gEkrHitEfxBool[];     /* [0] for left and [1] for right, if in hit routine, 1, otherwise 0 */
 extern u8 gSpellAnimBgfx[];

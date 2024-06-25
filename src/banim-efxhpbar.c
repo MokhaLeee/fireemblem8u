@@ -190,7 +190,7 @@ void NewEfxHPBarResire(struct Anim *anim)
     proc->cur = proc->pre;
     proc->timer = 0;
     proc->finished = false;
-    gUnknown_02017750 = 0;
+    gBanimHpDrainKind = 0;
     gEkrHitEfxBool[GetAnimPosition(proc->anim60)] = 1;
 }
 
@@ -219,7 +219,7 @@ void EfxHPBarResire_80526C8(struct ProcEfxHPBar * proc)
 
         proc->pos = 0;
         proc->cur = 10;
-        gUnknown_02017750 = 1;
+        gBanimHpDrainKind = 1;
 
         Proc_Break(proc);
         return;

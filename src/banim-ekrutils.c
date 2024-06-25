@@ -64,119 +64,137 @@ void sub_8055288(struct Anim *anim, int type)
     StartBattleAnimHitEffects(anim, type, 5, 5);
 }
 
-void StartBattleAnimHitEffects(struct Anim *anim, int type, int a, int b)
+void StartBattleAnimHitEffects(struct Anim * anim, int type, int quake_kind_normal, int quake_kind_crit)
 {
-    struct Anim *animr7, *animr9, *animr5, *animr8;
-    int val1, val2;
-    s16 roundt1, roundt2;
+    struct Anim * animact_f, * animact_b, * animtar_f, * animtar_b;
+    int hp_this, hp_next;
+    s16 round_act, round_tar;
 
-    if (GetAnimPosition(anim) == EKR_POS_L) {
-        animr7 = gAnims[2];
-        animr9 = gAnims[3];
-        animr5 = gAnims[0];
-        animr8 = gAnims[1];
-    } else {
-        animr7 = gAnims[0];
-        animr9 = gAnims[1];
-        animr5 = gAnims[2];
-        animr8 = gAnims[3];
+    if (GetAnimPosition(anim) == EKR_POS_L)
+    {
+        animact_f = gAnims[2];
+        animact_b = gAnims[3];
+        animtar_f = gAnims[0];
+        animtar_b = gAnims[1];
+    }
+    else
+    {
+        animact_f = gAnims[0];
+        animact_b = gAnims[1];
+        animtar_f = gAnims[2];
+        animtar_b = gAnims[3];
     }
 
     switch (type) {
     case EKR_HITTED:
-        roundt1 = GetRoundFlagByAnim(animr7);
-        roundt2 = GetRoundFlagByAnim(animr5);
+        round_act = GetRoundFlagByAnim(animact_f);
+        round_tar = GetRoundFlagByAnim(animtar_f);
 
-        if (roundt1 & ANIM_ROUND_POISON) {
-            if (GetUnitEfxDebuff(animr7) == UNIT_STATUS_NONE)
-                SetUnitEfxDebuff(animr7, UNIT_STATUS_POISON);
+        if (round_act & ANIM_ROUND_POISON)
+        {
+            if (GetUnitEfxDebuff(animact_f) == UNIT_STATUS_NONE)
+                SetUnitEfxDebuff(animact_f, UNIT_STATUS_POISON);
         }
 
-        if (roundt2 & ANIM_ROUND_POISON) {
-            if (GetUnitEfxDebuff(animr5) == UNIT_STATUS_NONE)
-                SetUnitEfxDebuff(animr5, UNIT_STATUS_POISON);
+        if (round_tar & ANIM_ROUND_POISON)
+        {
+            if (GetUnitEfxDebuff(animtar_f) == UNIT_STATUS_NONE)
+                SetUnitEfxDebuff(animtar_f, UNIT_STATUS_POISON);
         }
 
-        if (roundt1 & ANIM_ROUND_DEVIL || roundt2 & ANIM_ROUND_DEVIL) {
-            struct Anim *tmp;
-            tmp = animr5;
-            animr5 = animr7;
-            animr7 = tmp;
-            animr8 = animr9;
+        /**
+         * If devil, swap the actor and target
+         */
+        if (round_act & ANIM_ROUND_DEVIL || round_tar & ANIM_ROUND_DEVIL)
+        {
+            struct Anim * swap_tmp;
+            swap_tmp = animtar_f;
+            animtar_f = animact_f;
+            animact_f = swap_tmp;
+            animtar_b = animact_b;
         }
 
-        val1 = gEfxHpLutOff[GetAnimPosition(animr5)];
-        val2 = gEfxHpLutOff[GetAnimPosition(animr5)];
-        val2++;
+        hp_this = gEfxHpLutOff[GetAnimPosition(animtar_f)];
+        hp_next = gEfxHpLutOff[GetAnimPosition(animtar_f)];
+        hp_next++;
     
-        val1 = GetEfxHp(val1 * 2 + GetAnimPosition(animr5));
-        val2 = GetEfxHp(val2 * 2 + GetAnimPosition(animr5));
+        hp_this = GetEfxHp(hp_this * 2 + GetAnimPosition(animtar_f));
+        hp_next = GetEfxHp(hp_next * 2 + GetAnimPosition(animtar_f));
 
-        if (val1 != val2) {
-            NewEfxHPBar(animr5);
+        if (hp_this != hp_next)
+        {
+            NewEfxHPBar(animtar_f);
 
-            if (CheckRoundCrit(animr7) == 1)
-                NewEfxHitQuake(animr5, animr7, b);
+            if (CheckRoundCrit(animact_f) == 1)
+                NewEfxHitQuake(animtar_f, animact_f, quake_kind_crit);
             else
-                NewEfxHitQuake(animr5, animr7, a);
+                NewEfxHitQuake(animtar_f, animact_f, quake_kind_normal);
             
-            NewEfxFlashHPBar(animr5, 0, 5);
-            NewEfxFlashUnit(animr5, 0, 8, 0);
-        } else {
-            NewEfxNoDamage(animr5, animr8, 0);
+            NewEfxFlashHPBar(animtar_f, 0, 5);
+            NewEfxFlashUnit(animtar_f, 0, 8, 0);
+        }
+        else
+        {
+            NewEfxNoDamage(animtar_f, animtar_b, 0);
         }
         break;
 
     case EKR_MISS:
-        NewEfxAvoid(animr5);
+        NewEfxAvoid(animtar_f);
         break;
     }
 }
 
 void StartBattleAnimResireHitEffects(struct Anim * anim, int type)
 {
-    int val1, val2, off;
-    struct Anim * animR7, * animR5, * animR8;
+    int hp_this, hp_next, off;
+    struct Anim * animact_f, * animtar_f, * animtar_b;
 
-    if (GetAnimPosition(anim) == EKR_POS_L) {
-        animR7 = gAnims[2];
-        animR5 = gAnims[0];
-        animR8 = gAnims[1];
-    } else {
-        animR7 = gAnims[0];
-        animR5 = gAnims[2];
-        animR8 = gAnims[3];
+    if (GetAnimPosition(anim) == EKR_POS_L)
+    {
+        animact_f = gAnims[2];
+        animtar_f = gAnims[0];
+        animtar_b = gAnims[1];
+    }
+    else
+    {
+        animact_f = gAnims[0];
+        animtar_f = gAnims[2];
+        animtar_b = gAnims[3];
     }
 
-    val1 = gEfxHpLutOff[GetAnimPosition(animR5)];
-    val2 = gEfxHpLutOff[GetAnimPosition(animR5)];
-    val2++;
+    hp_this = gEfxHpLutOff[GetAnimPosition(animtar_f)];
+    hp_next = gEfxHpLutOff[GetAnimPosition(animtar_f)];
+    hp_next++;
 
     {
-        val1 = GetEfxHp(val1 * 2 + GetAnimPosition(animR5));
-        val2 = GetEfxHp(val2 * 2 + GetAnimPosition(animR5));
+        hp_this = GetEfxHp(hp_this * 2 + GetAnimPosition(animtar_f));
+        hp_next = GetEfxHp(hp_next * 2 + GetAnimPosition(animtar_f));
     }
 
     switch (type) {
     case EKR_HITTED:
-        if (val1 != val2) {
-            NewEfxHPBarResire(animR5);
+        if (hp_this != hp_next)
+        {
+            NewEfxHPBarResire(animtar_f);
 
-            if (CheckRoundCrit(animR7) == 1)
-                NewEfxHitQuake(animR5, animR7, 4);
+            if (CheckRoundCrit(animact_f) == 1)
+                NewEfxHitQuake(animtar_f, animact_f, 4);
             else
-                NewEfxHitQuake(animR5, animR7, 3);
+                NewEfxHitQuake(animtar_f, animact_f, 3);
             
-            NewEfxFlashHPBar(animR5, 0, 5);
-            NewEfxFlashUnit(animR5, 0, 8, 0);
-        } else {
-            gUnknown_02017750 = 2;
-            NewEfxNoDamage(animR5, animR8, 1);
+            NewEfxFlashHPBar(animtar_f, 0, 5);
+            NewEfxFlashUnit(animtar_f, 0, 8, 0);
+        }
+        else
+        {
+            gBanimHpDrainKind = 2;
+            NewEfxNoDamage(animtar_f, animtar_b, 1);
         }
         break;
 
     case EKR_MISS:
-        NewEfxAvoid(animR5);
+        NewEfxAvoid(animtar_f);
         break;
     }
 }

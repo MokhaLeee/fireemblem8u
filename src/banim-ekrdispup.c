@@ -345,17 +345,17 @@ void EkrEfxStatusClear(void)
     gEkrDeadEventExist = 0;
     gUnknown_0201773C = 0;
     gUnknown_02017740 = 0;
-    gUnknown_02017748 = 0;
+    gDisableEfxQuake = 0;
     gEfxBgSemaphore = 0;
-    gUnknown_02017750 = 0;
-    gUnknown_02017754 = 0;
-    gUnknown_02017758 = 0;
+    gBanimHpDrainKind = 0;
+    gBanim_Unused_02017754 = 0;
+    gBanimTeonoEnd = 0;
     gUnknown_0201775C = 0;
     SetEkrBg2QuakeVec(0, 0);
-    gUnknown_02017764[0] = 0;
-    gUnknown_02017764[1] = 0;
-    gUnknown_02017768[0] = 0;
-    gUnknown_02017768[1] = 0;
+    gBanim_Unused_02017764[0] = 0;
+    gBanim_Unused_02017764[1] = 0;
+    gBanimSpecialEffectDisplayed[0] = 0;
+    gBanimSpecialEffectDisplayed[1] = 0;
     gEkrHitEfxBool[0] = 0;
     gEkrHitEfxBool[1] = 0;
 

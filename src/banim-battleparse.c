@@ -220,6 +220,9 @@ void UnsetMapStaffAnim(s16 * out, u16 pos, u16 weapon)
     if (*out == -1)
         *out = 0;
 
+    /**
+     * Ally always stay at POS_R
+     */
     if (gEkrInitialHitSide == pos)
         return;
 
@@ -248,10 +251,10 @@ void ParseBattleHitToBanimCmd(void)
     s16 * anim_round_r5;
     struct Unit * unit_r6;
     struct BattleHit * hit = gBattleHitArray;
-    u16 * r8, r9, r10;
+    u16 * r8, hplutcur_ally, hplutcur_enemy;
     u16 sp00[2];
     struct BattleUnit * bul_sp04, * bur_sp08;
-    int round_sp0C, ret_sp10;
+    int round_sp0C, retaliation_attack;
     u32 distance_sp14, distance_sp18, distance_sp1C;
 
     for (i = 0; i < 0x14; i++)
@@ -284,42 +287,42 @@ void ParseBattleHitToBanimCmd(void)
     bul_sp04 = gpEkrBattleUnitLeft;
     bur_sp08 = gpEkrBattleUnitRight;
 
-    if (GetItemIndex(bul_sp04->weaponBefore) == 0x11 && distance == 0)
-        distance_sp14 = 1;
-    if (GetItemIndex(bur_sp08->weaponBefore) == 0x11 && distance_sp18 == 0)
-        distance_sp18 = 1;
+    if (GetItemIndex(bul_sp04->weaponBefore) == ITEM_SWORD_RUNESWORD && distance == EKR_DISTANCE_CLOSE)
+        distance_sp14 = EKR_DISTANCE_FAR;
+    if (GetItemIndex(bur_sp08->weaponBefore) == ITEM_SWORD_RUNESWORD && distance_sp18 == EKR_DISTANCE_CLOSE)
+        distance_sp18 = EKR_DISTANCE_FAR;
 
-    if (GetItemIndex(bul_sp04->weaponBefore) == 0x28 && distance_sp14 == 0)
-        distance_sp14 = 1;
-    if (GetItemIndex(bur_sp08->weaponBefore) == 0x28 && distance_sp18 == 0)
-        distance_sp18 = 1;
+    if (GetItemIndex(bul_sp04->weaponBefore) == ITEM_AXE_HANDAXE && distance_sp14 == EKR_DISTANCE_CLOSE)
+        distance_sp14 = EKR_DISTANCE_FAR;
+    if (GetItemIndex(bur_sp08->weaponBefore) == ITEM_AXE_HANDAXE && distance_sp18 == EKR_DISTANCE_CLOSE)
+        distance_sp18 = EKR_DISTANCE_FAR;
 
-    if (GetItemIndex(bul_sp04->weaponBefore) == 0x29 && distance_sp14 == 0)
-        distance_sp14 = 1;
-    if (GetItemIndex(bur_sp08->weaponBefore) == 0x29 && distance_sp18 == 0)
-        distance_sp18 = 1;
+    if (GetItemIndex(bul_sp04->weaponBefore) == ITEM_AXE_TOMAHAWK && distance_sp14 == EKR_DISTANCE_CLOSE)
+        distance_sp14 = EKR_DISTANCE_FAR;
+    if (GetItemIndex(bur_sp08->weaponBefore) == ITEM_AXE_TOMAHAWK && distance_sp18 == EKR_DISTANCE_CLOSE)
+        distance_sp18 = EKR_DISTANCE_FAR;
 
-    if (GetItemIndex(bul_sp04->weaponBefore) == 0x2C && distance_sp14 == 0)
-        distance_sp14 = 1;
-    if (GetItemIndex(bur_sp08->weaponBefore) == 0x2C && distance_sp18 == 0)
-        distance_sp18 = 1;
+    if (GetItemIndex(bul_sp04->weaponBefore) == ITEM_AXE_HATCHET && distance_sp14 == EKR_DISTANCE_CLOSE)
+        distance_sp14 = EKR_DISTANCE_FAR;
+    if (GetItemIndex(bur_sp08->weaponBefore) == ITEM_AXE_HATCHET && distance_sp18 == EKR_DISTANCE_CLOSE)
+        distance_sp18 = EKR_DISTANCE_FAR;
 
     /* _08058332 */
     gEfxHpLut[0] = gEkrGaugeHp[0];
     gEfxHpLut[1] = gEkrGaugeHp[1];
 
     round_sp0C = 0;
-    r10 = 0;
-    r9 = 0;
+    hplutcur_enemy = 0;
+    hplutcur_ally = 0;
 
     for (; 0 == (hit->info & BATTLE_HIT_INFO_END); hit++, round_sp0C++)
     {
         if (hit->info & BATTLE_HIT_INFO_RETALIATION)
-            ret_sp10 = true;
+            retaliation_attack = true;
         else
-            ret_sp10 = false;
+            retaliation_attack = false;
 
-        if (gEkrInitialPosition[POS_L] == ret_sp10)
+        if (gBanimIsEnemy[BATTLE_ATTACKER] == retaliation_attack)
         {
             r5 = &sp00[POS_L];
             r8 = &sp00[POS_R];
@@ -434,114 +437,120 @@ void ParseBattleHitToBanimCmd(void)
         {
             if (hit->attributes & BATTLE_HIT_ATTR_DEVIL)
             {
-                if (gEkrInitialPosition[POS_L] == ret_sp10)
+                if (gBanimIsEnemy[BATTLE_ATTACKER] == retaliation_attack)
                 {
-                    new_hp = GetEfxHp(r9 * 2) - hit->hpChange;
+                    /**
+                     * attacker is enemy and now on retaliation: now is ally
+                     */
+                    new_hp = GetEfxHp(hplutcur_ally * 2) - hit->hpChange;
                     if (new_hp < 0)
                         new_hp = 0;
 
-                    r9 = r9 + 1;
-                    gEfxHpLut[r9 * 2] = new_hp;
-                    *anim_round_r5 = (u32)*anim_round_r5 | ({0xFFFF8000 + 0;});
+                    hplutcur_ally = hplutcur_ally + 1;
+                    gEfxHpLut[hplutcur_ally * 2] = new_hp;
+                    *anim_round_r5 = (u32)*anim_round_r5 | ((s16)ANIM_ROUND_DEVIL);
                 }
                 else
                 {
-                    new_hp = GetEfxHp(r10 * 2 + 1) - hit->hpChange;
+                    /**
+                     * Now is enemy attack
+                     */
+                    new_hp = GetEfxHp(hplutcur_enemy * 2 + 1) - hit->hpChange;
                     if (new_hp < 0)
                         new_hp = 0;
 
-                    r10 = r10 + 1;
-                    gEfxHpLut[r10 * 2 + 1] = new_hp;
-                    *anim_round_r4 = (u32)*anim_round_r4 | ({0xFFFF8000 + 0;});
+                    hplutcur_enemy = hplutcur_enemy + 1;
+                    gEfxHpLut[hplutcur_enemy * 2 + 1] = new_hp;
+                    *anim_round_r4 = (u32)*anim_round_r4 | ((s16)ANIM_ROUND_DEVIL);
                 }
             }
             /* _080585B4 */
             else if (hit->attributes & BATTLE_HIT_ATTR_HPSTEAL)
             {
-                if (gEkrInitialPosition[POS_L] == ret_sp10)
+                if (gBanimIsEnemy[BATTLE_ATTACKER] == retaliation_attack)
                 {
-                    new_hp = GetEfxHp(r10 * 2 + 1) - hit->hpChange;
+                    new_hp = GetEfxHp(hplutcur_enemy * 2 + 1) - hit->hpChange;
                     if (new_hp < 0)
                         new_hp = 0;
 
-                    r10 = r10 + 1;
-                    gEfxHpLut[r10 * 2 + 1] = new_hp;
+                    hplutcur_enemy = hplutcur_enemy + 1;
+                    gEfxHpLut[hplutcur_enemy * 2 + 1] = new_hp;
 
-                    new_hp = GetEfxHp(r9 * 2) + hit->hpChange;
+                    new_hp = GetEfxHp(hplutcur_ally * 2) + hit->hpChange;
                     if (new_hp > gBanimMaxHP[POS_L])
                         new_hp = gBanimMaxHP[POS_L];
 
-                    r9 = r9 + 1;
-                    gEfxHpLut[r9 * 2] = new_hp;
+                    hplutcur_ally = hplutcur_ally + 1;
+                    gEfxHpLut[hplutcur_ally * 2] = new_hp;
                 }
                 else
                 {
-                    new_hp = GetEfxHp(r9 * 2) - hit->hpChange;
+                    new_hp = GetEfxHp(hplutcur_ally * 2) - hit->hpChange;
                     if (new_hp < 0)
                         new_hp = 0;
 
-                    r9 = r9 + 1;
-                    gEfxHpLut[r9 * 2] = new_hp;
+                    hplutcur_ally = hplutcur_ally + 1;
+                    gEfxHpLut[hplutcur_ally * 2] = new_hp;
 
-                    new_hp = GetEfxHp(r10 * 2 + 1) + hit->hpChange;
+                    new_hp = GetEfxHp(hplutcur_enemy * 2 + 1) + hit->hpChange;
                     if (new_hp > gBanimMaxHP[POS_R])
                         new_hp = gBanimMaxHP[POS_R];
 
-                    r10 = r10 + 1;
-                    gEfxHpLut[r10 * 2 + 1] = new_hp;
+                    hplutcur_enemy = hplutcur_enemy + 1;
+                    gEfxHpLut[hplutcur_enemy * 2 + 1] = new_hp;
                 }
             }
             /* _080586A0 */
             else
             {
-                if (gEkrInitialPosition[POS_L] == ret_sp10)
+                if (gBanimIsEnemy[BATTLE_ATTACKER] == retaliation_attack)
                 {
-                    new_hp = GetEfxHp(r10 * 2 + 1) - hit->hpChange;
+                    new_hp = GetEfxHp(hplutcur_enemy * 2 + 1) - hit->hpChange;
                     if (new_hp < 0)
                         new_hp = 0;
 
-                    r10 = r10 + 1;
-                    gEfxHpLut[r10 * 2 + 1] = new_hp;
+                    hplutcur_enemy = hplutcur_enemy + 1;
+                    gEfxHpLut[hplutcur_enemy * 2 + 1] = new_hp;
 
-                    if (hit->attributes & 0x40)
-                        *anim_round_r4 |= 0x2000;
+                    if (hit->attributes & BATTLE_HIT_ATTR_POISON)
+                        *anim_round_r4 |= ANIM_ROUND_POISON;
 
-                    if (hit->attributes & 0x800)
-                        *anim_round_r5 |= 0x1000;
+                    if (hit->attributes & BATTLE_HIT_ATTR_SILENCER)
+                        *anim_round_r5 |= ANIM_ROUND_SILENCER;
 
-                    if (hit->attributes & 0x4000)
-                        *anim_round_r5 |= 0x800;
+                    if (hit->attributes & BATTLE_HIT_ATTR_SURESHOT)
+                        *anim_round_r5 |= ANIM_ROUND_SURE_SHOT;
 
-                    if (hit->attributes & 0x10000)
-                        *anim_round_r5 |= 0x200;
+                    if (hit->attributes & BATTLE_HIT_ATTR_PIERCE)
+                        *anim_round_r5 |= ANIM_ROUND_PIERCE;
 
-                    if (hit->attributes & 0x8000)
-                        *anim_round_r5 |= 0x400;
+                    if (hit->attributes & BATTLE_HIT_ATTR_GREATSHLD)
+                        *anim_round_r5 |= ANIM_ROUND_GREAT_SHIELD;
                 }
                 /* _0805876C */
                 else
                 {
-                    new_hp = GetEfxHp(r9 * 2) - hit->hpChange;
+                    new_hp = GetEfxHp(hplutcur_ally * 2) - hit->hpChange;
                     if (new_hp < 0)
                         new_hp = 0;
 
-                    r9 = r9 + 1;
-                    gEfxHpLut[r9 * 2] = new_hp;
+                    hplutcur_ally = hplutcur_ally + 1;
+                    gEfxHpLut[hplutcur_ally * 2] = new_hp;
 
-                    if (hit->attributes & 0x40)
-                        *anim_round_r5 |= 0x2000;
+                    if (hit->attributes & BATTLE_HIT_ATTR_POISON)
+                        *anim_round_r5 |= ANIM_ROUND_POISON;
 
-                    if (hit->attributes & 0x800)
-                        *anim_round_r4 |= 0x1000;
+                    if (hit->attributes & BATTLE_HIT_ATTR_SILENCER)
+                        *anim_round_r4 |= ANIM_ROUND_SILENCER;
 
-                    if (hit->attributes & 0x4000)
-                        *anim_round_r4 |= 0x800;
+                    if (hit->attributes & BATTLE_HIT_ATTR_SURESHOT)
+                        *anim_round_r4 |= ANIM_ROUND_SURE_SHOT;
 
-                    if (hit->attributes & 0x10000)
-                        *anim_round_r4 |= 0x200;
+                    if (hit->attributes & BATTLE_HIT_ATTR_PIERCE)
+                        *anim_round_r4 |= ANIM_ROUND_PIERCE;
 
-                    if (hit->attributes & 0x8000)
-                        *anim_round_r4 |= 0x400;
+                    if (hit->attributes & BATTLE_HIT_ATTR_GREATSHLD)
+                        *anim_round_r4 |= ANIM_ROUND_GREAT_SHIELD;
                 }
             }
         }
@@ -740,7 +749,7 @@ void ParseBattleHitToBanimCmd(void)
         negs r0, r0\n\
         lsrs r0, r0, #0x1f\n\
         str r0, [sp, #0x10]\n\
-        ldr r0, _08058390  @ gEkrInitialPosition\n\
+        ldr r0, _08058390  @ gBanimIsEnemy\n\
         movs r2, #0\n\
         ldrsh r0, [r0, r2]\n\
         ldr r3, [sp, #0x10]\n\
@@ -762,7 +771,7 @@ void ParseBattleHitToBanimCmd(void)
         strh r2, [r0]\n\
         b _080583B4\n\
         .align 2, 0\n\
-    _08058390: .4byte gEkrInitialPosition\n\
+    _08058390: .4byte gBanimIsEnemy\n\
     _08058394: .4byte gEkrInitialHitSide\n\
     _08058398:\n\
         mov r5, sp\n\
@@ -965,7 +974,7 @@ void ParseBattleHitToBanimCmd(void)
         ands r0, r1\n\
         cmp r0, #0\n\
         beq _080585B4\n\
-        ldr r0, _08058568  @ gEkrInitialPosition\n\
+        ldr r0, _08058568  @ gBanimIsEnemy\n\
         movs r1, #0\n\
         ldrsh r0, [r0, r1]\n\
         ldr r2, [sp, #0x10]\n\
@@ -999,7 +1008,7 @@ void ParseBattleHitToBanimCmd(void)
         .align 2, 0\n\
     _08058560: .4byte gUnknown_080DAEB4\n\
     _08058564: .4byte gAnimRoundData\n\
-    _08058568: .4byte gEkrInitialPosition\n\
+    _08058568: .4byte gBanimIsEnemy\n\
     _0805856C: .4byte gEfxHpLut\n\
     _08058570: .4byte 0xFFFF8000\n\
     _08058574:\n\
@@ -1039,7 +1048,7 @@ void ParseBattleHitToBanimCmd(void)
         ands r1, r0\n\
         cmp r1, #0\n\
         beq _080586A0\n\
-        ldr r0, _08058628  @ gEkrInitialPosition\n\
+        ldr r0, _08058628  @ gBanimIsEnemy\n\
         movs r3, #0\n\
         ldrsh r0, [r0, r3]\n\
         ldr r5, [sp, #0x10]\n\
@@ -1093,7 +1102,7 @@ void ParseBattleHitToBanimCmd(void)
         lsls r0, r0, #2\n\
         b _08058690\n\
         .align 2, 0\n\
-    _08058628: .4byte gEkrInitialPosition\n\
+    _08058628: .4byte gBanimIsEnemy\n\
     _0805862C: .4byte gEfxHpLut\n\
     _08058630: .4byte gBanimMaxHP\n\
     _08058634:\n\
@@ -1151,7 +1160,7 @@ void ParseBattleHitToBanimCmd(void)
     _08058698: .4byte gEfxHpLut\n\
     _0805869C: .4byte gBanimMaxHP\n\
     _080586A0:\n\
-        ldr r0, _08058764  @ gEkrInitialPosition\n\
+        ldr r0, _08058764  @ gBanimIsEnemy\n\
         movs r1, #0\n\
         ldrsh r0, [r0, r1]\n\
         ldr r2, [sp, #0x10]\n\
@@ -1255,7 +1264,7 @@ void ParseBattleHitToBanimCmd(void)
         strh r0, [r5]\n\
         b _0805881C\n\
         .align 2, 0\n\
-    _08058764: .4byte gEkrInitialPosition\n\
+    _08058764: .4byte gBanimIsEnemy\n\
     _08058768: .4byte gEfxHpLut\n\
     _0805876C:\n\
         mov r1, r9\n\

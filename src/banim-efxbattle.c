@@ -82,7 +82,7 @@ void NewEfxFarAttackWithDistance(struct Anim * anim, s16 arg)
             }
 
             gEkrBgPosition = proc->unk_32;
-            gUnknown_02017748 = 1;
+            gDisableEfxQuake = 1;
 
             break;
 
@@ -184,7 +184,7 @@ void sub_8053584(struct ProcEfxFarAttack * proc)
             gEkrInitPosReal = 0;
         }
 
-        gUnknown_02017748 = 0;
+        gDisableEfxQuake = 0;
 
         Proc_Break(proc);
     }
@@ -864,7 +864,7 @@ ProcPtr NewEfxQuake(int kind)
 {
     struct EfxQuakeProc * proc;
 
-    if (gUnknown_02017748 == 1)
+    if (gDisableEfxQuake == 1)
     {
         return NULL;
     }

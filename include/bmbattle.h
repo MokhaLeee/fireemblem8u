@@ -153,6 +153,11 @@ enum {
 
 extern struct BattleStats gBattleStats;
 
+enum {
+    BATTLE_ATTACKER,
+    BATTLE_DEFENDER
+};
+
 extern struct BattleUnit gBattleActor;
 extern struct BattleUnit gBattleTarget;
 

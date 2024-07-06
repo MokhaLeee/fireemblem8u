@@ -254,7 +254,7 @@ static void expand_control_codes(char *src, char *dest)
 
 char *skip_whitespace_and_comments(char *str)
 {
-    int isLineStart = 0;
+    __attribute__((unused)) int isLineStart = 0;
 
     // needed to allow comments on first line of file
     if (str == inputFileBuffer)
@@ -276,7 +276,7 @@ char *skip_whitespace_and_comments(char *str)
         {
             // Handle comments
             // # starts a comment if it is the first non-whitespace character on a line
-            if (*str == '#' && isLineStart)
+            if (*str == '#')
             {
                 // Skip to the end of the line
                 while (*str != '\n' && *str != 0)

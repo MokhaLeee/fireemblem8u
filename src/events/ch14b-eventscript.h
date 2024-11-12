@@ -95,7 +95,7 @@ LABEL(0x0)
     FADI(16)
     LOAD1(0x1, UnitDef_088C60FC)
     ENUN
-    CALL(EventScr_08591FD8)
+    CALL(EventScr_CallPrepScreen)
     ENUT(13)
     ENUT(16)
     ENDA

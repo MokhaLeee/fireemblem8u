@@ -106,7 +106,7 @@ LABEL(0x1)
     SVAL(EVT_SLOT_2, 0x40)
     MOVE_CLOSEST(0xffff, CHAR_EVT_SLOT2, 20, 6)
     CALL(EventScr_UnitWarpIN)
-    CALL(EventScr_08591FD8)
+    CALL(EventScr_CallPrepScreen)
     ENDA
 };
 

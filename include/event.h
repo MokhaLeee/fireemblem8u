@@ -205,7 +205,7 @@ extern EventScr EventScr_08591F64[];
 extern EventScr EventScr_DisplayBattleQuote[];
 extern EventScr EventScr_TriggerQueuedTileChanges[];
 extern EventScr EventScr_OpenChest[];
-extern EventListScr EventScr_08591FD8[];
+extern EventListScr EventScr_CallPrepScreen[];
 extern EventScr EventScr_MapSupportConversation[];
 extern EventScr EventScr_SupportViewerConversation[];
 extern EventScr EventScr_SkirmishRetreat[];

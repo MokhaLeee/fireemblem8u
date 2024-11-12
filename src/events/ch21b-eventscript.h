@@ -8,7 +8,7 @@ CONST_DATA EventListScr EventScr_Ch21b_BeginingScene[] = {
     FADI(16)
     LOAD1(0x1, UnitDef_088CB164)
     ENUN
-    CALL(EventScr_08591FD8)
+    CALL(EventScr_CallPrepScreen)
     ENUT(11)
     ENUT(12)
     ENUT(13)

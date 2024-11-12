@@ -58,7 +58,7 @@ CONST_DATA EventListScr EventScr_Ch15b_BeginingScene[] = {
     REVEAL(CHARACTER_CAELLACH)
     DISA(CHARACTER_BANDIT_CH5)
     FADI(16)
-    CALL(EventScr_08591FD8)
+    CALL(EventScr_CallPrepScreen)
     CAMERA2(12, 7)
     FADU(16)
     MUSC(0x26)

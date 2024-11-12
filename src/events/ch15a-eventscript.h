@@ -35,7 +35,7 @@ CONST_DATA EventListScr EventScr_Ch15a_BeginingScene[] = {
     DISA(CHARACTER_RIEV)
     LOAD1(0x1, UnitDef_088BCA48)
     ENUN
-    CALL(EventScr_08591FD8)
+    CALL(EventScr_CallPrepScreen)
     ENDA
 };
 

@@ -73,7 +73,7 @@ CONST_DATA EventListScr EventScr_Ch13b_BeginingScene[] = {
     FADI(16)
     LOAD1(0x1, UnitDef_088C5508)
     ENUN
-    CALL(EventScr_08591FD8)
+    CALL(EventScr_CallPrepScreen)
     CAMERA(21, 0)
     MUSC(0x25)
     FADU(16)

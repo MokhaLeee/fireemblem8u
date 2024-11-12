@@ -93,7 +93,7 @@ CONST_DATA EventListScr EventScr_Ch4_BeginingScene[] = {
     REMA
     SVAL(EVT_SLOT_2, EventScr_089F1CA4)
     CALL(EventScr_CallOnTutorialMode)
-    CALL(EventScr_08591FD8)
+    CALL(EventScr_CallPrepScreen)
     CAMERA(0, 0)
     FADU(16)
     MUSC(0x9)

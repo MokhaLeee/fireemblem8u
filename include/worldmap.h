@@ -7,6 +7,12 @@
 #include "ap.h"
 #include "constants/worldmap.h"
 
+enum battle_map_kind {
+    WM_KIND_NORMAL  = 0,
+    WM_KIND_DUNGEON  = 1,
+    WM_KIND_SKIRMISH = 2,
+};
+
 enum worldmap_unit_alignace {
     WM_FACTION_BLUE  = 0,
     WM_FACTION_RED   = 1,
@@ -281,7 +287,7 @@ struct WorldMapMainProc
 
     /* 3A */ u16 unk_3a;
     /* 3C */ u16 unk_3c; // pad?
-    /* 3E */ u8 unk_3e;
+    /* 3E */ u8 node_effective;
     /* 3F */ u8 unk_3f;
     /* 40 */ s8 unk_40;
     /* 41 */ s8 unk_41;
@@ -315,6 +321,11 @@ struct GMapPathData
 };
 
 extern const struct GMapPathData gWMPathData[];
+
+enum
+{
+    PROCLABEL_GMMAIN_
+};
 
 enum
 {
@@ -588,21 +599,21 @@ void HideWmFace(void);
 void WorldMap_Destruct(struct WorldMapMainProc * proc);
 void sub_80B8A7C(struct WorldMapMainProc * proc);
 void sub_80B8B3C(struct WorldMapMainProc * proc);
-void sub_80B8E60(struct WorldMapMainProc * proc);
+void WorldMap_InitScreen(struct WorldMapMainProc * proc);
 void sub_80B8BA4(struct WorldMapMainProc * proc);
 void SetupGraphicSystemsForWorldMap(void);
 void SetupGmapNodeGfx(void);
-void sub_80B8E60(struct WorldMapMainProc * proc);
+void WorldMap_InitScreen(struct WorldMapMainProc * proc);
 void DeployEveryUnit(struct WorldMapMainProc * unused);
 void nullsub_22(void);
 void sub_80B8FD4(void);
-// ??? sub_80B8FEC(???);
+// ??? WorldMapRegisterNextUnclearedNode(???);
 // ??? sub_80B9028(???);
 // ??? sub_80B90CC(???);
-// ??? sub_80B9114(???);
+// ??? SkipStandingNodeAfterRetreat(???);
 void WorldMap_Init(struct WorldMapMainProc * proc);
 void WmMain_MoveCamera(ProcPtr);
-s8 sub_80B92D0(struct WorldMapMainProc *, int);
+bool WorldMap_ProcessButtonOnNode(struct WorldMapMainProc *, int node_idx);
 void WmMain_MoveCursor(struct WorldMapMainProc *);
 // ??? sub_80B955C(???);
 int sub_80B95B0(void);

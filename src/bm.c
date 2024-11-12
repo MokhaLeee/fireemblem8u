@@ -397,7 +397,7 @@ int CallBeginningEvents(void)
 {
     const struct ChapterEventGroup* pChapterEvents = GetChapterEventDataPointer(gPlaySt.chapterIndex);
 
-    if (GetBattleMapKind() != 2)
+    if (GetBattleMapKind() != WM_KIND_SKIRMISH)
         CallEvent(pChapterEvents->beginningSceneEvents, 1);
     else
         CallEvent((u16 *)EventScr_SkirmishCommonBeginning, 1);
@@ -1182,12 +1182,12 @@ int GetCurrentMapMusicIndex(void) {
                 return GetROMChapterStruct(gPlaySt.chapterIndex)->mapBgmIds[blueBgmIdx];
             }
 
-            if ((GetBattleMapKind() == 2) || GetROMChapterStruct(gPlaySt.chapterIndex)->victorySongEnemyThreshold != 0) {
-                aliveUnits = CountUnitsInState(0x80, 0x0001000C);
+            if ((GetBattleMapKind() == WM_KIND_SKIRMISH) || GetROMChapterStruct(gPlaySt.chapterIndex)->victorySongEnemyThreshold != 0) {
+                aliveUnits = CountUnitsInState(FACTION_RED, US_UNAVAILABLE);
                 thing = GetBattleMapKind();
 
-                if ((thing != 2 && aliveUnits <= (GetROMChapterStruct(gPlaySt.chapterIndex)->victorySongEnemyThreshold))
-                    || (thing == 2 && aliveUnits <= 1))
+                if ((thing != WM_KIND_SKIRMISH && aliveUnits <= (GetROMChapterStruct(gPlaySt.chapterIndex)->victorySongEnemyThreshold))
+                    || (thing == WM_KIND_SKIRMISH && aliveUnits <= 1))
                     return 0x10;
             }
 

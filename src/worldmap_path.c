@@ -1985,14 +1985,12 @@ u32 GetBattleMapKind(void)
                 {
                     if (!(gGMData.nodes[i].state & GM_NODE_STATE_CLEARED))
                     {
-                        if ((u8)i[gWMNodeData].encounters != 3)
-                        {
+                        if ((u8)i[gWMNodeData].encounters != GMAP_ENCOUNTERS_DUNGEON)
                             break;
-                        }
                     }
                     else if (i[gWMNodeData].placementFlag != GMAP_NODE_PLACEMENT_DUNGEON)
                     {
-                        return 0;
+                        return WM_KIND_NORMAL;
                     }
 
                     return 1;

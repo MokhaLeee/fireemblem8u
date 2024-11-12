@@ -18,7 +18,7 @@ CONST_DATA EventListScr EventScr_Tower1_BeginingScene[] = {
     CALL(EventScr_9EE84C)
     LOAD1(0x1, UnitDef_088CB77C)
     ENUN
-    CALL(EventScr_08591FD8)
+    CALL(EventScr_CallPrepScreen)
     ENDA
 };
 
@@ -49,7 +49,7 @@ CONST_DATA EventListScr EventScr_Tower2_BeginingScene[] = {
     CALL(EventScr_9EE84C)
     LOAD1(0x1, UnitDef_088CB9CC)
     ENUN
-    CALL(EventScr_08591FD8)
+    CALL(EventScr_CallPrepScreen)
     ENUT(8)
     ENDA
 };
@@ -100,7 +100,7 @@ CONST_DATA EventListScr EventScr_Tower3_BeginingScene[] = {
     CALL(EventScr_9EE84C)
     LOAD1(0x1, UnitDef_088CBCEC)
     ENUN
-    CALL(EventScr_08591FD8)
+    CALL(EventScr_CallPrepScreen)
     ENDA
 };
 
@@ -133,7 +133,7 @@ CONST_DATA EventListScr EventScr_Tower4_BeginingScene[] = {
     CALL(EventScr_9EE84C)
     LOAD1(0x1, UnitDef_088CBFD8)
     ENUN
-    CALL(EventScr_08591FD8)
+    CALL(EventScr_CallPrepScreen)
     ENDA
 };
 
@@ -164,7 +164,7 @@ CONST_DATA EventListScr EventScr_Tower5_BeginingScene[] = {
     CALL(EventScr_9EE84C)
     LOAD1(0x1, UnitDef_088CC244)
     ENUN
-    CALL(EventScr_08591FD8)
+    CALL(EventScr_CallPrepScreen)
     ENDA
 };
 
@@ -202,7 +202,7 @@ CONST_DATA EventListScr EventScr_Tower6_BeginingScene[] = {
     CALL(EventScr_9EE84C)
     LOAD1(0x1, UnitDef_088CC67C)
     ENUN
-    CALL(EventScr_08591FD8)
+    CALL(EventScr_CallPrepScreen)
     ENDA
 };
 
@@ -235,7 +235,7 @@ CONST_DATA EventListScr EventScr_Tower7_BeginingScene[] = {
     CALL(EventScr_9EE84C)
     LOAD1(0x1, UnitDef_088CCA6C)
     ENUN
-    CALL(EventScr_08591FD8)
+    CALL(EventScr_CallPrepScreen)
     ENUT(12)
     ENUT(13)
     ENUT(14)
@@ -348,7 +348,7 @@ CONST_DATA EventListScr EventScr_Tower8_BeginingScene[] = {
     CALL(EventScr_9EE84C)
     LOAD1(0x1, UnitDef_088CCE68)
     ENUN
-    CALL(EventScr_08591FD8)
+    CALL(EventScr_CallPrepScreen)
     ENDA
 };
 

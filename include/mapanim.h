@@ -1169,7 +1169,7 @@ void sub_808218C(int x, int y, int a, int b, const u8 * unk);
 // ??? PrepareSineWaveScanlineBuf(???);
 // ??? sub_8082268(???);
 // ??? sub_80822AC(???);
-// ??? sub_80822F0(???);
+void sub_80822F0(u16 * buf, s16 phase, s16 amplitude, s16 frequency, int arg5);
 void PrepareSineWaveScanlineBufExt(u16 * buf, s16 phase, s16 amplitude, s16 frequency, int yStart, int yEnd);
 void SwapScanlineBufs(void);
 void InitScanlineBuf(u16 *);

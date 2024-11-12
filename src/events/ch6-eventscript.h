@@ -95,7 +95,7 @@ CONST_DATA EventListScr EventScr_Ch6_BeginingScene[] = {
     FADI(16)
     SVAL(EVT_SLOT_2, EventScr_089F2AE4)
     CALL(EventScr_CallOnTutorialMode)
-    CALL(EventScr_08591FD8)
+    CALL(EventScr_CallPrepScreen)
     ENDA
 };
 

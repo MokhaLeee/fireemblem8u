@@ -175,7 +175,7 @@ LABEL(0xb)
     SADD(EVT_SLOT_2, EVT_SLOT_A, EVT_SLOT_0)
     LOAD1(0x1, 0xffffffff)
     ENUN
-    CALL(EventScr_08591FD8)
+    CALL(EventScr_CallPrepScreen)
     CAMERA(0, 24)
     MUSC(0x18)
     FADU(16)

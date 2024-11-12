@@ -69,7 +69,7 @@ CONST_DATA EventListScr EventScr_Ch11b_BeginingScene[] = {
     SVAL(EVT_SLOT_2, 0x57)
     CALL(EventScr_UnitWarpOUT)
     DISA(CHARACTER_RIEV)
-    CALL(EventScr_08591FD8)
+    CALL(EventScr_CallPrepScreen)
     ENDA
 };
 

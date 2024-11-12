@@ -196,7 +196,7 @@ void sub_80B8BA4(struct WorldMapMainProc * proc)
             if (gGMData.nodes[location].state & 2 &&
                 sub_80BD28C(proc->unk_40 + 1)[gWMNodeData].placementFlag != GMAP_NODE_PLACEMENT_DUNGEON)
             {
-                proc->unk_3e = sub_80BD28C(proc->unk_40 + 1);
+                proc->node_effective = sub_80BD28C(proc->unk_40 + 1);
                 Proc_Goto(proc, 14);
             }
         }
@@ -339,7 +339,7 @@ void SetupGmapNodeGfx(void)
 }
 
 //! FE8U = 0x080B8E60
-void sub_80B8E60(struct WorldMapMainProc * proc)
+void WorldMap_InitScreen(struct WorldMapMainProc * proc)
 {
     proc->unk_3a = 0;
 
@@ -418,7 +418,7 @@ void sub_80B8FD4(void)
 }
 
 //! FE8U = 0x080B8FEC
-void sub_80B8FEC(struct WorldMapMainProc * proc)
+void WorldMapRegisterNextUnclearedNode(struct WorldMapMainProc * proc)
 {
     int id = GetNextUnclearedNode(&gGMData);
 
@@ -431,8 +431,6 @@ void sub_80B8FEC(struct WorldMapMainProc * proc)
     {
         proc->gm_icon->merge_next_node = false;
     }
-
-    return;
 }
 
 //! FE8U = 0x080B9028
@@ -496,13 +494,17 @@ void sub_80B90CC(struct WorldMapMainProc * proc)
 }
 
 //! FE8U = 0x080B9114
-void sub_80B9114(struct WorldMapMainProc * proc)
+void SkipStandingNodeAfterRetreat(struct WorldMapMainProc * proc)
 {
     int i;
 
-    for (i = 0; i <= 0x1c; i++)
+#if BUGFIX
+    for (i = 0; i < 0x1C; i++)
+#else
+    for (i = 0; i < (0x1C + 1); i++)
+#endif
     {
-        if (gGMData.nodes[i].state & 2)
+        if (gGMData.nodes[i].state & GM_NODE_STATE_CLEARED)
         {
             proc->gm_icon->nodeId = i;
             proc->gm_icon->merge_next_node = true;
@@ -510,8 +512,6 @@ void sub_80B9114(struct WorldMapMainProc * proc)
             break;
         }
     }
-
-    return;
 }
 
 //! FE8U = 0x080B9154
@@ -519,7 +519,7 @@ void WorldMap_Init(struct WorldMapMainProc * proc)
 {
     SetupGraphicSystemsForWorldMap();
 
-    sub_80B8E60(proc);
+    WorldMap_InitScreen(proc);
     DeployEveryUnit(proc);
 
     proc->gm_screen = NewMapScreen(PROC_TREE_5);
@@ -530,15 +530,13 @@ void WorldMap_Init(struct WorldMapMainProc * proc)
 
     RefreshGmNodeLinks(&gGMData);
     StartWmTextHandler(proc);
-    sub_80B8FEC(proc);
+    WorldMapRegisterNextUnclearedNode(proc);
     sub_80B90CC(proc);
 
     if (gGMData.state.bits.monster_merged)
-    {
-        sub_80B9114(proc);
-    }
+        SkipStandingNodeAfterRetreat(proc);
 
-    proc->gm_screen->gmroute->flags |= 3;
+    proc->gm_screen->gmroute->flags |= GM_ROUTE_FLAG_0 | GM_ROUTE_FLAG_1;
 
     if (gPlaySt.chapterStateBits & PLAY_FLAG_POSTGAME)
     {
@@ -597,46 +595,46 @@ void WmMain_MoveCamera(ProcPtr proc)
 }
 
 //! FE8U = 0x080B92D0
-s8 sub_80B92D0(struct WorldMapMainProc * param_1, int param_2)
+bool WorldMap_ProcessButtonOnNode(struct WorldMapMainProc * proc, int node_idx)
 {
     int iVar4;
     int i;
 
-    if (gGMData.units[0].location == param_2)
+    if (gGMData.units[0].location == node_idx)
     {
-        if (((gGMData.nodes[param_2].state & 2) == 0) && (param_2[gWMNodeData].placementFlag != 3))
+        if (((gGMData.nodes[node_idx].state & 2) == 0) && (node_idx[gWMNodeData].placementFlag != GMAP_NODE_PLACEMENT_DUNGEON))
         {
-            if (sub_80BCA1C(param_2) >= 0)
-                Proc_Goto(param_1, 16);
+            if (sub_80BCA1C(node_idx) >= 0)
+                Proc_Goto(proc, 16);
             else
             {
                 iVar4 = GetNextUnclearedNode(&gGMData);
                 if (!(gPlaySt.chapterStateBits & 4) && !gPlaySt.config.controller && iVar4 == 2)
                     return 0;
 
-                Proc_Goto(param_1, 18);
+                Proc_Goto(proc, 18);
             }
         }
         else
         {
-            param_1->unk_3e = param_2;
-            Proc_Goto(param_1, 14);
+            proc->node_effective = node_idx;
+            Proc_Goto(proc, 14);
             return 1; // :/
         }
 
         return 1;
     }
 
-    if (sub_80BCCFC(gGMData.units[0].location, param_2, 0) != 0)
+    if (sub_80BCCFC(gGMData.units[0].location, node_idx, 0) != 0)
     {
-        if ((sub_80BD29C() == 2) && (gGMData.nodes[param_2].state & 2) != 0)
+        if ((sub_80BD29C() == 2) && (gGMData.nodes[node_idx].state & 2) != 0)
         {
-            param_1->unk_3e = param_2;
-            Proc_Goto(param_1, 14);
+            proc->node_effective = node_idx;
+            Proc_Goto(proc, 14);
         }
         else
         {
-            Proc_Goto(param_1, 6);
+            Proc_Goto(proc, 6);
         }
 
         return 1;
@@ -644,25 +642,25 @@ s8 sub_80B92D0(struct WorldMapMainProc * param_1, int param_2)
     else
     {
         i = gGMData.units[0].location;
-        if (sub_80BCCFC(i, param_2, 1) != 0)
+        if (sub_80BCCFC(i, node_idx, 1) != 0)
         {
             if (sub_80BD29C() == 2)
             {
-                if (param_2[gWMNodeData].placementFlag != 3)
+                if (node_idx[gWMNodeData].placementFlag != 3)
                 {
-                    if ((gGMData.nodes[param_2].state & 2) != 0)
+                    if ((gGMData.nodes[node_idx].state & 2) != 0)
                     {
-                        param_1->unk_3e = param_2;
-                        Proc_Goto(param_1, 14);
+                        proc->node_effective = node_idx;
+                        Proc_Goto(proc, 14);
                     }
                     else
-                        Proc_Goto(param_1, 6);
+                        Proc_Goto(proc, 6);
                 }
                 else
-                    Proc_Goto(param_1, 6);
+                    Proc_Goto(proc, 6);
             }
             else
-                Proc_Goto(param_1, 6);
+                Proc_Goto(proc, 6);
 
             return 1;
         }
@@ -1143,7 +1141,7 @@ void WorldMap_LoopExt(struct WorldMapMainProc * proc)
     {
         if (gKeyStatusPtr->newKeys & A_BUTTON)
         {
-            if (sub_80B92D0(proc, nodeId) != 0)
+            if (WorldMap_ProcessButtonOnNode(proc, nodeId) != 0)
             {
                 PlaySoundEffect(0x6a);
                 return;
@@ -1411,7 +1409,7 @@ void WorldMap_CallIntroEvent(struct WorldMapMainProc * proc)
 
     if (gGMData.units[0].location[gWMNodeData].placementFlag != GMAP_NODE_PLACEMENT_DUNGEON)
     {
-        gPlaySt.chapterIndex = WMLoc_GetChapterId(proc->unk_3e);
+        gPlaySt.chapterIndex = WMLoc_GetChapterId(proc->node_effective);
         gGMData.state.bits.monster_merged = false;
     }
     else
@@ -1461,7 +1459,7 @@ void WorldMap_PostBeginningEvent(struct WorldMapMainProc * proc)
         Sound_FadeOutBGM(1);
         Sound_FadeOutSE(1);
 
-        proc->unk_3e = gGMData.units[0].location;
+        proc->node_effective = gGMData.units[0].location;
 
         Proc_Goto(proc, 15);
     }

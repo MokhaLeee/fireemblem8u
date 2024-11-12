@@ -71,7 +71,7 @@ LABEL(0x1)
     FADI(16)
     LOAD1(0x1, UnitDef_088B9984)
     ENUN
-    CALL(EventScr_08591FD8)
+    CALL(EventScr_CallPrepScreen)
     ENDA
 };
 

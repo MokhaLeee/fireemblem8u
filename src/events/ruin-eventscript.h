@@ -18,7 +18,7 @@ CONST_DATA EventListScr EventScr_Ruins1_BeginingScene[] = {
     CALL(EventScr_9EE84C)
     LOAD1(0x1, UnitDef_088CD174)
     ENUN
-    CALL(EventScr_08591FD8)
+    CALL(EventScr_CallPrepScreen)
     ENDA
 };
 
@@ -71,7 +71,7 @@ CONST_DATA EventListScr EventScr_Ruins2_BeginingScene[] = {
     CALL(EventScr_9EE84C)
     LOAD1(0x1, UnitDef_088CD5E8)
     ENUN
-    CALL(EventScr_08591FD8)
+    CALL(EventScr_CallPrepScreen)
     ENDA
 };
 
@@ -112,7 +112,7 @@ CONST_DATA EventListScr EventScr_Ruins3_BeginingScene[] = {
     CALL(EventScr_9EE84C)
     LOAD1(0x1, UnitDef_088CDAAC)
     ENUN
-    CALL(EventScr_08591FD8)
+    CALL(EventScr_CallPrepScreen)
     ENDA
 };
 
@@ -175,7 +175,7 @@ CONST_DATA EventListScr EventScr_Ruins4_BeginingScene[] = {
     CALL(EventScr_9EE84C)
     LOAD1(0x1, UnitDef_088CE024)
     ENUN
-    CALL(EventScr_08591FD8)
+    CALL(EventScr_CallPrepScreen)
     ENDA
 };
 
@@ -217,7 +217,7 @@ CONST_DATA EventListScr EventScr_Ruins5_BeginingScene[] = {
     CALL(EventScr_9EE84C)
     LOAD1(0x1, UnitDef_088CE434)
     ENUN
-    CALL(EventScr_08591FD8)
+    CALL(EventScr_CallPrepScreen)
     ENDA
 };
 
@@ -268,7 +268,7 @@ CONST_DATA EventListScr EventScr_Ruins6_BeginingScene[] = {
     CALL(EventScr_9EE84C)
     LOAD1(0x1, UnitDef_088CE81C)
     ENUN
-    CALL(EventScr_08591FD8)
+    CALL(EventScr_CallPrepScreen)
     ENDA
 };
 
@@ -324,7 +324,7 @@ CONST_DATA EventListScr EventScr_Ruins7_BeginingScene[] = {
     CALL(EventScr_9EE84C)
     LOAD1(0x1, UnitDef_088CED74)
     ENUN
-    CALL(EventScr_08591FD8)
+    CALL(EventScr_CallPrepScreen)
     ENUT(8)
     ENUT(10)
     ENUT(12)
@@ -458,7 +458,7 @@ CONST_DATA EventListScr EventScr_Ruins8_BeginingScene[] = {
     CALL(EventScr_9EE84C)
     LOAD1(0x1, UnitDef_088CF1D4)
     ENUN
-    CALL(EventScr_08591FD8)
+    CALL(EventScr_CallPrepScreen)
     ENUT(8)
     ENUT(10)
     ENUT(12)
@@ -904,7 +904,7 @@ CONST_DATA EventListScr EventScr_Ruins9_BeginingScene[] = {
     CALL(EventScr_9EE84C)
     LOAD1(0x1, UnitDef_088CF684)
     ENUN
-    CALL(EventScr_08591FD8)
+    CALL(EventScr_CallPrepScreen)
     ENUT(8)
     ENDA
 };
@@ -964,7 +964,7 @@ CONST_DATA EventListScr EventScr_Ruins10_BeginingScene[] = {
     CALL(EventScr_9EE84C)
     LOAD1(0x1, UnitDef_088CFAE4)
     ENUN
-    CALL(EventScr_08591FD8)
+    CALL(EventScr_CallPrepScreen)
     ENDA
 };
 

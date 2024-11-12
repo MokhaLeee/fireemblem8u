@@ -71,7 +71,7 @@ CONST_DATA EventListScr EventScr_SkirmishCommonBeginning[] = {
     TILECHANGE(0xfffd)
     LOAD4(0x1, 0x0)
     ENUN
-    CALL(EventScr_08591FD8)
+    CALL(EventScr_CallPrepScreen)
     ENDA
 };
 

@@ -62,7 +62,7 @@ CONST_DATA EventListScr EventScr_Ch14a_BeginingScene[] = {
     REMA
     FADI(16)
     MOVE(0xffff, CHARACTER_CARLYLE, 8, 7)
-    CALL(EventScr_08591FD8)
+    CALL(EventScr_CallPrepScreen)
     MUSC(0x14)
     CAMERA_CAHR(CHARACTER_RENNAC)
     FADU(16)

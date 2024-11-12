@@ -74,7 +74,7 @@ LABEL(0x5)
 LABEL(0x6)
     EvtTextShow2(0x9fe) // ENOSUPP in EAstdlib
     TEXTEND
-    CALL(EventScr_08591FD8)
+    CALL(EventScr_CallPrepScreen)
     MUSC(0x9)
     FADU(16)
     SVAL(EVT_SLOT_2, EventScr_089F2EBC)

@@ -12,7 +12,7 @@ CONST_DATA EventListScr EventScr_Ch16a_BeginingScene[] = {
     SVAL(EVT_SLOT_3, 0x1)
     CALL(EventScr_LoadUnitForTutorial)
     CLEA
-    CALL(EventScr_08591FD8)
+    CALL(EventScr_CallPrepScreen)
     ENUT(12)
     ENDA
 };

@@ -4278,7 +4278,7 @@ LABEL(0x1)
     ENDA
 };
 
-CONST_DATA EventListScr EventScr_08591FD8[] = {
+CONST_DATA EventListScr EventScr_CallPrepScreen[] = {
     CALL(EventScr_08591F64)
     CLEAN
     PREP

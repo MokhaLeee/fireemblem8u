@@ -73,7 +73,7 @@ CONST_DATA EventListScr EventScr_Ch12b_BeginingScene[] = {
     REMA
     FADI(16)
     DISA(CHARACTER_LYON)
-    CALL(EventScr_08591FD8)
+    CALL(EventScr_CallPrepScreen)
     ENDA
 };
 

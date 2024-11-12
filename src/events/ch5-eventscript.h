@@ -145,7 +145,7 @@ LABEL(0x8020)
     MUSCMID(0x7fff)
     LOAD1(0x0, UnitDef_Event_Ch4Ally)
     ENUN
-    CALL(EventScr_08591FD8)
+    CALL(EventScr_CallPrepScreen)
     FADU(16)
     CAMERA(0, 0)
     MUSC(0x13)

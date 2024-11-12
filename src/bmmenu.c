@@ -124,10 +124,10 @@ u8 MapMenu_OptionsCommand(struct MenuProc* menu, struct MenuItemProc* menuItem) 
     return MENU_ACT_SKIPCURSOR | MENU_ACT_END | MENU_ACT_SND6A | MENU_ACT_CLEAR;
 }
 
-u8 sub_802263C(void) {
-    if (GetBattleMapKind() == 1) {
+u8 sub_802263C(void)
+{
+    if (GetBattleMapKind() == WM_KIND_DUNGEON)
         return MENU_NOTSHOWN;
-    }
 
     return MENU_ENABLED;
 }
@@ -2395,7 +2395,7 @@ u8 ItemMenuHelpBox(struct MenuProc* menu, struct MenuItemProc* menuItem) {
 u8 MapMenu_IsRecordsCommandAvailable(const struct MenuItemDef* def, int number) {
     u8 chapterId;
 
-    if (GetBattleMapKind() != 1) {
+    if (GetBattleMapKind() != WM_KIND_DUNGEON) {
         return MENU_NOTSHOWN;
     }
 

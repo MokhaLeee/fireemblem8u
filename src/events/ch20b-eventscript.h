@@ -10,7 +10,7 @@ CONST_DATA EventListScr EventScr_Ch20b_BeginingScene[] = {
     SVAL(EVT_SLOT_2, UnitDef_088CAF88)
     SVAL(EVT_SLOT_3, 0x1)
     CALL(EventScr_LoadUnitForTutorial)
-    CALL(EventScr_08591FD8)
+    CALL(EventScr_CallPrepScreen)
     ENUT(10)
     ENUT(12)
     ENUT(14)

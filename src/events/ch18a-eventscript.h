@@ -64,7 +64,7 @@ LABEL(0x1)
     REMA
     FADI(16)
     CLEN
-    CALL(EventScr_08591FD8)
+    CALL(EventScr_CallPrepScreen)
     ENUT(8)
     ENUT(10)
     ENUT(12)

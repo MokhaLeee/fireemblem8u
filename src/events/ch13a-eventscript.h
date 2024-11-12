@@ -113,7 +113,7 @@ LABEL(0x1)
     TEXTSHOW(0xa6d)
     TEXTEND
     REMA
-    CALL(EventScr_08591FD8)
+    CALL(EventScr_CallPrepScreen)
     ENDA
 };
 

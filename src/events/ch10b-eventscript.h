@@ -126,7 +126,7 @@ CONST_DATA EventListScr EventScr_Ch10b_BeginingScene[] = {
     TEXTSHOW(0xab8)
     TEXTEND
     REMA
-    CALL(EventScr_08591FD8)
+    CALL(EventScr_CallPrepScreen)
     ENDA
 };
 

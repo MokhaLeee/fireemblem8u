@@ -149,7 +149,7 @@ CONST_DATA EventListScr EventScr_Ch9b_BeginingScene[] = {
     ENUN
     LOAD1(0x1, UnitDef_088C269C)
     ENUN
-    CALL(EventScr_08591FD8)
+    CALL(EventScr_CallPrepScreen)
     MUSC(0xc)
     CAMERA2(8, 4)
     FADU(16)

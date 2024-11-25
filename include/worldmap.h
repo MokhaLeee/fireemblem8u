@@ -805,17 +805,17 @@ struct GMapNodeLink
     s8 connections[7]; // node IDs of each connected node
 };
 
-extern struct GMapNodeLink gUnknown_0201AFF0[];
+extern struct GMapNodeLink gGMapNodeLinks[];
 
-struct Unknown0201B100
+struct GmapUnitLocationBuffer
 {
-    u8 a;
-    u8 b[0x20];
+    u8 cnt;
+    u8 nodes[0x20];
 };
 
-extern struct Unknown0201B100 gUnknown_0201B100[];
+extern struct GmapUnitLocationBuffer gGmapUnitLocationBuffer[];
 
-struct Unknown0201B0D8
+struct GmapNodeBuffer
 {
     /* 00 */ s8 unk_00[0x10];
     /* 10 */ s8 unk_10[0x10];
@@ -823,16 +823,16 @@ struct Unknown0201B0D8
     /* 24 */ int unk_24;
 };
 
-extern struct Unknown0201B0D8 gUnknown_0201B0D8;
+extern struct GmapNodeBuffer gGmapNodeBuffer;
 
 // ??? GmPathsInit(???);
 bool AddGmPath(struct GMapData*, struct OpenPaths*, int);
 bool RemoveGmPath(struct GMapData * pGMapData, struct OpenPaths * pPaths, int idx);
 // ??? RefreshGmNodeLinksExt(???);
 void RefreshGmNodeLinks(struct GMapData *);
-int sub_80BCA1C(int);
-// ??? sub_80BCA54(???);
-// ??? sub_80BCA90(???);
+int GetGmapUnitSlotOnNode(int);
+// ??? BufferGmNodeUnitLocations(???);
+// ??? CheckAnyUnitStandsOnGmNode(???);
 // ??? sub_80BCAB8(???);
 // ??? sub_80BCBAC(???);
 s8 sub_80BCCFC(s8, s8, s8);
@@ -1349,9 +1349,9 @@ int GetGMapBaseMenuPid();
 void SetGMapBaseMenuPid(int);
 
 // extern ??? gFont_0201AFC0
-// extern ??? gUnknown_0201AFF0
-// extern ??? gUnknown_0201B0D8
-// extern ??? gUnknown_0201B100
+// extern ??? gGMapNodeLinks
+// extern ??? gGmapNodeBuffer
+// extern ??? gGmapUnitLocationBuffer
 // extern ??? gUnknown_0201B104
 // extern ??? gUnknown_0201B1E4
 // extern ??? gUnknown_0201B3A4

@@ -202,7 +202,7 @@ void sub_80B8BA4(struct WorldMapMainProc * proc)
         }
         else
         {
-            if (sub_80BCA1C(sub_80BD28C(proc->unk_40 + 1)) >= 0)
+            if (GetGmapUnitSlotOnNode(sub_80BD28C(proc->unk_40 + 1)) >= 0)
             {
                 Proc_Goto(proc, 17);
                 return;
@@ -604,7 +604,7 @@ bool WorldMap_ProcessButtonOnNode(struct WorldMapMainProc * proc, int node_idx)
     {
         if (((gGMData.nodes[node_idx].state & 2) == 0) && (node_idx[gWMNodeData].placementFlag != GMAP_NODE_PLACEMENT_DUNGEON))
         {
-            if (sub_80BCA1C(node_idx) >= 0)
+            if (GetGmapUnitSlotOnNode(node_idx) >= 0)
                 Proc_Goto(proc, 16);
             else
             {
@@ -1352,7 +1352,7 @@ void sub_80B9A58(struct WorldMapMainProc * proc)
     GmMu_80BE108(proc->gm_mu, 0, 0);
     gPlaySt.chapterIndex = WMLoc_GetChapterId(gGMData.units[0].location);
     gGMData.sprite_disp = 0;
-    StartWorldmapSkirmishAnim(0, sub_80BCA1C(gGMData.units[0].location), proc);
+    StartWorldmapSkirmishAnim(0, GetGmapUnitSlotOnNode(gGMData.units[0].location), proc);
     return;
 }
 

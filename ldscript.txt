@@ -121,9 +121,9 @@ SECTIONS
         . = 0x00AF00; gUnknown_0200AF00 = .;
         . = 0x019D00; gUnknown_02019D00 = .;
         . = 0x01AFC0; gFont_0201AFC0 = .;
-        . = 0x01AFF0; gUnknown_0201AFF0 = .;
-        . = 0x01B0D8; gUnknown_0201B0D8 = .;
-        . = 0x01B100; gUnknown_0201B100 = .;
+        . = 0x01AFF0; gGMapNodeLinks = .;
+        . = 0x01B0D8; gGmapNodeBuffer = .;
+        . = 0x01B100; gGmapUnitLocationBuffer = .;
         . = 0x01B104; gUnknown_0201B104 = .;
         . = 0x01B1E4; gUnknown_0201B1E4 = .;
         . = 0x01B3A4; gUnknown_0201B3A4 = .;

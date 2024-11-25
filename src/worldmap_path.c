@@ -1456,32 +1456,32 @@ bool RemoveGmPath(struct GMapData * pGMapData, struct OpenPaths * pPaths, int id
 /* https://decomp.me/scratch/yGsRY */
 
 //! FE8U = 0x080BC970
-void RefreshGmNodeLinksExt(struct GMapData * param_1, struct GMapNodeLink * param_2)
+void RefreshGmNodeLinksExt(struct GMapData * gmap, struct GMapNodeLink * node_link)
 {
     int pathId;
     int i, j;
-    struct GMapNodeLink * pcVar6;
-    s8 * r0, * r9;
+    struct GMapNodeLink * plink;
+    s8 * pathes, * ipath;
 
-    CpuFill32(0, param_2, sizeof(struct GMapNodeLink) * 0x1d);
+    CpuFill32(0, node_link, sizeof(struct GMapNodeLink) * 0x1d);
     i = 0;
-    r0 = param_1->openPaths.openPaths;
-    if (i < param_1->openPaths.openPathsLength)
+    pathes = gmap->openPaths.openPaths;
+    if (i < gmap->openPaths.openPathsLength)
     {
-        for (r9 = r0; i < param_1->openPaths.openPathsLength; i++, r0 = r9)
+        for (ipath = pathes; i < gmap->openPaths.openPathsLength; i++, pathes = ipath)
         {
-            pathId = r0[i];
+            pathId = pathes[i];
 
             for (j = 0; j < 2; j++)
             {
                 int r2 = pathId[gWMPathData].node[j];
 
-                pcVar6 = param_2 + r2;
-                GMapNodeLinkNextConnSlot(pcVar6) = pathId[gWMPathData].node[1-j];
-                pcVar6->numConnections++;
+                plink = node_link + r2;
+                GMapNodeLinkNextConnSlot(plink) = pathId[gWMPathData].node[1-j];
+                plink->numConnections++;
 
                 if (r2 == 0)
-                    GMapNodeLinkNextConnSlot(pcVar6) = pathId[gWMPathData].node[1-j];
+                    GMapNodeLinkNextConnSlot(plink) = pathId[gWMPathData].node[1-j];
             }
         }
     }
@@ -1490,28 +1490,24 @@ void RefreshGmNodeLinksExt(struct GMapData * param_1, struct GMapNodeLink * para
 }
 
 //! FE8U = 0x080BCA0C
-void RefreshGmNodeLinks(struct GMapData * param_1)
+void RefreshGmNodeLinks(struct GMapData * gmap)
 {
-    RefreshGmNodeLinksExt(param_1, gUnknown_0201AFF0);
+    RefreshGmNodeLinksExt(gmap, gGMapNodeLinks);
     return;
 }
 
 //! FE8U = 0x080BCA1C
-int sub_80BCA1C(int nodeId)
+int GetGmapUnitSlotOnNode(int nodeId)
 {
     int i;
 
     for (i = 4; i < 7; i++)
     {
         if (gGMData.units[i].id == 0)
-        {
             continue;
-        }
 
         if (nodeId != gGMData.units[i].location)
-        {
             continue;
-        }
 
         return i;
     }
@@ -1520,42 +1516,36 @@ int sub_80BCA1C(int nodeId)
 }
 
 //! FE8U = 0x080BCA54
-void sub_80BCA54(struct Unknown0201B100 * buf)
+void BufferGmNodeUnitLocations(struct GmapUnitLocationBuffer * buf)
 {
     int i;
 
-    buf->a = 0;
+    buf->cnt = 0;
 
     for (i = 4; i < 7; i++)
     {
         if (gGMData.units[i].id != 0)
         {
-            buf->b[buf->a] = gGMData.units[i].location;
-            buf->a++;
+            buf->nodes[buf->cnt] = gGMData.units[i].location;
+            buf->cnt++;
         }
     }
-
-    return;
 }
 
 //! FE8U = 0x080BCA90
-s8 sub_80BCA90(struct Unknown0201B100 * buf, int target)
+bool CheckAnyUnitStandsOnGmNode(struct GmapUnitLocationBuffer * buf, int target)
 {
     int i;
 
-    for (i = 0; i < buf->a; i++)
-    {
-        if (buf->b[i] == target)
-        {
-            return 1;
-        }
-    }
+    for (i = 0; i < buf->cnt; i++)
+        if (buf->nodes[i] == target)
+            return true;
 
-    return 0;
+    return false;
 }
 
 //! FE8U = 0x080BCAB8
-int sub_80BCAB8(struct Unknown0201B0D8 * buf, struct GMapNodeLink * links, s8 param_3, s8 param_4, s8 param_5, int param_6)
+int sub_80BCAB8(struct GmapNodeBuffer * buf, struct GMapNodeLink * links, s8 param_3, s8 param_4, s8 param_5, int param_6)
 {
     s8 * connections;
     int i;
@@ -1576,7 +1566,7 @@ int sub_80BCAB8(struct Unknown0201B0D8 * buf, struct GMapNodeLink * links, s8 pa
 
             r2 = connections[i] == param_5;
 
-            if (r2 || !sub_80BCA90(gUnknown_0201B100, connections[i]))
+            if (r2 || !CheckAnyUnitStandsOnGmNode(gGmapUnitLocationBuffer, connections[i]))
             {
                 connections = link->connections; // redundant
                 buf->unk_10[param_6] = connections[i];
@@ -1604,7 +1594,7 @@ int sub_80BCAB8(struct Unknown0201B0D8 * buf, struct GMapNodeLink * links, s8 pa
 /* https://decomp.me/scratch/eDz84 */
 
 //! FE8U = 0x080BCBAC
-int sub_80BCBAC(struct Unknown0201B0D8 * buf, struct GMapNodeLink * param_2, s8 param_3, s8 param_4, s8 param_5, int param_6, int param_7)
+int sub_80BCBAC(struct GmapNodeBuffer * buf, struct GMapNodeLink * param_2, s8 param_3, s8 cur_node, s8 next_node, int param_6, int param_7)
 {
     int i;
     int j;
@@ -1614,7 +1604,7 @@ int sub_80BCBAC(struct Unknown0201B0D8 * buf, struct GMapNodeLink * param_2, s8 
     if (param_6 < buf->unk_20)
     {
 
-        link = &param_2[param_4];
+        link = &param_2[cur_node];
 
         for (i = 0; i < link->numConnections; i++)
         {
@@ -1627,7 +1617,7 @@ int sub_80BCBAC(struct Unknown0201B0D8 * buf, struct GMapNodeLink * param_2, s8 
                 continue;
             }
 
-            r2 = connections[i] == param_5;
+            r2 = connections[i] == next_node;
 
             buf->unk_10[param_6] = connections[i];
 
@@ -1636,7 +1626,7 @@ int sub_80BCBAC(struct Unknown0201B0D8 * buf, struct GMapNodeLink * param_2, s8 
                 connections = link->connections; // redundant here too ?
                 if (!r2)
                 {
-                    sub_80BCBAC(buf, param_2, param_4, connections[i], param_5, param_6 + 1, param_7 + 1);
+                    sub_80BCBAC(buf, param_2, cur_node, connections[i], next_node, param_6 + 1, param_7 + 1);
                     continue;
                 }
                 else
@@ -1684,9 +1674,9 @@ int sub_80BCBAC(struct Unknown0201B0D8 * buf, struct GMapNodeLink * param_2, s8 
                 if (!r2)
                 {
 
-                    if (sub_80BCA90(gUnknown_0201B100, connections[i]))
+                    if (CheckAnyUnitStandsOnGmNode(gGmapUnitLocationBuffer, connections[i]))
                     {
-                        sub_80BCBAC(buf, param_2, param_4, connections[i], param_5, param_6 + 1, param_7 + 1);
+                        sub_80BCBAC(buf, param_2, cur_node, connections[i], next_node, param_6 + 1, param_7 + 1);
                         continue;
                     }
                 }
@@ -1706,7 +1696,7 @@ int sub_80BCBAC(struct Unknown0201B0D8 * buf, struct GMapNodeLink * param_2, s8 
                 }
             }
 
-            sub_80BCBAC(buf, param_2, param_4, connections[i], param_5, param_6 + 1, param_7);
+            sub_80BCBAC(buf, param_2, cur_node, connections[i], next_node, param_6 + 1, param_7);
         }
     }
 
@@ -1721,46 +1711,40 @@ const u8 ALIGNED(4) gUnknown_08206868[] =
 };
 
 //! FE8U = 0x080BCCFC
-s8 sub_80BCCFC(s8 a, s8 b, s8 flag)
+s8 sub_80BCCFC(s8 cur_node, s8 next_node, s8 flag)
 {
     int ret;
     int r4;
-    struct Unknown0201B0D8 * r6;
+    struct GmapNodeBuffer * buf;
 
-    sub_80BCA54(gUnknown_0201B100);
-
-    if (flag != 0)
-    {
-        gUnknown_0201B0D8.unk_24 = 0x10;
-    }
-
-    r6 = &gUnknown_0201B0D8;
-    r6->unk_20 = 0x10;
-
-    CpuFill32(0, r6->unk_00, 0x10);
-    CpuFill32(0, r6->unk_10, 0x10);
-
-    r6->unk_00[0] = a;
-    r6->unk_10[0] = a;
+    BufferGmNodeUnitLocations(gGmapUnitLocationBuffer);
 
     if (flag != 0)
-    {
-        ret = sub_80BCBAC(r6, gUnknown_0201AFF0, -1, a, b, r4 = 1, -1);
-    }
+        gGmapNodeBuffer.unk_24 = 0x10;
+
+    buf = &gGmapNodeBuffer;
+    buf->unk_20 = 0x10;
+
+    CpuFill32(0, buf->unk_00, 0x10);
+    CpuFill32(0, buf->unk_10, 0x10);
+
+    buf->unk_00[0] = cur_node;
+    buf->unk_10[0] = cur_node;
+
+    if (flag != 0)
+        ret = sub_80BCBAC(buf, gGMapNodeLinks, -1, cur_node, next_node, r4 = 1, -1);
     else
-    {
-        ret = sub_80BCAB8(r6, gUnknown_0201AFF0, -1, a, b, r4 = 1);
-    }
+        ret = sub_80BCAB8(buf, gGMapNodeLinks, -1, cur_node, next_node, r4 = 1);
 
     if (ret != 0)
     {
-        r6->unk_00[1] = r6->unk_10[1];
-        r6->unk_20 = r4;
+        buf->unk_00[1] = buf->unk_10[1];
+        buf->unk_20 = r4;
 
         return 1;
     }
 
-    return gUnknown_0201B0D8.unk_20 < 0x10;
+    return gGmapNodeBuffer.unk_20 < 0x10;
 }
 
 //! FE8U = 0x080BCDE4
@@ -2081,19 +2065,19 @@ void sub_80BD270(struct GMapData * dst, void * src)
 }
 
 //! FE8U = 0x080BD284
-struct Unknown0201B0D8 * sub_80BD284(void)
+struct GmapNodeBuffer * sub_80BD284(void)
 {
-    return &gUnknown_0201B0D8;
+    return &gGmapNodeBuffer;
 }
 
 //! FE8U = 0x080BD28C
 int sub_80BD28C(int idx)
 {
-    return gUnknown_0201B0D8.unk_00[idx];
+    return gGmapNodeBuffer.unk_00[idx];
 }
 
 //! FE8U = 0x080BD29C
 int sub_80BD29C(void)
 {
-    return gUnknown_0201B0D8.unk_20 + 1;
+    return gGmapNodeBuffer.unk_20 + 1;
 }

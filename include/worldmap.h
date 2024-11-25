@@ -324,7 +324,23 @@ extern const struct GMapPathData gWMPathData[];
 
 enum
 {
-    PROCLABEL_GMMAIN_
+    PROCLABEL_GMMAIN_POST_BEGINNING_EVENT = 0,
+    PROCLABEL_GMMAIN_POST_BEGINNING_EVENT_ = 1,
+    PROCLABEL_GMMAIN_MONSTER_GEN_ANIM = 2,
+    PROCLABEL_GMMAIN_START_DISP = 3,
+    PROCLABEL_GMMAIN_LOOP = 4,
+    PROCLABEL_GMMAIN_MENU = 5,
+    PROCLABEL_GMMAIN_SCROLLING = 6,
+    PROCLABEL_GMMAIN_BATTLE_DUNGEON = 14,
+    PROCLABEL_GMMAIN_BATTLE_BM = 15,
+    PROCLABEL_GMMAIN_BATTLE_SKIRMISH = 16,
+    PROCLABEL_GMMAIN_SOGU = 17,
+    PROCLABEL_GMMAIN_NODE_MENU = 18,
+    PROCLABEL_GMMAIN_ARMORY = 19,
+
+    PROCLABEL_GMMAIN_RELOAD_NODE_MENU = 24,
+
+    PROCLABEL_GMMAIN_END = 25,
 };
 
 enum
@@ -637,7 +653,7 @@ void sub_80B99A0(struct WorldMapMainProc * proc);
 // ??? sub_80B99F0(???);
 void WorldMap_HideEverything(void);
 void sub_80B9A34(struct WorldMapMainProc * proc);
-void sub_80B9A58(struct WorldMapMainProc * proc);
+void Worldmap_MoveUnitToSkirmish(struct WorldMapMainProc * proc);
 void Worldmap_WaitForSkirmishAnim(ProcPtr proc);
 void sub_80B9AB0(void);
 void sub_80B9AEC(struct WorldMapMainProc * proc);

@@ -315,7 +315,7 @@ struct GMapMovementPathData
 
 struct GMapPathData
 {
-    /* 00 */ u8 * gfxData;
+    /* 00 */ const u8 * gfxData;
     /* 04 */ s8 node[2];
     /* 08 */ const struct GMapMovementPathData * movementPath;
 };
@@ -368,9 +368,9 @@ struct GMapNodeData
     /* 05 */ u8 chapteridx_ephram;  // chapter ID end
     /* 06 */ s16 unk_06; // event condition flag
     /* 08 */ s8 unk_08[4]; // next destination id
-    /* 0C */ u16 * armory;
-    /* 10 */ u16 * vendor;
-    /* 14 */ u16 * secretShop;
+    /* 0C */ const u16 * armory;
+    /* 10 */ const u16 * vendor;
+    /* 14 */ const u16 * secretShop;
     /* 18 */ s16 x;
     /* 1A */ s16 y;
     /* 1C */ u16 nameTextId;

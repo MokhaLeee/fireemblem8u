@@ -391,7 +391,7 @@ void BattleForecast_Init(struct BattleForecastProc * proc)
     InitTextDb(&proc->unitNameTextB, 6);
     InitTextDb(&proc->itemNameText, 7);
 
-    BG_SetPosition(1, 0, -1);
+    SetBgOffset(1, 0, -1);
 
     proc->ready = 1;
 }
@@ -647,7 +647,7 @@ void NewBattleForecast(ProcPtr unused) {
         return;
     }
 
-    proc = Proc_Start(gProcScr_BKSEL, PROC_TREE_3);
+    proc = SpawnProc(gProcScr_BKSEL, PROC_TREE_3);
     proc->ready = 0;
 
     if (CheckBattleForecastTutorialEvent() == 1) {

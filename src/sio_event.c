@@ -27,7 +27,7 @@
 //! FE8U = 0x08048260
 void sub_8048260(ProcPtr parent)
 {
-    struct ProcTactician * proc = Proc_StartBlocking(ProcScr_TacticianNameSelection, parent);
+    struct ProcTactician * proc = SpawnProcBlocking(ProcScr_TacticianNameSelection, parent);
     proc->unk33 = 7;
     proc->unk32 = 0;
 
@@ -50,7 +50,7 @@ void StartTacticianNameSelect(ProcPtr parent)
 
     gPlaySt.config.windowColor = 0;
 
-    proc = Proc_StartBlocking(ProcScr_TacticianNameSelection, parent);
+    proc = SpawnProcBlocking(ProcScr_TacticianNameSelection, parent);
     proc->unk33 = 5;
     proc->unk32 = 1;
 

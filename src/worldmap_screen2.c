@@ -256,7 +256,7 @@ void GmapScreen2_Loop(struct GmNodeIconDisplayProc * proc)
 
 ProcPtr StartGmNodeIconDisplay(ProcPtr parent, int chr, int palId, int unk, ProcPtr pScreenProc)
 {
-    struct GmNodeIconDisplayProc * proc = Proc_Start(ProcScr_GmNodeIconDisplay, parent);
+    struct GmNodeIconDisplayProc * proc = SpawnProc(ProcScr_GmNodeIconDisplay, parent);
 
     proc->chr = chr;
     proc->pal = palId;

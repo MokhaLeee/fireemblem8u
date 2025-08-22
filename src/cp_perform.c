@@ -113,7 +113,7 @@ void AiTargetCursor_Main(struct UnkProcA* proc) {
 void StartAiTargetCursor(int x, int y, int kind, ProcPtr parent) {
     struct UnkProcA* proc;
 
-    proc = Proc_StartBlocking(gProcScr_AiTargetCursor, parent);
+    proc = SpawnProcBlocking(gProcScr_AiTargetCursor, parent);
 
     proc->unk_2C = x;
     proc->unk_30 = y;

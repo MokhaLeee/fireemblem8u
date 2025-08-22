@@ -38,7 +38,7 @@ void EfxPlaySE(int songid, int volume)
         return;
     }
 
-    proc = Proc_Start(ProcScr_efxSoundSE, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxSoundSE, PROC_TREE_3);
     proc->volume = volume;
     proc->index = songid;
     proc->timer = 0;

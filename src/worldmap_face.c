@@ -30,7 +30,7 @@ struct ProcCmd CONST_DATA ProcScr_WorldMapFaceHolder[] = {
 void WMFaceCtrl_Init(struct WMFaceCtrlProc * proc)
 {
     proc->timer = 0;
-    proc->faceHolderProc = Proc_Start(ProcScr_WorldMapFaceHolder, proc);
+    proc->faceHolderProc = SpawnProc(ProcScr_WorldMapFaceHolder, proc);
     proc->increment = 0;
     proc->blendAmt = 0;
     proc->unk_33 = 0;
@@ -87,7 +87,7 @@ void sub_80B82C8(int bg, u32 offset, int xIn, int yIn, u8 flip)
 
     BG_EnableSyncByMask(1 << (bg));
 
-    BG_SetPosition(bg, bgX, y_);
+    SetBgOffset(bg, bgX, y_);
 }
 
 //! FE8U = 0x080B8350
@@ -264,7 +264,7 @@ struct ProcCmd CONST_DATA ProcScr_WorldMapFaceCtrl[] = {
 
 //! FE8U = 0x080B8680
 ProcPtr StartWMFaceCtrl(ProcPtr parent) {
-    return Proc_Start(ProcScr_WorldMapFaceCtrl, parent);
+    return SpawnProc(ProcScr_WorldMapFaceCtrl, parent);
 }
 
 //! FE8U = 0x080B8694

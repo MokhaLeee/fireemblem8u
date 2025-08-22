@@ -28,7 +28,7 @@ void StartSpellAnimGleipnir(struct Anim * anim)
     SpellFx_Begin();
     SpellFx_ClearBG1Position();
 
-    proc = Proc_Start(ProcScr_efxDarkGrado, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxDarkGrado, PROC_TREE_3);
     proc->anim = anim;
     proc->timer = 0;
     proc->hitted = CheckRoundMiss(GetAnimRoundTypeAnotherSide(anim));
@@ -82,7 +82,7 @@ void efxDarkGrado_Loop_Main(struct ProcEfx * proc)
 
         NewEfxSpellCast();
 
-        anim->state3 |= (ANIM_BIT3_TAKE_BACK_ENABLE | ANIM_BIT3_HIT_EFFECT_APPLIED);
+        anim->state3 |= (ANIM_BIT3_C02_BLOCK_END | ANIM_BIT3_C01_BLOCK_END_INBATTLE);
 
         StartBattleAnimHitEffectsDefault(anim, proc->hitted);
 
@@ -96,7 +96,7 @@ void efxDarkGrado_Loop_Main(struct ProcEfx * proc)
         if (proc->hitted)
         {
             SpellFx_Finish();
-            RegisterEfxSpellCastEnd();
+            EndEfxSpellCastAsync();
             Proc_Break(proc);
         }
     }
@@ -114,7 +114,7 @@ void efxDarkGrado_Loop_Main(struct ProcEfx * proc)
     else if (proc->timer == duration + 353)
     {
         SpellFx_Finish();
-        RegisterEfxSpellCastEnd();
+        EndEfxSpellCastAsync();
         Proc_Break(proc);
     }
 
@@ -159,7 +159,7 @@ void StartSubSpell_efxDarkGradoMapFadeOut(void)
 
     gEfxBgSemaphore++;
 
-    proc = Proc_Start(ProcScr_efxDarkGradoMapFadeOut, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxDarkGradoMapFadeOut, PROC_TREE_3);
     proc->timer = 0;
 
     return;
@@ -542,7 +542,7 @@ void efxDarkGradoBG01_Loop(struct ProcEfxBG * proc)
             SpellFx_ClearBG1();
             SetPrimaryHBlankHandler(NULL);
             gEfxBgSemaphore--;
-            SetDefaultColorEffects_();
+            SpellFx_ClearColorEffects();
             Proc_Break(proc);
         }
     }
@@ -615,7 +615,7 @@ void StartSubSpell_efxDarkGradoBG01(struct Anim * anim)
 
     gUnk_Banim_0201FB28 = 0x10;
 
-    proc = Proc_Start(ProcScr_efxDarkGradoBG01, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxDarkGradoBG01, PROC_TREE_3);
     proc->anim = anim;
     proc->timer = 0;
     proc->frame = 0;
@@ -631,16 +631,16 @@ void StartSubSpell_efxDarkGradoBG01(struct Anim * anim)
     {
         if (GetAnimPosition(proc->anim) == 0)
         {
-            BG_SetPosition(BG_1, 24, -16);
+            SetBgOffset(BG_1, 24, -16);
         }
         else
         {
-            BG_SetPosition(BG_1, -24, -16);
+            SetBgOffset(BG_1, -24, -16);
         }
     }
     else
     {
-        BG_SetPosition(BG_1, 0, -16);
+        SetBgOffset(BG_1, 0, -16);
     }
 
     SpellFx_SetSomeColorEffect();
@@ -814,7 +814,7 @@ void efxDarkGradoBG02_Loop_B(struct ProcEfxBG * proc)
         x = -x;
     }
 
-    BG_SetPosition(BG_1, x, 0);
+    SetBgOffset(BG_1, x, 0);
 
     proc->terminator++;
 
@@ -833,7 +833,7 @@ void efxDarkGradoBG02_Loop_B(struct ProcEfxBG * proc)
         {
             SpellFx_ClearBG1();
             gEfxBgSemaphore--;
-            SetDefaultColorEffects_();
+            SpellFx_ClearColorEffects();
             Proc_Break(proc);
         }
     }
@@ -865,7 +865,7 @@ void StartSubSpell_efxDarkGradoBG02(struct Anim * anim)
 
     gEfxBgSemaphore++;
 
-    proc = Proc_Start(ProcScr_efxDarkGradoBG02, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxDarkGradoBG02, PROC_TREE_3);
     proc->anim = anim;
     proc->timer = 0;
     proc->frame = 0;
@@ -879,22 +879,22 @@ void StartSubSpell_efxDarkGradoBG02(struct Anim * anim)
     {
         if (GetAnimPosition(anim) == 0)
         {
-            BG_SetPosition(BG_1, 40, 0);
+            SetBgOffset(BG_1, 40, 0);
         }
         else
         {
-            BG_SetPosition(BG_1, -24, 0);
+            SetBgOffset(BG_1, -24, 0);
         }
     }
     else
     {
         if (GetAnimPosition(anim) == 0)
         {
-            BG_SetPosition(BG_1, 16, 0);
+            SetBgOffset(BG_1, 16, 0);
         }
         else
         {
-            BG_SetPosition(BG_1, 0, 0);
+            SetBgOffset(BG_1, 0, 0);
         }
     }
 
@@ -1007,7 +1007,7 @@ struct ProcCmd CONST_DATA ProcScr_085D84B4[] =
 //! FE8U = 0x080696F0
 void sub_80696F0(void)
 {
-    Proc_Start(ProcScr_085D84B4, PROC_TREE_VSYNC);
+    SpawnProc(ProcScr_085D84B4, PROC_TREE_VSYNC);
     return;
 }
 
@@ -1307,7 +1307,7 @@ void NewEfxDarkGradoOBJ01piece(struct Anim * anim, s16 b, s16 c, s16 d, u16 e)
 
     gEfxBgSemaphore++;
 
-    proc = Proc_Start(ProcScr_efxDarkGradoOBJ01piece, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxDarkGradoOBJ01piece, PROC_TREE_3);
     proc->anim = anim;
     proc->timer = 0;
     proc->terminator = 20;
@@ -1423,7 +1423,7 @@ void StartSubSpell_efxDarkGradoOBJ01(struct Anim * anim)
 {
     struct ProcEfxOBJ * proc;
 
-    proc = Proc_Start(ProcScr_efxDarkGradoOBJ01, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxDarkGradoOBJ01, PROC_TREE_3);
     proc->anim = anim;
     proc->timer = 0;
     proc->terminator = 0;
@@ -1481,7 +1481,7 @@ void StartSubSpell_efxDarkGradoOBJ02piece_A(struct Anim * anim, int xOffset, int
 
     gEfxBgSemaphore++;
 
-    proc = Proc_Start(ProcScr_efxDarkGradoOBJ02piece, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxDarkGradoOBJ02piece, PROC_TREE_3);
     proc->anim = anim;
     proc->timer = 0;
     proc->terminator = terminator;
@@ -1530,7 +1530,7 @@ void StartSubSpell_efxDarkGradoOBJ02piece_B(struct Anim * anim, int xOffset, int
 
     gEfxBgSemaphore++;
 
-    proc = Proc_Start(ProcScr_efxDarkGradoOBJ02piece, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxDarkGradoOBJ02piece, PROC_TREE_3);
     proc->anim = anim;
     proc->timer = 0;
     proc->terminator = terminator;
@@ -1681,7 +1681,7 @@ void StartSubSpell_efxDarkGradoOBJ02(struct Anim * anim)
 {
     struct ProcEfxOBJ * proc;
 
-    proc = Proc_Start(ProcScr_efxDarkGradoOBJ02, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxDarkGradoOBJ02, PROC_TREE_3);
     proc->anim = anim;
     proc->timer = 0;
 

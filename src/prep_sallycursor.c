@@ -113,14 +113,14 @@ PROC_LABEL(50),
 PROC_LABEL(0),
     PROC_CALL(sub_8033514),
     PROC_WHILE(sub_8013844),
-    PROC_CALL(PrepScreenProc_StartMapMenu),
+    PROC_CALL(PrepScreenSpawnProcMapMenu),
 
     // fallthrough
 
 PROC_LABEL(61),
     PROC_CALL(EnablePrepScreenMenu),
     PROC_WHILE(PrepScreenMenuExists),
-    PROC_CALL(PrepScreenProc_StartBrightenMap),
+    PROC_CALL(PrepScreenSpawnProcBrightenMap),
     PROC_WHILE(sub_8013844),
 
     // fallthrough
@@ -169,7 +169,7 @@ PROC_LABEL(52),
 
 PROC_LABEL(5),
     PROC_CALL(RefreshBMapGraphics),
-    PROC_START_CHILD_BLOCKING(gProcScr_ADJUSTSFROMXI),
+    SpawnProc_CHILD_BLOCKING(gProcScr_ADJUSTSFROMXI),
 
     PROC_GOTO(9),
 
@@ -217,7 +217,7 @@ PROC_LABEL(57),
     PROC_CALL(BMapDispSuspend),
 
     PROC_CALL(EndPrepScreenMenu_),
-    PROC_CALL(PrepScreenProc_StartConfigMenu),
+    PROC_CALL(PrepScreenSpawnProcConfigMenu),
     PROC_YIELD,
 
     PROC_CALL(BMapDispResume),
@@ -270,7 +270,7 @@ PROC_LABEL(62),
     PROC_CALL(RenderBmMap),
     PROC_CALL(RefreshUnitSprites),
 
-    PROC_CALL(PrepScreenProc_StartMapMenu),
+    PROC_CALL(PrepScreenSpawnProcMapMenu),
     PROC_CALL(PrepScreenProc_DimMapImmediate),
 
     PROC_CALL(StartFastFadeFromBlack),
@@ -284,7 +284,7 @@ PROC_LABEL(60),
     PROC_CALL(HideMoveRangeGraphics),
     PROC_CALL(BMapDispSuspend),
 
-    PROC_CALL(PrepScreenProc_StartShopScreen),
+    PROC_CALL(PrepScreenSpawnProcShopScreen),
     PROC_YIELD,
 
     PROC_CALL(BMapDispResume),
@@ -303,7 +303,7 @@ PROC_LABEL(60),
 
 PROC_LABEL(58),
     PROC_YIELD,
-    PROC_CALL(PrepScreenProc_StartMapMenu),
+    PROC_CALL(PrepScreenSpawnProcMapMenu),
 
     PROC_GOTO(61),
 
@@ -530,7 +530,7 @@ void sub_803348C(ProcPtr proc)
 void PrepScreenProc_InitMapMenu(struct ProcPrepSallyCursor * proc)
 {
     proc->unk_58 = 1;
-    PrepScreenProc_StartMapMenu(proc);
+    PrepScreenSpawnProcMapMenu(proc);
     return;
 }
 
@@ -543,7 +543,7 @@ void PrepScreenProc_DimMapImmediate(void)
 }
 
 //! FE8U = 0x080334E8
-void PrepScreenProc_StartBrightenMap(ProcPtr proc)
+void PrepScreenSpawnProcBrightenMap(ProcPtr proc)
 {
     sub_8013800(0xC0, 0xC0, 0xC0, 0x100, 0x100, 0x100, 0xFF00FFF0, 0x40, proc);
     return;
@@ -587,7 +587,7 @@ void sub_8033608(void)
 //! FE8U = 0x08033620
 void StartPrepHelpPrompt(ProcPtr proc)
 {
-    Proc_Start(gProcScr_PrepHelpPrompt, proc);
+    SpawnProc(gProcScr_PrepHelpPrompt, proc);
 }
 
 //! FE8U = 0x08033634
@@ -598,7 +598,7 @@ void PrepMapMenu_OnEnd(void)
 }
 
 //! FE8U = 0x08033648
-void PrepScreenProc_StartMapMenu(struct ProcPrepSallyCursor * proc)
+void PrepScreenSpawnProcMapMenu(struct ProcPrepSallyCursor * proc)
 {
     LoadHelpBoxGfx(0, -1);
     ResetText();
@@ -1061,14 +1061,14 @@ void DisplayMapChangeIfFog(void)
 }
 
 //! FE8U = 0x08033EC0
-void PrepScreenProc_StartConfigMenu(ProcPtr proc)
+void PrepScreenSpawnProcConfigMenu(ProcPtr proc)
 {
-    Proc_StartBlocking(ProcScr_Config_PrepMapMenu, proc);
+    SpawnProcBlocking(ProcScr_Config_PrepMapMenu, proc);
     return;
 }
 
 //! FE8U = 0x08033ED4
-void PrepScreenProc_StartShopScreen(ProcPtr proc)
+void PrepScreenSpawnProcShopScreen(ProcPtr proc)
 {
     struct EventInfo info;
     const struct ChapterEventGroup * evGroup = GetChapterEventDataPointer(gPlaySt.chapterIndex);

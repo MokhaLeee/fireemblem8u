@@ -55,7 +55,7 @@ CONST_DATA struct ProcCmd ProcScr_MapAnimWallBreak[] = {
 
 void MapAnim_BeginWallBreakAnim(struct Unit * unit, int unk)
 {
-    struct MAEffectProc* proc = Proc_Start(ProcScr_MapAnimWallBreak, PROC_TREE_3);
+    struct MAEffectProc* proc = SpawnProc(ProcScr_MapAnimWallBreak, PROC_TREE_3);
 
     proc->unit = unit;
 
@@ -91,7 +91,7 @@ CONST_DATA struct ProcCmd ProcScr_PoisonAnimHandler[] = {
 
 void NewMapPoisonEffect(struct Unit * unit)
 {
-    struct MAEffectProc* proc = Proc_Start(ProcScr_PoisonAnimHandler, PROC_TREE_3);
+    struct MAEffectProc* proc = SpawnProc(ProcScr_PoisonAnimHandler, PROC_TREE_3);
 
     proc->unit = unit;
 
@@ -128,7 +128,7 @@ CONST_DATA struct ProcCmd ProcScr_PoisonAnim2[] = {
 
 void NewMapAnimPoisonAnim2(struct Unit * unit)
 {
-    struct MAEffectProc * proc = Proc_Start(ProcScr_PoisonAnim2, PROC_TREE_3);
+    struct MAEffectProc * proc = SpawnProc(ProcScr_PoisonAnim2, PROC_TREE_3);
 
     proc->unit = unit;
 
@@ -181,7 +181,7 @@ CONST_DATA struct ProcCmd ProcScr_MapAnimGorgonHatch[] =
 //! FE8U = 0x0807CDD0
 void MapAnim_StartGorgonHatchAnim(struct Unit * unit)
 {
-    struct MAEffectProc * proc = Proc_Start(ProcScr_MapAnimGorgonHatch, PROC_TREE_3);
+    struct MAEffectProc * proc = SpawnProc(ProcScr_MapAnimGorgonHatch, PROC_TREE_3);
 
     proc->unit = unit;
 
@@ -193,7 +193,7 @@ void MapAnim_StartGorgonHatchAnim(struct Unit * unit)
 void MapAnim_GorgonHatch_Init(struct MAEffectProc * proc)
 {
     SetDefaultMapAnimScreenConf();
-    BG_SetPosition(BG_2, 0, 0);
+    SetBgOffset(BG_2, 0, 0);
 
     // TODO: BM_BANIM_BGCHR_...
     Decompress(

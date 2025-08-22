@@ -27,7 +27,7 @@ void StartSpellAnimEvilEye(struct Anim * anim)
     NewEfxSpellCast();
     SpellFx_ClearBG1Position();
 
-    proc = Proc_Start(ProcScr_efxEvilEye, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxEvilEye, PROC_TREE_3);
     proc->anim = anim;
     proc->timer = 0;
     proc->hitted = CheckRoundMiss(GetAnimRoundTypeAnotherSide(anim));
@@ -62,7 +62,7 @@ void efxEvilEye_Loop_Main(struct ProcEfx * proc)
     }
     else if (proc->timer == duration + 90)
     {
-        anim->state3 |= (ANIM_BIT3_TAKE_BACK_ENABLE | ANIM_BIT3_HIT_EFFECT_APPLIED);
+        anim->state3 |= (ANIM_BIT3_C02_BLOCK_END | ANIM_BIT3_C01_BLOCK_END_INBATTLE);
 
         StartBattleAnimHitEffectsDefault(anim, proc->hitted);
 
@@ -74,7 +74,7 @@ void efxEvilEye_Loop_Main(struct ProcEfx * proc)
     else if (proc->timer == duration + 116)
     {
         SpellFx_Finish();
-        RegisterEfxSpellCastEnd();
+        EndEfxSpellCastAsync();
         Proc_Break(proc);
     }
 
@@ -198,7 +198,7 @@ void StartSubSpell_efxEvilEyeBG(struct Anim * anim)
 
     gEfxBgSemaphore++;
 
-    proc = Proc_Start(ProcScr_efxEvilEyeBG, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxEvilEyeBG, PROC_TREE_3);
     proc->anim = GetAnimAnotherSide(anim);
     proc->timer = 0;
     proc->frame = 0;
@@ -215,11 +215,11 @@ void StartSubSpell_efxEvilEyeBG(struct Anim * anim)
     {
         if (GetAnimPosition(proc->anim) == 0)
         {
-            BG_SetPosition(BG_1, 232, 0);
+            SetBgOffset(BG_1, 232, 0);
         }
         else
         {
-            BG_SetPosition(BG_1, 24, 0);
+            SetBgOffset(BG_1, 24, 0);
         }
     }
 
@@ -248,7 +248,7 @@ void efxEvilEyeBG_Loop(struct ProcEfxBG * proc)
         {
             SpellFx_ClearBG1();
             gEfxBgSemaphore--;
-            SetDefaultColorEffects_();
+            SpellFx_ClearColorEffects();
             Proc_End(proc);
         }
     }
@@ -327,7 +327,7 @@ void sub_8067984(struct Anim * anim)
 
     gEfxBgSemaphore++;
 
-    proc = Proc_Start(ProcScr_efxEvilEyeBG2, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxEvilEyeBG2, PROC_TREE_3);
     proc->anim = GetAnimAnotherSide(anim);
     proc->timer = 0;
     proc->frame = 0;
@@ -354,11 +354,11 @@ void sub_8067984(struct Anim * anim)
     {
         if (GetAnimPosition(proc->anim) == 0)
         {
-            BG_SetPosition(BG_1, 232, 0);
+            SetBgOffset(BG_1, 232, 0);
         }
         else
         {
-            BG_SetPosition(BG_1, 24, 0);
+            SetBgOffset(BG_1, 24, 0);
         }
     }
 
@@ -387,7 +387,7 @@ void efxEvilEyeBG2_Loop(struct ProcEfxBG * proc)
         {
             SpellFx_ClearBG1();
             gEfxBgSemaphore--;
-            SetDefaultColorEffects_();
+            SpellFx_ClearColorEffects();
             Proc_End(proc);
         }
     }
@@ -426,7 +426,7 @@ void StartSubSpell_efxEvilEyeOBJ(struct Anim * anim, int terminator)
 
     gEfxBgSemaphore++;
 
-    proc = Proc_Start(ProcScr_efxEvilEyeOBJ, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxEvilEyeOBJ, PROC_TREE_3);
     proc->anim = GetAnimAnotherSide(anim);
     proc->timer = 0;
     proc->terminator = terminator;

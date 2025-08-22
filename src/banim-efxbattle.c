@@ -34,7 +34,7 @@ void NewEfxFarAttackWithDistance(struct Anim * anim, s16 arg)
     {
         case EKR_DISTANCE_FAR:
         case EKR_DISTANCE_FARFAR:
-            proc = Proc_Start(gProc_efxFarAttack, PROC_TREE_3);
+            proc = SpawnProc(gProc_efxFarAttack, PROC_TREE_3);
             proc->pos = GetAnimPosition(anim);
             proc->timer = 0;
 
@@ -201,7 +201,7 @@ void sub_8053618(int xPos)
 
     a = (xPos >> 3);
     x = xPos & 7;
-    BG_SetPosition(BG_2, x, 0);
+    SetBgOffset(BG_2, x, 0);
 
     p = gTmA_Banim + 33 + a;
     EfxTmCpyExt(p + 132, 66, gBG2TilemapBuffer, 32, 32, 20, -1, -1);
@@ -777,7 +777,7 @@ const void * CONST_DATA EfxQuakePureVecs[] =
 
 ProcPtr NewEfxQuakePure(int index, int kind)
 {
-    struct ProcEfxQuake * proc = Proc_Start(ProcScr_efxQuakePure, PROC_TREE_3);
+    struct ProcEfxQuake * proc = SpawnProc(ProcScr_efxQuakePure, PROC_TREE_3);
 
     proc->vec = (s16 *)EfxQuakePureVecs[index * 2];
     proc->quake_ui = (int)EfxQuakePureVecs[index * 2 + 1];
@@ -821,7 +821,7 @@ struct ProcCmd CONST_DATA ProcScr_EfxHitQuakePure[] =
 
 ProcPtr NewEfxHitQuakePure(void)
 {
-    return Proc_Start(ProcScr_EfxHitQuakePure, PROC_TREE_3);
+    return SpawnProc(ProcScr_EfxHitQuakePure, PROC_TREE_3);
 }
 
 void efxHitQuakePure_Loop_Null(void)
@@ -846,7 +846,7 @@ ProcPtr NewEfxQuake(int kind)
     }
 
     gEfxQuakeExist = 1;
-    proc = Proc_Start(ProcScr_efxQuake, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxQuake, PROC_TREE_3);
 
     proc->timer = 0;
 
@@ -929,11 +929,11 @@ void efxQuake_Loop(struct ProcEfxQuake * proc)
         SetEkrFrontAnimPostion(0, x1, y1);
         SetEkrFrontAnimPostion(1, x2, y2);
 
-        BG_SetPosition(BG_2, 0, 0);
+        SetBgOffset(BG_2, 0, 0);
 
         if (GetBanimDragonStatusType() != 0)
         {
-            BG_SetPosition(BG_3, proc->ix, proc->iy);
+            SetBgOffset(BG_3, proc->ix, proc->iy);
             SetEkrBg2QuakeVec(0, 0);
         }
 
@@ -945,11 +945,11 @@ void efxQuake_Loop(struct ProcEfxQuake * proc)
         SetEkrBg2QuakeVec(vec[proc->timer * 2 + 0], vec[proc->timer * 2 + 1]);
         proc->timer++;
 
-        BG_SetPosition(BG_2, gEkrBg2QuakeVec.x, gEkrBg2QuakeVec.y);
+        SetBgOffset(BG_2, gEkrBg2QuakeVec.x, gEkrBg2QuakeVec.y);
 
         if (GetBanimDragonStatusType() != 0)
         {
-            BG_SetPosition(BG_3, proc->ix + gEkrBg2QuakeVec.x, proc->iy + gEkrBg2QuakeVec.y);
+            SetBgOffset(BG_3, proc->ix + gEkrBg2QuakeVec.x, proc->iy + gEkrBg2QuakeVec.y);
         }
 
         if (GetBanimDragonStatusType() != 0)
@@ -1011,7 +1011,7 @@ void NewEfxHitQuake(struct Anim * anim1, struct Anim * anim2, int kind)
 
     gEfxHitQuakeExist = 1;
 
-    proc = Proc_Start(ProcScr_EfxHitQuake, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_EfxHitQuake, PROC_TREE_3);
 
     proc->anim_l = anim1;
     proc->anim_r = anim2;
@@ -1129,11 +1129,11 @@ void efxHitQuake_Loop(struct ProcEfxQuake * proc)
         switch (gEkrDistanceType)
         {
             case EKR_DISTANCE_CLOSE:
-                BG_SetPosition(BG_2, 0, 0);
+                SetBgOffset(BG_2, 0, 0);
 
                 if (GetBanimDragonStatusType() != EKRDRGON_TYPE_NORMAL)
                 {
-                    BG_SetPosition(BG_3, 0, 0);
+                    SetBgOffset(BG_3, 0, 0);
                 }
                 break;
 
@@ -1141,7 +1141,7 @@ void efxHitQuake_Loop(struct ProcEfxQuake * proc)
             case EKR_DISTANCE_FARFAR:
                 if (GetBanimDragonStatusType() != EKRDRGON_TYPE_NORMAL)
                 {
-                    BG_SetPosition(BG_3, 0, 0);
+                    SetBgOffset(BG_3, 0, 0);
                 }
 
                 sub_8053618(gEkrBgPosition);
@@ -1169,10 +1169,10 @@ void efxHitQuake_Loop(struct ProcEfxQuake * proc)
         {
             if (GetBanimDragonStatusType() != 0)
             {
-                BG_SetPosition(BG_3, 0, 0);
+                SetBgOffset(BG_3, 0, 0);
             }
 
-            BG_SetPosition(BG_0, gEkrBg0QuakeVec.x, gEkrBg0QuakeVec.y);
+            SetBgOffset(BG_0, gEkrBg0QuakeVec.x, gEkrBg0QuakeVec.y);
             EkrGauge_Setxy323A(-gEkrBg0QuakeVec.x, -gEkrBg0QuakeVec.y);
             EkrDispUP_SetPositionSync(-gEkrBg0QuakeVec.x, -gEkrBg0QuakeVec.y);
         }
@@ -1207,17 +1207,17 @@ void efxHitQuake_Loop(struct ProcEfxQuake * proc)
         }
         else
         {
-            BG_SetPosition(BG_2, gEkrBg2QuakeVec.x, gEkrBg2QuakeVec.y);
+            SetBgOffset(BG_2, gEkrBg2QuakeVec.x, gEkrBg2QuakeVec.y);
         }
 
         if (proc->quake_ui == 1)
         {
             if (GetBanimDragonStatusType() != EKRDRGON_TYPE_NORMAL)
             {
-                BG_SetPosition(BG_3, -x, y);
+                SetBgOffset(BG_3, -x, y);
             }
 
-            BG_SetPosition(BG_0, gEkrBg2QuakeVec.x + gEkrBg0QuakeVec.x, gEkrBg2QuakeVec.y + gEkrBg0QuakeVec.y);
+            SetBgOffset(BG_0, gEkrBg2QuakeVec.x + gEkrBg0QuakeVec.x, gEkrBg2QuakeVec.y + gEkrBg0QuakeVec.y);
             EkrGauge_Setxy323A(-(gEkrBg2QuakeVec.x + gEkrBg0QuakeVec.x), -(gEkrBg2QuakeVec.y + gEkrBg0QuakeVec.y));
             EkrDispUP_SetPositionSync(
                 -(gEkrBg2QuakeVec.x + gEkrBg0QuakeVec.x), -(gEkrBg2QuakeVec.y + gEkrBg0QuakeVec.y));
@@ -1225,7 +1225,7 @@ void efxHitQuake_Loop(struct ProcEfxQuake * proc)
 
         if (GetBanimDragonStatusType() != 0)
         {
-            BG_SetPosition(BG_3, gEkrBg2QuakeVec.x, gEkrBg2QuakeVec.y);
+            SetBgOffset(BG_3, gEkrBg2QuakeVec.x, gEkrBg2QuakeVec.y);
         }
 
         if (GetBanimDragonStatusType() != 0)

@@ -97,7 +97,7 @@ void NewGmapSogu(int x, int y)
     ap->tileBase = 0x1180;
     AP_SwitchAnimation(ap, 0);
 
-    proc = Proc_Start(ProcScr_GmapSogu, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_GmapSogu, PROC_TREE_3);
     proc->ap = ap;
     proc->x = x + 8;
     proc->y = y - 8;

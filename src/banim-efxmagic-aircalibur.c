@@ -27,7 +27,7 @@ void StartSpellAnimAircalibur(struct Anim * anim)
     NewEfxSpellCast();
     SpellFx_ClearBG1Position();
 
-    proc = Proc_Start(gProcScr_efxAlacalibur, PROC_TREE_3);
+    proc = SpawnProc(gProcScr_efxAlacalibur, PROC_TREE_3);
     proc->anim = anim;
     proc->timer = 0;
 
@@ -70,7 +70,7 @@ void efxAlacalibur_Loop_Main(struct ProcEfx * proc)
         }
         else if (proc->timer == time + 8 + duration)
         {
-            anim->state3 |= (ANIM_BIT3_TAKE_BACK_ENABLE | ANIM_BIT3_HIT_EFFECT_APPLIED);
+            anim->state3 |= (ANIM_BIT3_C02_BLOCK_END | ANIM_BIT3_C01_BLOCK_END_INBATTLE);
             StartBattleAnimHitEffectsDefault(anim, proc->hitted);
 
             if (!proc->hitted)
@@ -81,7 +81,7 @@ void efxAlacalibur_Loop_Main(struct ProcEfx * proc)
         else if ((proc->timer != time + 12 + duration) && (proc->timer == time + 14 + duration))
         {
             SpellFx_Finish();
-            RegisterEfxSpellCastEnd();
+            EndEfxSpellCastAsync();
             Proc_Break(proc);
         }
     }
@@ -122,7 +122,7 @@ void sub_805ECD4(struct Anim * anim)
 
     gEfxBgSemaphore++;
 
-    proc = Proc_Start(gProcScr_efxAlacaliburBG, PROC_TREE_3);
+    proc = SpawnProc(gProcScr_efxAlacaliburBG, PROC_TREE_3);
     proc->anim = anim;
     proc->timer = 0;
     proc->frame = 0;
@@ -134,11 +134,11 @@ void sub_805ECD4(struct Anim * anim)
 
     if (GetAnimPosition(proc->anim) == 0)
     {
-        BG_SetPosition(BG_1, 24, 0);
+        SetBgOffset(BG_1, 24, 0);
     }
     else
     {
-        BG_SetPosition(BG_1, 232, 0);
+        SetBgOffset(BG_1, 232, 0);
     }
 
     return;
@@ -160,7 +160,7 @@ void efxAlacaliburBG_Loop(struct ProcEfxBG * proc)
         {
             SpellFx_ClearBG1();
             gEfxBgSemaphore--;
-            SetDefaultColorEffects_();
+            SpellFx_ClearColorEffects();
             Proc_Break(proc);
         }
     }
@@ -202,7 +202,7 @@ void sub_805ED98(struct Anim * anim)
 
     gEfxBgSemaphore++;
 
-    proc = Proc_Start(gProcScr_efxAlacaliburBGCOL, PROC_TREE_3);
+    proc = SpawnProc(gProcScr_efxAlacaliburBGCOL, PROC_TREE_3);
 
     proc->anim = anim;
     proc->timer = 0;
@@ -257,7 +257,7 @@ void sub_805EE24(struct Anim * anim)
 
     gEfxBgSemaphore++;
 
-    proc = Proc_Start(gProcScr_efxAlacaliburOBJ, PROC_TREE_3);
+    proc = SpawnProc(gProcScr_efxAlacaliburOBJ, PROC_TREE_3);
     proc->anim = anim;
     proc->timer = 0;
     frontAnim = EfxCreateFrontAnim(anim, AnimScr_EfxAlacaliburOBJ_LeftFront, AnimScr_EfxAlacaliburOBJ_RightFront, AnimScr_EfxAlacaliburOBJ_LeftBack, AnimScr_EfxAlacaliburOBJ_RightBack);

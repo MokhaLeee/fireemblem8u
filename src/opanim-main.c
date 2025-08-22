@@ -67,7 +67,7 @@ CONST_DATA struct ProcCmd ProcScr_OpAnimFadeIn[] = {
 void NewProcOpAnimFadeIn(int max, ProcPtr parent)
 {
     struct ProcOpAnimFadeIn * proc;
-    proc = Proc_Start(ProcScr_OpAnimFadeIn, parent);
+    proc = SpawnProc(ProcScr_OpAnimFadeIn, parent);
     proc->max = max;
 }
 
@@ -107,10 +107,10 @@ void SetupOpAnimWorldMapfx(struct ProcOpAnim * proc)
     SetBackgroundScreenSize(BG_2, 0);
     SetBackgroundScreenSize(BG_3, 0);
 
-    BG_SetPosition(BG_0, 0, 0);
-    BG_SetPosition(BG_1, 0, 0);
-    BG_SetPosition(BG_2, 0, 0);
-    BG_SetPosition(BG_3, 0, 0);
+    SetBgOffset(BG_0, 0, 0);
+    SetBgOffset(BG_1, 0, 0);
+    SetBgOffset(BG_2, 0, 0);
+    SetBgOffset(BG_3, 0, 0);
 
     gLCDControlBuffer.bg0cnt.priority = 0;
     gLCDControlBuffer.bg1cnt.priority = 1;
@@ -244,7 +244,7 @@ void sub_80C6F70(struct ProcOpAnim * proc)
     if (!(proc->timer & 3))
         proc->unk2E++;
 
-    BG_SetPosition(BG_1, proc->unk2C, proc->unk2E);
+    SetBgOffset(BG_1, proc->unk2C, proc->unk2E);
 
     if (proc->timer <= 0x60)
     {
@@ -294,10 +294,10 @@ void sub_80C7050(struct ProcOpAnim * proc)
     SetBackgroundScreenSize(BG_2, 0);
     SetBackgroundScreenSize(BG_3, 0);
 
-    BG_SetPosition(BG_0, 0, 0);
-    BG_SetPosition(BG_1, 0, 0);
-    BG_SetPosition(BG_2, 0, 0);
-    BG_SetPosition(BG_3, 0, 0);
+    SetBgOffset(BG_0, 0, 0);
+    SetBgOffset(BG_1, 0, 0);
+    SetBgOffset(BG_2, 0, 0);
+    SetBgOffset(BG_3, 0, 0);
 
     gLCDControlBuffer.bg0cnt.priority = 0;
     gLCDControlBuffer.bg1cnt.priority = 1;
@@ -343,7 +343,7 @@ CONST_DATA struct ProcCmd ProcScr_08AA6D04[] = {
 
 void NewProc08AA6D04(void)
 {
-    Proc_Start(ProcScr_08AA6D04, PROC_TREE_VSYNC);
+    SpawnProc(ProcScr_08AA6D04, PROC_TREE_VSYNC);
 }
 
 void EndProc08AA6D04(void)
@@ -587,7 +587,7 @@ void OpAnim1_UpdateScroll(int new, int old)
     for (i = (old >> 3) + 0x15; i < ((new >> 3) + 0x15); i++)
         OpAnim1_UpdateScrollOneLine(i);
 
-    BG_SetPosition(2, 0, 0x60 - new);
+    SetBgOffset(2, 0, 0x60 - new);
 }
 
 void sub_80C72A4(u8 type)
@@ -615,7 +615,7 @@ void sub_80C72A4(u8 type)
 
         ApplyPalettesOpAnim(Pal_OpAnimShiningRing, 8, 4);
 
-        BG_SetPosition(BG_1, 0, 0);
+        SetBgOffset(BG_1, 0, 0);
         SetWinEnable(0, 0, 0);
     }
 
@@ -778,7 +778,7 @@ void OpAnimEphraimfxFlyIn(struct ProcOpAnim * proc)
         case 16:
             TsaModifyFirstPalMaybe(ret, 0, 0x88, BG_2, (void *)(gGenericBuffer + 0x1000), NULL, 0);
             SetBackgroundTileDataOffset(BG_2, 0x4000);
-            Proc_Start(ProcScr_OpAnimMergeBG, proc);
+            SpawnProc(ProcScr_OpAnimMergeBG, proc);
             break;
         }
         proc->unk30 = ret;
@@ -1004,9 +1004,9 @@ void OpAnimPreparefxEirika(struct ProcOpAnim * proc)
 
             SetBackgroundMapDataOffset(BG_2, 0xe800);
 
-            BG_SetPosition(BG_0, 0, 0);
-            BG_SetPosition(BG_1, 0, 0);
-            BG_SetPosition(BG_2, 0, 0);
+            SetBgOffset(BG_0, 0, 0);
+            SetBgOffset(BG_1, 0, 0);
+            SetBgOffset(BG_2, 0, 0);
 
             BG_Fill(gBG0TilemapBuffer, 0);
             BG_Fill(gBG1TilemapBuffer, 0);
@@ -3288,7 +3288,7 @@ void sub_80CA940(void)
 {
     Proc_EndEach(gUnknown_08AA707C);
 
-    BG_SetPosition(BG_3, 0, 0);
+    SetBgOffset(BG_3, 0, 0);
 
     SetDispEnable(0, 0, 1, 0, 1);
     SetWinEnable(0, 0, 1);

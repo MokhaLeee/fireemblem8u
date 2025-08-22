@@ -12,7 +12,7 @@ void StartSpellAnimFire(struct Anim * anim)
     NewEfxSpellCast();
     SpellFx_ClearBG1Position();
 
-    proc = Proc_Start(ProcScr_efxFire, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxFire, PROC_TREE_3);
     proc->anim = anim;
     proc->timer = 0;
     proc->type = 0;
@@ -26,7 +26,7 @@ void StartSpellAnimElfire(struct Anim * anim)
     NewEfxSpellCast();
     SpellFx_ClearBG1Position();
 
-    proc = Proc_Start(ProcScr_efxFire, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxFire, PROC_TREE_3);
     proc->anim = anim;
     proc->timer = 0;
     proc->type = 1;
@@ -69,7 +69,7 @@ void Loop6C_efxFire(struct ProcEfx * proc)
     }
 
     if (time == r7) {
-        animc->state3 |= ANIM_BIT3_TAKE_BACK_ENABLE | ANIM_BIT3_HIT_EFFECT_APPLIED;
+        animc->state3 |= ANIM_BIT3_C02_BLOCK_END | ANIM_BIT3_C01_BLOCK_END_INBATTLE;
         StartBattleAnimHitEffectsDefault(animc, proc->hitted);
 
         if (proc->hitted != EKR_HITTED)
@@ -93,7 +93,7 @@ void Loop6C_efxFire(struct ProcEfx * proc)
 
     if (time == r9) {
         SpellFx_Finish();
-        RegisterEfxSpellCastEnd();
+        EndEfxSpellCastAsync();
         Proc_Break(proc);
     }
 }
@@ -146,7 +146,7 @@ void NewEfxFireBG(struct Anim * anim)
     struct ProcEfxBG * proc;
 
     gEfxBgSemaphore++;
-    proc = Proc_Start(ProcScr_efxFireBG, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxFireBG, PROC_TREE_3);
     proc->anim = anim;
     proc->timer = 0;
     proc->frame = 0;
@@ -173,7 +173,7 @@ void Loop6C_efxFireBG(struct ProcEfxBG * proc)
     if (ret == -1) {
         SpellFx_ClearBG1();
         gEfxBgSemaphore--;
-        SetDefaultColorEffects_();
+        SpellFx_ClearColorEffects();
         Proc_Break(proc);
     }
 }
@@ -189,7 +189,7 @@ void NewEfxFireOBJ(struct Anim * anim)
     struct Anim *anim2;
     struct ProcEfxOBJ * proc;
     gEfxBgSemaphore++;
-    proc = Proc_Start(ProcScr_efxFireOBJ, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxFireOBJ, PROC_TREE_3);
     proc->anim = anim;
     proc->timer = 0;
     anim2 = EfxCreateFrontAnim(anim, AnimScr_EfxFireOBJ_R_Front, AnimScr_EfxFireOBJ_L_Front, AnimScr_EfxFireOBJ_R_Back, AnimScr_EfxFireOBJ_L_Back);
@@ -288,7 +288,7 @@ void StartSubSpell_efxFireHITBG(struct Anim * anim)
 {
     struct ProcEfxBG * proc;
     gEfxBgSemaphore++;
-    proc = Proc_Start(ProcScr_efxFireHITBG, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxFireHITBG, PROC_TREE_3);
     proc->anim = anim;
     proc->timer = 0;
     proc->frame = 0;
@@ -304,9 +304,9 @@ void StartSubSpell_efxFireHITBG(struct Anim * anim)
         return;
     
     if (GetAnimPosition(proc->anim) == EKR_POS_L)
-        BG_SetPosition(BG_1, 0x18, 0x0);
+        SetBgOffset(BG_1, 0x18, 0x0);
     else
-        BG_SetPosition(BG_1, 0xE8, 0x0);
+        SetBgOffset(BG_1, 0xE8, 0x0);
 }
 
 void sub_805DE74(struct ProcEfxBG * proc)
@@ -324,7 +324,7 @@ void sub_805DE74(struct ProcEfxBG * proc)
     if (ret == -1) {
         SpellFx_ClearBG1();
         gEfxBgSemaphore--;
-        SetDefaultColorEffects_();
+        SpellFx_ClearColorEffects();
         Proc_End(proc);
     }
 }
@@ -340,7 +340,7 @@ void StartSubSpell_efxElfireBG(struct Anim * anim)
     struct ProcEfxBG * proc;
 
     gEfxBgSemaphore++;
-    proc = Proc_Start(ProcScr_efxElfireBG, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxElfireBG, PROC_TREE_3);
     proc->anim = anim;
     proc->timer = 0;
     SpellFx_RegisterBgGfx(Img_EkrElfireBG, 0x2000);
@@ -352,9 +352,9 @@ void StartSubSpell_efxElfireBG(struct Anim * anim)
         return;
     
     if (GetAnimPosition(proc->anim) == EKR_POS_L)
-        BG_SetPosition(BG_1, 0x18, 0x0);
+        SetBgOffset(BG_1, 0x18, 0x0);
     else
-        BG_SetPosition(BG_1, 0xE8, 0x0);
+        SetBgOffset(BG_1, 0xE8, 0x0);
     
     sub_8070DBC(TILEMAP_LOCATED(gBG1TilemapBuffer, 0x1E, 0x0), 2, 0x14, 0x1, 0x100);
 }
@@ -363,7 +363,7 @@ void EfxElfireBG_Loop(struct ProcEfxBG * proc)
 {
     if (++proc->timer == 0x28) {
         SpellFx_ClearBG1();
-        SetDefaultColorEffects_();
+        SpellFx_ClearColorEffects();
         gEfxBgSemaphore--;
         Proc_Break(proc);
     }
@@ -389,7 +389,7 @@ void StartSubSpell_efxElfireBGCOL(struct Anim * anim)
     struct ProcEfxBGCOL * proc;
 
     gEfxBgSemaphore++;
-    proc = Proc_Start(ProcScr_efxElfireBGCOL, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxElfireBGCOL, PROC_TREE_3);
     proc->anim = anim;
     proc->timer = 0;
     proc->frame = 0;
@@ -425,7 +425,7 @@ void StartSubSpell_efxElfireOBJ(struct Anim * anim)
     struct Anim * anim2;
     struct ProcEfxOBJ * proc;
     gEfxBgSemaphore++;
-    proc = Proc_Start(ProcScr_efxElfireOBJ, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxElfireOBJ, PROC_TREE_3);
     proc->anim = anim;
     proc->timer = 0;
     anim2 = EfxCreateFrontAnim(anim, AnimScr_EfxElfireObjLeft, AnimScr_EfxElfireObjRight, AnimScr_EfxElfireObjLeft, AnimScr_EfxElfireObjRight);

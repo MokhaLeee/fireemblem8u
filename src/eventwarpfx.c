@@ -147,23 +147,23 @@ void StartEventWarpAnim(ProcPtr parent, int x, int y, s8 subcmd, s8 flag)
 {
     struct ProcBmFx *proc;
     
-    proc = Proc_Start(ProcScr_EventWrapAnim, parent);
+    proc = SpawnProc(ProcScr_EventWrapAnim, parent);
     proc->xPos = subcmd;
     proc->yPos = flag;
 
     x = x * 0x10 - gBmSt.camera.x - 0x08;
     y = y * 0x10 - gBmSt.camera.y - 0x20;
-    BG_SetPosition(0, -x, -y);
+    SetBgOffset(0, -x, -y);
 }
 
 void StartEventWarpAnim_unused(ProcPtr parent, int xCamera, int yCamera, s8 subcmd)
 {
     struct ProcBmFx *proc;
     
-    proc = Proc_Start(ProcScr_EventWrapAnim, parent);
+    proc = SpawnProc(ProcScr_EventWrapAnim, parent);
     proc->xPos = subcmd;
 
-    BG_SetPosition(0, -xCamera, -yCamera);
+    SetBgOffset(0, -xCamera, -yCamera);
     proc->yPos = 1;
 }
 

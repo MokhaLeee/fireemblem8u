@@ -314,9 +314,9 @@ ProcPtr NewGmapTimeMons(ProcPtr parent, int * out)
 {
     struct ProcGmapTimeMons * proc;
     if (!parent)
-        proc = Proc_Start(ProcScr_GmapTimeMons, PROC_TREE_3);
+        proc = SpawnProc(ProcScr_GmapTimeMons, PROC_TREE_3);
     else
-        proc = Proc_StartBlocking(ProcScr_GmapTimeMons, parent);
+        proc = SpawnProcBlocking(ProcScr_GmapTimeMons, parent);
 
     if (out)
         *out = proc->monster_amt;

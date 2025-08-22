@@ -58,7 +58,7 @@ static u16 CONST_DATA gUnknown_0859B144[] = {
 
 struct ProcCmd CONST_DATA sProcScr_ChapterIntro_0859B160[] = {
     PROC_SLEEP(0x1E),
-    PROC_START_CHILD(sProcScr_ChapterIntro_0859B198),
+    SpawnProc_CHILD(sProcScr_ChapterIntro_0859B198),
     PROC_REPEAT(ChapterIntro_80207C8),
 
     PROC_END,
@@ -85,7 +85,7 @@ struct ProcCmd CONST_DATA gProcScr_ChapterIntro[] = {
 
     PROC_SLEEP(0x3C),
 
-    PROC_START_CHILD(sProcScr_ChapterIntro_KeyListen),
+    SpawnProc_CHILD(sProcScr_ChapterIntro_KeyListen),
 
     PROC_CALL_ARG(ChapterIntro_SetSkipTarget, 1),
 
@@ -93,7 +93,7 @@ struct ProcCmd CONST_DATA gProcScr_ChapterIntro[] = {
     PROC_REPEAT(ChapterIntro_DrawingLights),
     PROC_CALL(ChapterIntro_InitBLDCNT),
 
-    PROC_START_CHILD(sProcScr_ChapterIntro_LightBurst),
+    SpawnProc_CHILD(sProcScr_ChapterIntro_LightBurst),
 
     PROC_CALL(ChapterIntro_DrawChapterTitleMaybe),
 
@@ -103,8 +103,8 @@ struct ProcCmd CONST_DATA gProcScr_ChapterIntro[] = {
     PROC_REPEAT(ChapterIntro_UnknownFX8020578),
     PROC_CALL(ChapterIntro_SetBG_802009C),
 
-    PROC_START_CHILD(sProcScr_ChapterIntro_Bg3Scroll),
-    PROC_START_CHILD(sProcScr_ChapterIntro_0859B160),
+    SpawnProc_CHILD(sProcScr_ChapterIntro_Bg3Scroll),
+    SpawnProc_CHILD(sProcScr_ChapterIntro_0859B160),
 
     PROC_CALL(ChapterIntro_8020944),
     PROC_REPEAT(ChapterIntro_80209D8),
@@ -167,7 +167,7 @@ struct ProcCmd CONST_DATA sProcScr_0859B318[] = {
 
 void ChapterIntro_Bg3Scroll_Loop() {
     int offset = (GetGameClock() / 2) & 0xFF;
-    BG_SetPosition(2, offset, offset);
+    SetBgOffset(2, offset, offset);
 
     return;
 }
@@ -274,7 +274,7 @@ void ChapterIntro_801FFD0(struct ChapterIntroFXProc* proc) {
 void ChapterIntro_801FFD8_Loop(struct ChapterIntroFXProc* proc) {
     proc->unk_4C++;
 
-    BG_SetPosition(1, proc->unk_4C / 2, 0);
+    SetBgOffset(1, proc->unk_4C / 2, 0);
     REG_BG3HOFS = proc->unk_4C / 2;
 
     return;
@@ -312,7 +312,7 @@ int ChapterIntro_8020010(ProcPtr proc, void* unk_2, int unk_3) {
         buffer++;
     }
 
-    Proc_Start(sProcScr_ChapterIntro_0859B108, proc);
+    SpawnProc(sProcScr_ChapterIntro_0859B108, proc);
 
     // return; // BUG?
 }
@@ -348,9 +348,9 @@ void ChapterIntro_Init(struct ChapterIntroFXProc* proc) {
     gLCDControlBuffer.dispcnt.bg3_on = 0;
     gLCDControlBuffer.dispcnt.obj_on = 1;
 
-    BG_SetPosition(0, 0, 0);
-    BG_SetPosition(1, 0, 0);
-    BG_SetPosition(2, 0, 0);
+    SetBgOffset(0, 0, 0);
+    SetBgOffset(1, 0, 0);
+    SetBgOffset(2, 0, 0);
 
     BG_Fill(gBG0TilemapBuffer, 0);
     BG_Fill(gBG1TilemapBuffer, 0);

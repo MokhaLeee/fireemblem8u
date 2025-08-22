@@ -225,9 +225,9 @@ void PrepItemTrade_Init(struct PrepMenuTradeProc * proc)
     LoadUiFrameGraphics();
     LoadObjUIGfx();
 
-    BG_SetPosition(0, 0, 0);
-    BG_SetPosition(1, 0, 0);
-    BG_SetPosition(2, 0, 0);
+    SetBgOffset(0, 0, 0);
+    SetBgOffset(1, 0, 0);
+    SetBgOffset(2, 0, 0);
 
     LoadHelpBoxGfx((void*)0x06014000, -1);
     LoadIconPalettes(4);
@@ -438,7 +438,7 @@ struct ProcCmd CONST_DATA ProcScr_PrepItemTradeScreen[] = {
 
 //! FE8U = 0x0809BE3C
 void StartPrepItemTradeScreenProc(struct Unit* unitA, struct Unit* unitB, ProcPtr parent) {
-    struct PrepMenuTradeProc* proc = Proc_StartBlocking(ProcScr_PrepItemTradeScreen, parent);
+    struct PrepMenuTradeProc* proc = SpawnProcBlocking(ProcScr_PrepItemTradeScreen, parent);
 
     proc->units[0] = unitA;
     proc->units[1] = unitB;
@@ -450,7 +450,7 @@ void StartPrepItemTradeScreenProc(struct Unit* unitA, struct Unit* unitB, ProcPt
 
 //! FE8U = 0x0809BE60
 void sub_809BE60(struct Unit* unitA, struct Unit* unitB, int rightItemIdx, ProcPtr parent) {
-    struct PrepMenuTradeProc* proc = Proc_StartBlocking(ProcScr_PrepItemTradeScreen, parent);
+    struct PrepMenuTradeProc* proc = SpawnProcBlocking(ProcScr_PrepItemTradeScreen, parent);
 
     proc->units[0] = unitA;
     proc->units[1] = unitB;

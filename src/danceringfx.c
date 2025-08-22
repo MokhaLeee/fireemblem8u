@@ -130,11 +130,11 @@ void StartDanceringAnim(ProcPtr parent)
         int x = unit->xPos;
         int y = unit->yPos;
         
-        Proc_StartBlocking(ProcScr_DanceringAnim, parent);
+        SpawnProcBlocking(ProcScr_DanceringAnim, parent);
 
         x = x * 0x10 - gBmSt.camera.x - 0x10;
         y = y * 0x10 - gBmSt.camera.y - 0x10;
 
-        BG_SetPosition(BG_0, -x, -y);
+        SetBgOffset(BG_0, -x, -y);
     }
 }

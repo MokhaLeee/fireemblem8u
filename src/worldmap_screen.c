@@ -243,7 +243,7 @@ ProcPtr NewMapScreenVSync(u8 * arg0, u16 * arg1, u8 * arg2, void * arg3, void * 
 {
     struct GMapScreenVSyncProc * proc;
 
-    proc = Proc_Start(ProcScr_GMapScreenVSync, NULL);
+    proc = SpawnProc(ProcScr_GMapScreenVSync, NULL);
     if (proc == NULL)
     {
         return NULL;
@@ -461,7 +461,7 @@ void sub_80BAB0C(struct GmScreenProc * proc)
     }
 
     sub_80BA8A0(proc);
-    BG_SetPosition(BG_3, proc->x, proc->y);
+    SetBgOffset(BG_3, proc->x, proc->y);
 
     proc->unk_38 = proc->x;
     proc->unk_3a = proc->y;
@@ -493,7 +493,7 @@ struct ProcCmd CONST_DATA ProcScr_GMapScreen[] =
 //! FE8U = 0x080BABF0
 ProcPtr NewMapScreen(ProcPtr parent)
 {
-    struct GmScreenProc * proc = Proc_Start(ProcScr_GMapScreen, parent);
+    struct GmScreenProc * proc = SpawnProc(ProcScr_GMapScreen, parent);
     proc->gmroute = StartGMapRoute(proc, &gGMData.openPaths, 0x5000, 0xe);
     return proc;
 }

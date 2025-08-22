@@ -92,7 +92,7 @@ void EndMapAnimInfoWindow(void)
 
 void StartMapAnimInfoWindow(int x, int y, struct Proc* parent)
 {
-    struct MAInfoFrameProc* proc = Proc_Start(ProcScr_MapBattleInfoBox, PROC_TREE_3);
+    struct MAInfoFrameProc* proc = SpawnProc(ProcScr_MapBattleInfoBox, PROC_TREE_3);
 
     proc->x = x;
     proc->y = y;
@@ -108,8 +108,8 @@ void ProcMapInfoBox_OnEnd(void)
 
 void ProcMapInfoBox_OnDraw(struct MAInfoFrameProc* proc)
 {
-    BG_SetPosition(0, 0, 0);
-    BG_SetPosition(1, 0, 0);
+    SetBgOffset(0, 0, 0);
+    SetBgOffset(1, 0, 0);
 
     Decompress(
         Img_MapBattleInfoBox,

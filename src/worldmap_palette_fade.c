@@ -107,11 +107,11 @@ ProcPtr StartGmPalFade(ProcPtr parent, struct GmPalFadeInput * input)
         struct GmapPalFadeProc * proc;
         if (parent)
         {
-            proc = Proc_StartBlocking(ProcScr_GmapPalFade, parent);
+            proc = SpawnProcBlocking(ProcScr_GmapPalFade, parent);
         }
         else
         {
-            proc = Proc_Start(ProcScr_GmapPalFade, PROC_TREE_3);
+            proc = SpawnProc(ProcScr_GmapPalFade, PROC_TREE_3);
         }
 
         proc->unk_2c = input->unk_0c;

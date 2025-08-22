@@ -151,7 +151,7 @@ PROC_LABEL(1),
 //! FE8U = 0x080AC9C0
 ProcPtr StartUiCursorHand(ProcPtr parent)
 {
-    return Proc_Start(gProcScr_UiCursorHand, parent);
+    return SpawnProc(gProcScr_UiCursorHand, parent);
 }
 
 //! FE8U = 0x080AC9D4

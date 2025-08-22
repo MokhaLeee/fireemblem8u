@@ -211,7 +211,7 @@ struct ProcCmd CONST_DATA ProcScr_SallyCir[] = {
 //! FE8U = 0x08097AAC
 struct SallyCirProc* StartSallyCirProc(ProcPtr parent, u8 unk)
 {
-    struct SallyCirProc* proc = Proc_StartBlocking(ProcScr_SallyCir, parent);
+    struct SallyCirProc* proc = SpawnProcBlocking(ProcScr_SallyCir, parent);
     proc->unk_2a = unk;
 
     return proc;

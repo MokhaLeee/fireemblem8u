@@ -38,7 +38,7 @@ void NewEfxHpBar(struct Anim * anim)
 
     gEkrHpBarCount = 1;
 
-    proc = Proc_Start(ProcScr_efxHPBar, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxHPBar, PROC_TREE_3);
     proc->anim_this = anim;
 
     if (GetAnimPosition(anim) == EKR_POS_L)
@@ -175,7 +175,7 @@ void NewEfxHpBarResire(struct Anim * anim)
 
     gEkrHpBarCount = 1;
 
-    proc = Proc_Start(ProcScr_EfxHpBarResire, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_EfxHpBarResire, PROC_TREE_3);
     proc->anim_this = GetAnimAnotherSide(anim);
 
     if (GetAnimPosition(anim) == POS_L)
@@ -342,7 +342,7 @@ void NewEfxAvoid(struct Anim * anim)
 
     gEkrHpBarCount = 1;
 
-    proc = Proc_Start(ProcScr_EfxAvoid, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_EfxAvoid, PROC_TREE_3);
     proc->timer = 0;
 
     if (GetAnimPosition(anim) == POS_L)
@@ -379,7 +379,7 @@ void NewEfxHpBarLive(struct Anim * anim)
 
     gEkrHpBarCount = 1;
 
-    proc = Proc_Start(ProcScr_efxHPBarLive, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxHPBarLive, PROC_TREE_3);
 
 
     if (GetAnimPosition(anim) == POS_L)
@@ -463,7 +463,7 @@ void NewEfxNoDamage(struct Anim * anim1, struct Anim * anim2, int death)
     if (GetItemIndex(bu->weaponBefore) != ITEM_MONSTER_STONE)
     {
         gEkrHpBarCount++;
-        proc = Proc_Start(ProcScr_efxNoDamage, PROC_TREE_3);
+        proc = SpawnProc(ProcScr_efxNoDamage, PROC_TREE_3);
         proc->anim_main_other = anim1;
         proc->anim_main_this = anim2;
         proc->timer = 0;
@@ -494,7 +494,7 @@ void EfxNoDamageMain(struct ProcEfxHpBar * proc)
 
 void NewEfxNoDamageYure(struct Anim * anim1, struct Anim * anim2)
 {
-    struct ProcEfxHpBar *proc = Proc_Start(ProcScr_efxNoDamageYure, PROC_TREE_3);
+    struct ProcEfxHpBar *proc = SpawnProc(ProcScr_efxNoDamageYure, PROC_TREE_3);
     proc->anim_main_other = anim1;
     proc->anim_main_this = anim2;
     proc->timer = 0;
@@ -539,7 +539,7 @@ void NewEfxStatusCHG(struct Anim * anim)
 
     if (gEkrHpBarCount == 0) {
         gEkrHpBarCount = 1;
-        proc = Proc_Start(ProcScr_efxStatusCHG, PROC_TREE_3);
+        proc = SpawnProc(ProcScr_efxStatusCHG, PROC_TREE_3);
         proc->timer = 0;
         proc->anim_this = anim;
     }

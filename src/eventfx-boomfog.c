@@ -15,7 +15,7 @@ CONST_DATA struct ProcCmd ProcScr_BoomFogFx[] = {
 void NewBoomFogFx(struct Unit * unit)
 {
     struct MAEffectProc * proc;
-    proc = Proc_Start(ProcScr_BoomFogFx, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_BoomFogFx, PROC_TREE_3);
 
     proc->unit = unit;
     proc->xDisplay = 8 * (2 * SCREEN_TILE_X(unit->xPos) + 1);

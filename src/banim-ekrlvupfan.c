@@ -8,7 +8,7 @@
 
 void NewEkrLvlupFan(void)
 {
-    struct ProcEkrLvupFan *proc = Proc_Start(ProcScr_ekrLvupFan, PROC_TREE_3);
+    struct ProcEkrLvupFan *proc = SpawnProc(ProcScr_ekrLvupFan, PROC_TREE_3);
     proc->timer = 0;
     Sound_SetSEVolume(0x80);
 }

@@ -27,7 +27,7 @@ void StartSpellAnimBolting(struct Anim * anim)
     NewEfxSpellCast();
     SpellFx_ClearBG1Position();
 
-    proc = Proc_Start(gProcScr_efxThunderstorm, PROC_TREE_3);
+    proc = SpawnProc(gProcScr_efxThunderstorm, PROC_TREE_3);
     proc->anim = anim;
     proc->timer = 0;
     proc->hitted = CheckRoundMiss(GetAnimRoundTypeAnotherSide(anim));
@@ -64,7 +64,7 @@ void efxThunderstorm_Loop_Main(struct ProcEfx * proc)
     if (proc->timer == duration + 94)
     {
         StartSubSpell_efxThunderstormOBJ(anim);
-        anim->state3 |= (ANIM_BIT3_TAKE_BACK_ENABLE | ANIM_BIT3_HIT_EFFECT_APPLIED);
+        anim->state3 |= (ANIM_BIT3_C02_BLOCK_END | ANIM_BIT3_C01_BLOCK_END_INBATTLE);
         StartBattleAnimHitEffectsDefault(anim, proc->hitted);
         if (!proc->hitted)
         {
@@ -74,7 +74,7 @@ void efxThunderstorm_Loop_Main(struct ProcEfx * proc)
     else if ((proc->timer != duration + 195) && (proc->timer == duration + 200))
     {
         SpellFx_Finish();
-        RegisterEfxSpellCastEnd();
+        EndEfxSpellCastAsync();
         Proc_Break(proc);
     }
 
@@ -153,7 +153,7 @@ void StartSubSpell_efxThunderstormBG(struct Anim * anim)
 
     gEfxBgSemaphore++;
 
-    proc = Proc_Start(gProcScr_efxThunderstormBG, PROC_TREE_3);
+    proc = SpawnProc(gProcScr_efxThunderstormBG, PROC_TREE_3);
     proc->anim = anim;
     proc->timer = 0;
     proc->frame = 0;
@@ -216,7 +216,7 @@ void StartSubSpell_efxThunderstormOBJ(struct Anim * anim)
 
     gEfxBgSemaphore++;
 
-    proc = Proc_Start(gProcScr_efxThunderstormOBJ, PROC_TREE_3);
+    proc = SpawnProc(gProcScr_efxThunderstormOBJ, PROC_TREE_3);
     proc->anim = anim;
 
     return;
@@ -273,7 +273,7 @@ void StartSubSpell_efxThunderstormCOLOR(struct Anim * anim)
 
     gEfxBgSemaphore++;
 
-    proc = Proc_Start(gProcScr_efxThunderstormCOLOR, PROC_TREE_3);
+    proc = SpawnProc(gProcScr_efxThunderstormCOLOR, PROC_TREE_3);
     proc->anim = anim;
 
     return;
@@ -326,7 +326,7 @@ void efxThunderstormColor_Loop_C(struct ProcEfxBGCOL * proc)
     if (proc->timer > proc->timer2)
     {
         SpellFx_ClearBG1();
-        SetDefaultColorEffects_();
+        SpellFx_ClearColorEffects();
 
         gEfxBgSemaphore--;
 
@@ -359,7 +359,7 @@ void StartSubSpell_efxThunderstormDARK(struct Anim * anim, int timer, int termin
 
     CpuFastCopy(gPaletteBuffer, gEfxPal, PLTT_SIZE);
 
-    proc = Proc_Start(gProcScr_efxThunderstormDARK, 0);
+    proc = SpawnProc(gProcScr_efxThunderstormDARK, 0);
     proc->anim = anim;
     proc->timer = 0;
     proc->timer2 = timer;

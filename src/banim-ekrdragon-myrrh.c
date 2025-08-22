@@ -16,7 +16,7 @@ PROC_LABEL(0),
 void NewEkrDragonManakete(struct Anim *anim)
 {
     struct EkrDragonStatus *ekrsp = GetEkrDragonStatus(anim);
-    struct ProcEkrDragon *proc = Proc_Start(ProcScr_EkrMyrrh, PROC_TREE_3);
+    struct ProcEkrDragon *proc = SpawnProc(ProcScr_EkrMyrrh, PROC_TREE_3);
 
     ekrsp->proc = proc;
     AddEkrDragonStatusAttr(anim, EKRDRGON_ATTR_START);

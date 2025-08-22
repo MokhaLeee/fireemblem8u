@@ -166,7 +166,7 @@ int NewMapUnit(struct GMapUnitContainerProc * container, u16 classId, int factio
         return -1;
     }
 
-    mapUnitProc = Proc_Start(ProcScr_GmapUnit, container->proc_parent);
+    mapUnitProc = SpawnProc(ProcScr_GmapUnit, container->proc_parent);
     if (mapUnitProc == NULL)
     {
         return -2;
@@ -486,7 +486,7 @@ struct ProcCmd CONST_DATA ProcScr_GmapUnitContainer[] =
 //! FE8U = 0x080BB1E8
 ProcPtr NewGmapUnitContainer(ProcPtr parent, int layer, int chr)
 {
-    struct GMapUnitContainerProc * proc = Proc_Start(ProcScr_GmapUnitContainer, parent);
+    struct GMapUnitContainerProc * proc = SpawnProc(ProcScr_GmapUnitContainer, parent);
     proc->layer = layer;
     proc->unk_30 = chr;
 
@@ -639,11 +639,11 @@ ProcPtr StartGmapUnitFade(int index, int palA, int palB, int arg3, ProcPtr paren
 
     if (parent)
     {
-        proc = Proc_StartBlocking(ProcScr_GmapUnitFade, parent);
+        proc = SpawnProcBlocking(ProcScr_GmapUnitFade, parent);
     }
     else
     {
-        proc = Proc_Start(ProcScr_GmapUnitFade, PROC_TREE_3);
+        proc = SpawnProc(ProcScr_GmapUnitFade, PROC_TREE_3);
     }
 
     proc->unk_29 = palA;

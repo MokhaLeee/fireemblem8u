@@ -134,7 +134,7 @@ void MapAnim_PrepareNextBattleRound(ProcPtr proc)
 
 void MapAnim_DisplayRoundAnim(ProcPtr proc)
 {
-    Proc_StartBlocking(MapAnim_GetRoundProcScript(), proc);
+    SpawnProcBlocking(MapAnim_GetRoundProcScript(), proc);
 }
 
 void MapAnim_ShowPoisonEffectIfAny(ProcPtr proc)
@@ -242,7 +242,7 @@ void MapAnim_DisplayExpBar(ProcPtr proc)
 
     if (actorNum >= 0)
     {
-        struct MAExpBarProc * expProc = Proc_StartBlocking(ProcScr_MapAnimExpBar, proc);
+        struct MAExpBarProc * expProc = SpawnProcBlocking(ProcScr_MapAnimExpBar, proc);
 
         expProc->expFrom = gManimSt.actor[actorNum].bu->expPrevious;
         expProc->expTo   = gManimSt.actor[actorNum].bu->expPrevious + gManimSt.actor[actorNum].bu->expGain;
@@ -396,7 +396,7 @@ CONST_DATA struct ProcCmd ProcScr_MapAnimPoisonDmg[] =
     PROC_CALL(MapAnim_InitInfoBox),
     PROC_SLEEP(15),
 
-    PROC_START_CHILD_BLOCKING(ProcScr_PoisonDmgMapEffect),
+    SpawnProc_CHILD_BLOCKING(ProcScr_PoisonDmgMapEffect),
     PROC_SLEEP(1),
 
     PROC_JUMP(ProcScr_MapAnimEnd),
@@ -412,10 +412,10 @@ CONST_DATA struct ProcCmd ProcScr_MapAnimEggDmg[] =
     PROC_CALL(MapAnim_InitInfoBox),
     PROC_SLEEP(15),
 
-    PROC_START_CHILD_BLOCKING(ProcScr_EggDmgMapEffect1),
+    SpawnProc_CHILD_BLOCKING(ProcScr_EggDmgMapEffect1),
     PROC_SLEEP(1),
 
-    PROC_START_CHILD_BLOCKING(ProcScr_EggDmgMapEffect2),
+    SpawnProc_CHILD_BLOCKING(ProcScr_EggDmgMapEffect2),
     PROC_SLEEP(1),
 
     PROC_JUMP(ProcScr_MapAnimEnd),
@@ -431,7 +431,7 @@ CONST_DATA struct ProcCmd ProcScr_MapAnimCritAtk[] =
     PROC_CALL(MapAnim_InitInfoBox),
     PROC_SLEEP(15),
 
-    PROC_START_CHILD_BLOCKING(ProcScr_CritAtkMapEffect),
+    SpawnProc_CHILD_BLOCKING(ProcScr_CritAtkMapEffect),
     PROC_SLEEP(1),
 
     PROC_JUMP(ProcScr_MapAnimEnd),

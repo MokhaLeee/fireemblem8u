@@ -145,7 +145,7 @@ struct ProcCmd CONST_DATA gProc_ekrChienCHR[] =
 void NewEkrChienCHR(struct Anim * anim)
 {
     struct ProcEkrChienCHR * proc;
-    proc = Proc_Start(gProc_ekrChienCHR, PROC_TREE_3);
+    proc = SpawnProc(gProc_ekrChienCHR, PROC_TREE_3);
     proc->anim = anim;
 }
 

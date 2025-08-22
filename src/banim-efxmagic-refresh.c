@@ -26,7 +26,7 @@ void StartSpellAnimSong(struct Anim * anim)
     SpellFx_Begin();
     SpellFx_ClearBG1Position();
 
-    proc = Proc_Start(ProcScr_efxSong, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxSong, PROC_TREE_3);
     proc->anim = anim;
     proc->timer = 0;
     proc->hitted = CheckRoundMiss(GetAnimRoundTypeAnotherSide(anim));
@@ -58,7 +58,7 @@ void efxSong_Loop_Main(struct ProcEfx * proc)
 
     if (proc->timer == 139)
     {
-        anim->state3 |= (ANIM_BIT3_TAKE_BACK_ENABLE | ANIM_BIT3_HIT_EFFECT_APPLIED);
+        anim->state3 |= (ANIM_BIT3_C02_BLOCK_END | ANIM_BIT3_C01_BLOCK_END_INBATTLE);
 
         StartBattleAnimStatusChgHitEffects(anim, proc->hitted);
 
@@ -197,7 +197,7 @@ void StartSubSpell_efxSongBG(struct Anim * anim, int kind)
 
     gEfxBgSemaphore++;
 
-    proc = Proc_Start(ProcScr_efxSongBG, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxSongBG, PROC_TREE_3);
     proc->anim = anim;
     proc->timer = 0;
     proc->frame = 0;
@@ -244,7 +244,7 @@ void efxSongBG_Loop(struct ProcEfxEclipseBG * proc)
 
             gEfxBgSemaphore--;
 
-            SetDefaultColorEffects_();
+            SpellFx_ClearColorEffects();
             Proc_Break(proc);
         }
     }
@@ -271,7 +271,7 @@ void StartSubSpell_efxSongOBJ(struct Anim * anim, int kind)
 
     gEfxBgSemaphore++;
 
-    proc = Proc_Start(ProcScr_efxSongOBJ, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxSongOBJ, PROC_TREE_3);
     proc->anim = anim;
     proc->timer = 0;
     proc->terminator = 56;
@@ -318,7 +318,7 @@ void StartSpellAnimDance(struct Anim * anim)
     SpellFx_Begin();
     SpellFx_ClearBG1Position();
 
-    proc = Proc_Start(ProcScr_efxDance, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxDance, PROC_TREE_3);
     proc->anim = anim;
     proc->timer = 0;
     proc->hitted = CheckRoundMiss(GetAnimRoundTypeAnotherSide(anim));
@@ -350,7 +350,7 @@ void efxDance_Loop_Main(struct ProcEfx * proc)
 
     if (proc->timer == 125)
     {
-        anim->state3 |= (ANIM_BIT3_TAKE_BACK_ENABLE | ANIM_BIT3_HIT_EFFECT_APPLIED);
+        anim->state3 |= (ANIM_BIT3_C02_BLOCK_END | ANIM_BIT3_C01_BLOCK_END_INBATTLE);
 
         StartBattleAnimStatusChgHitEffects(anim, proc->hitted);
 

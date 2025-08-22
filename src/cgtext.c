@@ -295,7 +295,7 @@ void CgText_Init(struct CgTextMainProc * proc)
         }
     }
 
-    BG_SetPosition(GetCgTextBg(GetCgTextFlags()), 0, 0);
+    SetBgOffset(GetCgTextBg(GetCgTextFlags()), 0, 0);
 
     return;
 }
@@ -526,11 +526,11 @@ void StartCgText(int x, int y, int width, int height, int stringId, void * vram,
 
     if (parent)
     {
-        proc = Proc_StartBlocking(gProcScr_CgTextMain, parent);
+        proc = SpawnProcBlocking(gProcScr_CgTextMain, parent);
     }
     else
     {
-        proc = Proc_Start(gProcScr_CgTextMain, PROC_TREE_3);
+        proc = SpawnProc(gProcScr_CgTextMain, PROC_TREE_3);
     }
 
     SetCgTextFlags(CG_TEXT_BG(BG_1));
@@ -1354,7 +1354,7 @@ PROC_LABEL(99),
 void RestartCgTextInterpreter(struct CgTextMainProc * parent)
 {
     Proc_End(Proc_Find(gProcScr_CgTextInterpreter));
-    Proc_Start(gProcScr_CgTextInterpreter, parent);
+    SpawnProc(gProcScr_CgTextInterpreter, parent);
     return;
 }
 
@@ -1434,7 +1434,7 @@ void StartYesNoChoice(int * choiceTextIds, struct Text * th, int x, int y, int c
     Text_InsertDrawString(th, 16, color, GetStringFromIndex(choiceTextIds[0]));
     Text_InsertDrawString(th, 56, color, GetStringFromIndex(choiceTextIds[1]));
 
-    proc = Proc_StartBlocking(gProcScr_YesNoChoice, parent);
+    proc = SpawnProcBlocking(gProcScr_YesNoChoice, parent);
     proc->currentChoice = defaultChoice;
     proc->x = x + 16;
     proc->y = y;

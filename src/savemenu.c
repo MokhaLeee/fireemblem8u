@@ -1147,7 +1147,7 @@ struct ProcCmd CONST_DATA gProcScr_08A20068[] = {
 //! FE8U = 0x080A9DFC
 void sub_80A9DFC(int x, int y, int msgId, ProcPtr parent)
 {
-    struct SaveMenu8A20068Proc  * proc = Proc_StartBlocking(gProcScr_08A20068, parent);
+    struct SaveMenu8A20068Proc  * proc = SpawnProcBlocking(gProcScr_08A20068, parent);
     proc->msgId = msgId;
     proc->x = x;
     proc->y = y;
@@ -1338,7 +1338,7 @@ struct ProcCmd CONST_DATA ProcScr_CallExtraMap[] = {
 //! FE8U = 0x080AA144
 void CallExtraMap(ProcPtr parent)
 {
-    Proc_StartBlocking(ProcScr_CallExtraMap, parent);
+    SpawnProcBlocking(ProcScr_CallExtraMap, parent);
 }
 
 //! FE8U = 0x080AA158
@@ -1671,7 +1671,7 @@ PROC_LABEL(PL_SAVEMENU_EXIT),
 //! FE8U = 0x080AA4C0
 void StartSaveMenu(ProcPtr parent)
 {
-    struct SaveMenuProc * proc = Proc_StartBlocking(ProcScr_SaveMenu, parent);
+    struct SaveMenuProc * proc = SpawnProcBlocking(ProcScr_SaveMenu, parent);
     proc->main_sel_bitfile = 0x100;
     proc->extra_sel_bitfile = 0;
 
@@ -1737,7 +1737,7 @@ PROC_LABEL(15),
 //! FE8U = 0x080AA518
 void Make6C_SaveMenuPostChapter(ProcPtr parent)
 {
-    Proc_StartBlocking(gProcScr_SaveMenuPostChapter, parent);
+    SpawnProcBlocking(gProcScr_SaveMenuPostChapter, parent);
 }
 
 //! FE8U = 0x080AA52C
@@ -1888,7 +1888,7 @@ PROC_LABEL(10),
 //! FE8U = 0x080AA6EC
 void StartBonusClaimMenu(ProcPtr parent)
 {
-    Proc_StartBlocking(ProcScr_BonusClaimMenu, parent);
+    SpawnProcBlocking(ProcScr_BonusClaimMenu, parent);
 }
 
 //! FE8U = 0x080AA700

@@ -188,9 +188,9 @@ void sub_805A580(struct Anim * anim)
 {
     anim->nextRoundId = -2;
 
-    if (anim->state3 & ANIM_BIT3_HIT_EFFECT_APPLIED)
+    if (anim->state3 & ANIM_BIT3_C01_BLOCK_END_INBATTLE)
     {
-        anim->state3 &= ANIM_BIT3_HIT_EFFECT_APPLIED;
+        anim->state3 &= ANIM_BIT3_C01_BLOCK_END_INBATTLE;
         anim->nextRoundId = 0;
         anim->pScrCurrent++;
     }
@@ -542,10 +542,10 @@ void sub_805A990(struct AnimBuffer * pAnimBuf)
     struct Anim * anim;
 
     anim = pAnimBuf->anim1;
-    anim->state3 |= ANIM_BIT3_HIT_EFFECT_APPLIED;
+    anim->state3 |= ANIM_BIT3_C01_BLOCK_END_INBATTLE;
 
     anim = pAnimBuf->anim2;
-    anim->state3 |= ANIM_BIT3_HIT_EFFECT_APPLIED;
+    anim->state3 |= ANIM_BIT3_C01_BLOCK_END_INBATTLE;
 
     return;
 }
@@ -578,7 +578,7 @@ struct ProcCmd CONST_DATA gProc_efxAnimeDrvProc[] =
 void NewEfxAnimeDrvProc(void)
 {
     void ** ptr = &gpProcEfxAnimeDrv;
-    *ptr = Proc_Start(gProc_efxAnimeDrvProc, PROC_TREE_4);
+    *ptr = SpawnProc(gProc_efxAnimeDrvProc, PROC_TREE_4);
 
     AnimClearAll();
 
@@ -615,7 +615,7 @@ struct ProcCmd CONST_DATA ProcScr_ekrUnitMainMini[] =
 //! FE8U = 0x0805AA00
 void NewEkrUnitMainMini(struct AnimBuffer * pAnimBuf)
 {
-    struct ProcEkrUnitMainMini * proc = Proc_Start(ProcScr_ekrUnitMainMini, PROC_TREE_4);
+    struct ProcEkrUnitMainMini * proc = SpawnProc(ProcScr_ekrUnitMainMini, PROC_TREE_4);
     InitMainMiniAnim(pAnimBuf);
 
     proc->unk_5C = pAnimBuf;

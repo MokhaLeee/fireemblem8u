@@ -20,7 +20,7 @@ void BackgroundSlide_Init(struct MuralBackgroundProc* proc) {
 //! FE8U = 0x08086B7C
 void BackgroundSlide_Loop(struct MuralBackgroundProc* proc) {
     proc->offset++;
-    BG_SetPosition(3, proc->offset / 4, 0);
+    SetBgOffset(3, proc->offset / 4, 0);
     REG_BG3HOFS = proc->offset / 4;
     return;
 }
@@ -61,7 +61,7 @@ ProcPtr StartMuralBackground(ProcPtr parent, void* vram, int pal) {
         *tm++ = i + tileref;
     }
 
-    return Proc_Start(ProcScr_SlidingWallBg, parent);
+    return SpawnProc(ProcScr_SlidingWallBg, parent);
 }
 
 //! FE8U = 0x08086C50
@@ -93,7 +93,7 @@ ProcPtr StartMuralBackgroundAlt(ProcPtr parent, void * vram, int pal, u8 flag)
         *tm++ = i + tileref;
     }
 
-    return Proc_Start(ProcScr_SlidingWallBg, parent);
+    return SpawnProc(ProcScr_SlidingWallBg, parent);
 }
 
 //! FE8U = 0x08086CE8
@@ -129,7 +129,7 @@ ProcPtr StartMuralBackgroundExt(ProcPtr parent, void* vram, int a, int b, int pa
         *tm++ = i + tileref;
     }
 
-    return Proc_Start(ProcScr_SlidingWallBg, parent);
+    return SpawnProc(ProcScr_SlidingWallBg, parent);
 }
 
 //! FE8U = 0x08086DBC

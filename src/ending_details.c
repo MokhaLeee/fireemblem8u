@@ -767,7 +767,7 @@ PROC_LABEL(100),
 //! FE8U = 0x080B6C94
 void StartCharacterEndings(ProcPtr parent)
 {
-    Proc_StartBlocking(gProcScr_CharacterEndings, parent);
+    SpawnProcBlocking(gProcScr_CharacterEndings, parent);
     return;
 }
 
@@ -893,7 +893,7 @@ struct ProcCmd CONST_DATA gProcScr_EndingBattleDisplay_Solo[] =
 //! FE8U = 0x080B6F14
 void StartSoloEndingBattleDisplay(struct CharacterEndingEnt * endingEnt, struct Unit * unit, struct CharacterEndingProc * parent)
 {
-    struct EndingBattleDisplayProc * proc = Proc_StartBlocking(gProcScr_EndingBattleDisplay_Solo, parent);
+    struct EndingBattleDisplayProc * proc = SpawnProcBlocking(gProcScr_EndingBattleDisplay_Solo, parent);
 
     proc->units[0] = unit;
     proc->units[1] = NULL;
@@ -1028,7 +1028,7 @@ struct ProcCmd CONST_DATA gProcScr_EndingBattleDisplay_Paired[] =
 //! FE8U = 0x080B72A4
 void StartPairedEndingBattleDisplay(struct CharacterEndingEnt * endingEnt, struct Unit * unitA, struct Unit * unitB, struct CharacterEndingProc * parent)
 {
-    struct EndingBattleDisplayProc * proc = Proc_StartBlocking(gProcScr_EndingBattleDisplay_Paired, parent);
+    struct EndingBattleDisplayProc * proc = SpawnProcBlocking(gProcScr_EndingBattleDisplay_Paired, parent);
 
     proc->units[0] = unitA;
     proc->units[1] = unitB;
@@ -1163,7 +1163,7 @@ struct ProcCmd CONST_DATA gProcScr_EndingBattleDisplay_Text[] =
 //! FE8U = 0x080B742C
 void StartEndingBattleText(struct CharacterEndingEnt * pairingEnt, struct Unit * unitA, struct Unit * unitB, struct CharacterEndingProc * parent)
 {
-    struct EndingBattleTextProc * proc = Proc_StartBlocking(gProcScr_EndingBattleDisplay_Text, parent);
+    struct EndingBattleTextProc * proc = SpawnProcBlocking(gProcScr_EndingBattleDisplay_Text, parent);
     proc->pCharacterEnding = pairingEnt;
     proc->unitA = unitA;
     proc->unitB = unitB;
@@ -1306,7 +1306,7 @@ PROC_LABEL(100),
 //! FE8U = 0x080B7598
 void StartFinScreen(ProcPtr parent)
 {
-    Proc_StartBlocking(gProcScr_FinScreen, parent);
+    SpawnProcBlocking(gProcScr_FinScreen, parent);
     return;
 }
 
@@ -1496,7 +1496,7 @@ void sub_80B7614(struct EndingTurnRecordProc * proc)
     y = proc->unk_4c;
     x = y * 3;
 
-    BG_SetPosition(BG_2, x / 8, y / 4);
+    SetBgOffset(BG_2, x / 8, y / 4);
 
     return;
 }
@@ -1552,7 +1552,7 @@ void TurnRecord_SetupText(void)
 {
     int i;
 
-    BG_SetPosition(BG_1, 0, -136);
+    SetBgOffset(BG_1, 0, -136);
 
     SetWinEnable(1, 0, 0);
     SetWin0Box(0, 24, 240, 136);
@@ -1669,7 +1669,7 @@ void TurnRecord_Loop_Main(struct EndingTurnRecordProc * proc)
 {
     int y = proc->yPos >> 6;
 
-    BG_SetPosition(BG_1, 0, y - 136);
+    SetBgOffset(BG_1, 0, y - 136);
 
     if ((y & 15) == 0)
     {
@@ -1841,8 +1841,8 @@ void TurnRecord_SetupGfx(void)
 
     SetDispEnable(1, 1, 1, 1, 1);
 
-    BG_SetPosition(BG_2, 0, 0);
-    BG_SetPosition(BG_3, 0, 0);
+    SetBgOffset(BG_2, 0, 0);
+    SetBgOffset(BG_3, 0, 0);
 
     SetBlendTargetA(0, 0, 1, 0, 0);
     SetBlendTargetB(0, 0, 0, 1, 0);
@@ -1905,7 +1905,7 @@ struct ProcCmd CONST_DATA gProcScr_EndingTurnRecord[] =
 //! FE8U = 0x080B8174
 void StartEndingTurnRecordScreen(ProcPtr parent)
 {
-    Proc_StartBlocking(gProcScr_EndingTurnRecord, parent);
+    SpawnProcBlocking(gProcScr_EndingTurnRecord, parent);
     return;
 }
 

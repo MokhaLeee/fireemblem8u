@@ -31,7 +31,7 @@ void StartSpellAnimFlux(struct Anim * anim)
     NewEfxSpellCast();
     SpellFx_ClearBG1Position();
 
-    proc = Proc_Start(gProcScr_efxMistyrain, PROC_TREE_3);
+    proc = SpawnProc(gProcScr_efxMistyrain, PROC_TREE_3);
     proc->anim = anim;
     proc->timer = 0;
     proc->hitted = CheckRoundMiss(GetAnimRoundTypeAnotherSide(anim));
@@ -91,7 +91,7 @@ void efxMistyRain_Loop_Main(struct ProcEfx * proc)
         else if (proc->timer == duration + 164)
         {
             SpellFx_Finish();
-            RegisterEfxSpellCastEnd();
+            EndEfxSpellCastAsync();
             Proc_Break(proc);
         }
     }
@@ -228,7 +228,7 @@ void StartSubSpell_efxMistyrainBG(struct Anim * anim)
 
     gEfxBgSemaphore++;
 
-    proc = Proc_Start(gProcScr_efxMistyrainBG, PROC_TREE_3);
+    proc = SpawnProc(gProcScr_efxMistyrainBG, PROC_TREE_3);
     proc->anim = anim;
     proc->timer = 0;
     proc->frame = 0;
@@ -242,11 +242,11 @@ void StartSubSpell_efxMistyrainBG(struct Anim * anim)
     {
         if (GetAnimPosition(proc->anim) == 0)
         {
-            BG_SetPosition(1, 232, 0);
+            SetBgOffset(1, 232, 0);
         }
         else
         {
-            BG_SetPosition(1, 24, 0);
+            SetBgOffset(1, 24, 0);
         }
     }
 
@@ -309,7 +309,7 @@ void StartSubSpell_efxMistyrainBG2(struct Anim * anim)
 
     gEfxBgSemaphore++;
 
-    proc = Proc_Start(gProcScr_efxMistyrainBG, PROC_TREE_3);
+    proc = SpawnProc(gProcScr_efxMistyrainBG, PROC_TREE_3);
     proc->anim = anim;
     proc->timer = 0;
     proc->frame = 0;
@@ -326,11 +326,11 @@ void StartSubSpell_efxMistyrainBG2(struct Anim * anim)
     {
         if (GetAnimPosition(proc->anim) == 0)
         {
-            BG_SetPosition(1, 232, 0);
+            SetBgOffset(1, 232, 0);
         }
         else
         {
-            BG_SetPosition(1, 24, 0);
+            SetBgOffset(1, 24, 0);
         }
     }
 
@@ -355,7 +355,7 @@ void efxMistyRainBg_Loop(struct ProcEfxBG * proc)
     {
         SpellFx_ClearBG1();
         gEfxBgSemaphore--;
-        SetDefaultColorEffects_();
+        SpellFx_ClearColorEffects();
         Proc_End(proc);
     }
 
@@ -392,7 +392,7 @@ void StartSubSpell_efxMistyRainOBJ(struct Anim * anim)
 
     gEfxBgSemaphore++;
 
-    proc = Proc_Start(ProcScr_efxMistyrainOBJ, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxMistyrainOBJ, PROC_TREE_3);
     proc->anim = anim;
 
     GetAnimAnotherSide(anim);
@@ -428,7 +428,7 @@ struct ProcEfxOBJ * StartSubSpell_efxMistyrainOBJ2(struct Anim * anim)
 
     gEfxBgSemaphore++;
 
-    proc = Proc_Start(gProcScr_efxMistyrainOBJ2, PROC_TREE_3);
+    proc = SpawnProc(gProcScr_efxMistyrainOBJ2, PROC_TREE_3);
     proc->anim = anim;
     GetAnimAnotherSide(anim);
 

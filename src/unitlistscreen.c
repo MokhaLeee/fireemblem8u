@@ -1011,10 +1011,10 @@ void sub_8090D80(struct UnitListScreenProc * proc)
 
     BG_EnableSyncByMask(BG0_SYNC_BIT | BG1_SYNC_BIT | BG2_SYNC_BIT | BG3_SYNC_BIT);
 
-    BG_SetPosition(BG_3, 0, 0);
-    BG_SetPosition(BG_2, 0, 0);
-    BG_SetPosition(BG_1, 0, 0);
-    BG_SetPosition(BG_0, 0, (proc->unk_3e - 56) & 0xff);
+    SetBgOffset(BG_3, 0, 0);
+    SetBgOffset(BG_2, 0, 0);
+    SetBgOffset(BG_1, 0, 0);
+    SetBgOffset(BG_0, 0, (proc->unk_3e - 56) & 0xff);
 
     gLCDControlBuffer.bg0cnt.priority = 0;
     gLCDControlBuffer.bg1cnt.priority = 2;
@@ -1024,7 +1024,7 @@ void sub_8090D80(struct UnitListScreenProc * proc)
     Decompress(gImg_UiSpinningArrow_Horizontal, gBG1TilemapBuffer + 0x280);
     ApplyPalette(Pal_SpinningArrow, 0xf);
 
-    proc->pSpriteProc = Proc_Start(ProcScr_bmview, proc);
+    proc->pSpriteProc = SpawnProc(ProcScr_bmview, proc);
     proc->pMuralProc = StartMuralBackground(0, 0, 10);
     LoadHelpBoxGfx(0, -1);
 
@@ -1298,7 +1298,7 @@ void sub_809144C(struct UnitListScreenProc * proc)
                 UnitList_PutRow(proc, proc->unk_3e / 16 - 1, gBG0TilemapBuffer, proc->page, 1);
                 proc->unk_29 = 2;
                 proc->unk_3e = -(proc->unk_31 * 4) + proc->unk_3e;
-                BG_SetPosition(0, 0, (proc->unk_3e - 0x38) & 0xFF);
+                SetBgOffset(0, 0, (proc->unk_3e - 0x38) & 0xFF);
 
                 if (proc->unk_2c == 0)
                 {
@@ -1327,7 +1327,7 @@ void sub_809144C(struct UnitListScreenProc * proc)
                 UnitList_PutRow(proc, 6 + proc->unk_3e / 16, gBG0TilemapBuffer, proc->page, 1);
                 proc->unk_29 = 1;
                 proc->unk_3e = proc->unk_3e + proc->unk_31 * 4;
-                BG_SetPosition(0, 0, (proc->unk_3e - 0x38) & 0xFF);
+                SetBgOffset(0, 0, (proc->unk_3e - 0x38) & 0xFF);
                 return;
             }
 
@@ -1491,7 +1491,7 @@ void sub_8091AEC(struct UnitListScreenProc * proc)
 
         case 1:
             proc->unk_3e += 4 * proc->unk_31;
-            BG_SetPosition(0, 0, (proc->unk_3e - 56) & 0xFF);
+            SetBgOffset(0, 0, (proc->unk_3e - 56) & 0xFF);
 
             if ((proc->unk_3e % 0x10) == 0)
             {
@@ -1503,7 +1503,7 @@ void sub_8091AEC(struct UnitListScreenProc * proc)
 
         case 2:
             proc->unk_3e += -(4 * proc->unk_31);
-            BG_SetPosition(0, 0, (proc->unk_3e - 56) & 0xFF);
+            SetBgOffset(0, 0, (proc->unk_3e - 56) & 0xFF);
 
             if ((proc->unk_3e % 0x10) == 0)
             {
@@ -1983,7 +1983,7 @@ void sub_8091F10(struct UnitListScreenProc * proc)
 //! FE8U = 0x080920C4
 void StartUnitListScreenField(void)
 {
-    struct UnitListScreenProc * proc = Proc_Start(ProcScr_UnitListScreen_Field, PROC_TREE_3);
+    struct UnitListScreenProc * proc = SpawnProc(ProcScr_UnitListScreen_Field, PROC_TREE_3);
 
     proc->mode = UNITLIST_MODE_FIELD;
 
@@ -1997,11 +1997,11 @@ void StartUnitListScreenPrepMenu(ProcPtr parent)
 
     if (parent == NULL)
     {
-        proc = Proc_Start(ProcScr_UnitListScreen_PrepMenu, PROC_TREE_3);
+        proc = SpawnProc(ProcScr_UnitListScreen_PrepMenu, PROC_TREE_3);
     }
     else
     {
-        proc = Proc_StartBlocking(ProcScr_UnitListScreen_PrepMenu, parent);
+        proc = SpawnProcBlocking(ProcScr_UnitListScreen_PrepMenu, parent);
     }
 
     proc->mode = UNITLIST_MODE_PREPMENU;
@@ -2027,11 +2027,11 @@ void StartUnitListScreenForSoloAnim(ProcPtr parent)
 
     if (parent == NULL)
     {
-        proc = Proc_Start(ProcScr_UnitListScreen_SoloAnim, PROC_TREE_3);
+        proc = SpawnProc(ProcScr_UnitListScreen_SoloAnim, PROC_TREE_3);
     }
     else
     {
-        proc = Proc_StartBlocking(ProcScr_UnitListScreen_SoloAnim, parent);
+        proc = SpawnProcBlocking(ProcScr_UnitListScreen_SoloAnim, parent);
     }
 
     proc->mode = UNITLIST_MODE_SOLOANIM;
@@ -2046,11 +2046,11 @@ void StartUnitListScreenUnk(ProcPtr parent)
 
     if (parent == NULL)
     {
-        proc = Proc_Start(ProcScr_UnitListScreen_PrepMenu, PROC_TREE_3);
+        proc = SpawnProc(ProcScr_UnitListScreen_PrepMenu, PROC_TREE_3);
     }
     else
     {
-        proc = Proc_StartBlocking(ProcScr_UnitListScreen_PrepMenu, parent);
+        proc = SpawnProcBlocking(ProcScr_UnitListScreen_PrepMenu, parent);
     }
 
     proc->mode = UNITLIST_MODE_4;
@@ -2065,11 +2065,11 @@ void StartUnitListScreenWorldMap(ProcPtr parent)
 
     if (parent == NULL)
     {
-        proc = Proc_Start(ProcScr_UnitListScreen_WorldMap, PROC_TREE_3);
+        proc = SpawnProc(ProcScr_UnitListScreen_WorldMap, PROC_TREE_3);
     }
     else
     {
-        proc = Proc_StartBlocking(ProcScr_UnitListScreen_WorldMap, parent);
+        proc = SpawnProcBlocking(ProcScr_UnitListScreen_WorldMap, parent);
     }
 
     ResetUnitSprites();

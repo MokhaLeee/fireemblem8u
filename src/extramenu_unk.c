@@ -113,7 +113,7 @@ struct ProcCmd CONST_DATA gUnknown_08A21568[] = {
 
 //! FE8U = 0x080B060C
 void sub_80B060C(ProcPtr parent) {
-    Proc_Start(gUnknown_08A21568, parent);
+    SpawnProc(gUnknown_08A21568, parent);
     return;
 }
 

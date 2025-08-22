@@ -95,7 +95,7 @@ void PrepPromoteDebugMaybe(struct Proc08A184B4 *proc)
     SetBlendConfig(3, 0, 0, 0x10);
     SetBlendTargetA(1, 1, 1, 1, 1);
     EndAllProcChildren(proc);
-    Proc_StartBlocking(ProcScr_PrepPromoteDebug, proc);
+    SpawnProcBlocking(ProcScr_PrepPromoteDebug, proc);
 }
 
 void sub_8096668()
@@ -105,7 +105,7 @@ void sub_8096668()
 
 void NewPrepScreenTraineePromotionManager()
 {
-    Proc_Start(ProcScr_PrepTraineePromo, PROC_TREE_3);
+    SpawnProc(ProcScr_PrepTraineePromo, PROC_TREE_3);
 }
 
 int PrepScreenTraineePromotionManagerExists(ProcPtr proc)
@@ -298,7 +298,7 @@ void PrepSpecialChar_BlinkButtonB()
 ProcPtr StartPrepSpecialCharEffect(ProcPtr parent)
 {
     Proc_End(Proc_Find(ProcScr_PrepSpecialCharEff));
-    Proc_Start(ProcScr_PrepSpecialCharEff, parent);
+    SpawnProc(ProcScr_PrepSpecialCharEff, parent);
 }
 
 void EndPrepSpecialCharEffect()
@@ -481,7 +481,7 @@ void PrepMenu_OnEnd(struct ProcPrepMenu *proc)
 void StartPrepScreenMenu(ProcPtr proc)
 {
     Proc_End(Proc_Find(ProcScr_PrepMenu));
-    Proc_Start(ProcScr_PrepMenu, proc);
+    SpawnProc(ProcScr_PrepMenu, proc);
 }
 
 void SetPrepScreenMenuOnBPress(const void* func)
@@ -533,7 +533,7 @@ void SetPrepScreenMenuItem(int index, const void* func, int color, int msg, int 
         }
 
         i = proc->max_index;
-        proc->cmds[i] = Proc_Start(ProcScr_PrepScreenMenuDummyItem, proc);
+        proc->cmds[i] = SpawnProc(ProcScr_PrepScreenMenuDummyItem, proc);
         proc->cmds[i]->index = index;
     	proc->cmds[i]->effect = func;
     	proc->cmds[i]->color = color;

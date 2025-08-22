@@ -51,13 +51,13 @@ struct ProcCmd CONST_DATA gProcScr_GameControl[] =
     // fallthrough
 
 PROC_LABEL(LGAMECTRL_GAME_INTRO_UI),
-    PROC_START_CHILD_BLOCKING(ProcScr_GameEarlyStartUI),
+    SpawnProc_CHILD_BLOCKING(ProcScr_GameEarlyStartUI),
 
     // fallthrough
 
 PROC_LABEL(LGAMECTRL_OP_ANIM),
     PROC_CALL(GameControl_EnableSoundEffects),
-    PROC_START_CHILD_BLOCKING(ProcScr_OpAnim),
+    SpawnProc_CHILD_BLOCKING(ProcScr_OpAnim),
     PROC_CALL(GameControl_PostIntro),
     PROC_YIELD,
     PROC_GOTO(4),
@@ -117,7 +117,7 @@ PROC_LABEL(LGAMECTRL_EXEC_BM),
     PROC_CALL(GameControl_RememberChapterId),
     PROC_CALL(GameCtrlStartIntroMonologue),
     PROC_YIELD,
-    PROC_START_CHILD_BLOCKING(ProcScr_WorldMapWrapper),
+    SpawnProc_CHILD_BLOCKING(ProcScr_WorldMapWrapper),
     PROC_CALL(EndWM),
     PROC_CALL(sub_8009E28),
     PROC_YIELD,
@@ -699,7 +699,7 @@ void StartGame(void)
     SetMainUpdateRoutine(OnMain);
     SetInterrupt_LCDVBlank(OnVBlank);
 
-    proc = Proc_Start(gProcScr_GameControl, PROC_TREE_3);
+    proc = SpawnProc(gProcScr_GameControl, PROC_TREE_3);
     proc->nextAction = GAME_ACTION_EVENT_RETURN;
     proc->nextChapter = 0;
     proc->idle_status = 0;
@@ -737,7 +737,7 @@ void RestartGameAndGoto8() {
 
     Proc_EndEach(gProcScr_GameControl);
 
-    proc = Proc_Start(gProcScr_GameControl, PROC_TREE_3);
+    proc = SpawnProc(gProcScr_GameControl, PROC_TREE_3);
 
     Proc_Goto(proc, 8);
 
@@ -749,7 +749,7 @@ void RestartGameAndGoto12() {
 
     Proc_EndEach(gProcScr_GameControl);
 
-    proc = Proc_Start(gProcScr_GameControl, PROC_TREE_3);
+    proc = SpawnProc(gProcScr_GameControl, PROC_TREE_3);
 
     Proc_Goto(proc, 18);
 

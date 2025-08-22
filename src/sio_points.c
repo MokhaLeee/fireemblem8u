@@ -242,10 +242,10 @@ struct ProcCmd CONST_DATA ProcScr_LinkArenaPointsBox[] =
 //! FE8U = 0x08048A6C
 void StartLinkArenaPointsBox(void)
 {
-    BG_SetPosition(BG_0, 0, 0);
-    BG_SetPosition(BG_1, 0, 0);
+    SetBgOffset(BG_0, 0, 0);
+    SetBgOffset(BG_1, 0, 0);
 
-    Proc_Start(ProcScr_LinkArenaPointsBox, PROC_TREE_3);
+    SpawnProc(ProcScr_LinkArenaPointsBox, PROC_TREE_3);
 
     return;
 }
@@ -628,7 +628,7 @@ s8 sub_80490EC(int x, int y, const char * str, u8 flag, ProcPtr parent)
         {
             if (gUnk_Sio_0203DD90.unk_2c[playerId].newScore != 0)
             {
-                struct PointsNumberMoverProc * proc = Proc_StartBlocking(ProcScr_LinkArena_PointsNumberMover, parent);
+                struct PointsNumberMoverProc * proc = SpawnProcBlocking(ProcScr_LinkArena_PointsNumberMover, parent);
                 proc->playerId = playerId;
                 proc->unitId = gUnk_Sio_0203DD90.unk_2c[playerId].unitId;
                 proc->newScore = gUnk_Sio_0203DD90.currentScore[playerId] + gUnk_Sio_0203DD90.unk_2c[playerId].newScore;
@@ -656,7 +656,7 @@ s8 sub_80490EC(int x, int y, const char * str, u8 flag, ProcPtr parent)
     {
         if (flag != 0)
         {
-            struct PointsSpriteTextProc * proc = Proc_StartBlocking(ProcScr_LinkArena_PointsSpriteText, parent);
+            struct PointsSpriteTextProc * proc = SpawnProcBlocking(ProcScr_LinkArena_PointsSpriteText, parent);
             proc->x = x;
             proc->y = y;
             proc->str = str;

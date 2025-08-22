@@ -10,9 +10,9 @@ PROC_OPCODES = {
     "PROC_CALL": 0x02,
     "PROC_REPEAT": 0x03,
     "PROC_SET_END_CB": 0x04,
-    "PROC_START_CHILD": 0x05,
-    "PROC_START_CHILD_BLOCKING": 0x06,
-    "PROC_START_MAIN_BUGGED": 0x07,
+    "SpawnProc_CHILD": 0x05,
+    "SpawnProc_CHILD_BLOCKING": 0x06,
+    "SpawnProc_MAIN_BUGGED": 0x07,
     "PROC_WHILE_EXISTS": 0x08,
     "PROC_END_EACH": 0x09,
     "PROC_BREAK_EACH": 0x0A,
@@ -66,11 +66,11 @@ def decode_proc_cmd(cmd):
     if opcode == 4:
         return make_pointer_proc("PROC_SET_END_CB", dataImm, 0, dataPtr)
     if opcode == 5:
-        return make_pointer_proc("PROC_START_CHILD", dataImm, 0, dataPtr)
+        return make_pointer_proc("SpawnProc_CHILD", dataImm, 0, dataPtr)
     if opcode == 6:
-        return make_pointer_proc("PROC_START_CHILD_BLOCKING", dataImm, 1, dataPtr)
+        return make_pointer_proc("SpawnProc_CHILD_BLOCKING", dataImm, 1, dataPtr)
     if opcode == 7:
-        return make_pointer_proc("PROC_START_MAIN_BUGGED", dataImm, 0, dataPtr)
+        return make_pointer_proc("SpawnProc_MAIN_BUGGED", dataImm, 0, dataPtr)
     if opcode == 8:
         return make_pointer_proc("PROC_WHILE_EXISTS", dataImm, 0, dataPtr)
     if opcode == 9:
@@ -149,16 +149,16 @@ def test_decode():
     )
     assert_eq(
         decode_proc_cmd(b"\x05\x00\x00\x00\x12\x00\x00\x00"),
-        ("PROC_START_CHILD", None, 0x12),
+        ("SpawnProc_CHILD", None, 0x12),
     )
     assert_eq(
         decode_proc_cmd(b"\x06\x00\x01\x00\x12\x00\x00\x00"),
-        ("PROC_START_CHILD_BLOCKING", None, 0x12),
+        ("SpawnProc_CHILD_BLOCKING", None, 0x12),
     )
     assert_eq(decode_proc_cmd(b"\x06\x00\x00\x00\x12\x00\x00\x00"), None)
     assert_eq(
         decode_proc_cmd(b"\x07\x00\x00\x00\x12\x00\x00\x00"),
-        ("PROC_START_MAIN_BUGGED", None, 0x12),
+        ("SpawnProc_MAIN_BUGGED", None, 0x12),
     )
     assert_eq(
         decode_proc_cmd(b"\x08\x00\x00\x00\x12\x00\x00\x00"),
@@ -349,7 +349,7 @@ def resolve_and_format_command(cmd):
     if imm is not None:
         imm_str = hex(imm)
     else:
-        if name == "PROC_START_CHILD_BLOCKING":
+        if name == "SpawnProc_CHILD_BLOCKING":
             imm_str = "0x1"
         else:
             imm_str = "0x0"

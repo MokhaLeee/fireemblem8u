@@ -180,7 +180,7 @@ void RegisterTsaWithOffset(u16 *_dst, u16 *_src, u32 offset) {
 
 ProcPtr StartPromoClassSelect(ProcPtr parent)
 {
-    return Proc_StartBlocking(ProcScr_PromoSelect, parent);
+    return SpawnProcBlocking(ProcScr_PromoSelect, parent);
 }
 
 void Make6C_PromotionMenuSelect(struct ProcPromoSel* proc) {
@@ -616,7 +616,7 @@ u8 LoadClassBattleSprite(s16 * out, u16 jid, u16 wpn_before)
 }
 
 void NewCcramifyEnd(void) {
-    Proc_Start(ProcScr_PromoSelectEnd, PROC_TREE_3);
+    SpawnProc(ProcScr_PromoSelectEnd, PROC_TREE_3);
 }
 
 CONST_DATA struct ProcCmd ProcScr_PromoSelect[] = {

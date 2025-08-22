@@ -27,7 +27,7 @@ void StartSpellAnimAura(struct Anim * anim)
     NewEfxSpellCast();
     SpellFx_ClearBG1Position();
 
-    proc = Proc_Start(ProcScr_efxOura, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxOura, PROC_TREE_3);
     proc->anim = anim;
     proc->timer = 0;
     proc->hitted = CheckRoundMiss(GetAnimRoundTypeAnotherSide(anim));
@@ -81,7 +81,7 @@ void efxOura_Loop_Main(struct ProcEfx * proc)
     else if (proc->timer == duration + 144)
     {
         NewEfxFlashBgWhite(anim, 10);
-        anim->state3 |= (ANIM_BIT3_TAKE_BACK_ENABLE | ANIM_BIT3_HIT_EFFECT_APPLIED);
+        anim->state3 |= (ANIM_BIT3_C02_BLOCK_END | ANIM_BIT3_C01_BLOCK_END_INBATTLE);
         StartBattleAnimHitEffectsDefault(anim, proc->hitted);
         if (!proc->hitted)
         {
@@ -99,7 +99,7 @@ void efxOura_Loop_Main(struct ProcEfx * proc)
     {
 
         SpellFx_Finish();
-        RegisterEfxSpellCastEnd();
+        EndEfxSpellCastAsync();
         Proc_Break(proc);
     }
 
@@ -174,7 +174,7 @@ void StartSubSpell_efxOuraBG_A(struct Anim * anim)
 
     gEfxBgSemaphore++;
 
-    proc = Proc_Start(ProcScr_efxOuraBG, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxOuraBG, PROC_TREE_3);
     proc->anim = anim;
     proc->timer = 0;
     proc->frame = 0;
@@ -186,17 +186,17 @@ void StartSubSpell_efxOuraBG_A(struct Anim * anim)
     SpellFx_RegisterBgGfx(Img_AuraBg1, 32 * 8 * CHR_SIZE);
     SpellFx_RegisterBgPal(Pal_AuraBg1, PLTT_SIZE_4BPP);
 
-    BG_SetPosition(BG_1, 0, 0);
+    SetBgOffset(BG_1, 0, 0);
 
     if (gEkrDistanceType == 0)
     {
         if (GetAnimPosition(proc->anim) == 0)
         {
-            BG_SetPosition(BG_1, 24, 0);
+            SetBgOffset(BG_1, 24, 0);
         }
         else
         {
-            BG_SetPosition(BG_1, 232, 0);
+            SetBgOffset(BG_1, 232, 0);
         }
     }
 
@@ -231,7 +231,7 @@ void StartSubSpell_efxOuraBG_B(struct Anim * anim)
 
     gEfxBgSemaphore++;
 
-    proc = Proc_Start(ProcScr_efxOuraBG, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxOuraBG, PROC_TREE_3);
     proc->anim = anim;
     proc->timer = 0;
     proc->frame = 0;
@@ -243,17 +243,17 @@ void StartSubSpell_efxOuraBG_B(struct Anim * anim)
     SpellFx_RegisterBgGfx(Img_AuraBg1, 32 * 8 * CHR_SIZE);
     SpellFx_RegisterBgPal(Pal_AuraBg1, PLTT_SIZE_4BPP);
 
-    BG_SetPosition(BG_1, 0, 0);
+    SetBgOffset(BG_1, 0, 0);
 
     if (gEkrDistanceType != 0)
     {
         if (GetAnimPosition(proc->anim) == 0)
         {
-            BG_SetPosition(BG_1, 232, 0);
+            SetBgOffset(BG_1, 232, 0);
         }
         else
         {
-            BG_SetPosition(BG_1, 24, 0);
+            SetBgOffset(BG_1, 24, 0);
         }
     }
 
@@ -282,7 +282,7 @@ void StartSubSpell_efxOuraBG_C(struct Anim * anim)
 
     gEfxBgSemaphore++;
 
-    proc = Proc_Start(ProcScr_efxOuraBG, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxOuraBG, PROC_TREE_3);
     proc->anim = anim;
     proc->timer = 0;
     proc->frame = 0;
@@ -294,17 +294,17 @@ void StartSubSpell_efxOuraBG_C(struct Anim * anim)
     SpellFx_RegisterBgGfx(Img_AuraBg1, 32 * 8 * CHR_SIZE);
     SpellFx_RegisterBgPal(Pal_AuraBg1, PLTT_SIZE_4BPP);
 
-    BG_SetPosition(BG_1, 0, 0);
+    SetBgOffset(BG_1, 0, 0);
 
     if (gEkrDistanceType != 0)
     {
         if (GetAnimPosition(proc->anim) == 0)
         {
-            BG_SetPosition(BG_1, 24, 0);
+            SetBgOffset(BG_1, 24, 0);
         }
         else
         {
-            BG_SetPosition(BG_1, 232, 0);
+            SetBgOffset(BG_1, 232, 0);
         }
     }
 
@@ -330,7 +330,7 @@ void efxOuraBG_Loop(struct ProcEfxBG * proc)
         {
             SpellFx_ClearBG1();
             gEfxBgSemaphore--;
-            SetDefaultColorEffects_();
+            SpellFx_ClearColorEffects();
             Proc_Break(proc);
         }
     }
@@ -359,7 +359,7 @@ void StartSubSpell_efxOuraBG2(struct Anim * anim)
 
     gEfxBgSemaphore++;
 
-    proc = Proc_Start(ProcScr_efxOuraBG2, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxOuraBG2, PROC_TREE_3);
     proc->anim = anim;
     proc->timer = 0;
     proc->terminator = 5;
@@ -388,7 +388,7 @@ void StartSubSpell_efxOuraBG2(struct Anim * anim)
     BG_EnableSyncByMask(BG1_SYNC_BIT);
     SpellFx_SetSomeColorEffect();
 
-    BG_SetPosition(BG_1, 0, 0);
+    SetBgOffset(BG_1, 0, 0);
     SetWinEnable(0, 0, 0);
 
     return;
@@ -399,7 +399,7 @@ void efxOuraBG2_OnEnd(void)
 {
     SpellFx_ClearBG1();
     gEfxBgSemaphore--;
-    SetDefaultColorEffects_();
+    SpellFx_ClearColorEffects();
     return;
 }
 
@@ -446,7 +446,7 @@ void StartSubSpell_efxOuraBGCOL(struct Anim * anim)
 
     gEfxBgSemaphore++;
 
-    proc = Proc_Start(ProcScr_efxOuraBGCOL, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxOuraBGCOL, PROC_TREE_3);
     proc->anim = anim;
     proc->timer = 0;
     proc->timer2 = 0;
@@ -567,7 +567,7 @@ void StartSubSpell_efxOuraBG3(struct Anim * anim)
 
     gEfxBgSemaphore++;
 
-    proc = Proc_Start(ProcScr_efxOuraBG3, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxOuraBG3, PROC_TREE_3);
     proc->anim = anim;
     proc->timer = 0;
     proc->frame = 0;
@@ -579,7 +579,7 @@ void StartSubSpell_efxOuraBG3(struct Anim * anim)
 
     SpellFx_RegisterBgPal(Pal_AuraBg3, PLTT_SIZE_4BPP);
 
-    BG_SetPosition(BG_1, 0, 0);
+    SetBgOffset(BG_1, 0, 0);
     SpellFx_SetSomeColorEffect();
 
     return;
@@ -604,7 +604,7 @@ void efxOuraBG3_Loop(struct ProcEfxBG * proc)
         {
             SpellFx_ClearBG1();
             gEfxBgSemaphore--;
-            SetDefaultColorEffects_();
+            SpellFx_ClearColorEffects();
             Proc_Break(proc);
         }
     }

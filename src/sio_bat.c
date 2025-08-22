@@ -175,7 +175,7 @@ struct ProcCmd CONST_DATA ProcScr_SIOMAIN2[] = {
 PROC_LABEL(0),
     PROC_CALL(sub_80499D0),
     PROC_SLEEP(1),
-    PROC_START_CHILD_BLOCKING(ProcScr_LinkArenaPhaseIntro),
+    SpawnProc_CHILD_BLOCKING(ProcScr_LinkArenaPhaseIntro),
     PROC_YIELD,
     PROC_REPEAT(sub_8049964),
     PROC_GOTO(0),
@@ -190,7 +190,7 @@ PROC_LABEL(3),
 //! FE8U = 0x08045C14
 void New6C_SIOMAIN2(void)
 {
-    Proc_Start(ProcScr_SIOMAIN2, PROC_TREE_2);
+    SpawnProc(ProcScr_SIOMAIN2, PROC_TREE_2);
     return;
 }
 
@@ -352,9 +352,9 @@ void sub_8045F00(ProcPtr proc)
 {
     u16 data = 0x2586;
 
-    Proc_Start(ProcScr_SIOVSYNC, PROC_TREE_VSYNC);
-    Proc_Start(ProcScr_SIOMAIN, proc);
-    Proc_Start(ProcScr_SIOCON, proc);
+    SpawnProc(ProcScr_SIOVSYNC, PROC_TREE_VSYNC);
+    SpawnProc(ProcScr_SIOMAIN, proc);
+    SpawnProc(ProcScr_SIOCON, proc);
 
     SioSend16(&data, -1);
 
@@ -861,7 +861,7 @@ void sub_80467AC(struct SioBatProc * proc)
     Text_DrawString(&gUnk_Sio_0203DA78, GetStringFromIndex(0x77D));
     PutText(&gUnk_Sio_0203DA78, TILEMAP_LOCATED(gBG2TilemapBuffer, 9, 12));
 
-    Proc_Start(gUnknown_085A93A0, proc);
+    SpawnProc(gUnknown_085A93A0, proc);
 
     BG_EnableSyncByMask(BG0_SYNC_BIT | BG1_SYNC_BIT | BG2_SYNC_BIT | BG3_SYNC_BIT);
 
@@ -896,7 +896,7 @@ void sub_8046838(ProcPtr proc)
     StartRuleSettingSpriteDrawStatic();
     LoadLinkArenaRuleSettings(buf);
 
-    BG_SetPosition(BG_1, 0xfe, 0);
+    SetBgOffset(BG_1, 0xfe, 0);
 
     for (i = 0; i < 3; i++)
     {

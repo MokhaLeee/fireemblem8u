@@ -393,11 +393,11 @@ CONST_DATA struct ProcCmd ProcScr_AsnycKeyStatus[] =
 
 void AsnycKeyStatus(int key)
 {
-    struct KeyProc * kproc = Proc_Start(ProcScr_AsnycKeyStatus, PROC_TREE_1);
+    struct KeyProc * kproc = SpawnProc(ProcScr_AsnycKeyStatus, PROC_TREE_1);
     kproc->unk64 = key;
 }
 
-void BG_SetPosition(u16 bg, u16 x, u16 y)
+void SetBgOffset(u16 bg, u16 x, u16 y)
 {
     switch (bg) {
     case BG_0:
@@ -744,7 +744,7 @@ void SetupBackgrounds(u16 *bgConfig)
         SetBackgroundTileDataOffset(bg, *bgConfig++);
         SetBackgroundMapDataOffset(bg, *bgConfig++);
         SetBackgroundScreenSize(bg, *bgConfig++);
-        BG_SetPosition(bg, 0, 0);
+        SetBgOffset(bg, 0, 0);
         BG_Fill(BG_GetMapBuffer(bg), 0);
         CpuFastFill16(0, (void *)(VRAM + GetBackgroundTileDataOffset(bg)), 64);
     }

@@ -555,10 +555,10 @@ void ChapterStatus_Init(struct ChapterStatusProc * proc)
     proc->helpTextActive = false;
     proc->focusUnitOnExit = false;
 
-    BG_SetPosition(BG_0, -2, -4);
-    BG_SetPosition(BG_1, 0, -2);
-    BG_SetPosition(BG_2, 0, -36);
-    BG_SetPosition(BG_3, 0, 0);
+    SetBgOffset(BG_0, -2, -4);
+    SetBgOffset(BG_1, 0, -2);
+    SetBgOffset(BG_2, 0, -36);
+    SetBgOffset(BG_3, 0, 0);
 
     ClearBg0Bg1();
 
@@ -635,7 +635,7 @@ void ChapterStatus_Init(struct ChapterStatusProc * proc)
 
     StartHelpPromptSprite(200, 18, 2, proc);
 
-    Proc_Start(ProcScr_StatusScreenSpriteDraw, proc);
+    SpawnProc(ProcScr_StatusScreenSpriteDraw, proc);
 
     SetDispEnable(0, 0, 0, 0, 0);
 
@@ -934,7 +934,7 @@ void ChapterStatus_FocusLeaderUnit(struct ChapterStatusProc * proc)
 {
     if (proc->focusUnitOnExit)
     {
-        Proc_StartBlocking(gProcScr_ADJUSTSFROMXI, proc);
+        SpawnProcBlocking(gProcScr_ADJUSTSFROMXI, proc);
     }
 
     return;
@@ -947,12 +947,12 @@ void StartChapterStatusScreen(ProcPtr parent)
 
     if (parent != NULL)
     {
-        proc = Proc_StartBlocking(gProcScr_ChapterStatusScreen, parent);
+        proc = SpawnProcBlocking(gProcScr_ChapterStatusScreen, parent);
         proc->unk_3f = 0;
     }
     else
     {
-        proc = Proc_Start(gProcScr_ChapterStatusScreen, PROC_TREE_3);
+        proc = SpawnProc(gProcScr_ChapterStatusScreen, PROC_TREE_3);
         proc->unk_3f = 0;
     }
 
@@ -962,7 +962,7 @@ void StartChapterStatusScreen(ProcPtr parent)
 //! FE8U = 0x0808E79C
 void StartChapterStatusScreen_FromPrep(ProcPtr parent)
 {
-    struct ChapterStatusProc * proc = Proc_StartBlocking(ProcScr_ChapterStatusScreen_FromPrep, parent);
+    struct ChapterStatusProc * proc = SpawnProcBlocking(ProcScr_ChapterStatusScreen_FromPrep, parent);
     proc->unk_3f = 1;
 
     return;

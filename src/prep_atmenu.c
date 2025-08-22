@@ -114,7 +114,7 @@ void sub_8095C00(int msg, ProcPtr parent)
     if (proc)
         Proc_End(proc);
     
-    proc = Proc_Start(ProcScr_PrepMenuDescHandler, parent);
+    proc = SpawnProc(ProcScr_PrepMenuDescHandler, parent);
     proc->msg = msg;
 }
 
@@ -179,9 +179,9 @@ void AtMenu_Reinitialize(struct ProcAtMenu* proc)
     gLCDControlBuffer.dispcnt.win1_on = 0;
     gLCDControlBuffer.dispcnt.objWin_on  = 0;
 
-    BG_SetPosition(0, 0, 0);
-    BG_SetPosition(1, 0, 0);
-    BG_SetPosition(2, 0, 0);
+    SetBgOffset(0, 0, 0);
+    SetBgOffset(1, 0, 0);
+    SetBgOffset(2, 0, 0);
 
     InitPrepScreenMainMenu(proc);
     BG_EnableSyncByMask(0xF);
@@ -423,7 +423,7 @@ void AtMenu_StartSubmenu(struct ProcAtMenu * proc)
         break;
 
     case 1: /* Pick Units */
-        Proc_StartBlocking(ProcScr_PrepUnitScreen, proc);
+        SpawnProcBlocking(ProcScr_PrepUnitScreen, proc);
         break;
 
     case 4: /* Support */
@@ -488,12 +488,12 @@ void AtMenu_UnlockGame()
 
 void StartPrepAtMenu()
 {
-    Proc_Start(ProcScr_AtMenu, PROC_TREE_3);
+    SpawnProc(ProcScr_AtMenu, PROC_TREE_3);
 }
 
 void StartPrepAtMenuWithConfig()
 {
-    Proc_Start(ProcScr_AtMenu, PROC_TREE_3);
+    SpawnProc(ProcScr_AtMenu, PROC_TREE_3);
     RemoveSomeUnitItems();
     ResetSioPidPool();
 }

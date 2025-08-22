@@ -27,7 +27,7 @@ void StartSpellAnimNaglfar(struct Anim * anim)
     NewEfxSpellCast();
     SpellFx_ClearBG1Position();
 
-    proc = Proc_Start(ProcScr_efxNaglfar, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxNaglfar, PROC_TREE_3);
     proc->anim = anim;
     proc->timer = 0;
     proc->hitted = CheckRoundMiss(GetAnimRoundTypeAnotherSide(anim));
@@ -126,7 +126,7 @@ void efxNaglfar_Loop_Main(struct ProcEfx * proc)
     else if (proc->timer == duration + 384)
     {
         SpellFx_Finish();
-        RegisterEfxSpellCastEnd();
+        EndEfxSpellCastAsync();
         Proc_Break(proc);
     }
 
@@ -169,7 +169,7 @@ void StartSubSpell_efxNaglfarBG(struct Anim * anim)
 
     gEfxBgSemaphore++;
 
-    proc = Proc_Start(ProcScr_efxNaglfarBG, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxNaglfarBG, PROC_TREE_3);
     proc->anim = anim;
     proc->timer = 0;
     proc->frame = 0;
@@ -192,7 +192,7 @@ void efxNaglfarBG_Loop(struct ProcEfxBG * proc)
     s16 ret;
 
     proc->unk32 = (proc->unk32 + 4) % 0xf0;
-    BG_SetPosition(BG_1, proc->unk32, 0);
+    SetBgOffset(BG_1, proc->unk32, 0);
 
     ret = EfxAdvanceFrameLut((s16 *)&proc->timer, (s16 *)&proc->frame, proc->frame_config);
 
@@ -209,7 +209,7 @@ void efxNaglfarBG_Loop(struct ProcEfxBG * proc)
         {
             SpellFx_ClearBG1();
             gEfxBgSemaphore--;
-            SetDefaultColorEffects_();
+            SpellFx_ClearColorEffects();
             Proc_End(proc);
         }
     }
@@ -317,7 +317,7 @@ void StartSubSpell_efxNaglfarBG2(struct Anim * anim)
     struct ProcEfxBG * proc;
 
     gEfxBgSemaphore++;
-    proc = Proc_Start(ProcScr_efxNaglfarBG2, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxNaglfarBG2, PROC_TREE_3);
     proc->anim = anim;
     proc->timer = 0;
     proc->frame = 0;
@@ -338,7 +338,7 @@ void efxNaglfarBG2_Loop(struct ProcEfxBG * proc)
 {
     s16 ret;
 
-    BG_SetPosition(BG_1, 0, 0);
+    SetBgOffset(BG_1, 0, 0);
 
     ret = EfxAdvanceFrameLut((s16 *)&proc->timer, (s16 *)&proc->frame, proc->frame_config);
 
@@ -359,7 +359,7 @@ void efxNaglfarBG2_Loop(struct ProcEfxBG * proc)
         {
             SpellFx_ClearBG1();
             gEfxBgSemaphore--;
-            SetDefaultColorEffects_();
+            SpellFx_ClearColorEffects();
             Proc_End(proc);
         }
     }
@@ -432,7 +432,7 @@ void StartSubSpell_efxNaglfarBG3(struct Anim * anim)
 
     gEfxBgSemaphore++;
 
-    proc = Proc_Start(ProcScr_efxNaglfarBG3, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxNaglfarBG3, PROC_TREE_3);
     proc->anim = anim;
     proc->timer = 0;
     proc->frame = 0;
@@ -453,7 +453,7 @@ void efxNaglfarBG3_Loop(struct ProcEfxBG * proc)
 {
     s16 ret;
 
-    BG_SetPosition(BG_1, 0, 0);
+    SetBgOffset(BG_1, 0, 0);
 
     ret = EfxAdvanceFrameLut((s16 *)&proc->timer, (s16 *)&proc->frame, proc->frame_config);
 
@@ -472,7 +472,7 @@ void efxNaglfarBG3_Loop(struct ProcEfxBG * proc)
         {
             SpellFx_ClearBG1();
             gEfxBgSemaphore--;
-            SetDefaultColorEffects_();
+            SpellFx_ClearColorEffects();
             Proc_End(proc);
         }
     }
@@ -542,7 +542,7 @@ void StartSubSpell_efxNaglfarBG4(struct Anim * anim)
 
     gEfxBgSemaphore++;
 
-    proc = Proc_Start(ProcScr_efxNaglfarBG4, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxNaglfarBG4, PROC_TREE_3);
     proc->anim = anim;
     proc->timer = 0;
     proc->frame = 0;
@@ -563,7 +563,7 @@ void efxNaglfarBG4_Loop(struct ProcEfxBG * proc)
 {
     s16 ret;
 
-    BG_SetPosition(BG_1, 0, 0);
+    SetBgOffset(BG_1, 0, 0);
 
     ret = EfxAdvanceFrameLut((s16 *)&proc->timer, (s16 *)&proc->frame, proc->frame_config);
 
@@ -582,7 +582,7 @@ void efxNaglfarBG4_Loop(struct ProcEfxBG * proc)
         {
             SpellFx_ClearBG1();
             gEfxBgSemaphore--;
-            SetDefaultColorEffects_();
+            SpellFx_ClearColorEffects();
             Proc_End(proc);
         }
     }
@@ -642,7 +642,7 @@ void StartSubSpell_efxNaglfarOBJ(struct Anim * anim, int terminator, s16 x, s16 
 
     gEfxBgSemaphore++;
 
-    proc = Proc_Start(ProcScr_efxNaglfarOBJ, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxNaglfarOBJ, PROC_TREE_3);
     proc->anim = GetAnimAnotherSide(anim);
     proc->timer = 0;
     proc->terminator = terminator;
@@ -716,7 +716,7 @@ void StartSubSpell_efxNaglfarOBJ2(struct Anim * anim, int terminator, u8 c)
     pos = GetAnimPosition(anim);
     gEfxBgSemaphore++;
 
-    proc = Proc_Start(ProcScr_efxNaglfarOBJ2, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxNaglfarOBJ2, PROC_TREE_3);
     proc->anim = GetAnimAnotherSide(anim);
     proc->timer = 0;
     proc->terminator = terminator;
@@ -765,7 +765,7 @@ void StartSubSpell_efxNaglfarOBJRockGyre(struct Anim * anim, int terminator)
 
     gEfxBgSemaphore++;
 
-    proc = Proc_Start(ProcScr_efxNaglfarOBJRockGyre, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxNaglfarOBJRockGyre, PROC_TREE_3);
     proc->anim = GetAnimAnotherSide(anim);
     proc->timer = 0;
     proc->terminator = terminator;
@@ -947,7 +947,7 @@ struct ProcCmd CONST_DATA ProcScr_efxNaglfarBlack[] =
 //! FE8U = 0x08068614
 void StartSubSpell_efxNaglfarBlack(struct Anim * anim, int b, int c)
 {
-    struct ProcEfx * proc = Proc_Start(ProcScr_efxNaglfarBlack, PROC_TREE_VSYNC);
+    struct ProcEfx * proc = SpawnProc(ProcScr_efxNaglfarBlack, PROC_TREE_VSYNC);
 
     proc->anim = anim;
     proc->timer = 0;

@@ -29,7 +29,7 @@ void StartSpellAnimDemonLight(struct Anim * anim)
     NewEfxSpellCast();
     SpellFx_ClearBG1Position();
 
-    proc = Proc_Start(ProcScr_efxMaohFlash, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxMaohFlash, PROC_TREE_3);
     proc->anim = anim;
     proc->timer = 0;
     proc->hitted = CheckRoundMiss(GetAnimRoundTypeAnotherSide(anim));
@@ -115,7 +115,7 @@ void efxMaohFlash_Loop_Main(struct ProcEfx * proc)
         anim->state3 |= 2;
 
         SpellFx_Finish();
-        RegisterEfxSpellCastEnd();
+        EndEfxSpellCastAsync();
         Proc_Break(proc);
     }
 
@@ -395,7 +395,7 @@ void StartSubSpell_efxMaohFlashBG1(struct Anim * anim)
 
     gEfxBgSemaphore++;
 
-    proc = Proc_Start(ProcScr_efxMaohFlashBG1, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxMaohFlashBG1, PROC_TREE_3);
 
     proc->anim = anim;
     proc->timer = 0;
@@ -417,7 +417,7 @@ void StartSubSpell_efxMaohFlashBG1(struct Anim * anim)
         proc->pal = PalArray_DemonLightBg1_Close;
     }
 
-    BG_SetPosition(BG_1, 0, 0);
+    SetBgOffset(BG_1, 0, 0);
     SpellFx_SetSomeColorEffect();
 
     return;
@@ -432,7 +432,7 @@ void efxMaohFlashBG1_Loop(struct ProcEfxBG * proc)
 
     ret = EfxAdvanceFrameLut((s16 *)&proc->timer, (s16 *)&proc->frame, proc->frame_config);
 
-    BG_SetPosition(BG_1, 0, 0);
+    SetBgOffset(BG_1, 0, 0);
 
     if (ret >= 0)
     {
@@ -451,7 +451,7 @@ void efxMaohFlashBG1_Loop(struct ProcEfxBG * proc)
         {
             SpellFx_ClearBG1();
             gEfxBgSemaphore--;
-            SetDefaultColorEffects_();
+            SpellFx_ClearColorEffects();
             Proc_Break(proc);
         }
     }
@@ -508,7 +508,7 @@ void StartSubSpell_efxMaohFlashBG2(struct Anim * anim)
 
     gEfxBgSemaphore++;
 
-    proc = Proc_Start(ProcScr_efxMaohFlashBG2, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxMaohFlashBG2, PROC_TREE_3);
     proc->anim = anim;
     proc->timer = 0;
 
@@ -520,7 +520,7 @@ void StartSubSpell_efxMaohFlashBG2(struct Anim * anim)
     proc->img = ImgArray_DemonLightBg2;
     proc->pal = PalArray_DemonLightBg2;
 
-    BG_SetPosition(BG_1, 0, 0);
+    SetBgOffset(BG_1, 0, 0);
     SpellFx_SetSomeColorEffect();
 
     return;
@@ -533,11 +533,11 @@ void efxMaohFlashBG2_Loop(struct ProcEfxBG * proc)
 
     if (gEkrDistanceType == 0)
     {
-        BG_SetPosition(BG_1, 24, 0);
+        SetBgOffset(BG_1, 24, 0);
     }
     else
     {
-        BG_SetPosition(BG_1, 0, 0);
+        SetBgOffset(BG_1, 0, 0);
     }
 
     if (ret >= 0)
@@ -558,7 +558,7 @@ void efxMaohFlashBG2_Loop(struct ProcEfxBG * proc)
         {
             SpellFx_ClearBG1();
             gEfxBgSemaphore--;
-            SetDefaultColorEffects_();
+            SpellFx_ClearColorEffects();
             Proc_Break(proc);
         }
     }
@@ -671,7 +671,7 @@ void sub_8066914(struct Anim * anim)
 
     gEfxBgSemaphore++;
 
-    proc = Proc_Start(ProcScr_efxMaohFlashBG3, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxMaohFlashBG3, PROC_TREE_3);
     proc->anim = anim;
     proc->timer = 0;
 
@@ -693,7 +693,7 @@ void sub_8066914(struct Anim * anim)
         proc->pal = PalArray_DemonLightBg3_Close;
     }
 
-    BG_SetPosition(BG_1, 0, 0);
+    SetBgOffset(BG_1, 0, 0);
     SpellFx_SetSomeColorEffect();
 
     return;
@@ -721,7 +721,7 @@ void efxMaohFlashBG3_Loop(struct ProcEfxBG * proc)
         {
             SpellFx_ClearBG1();
             gEfxBgSemaphore--;
-            SetDefaultColorEffects_();
+            SpellFx_ClearColorEffects();
             Proc_Break(proc);
         }
     }
@@ -833,7 +833,7 @@ void StartSubSpell_efxMaohFlashBG4(struct Anim * anim)
 
     gEfxBgSemaphore++;
 
-    proc = Proc_Start(ProcScr_efxMaohFlashBG4, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxMaohFlashBG4, PROC_TREE_3);
     proc->anim = anim;
     proc->timer = 0;
 
@@ -855,7 +855,7 @@ void StartSubSpell_efxMaohFlashBG4(struct Anim * anim)
         proc->pal = PalArray_DemonLightBg4_Close;
     }
 
-    BG_SetPosition(BG_1, 0, 0);
+    SetBgOffset(BG_1, 0, 0);
     SpellFx_SetSomeColorEffect();
 
     return;
@@ -866,7 +866,7 @@ void efxMaohFlashBG4_Loop(struct ProcEfxBG * proc)
 {
     s16 ret = EfxAdvanceFrameLut((s16 *)&proc->timer, (s16 *)&proc->frame, proc->frame_config);
 
-    BG_SetPosition(BG_1, 0, 0);
+    SetBgOffset(BG_1, 0, 0);
 
     if (ret >= 0)
     {
@@ -885,7 +885,7 @@ void efxMaohFlashBG4_Loop(struct ProcEfxBG * proc)
         {
             SpellFx_ClearBG1();
             gEfxBgSemaphore--;
-            SetDefaultColorEffects_();
+            SpellFx_ClearColorEffects();
             Proc_Break(proc);
         }
     }
@@ -916,7 +916,7 @@ void StartSubSpell_efxMaohFlashWOUT(struct Anim * anim, int unused, int terminat
 
     gEfxBgSemaphore++;
 
-    proc = Proc_Start(ProcScr_efxMaohFlashWOUT, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxMaohFlashWOUT, PROC_TREE_3);
     proc->anim = anim;
     proc->timer = 0;
     proc->terminator = terminator;
@@ -1041,7 +1041,7 @@ void StartSubSpell_efxMaohFlashBGCOL(struct Anim * anim)
 
     gEfxBgSemaphore++;
 
-    proc = Proc_Start(ProcScr_efxMaohFlashBGCOL, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxMaohFlashBGCOL, PROC_TREE_3);
     proc->anim = anim;
     proc->timer = 0;
 
@@ -1143,7 +1143,7 @@ void StartSubSpell_efxMaohFlashEyeROBJ2(struct Anim * anim, int terminator, s16 
 
     gEfxBgSemaphore++;
 
-    proc = Proc_Start(ProcScr_efxMaohFlashEyeROBJ2, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxMaohFlashEyeROBJ2, PROC_TREE_3);
     proc->anim = GetAnimAnotherSide(anim);
     proc->timer = 0;
     proc->terminator = terminator;
@@ -1221,7 +1221,7 @@ void StartSubSpell_efxMaohFlashEyeLOBJ2(struct Anim * anim, int terminator, s16 
 
     gEfxBgSemaphore++;
 
-    proc = Proc_Start(ProcScr_efxMaohFlashEyeLOBJ2, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxMaohFlashEyeLOBJ2, PROC_TREE_3);
     proc->anim = GetAnimAnotherSide(anim);
     proc->timer = 0;
     proc->terminator = terminator;
@@ -1307,7 +1307,7 @@ void StartSubSpell_efxMaohFlashEyeOBJ1(struct Anim * anim, int terminator, s16 x
 
     gEfxBgSemaphore++;
 
-    proc = Proc_Start(ProcScr_efxMaohFlashEyeOBJ1, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxMaohFlashEyeOBJ1, PROC_TREE_3);
     proc->anim = GetAnimAnotherSide(anim);
     proc->timer = 0;
     proc->terminator = terminator;
@@ -1385,7 +1385,7 @@ void StartSubSpell_efxMaohFlashEyeFire1OBJ1(struct Anim * anim, int terminator, 
 
     gEfxBgSemaphore++;
 
-    proc = Proc_Start(ProcScr_efxMaohFlashEyeFire1OBJ1, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxMaohFlashEyeFire1OBJ1, PROC_TREE_3);
     proc->anim = GetAnimAnotherSide(anim);
     proc->timer = 0;
     proc->terminator = terminator;
@@ -1466,7 +1466,7 @@ void StartSubSpell_efxMaohFlashEyeFire2OBJ1(struct Anim * anim, int terminator, 
 
     gEfxBgSemaphore++;
 
-    proc = Proc_Start(ProcScr_efxMaohFlashEyeFire2OBJ1, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxMaohFlashEyeFire2OBJ1, PROC_TREE_3);
     proc->anim = GetAnimAnotherSide(anim);
     proc->timer = 0;
     proc->terminator = terminator;
@@ -1532,7 +1532,7 @@ void StartSubSpell_efxMaohFlashThunderOBJ(struct Anim * anim, int terminator)
 
     gEfxBgSemaphore++;
 
-    proc = Proc_Start(ProcScr_efxMaohFlashThunderOBJ, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxMaohFlashThunderOBJ, PROC_TREE_3);
     proc->anim = GetAnimAnotherSide(anim);
     proc->timer = 0;
     proc->terminator = terminator;
@@ -1713,7 +1713,7 @@ void StartSubSpell_efxMaohFlashThunderOBJ2(struct Anim * anim, int terminator, s
 
     gEfxBgSemaphore++;
 
-    proc = Proc_Start(ProcScr_efxMaohFlashThunderOBJ2, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxMaohFlashThunderOBJ2, PROC_TREE_3);
     proc->anim = GetAnimAnotherSide(anim);
     proc->timer = 0;
     proc->terminator = terminator;

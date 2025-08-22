@@ -53,9 +53,9 @@ ProcPtr StartGmMoveCursor(struct Vec2 * src, struct Vec2 * dst, int duration, in
     struct GMapMoveCursorProc * proc;
 
     if (parent)
-        proc = Proc_Start(ProcScr_GmMoveCursor, parent);
+        proc = SpawnProc(ProcScr_GmMoveCursor, parent);
     else
-        proc = Proc_Start(ProcScr_GmMoveCursor, PROC_TREE_3);
+        proc = SpawnProc(ProcScr_GmMoveCursor, PROC_TREE_3);
 
     if (src == NULL)
     {
@@ -155,7 +155,7 @@ ProcPtr StartGmScrollManage(struct GmScrollInfo * input, ProcPtr parent)
 {
     u16 _src;
 
-    struct GMapScrollManageProc * proc = Proc_Start(ProcScr_GmScrollManage, parent);
+    struct GMapScrollManageProc * proc = SpawnProc(ProcScr_GmScrollManage, parent);
 
     if ((input->xsrc < 0) || (input->ysrc < 0))
     {

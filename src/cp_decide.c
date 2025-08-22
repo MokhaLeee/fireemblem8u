@@ -117,7 +117,7 @@ next_unit:
             else
             {
                 gAiState.unitIt++;
-                Proc_StartBlocking(gProcScr_CpPerform, proc);
+                SpawnProcBlocking(gProcScr_CpPerform, proc);
             }
         } while (0);
     }

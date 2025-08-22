@@ -842,10 +842,10 @@ void Config_Init(struct ConfigProc * proc)
 
     SetDispEnable(1, 1, 1, 1, 1);
 
-    BG_SetPosition(BG_0, 0, 0);
-    BG_SetPosition(BG_1, 0, gConfigUiState->bg1YOffset);
-    BG_SetPosition(BG_2, 0, 0);
-    BG_SetPosition(BG_3, 0, 0);
+    SetBgOffset(BG_0, 0, 0);
+    SetBgOffset(BG_1, 0, gConfigUiState->bg1YOffset);
+    SetBgOffset(BG_2, 0, 0);
+    SetBgOffset(BG_3, 0, 0);
 
     SetWinEnable(1, 0, 0);
 
@@ -897,7 +897,7 @@ void Config_Init(struct ConfigProc * proc)
 
     StartMuralBackgroundExt(proc, NULL, 18, 2, 0);
 
-    Proc_Start(gProcScr_DrawConfigUiSprites, proc);
+    SpawnProc(gProcScr_DrawConfigUiSprites, proc);
 
     BG_EnableSyncByMask(BG0_SYNC_BIT | BG1_SYNC_BIT | BG2_SYNC_BIT | BG3_SYNC_BIT);
 
@@ -977,7 +977,7 @@ bool GenericOptionChangeHandler(ProcPtr proc)
 
         if (valueChanged)
         {
-            Proc_Start(gProcScr_RedrawConfigHelpText, proc);
+            SpawnProc(gProcScr_RedrawConfigHelpText, proc);
             DrawOptionValueTexts(selectedIdx, selectedIdx % 7, selectedIdx * 2 + 5);
             BG_EnableSyncByMask(BG0_SYNC_BIT | BG1_SYNC_BIT);
             PlaySoundEffect(SONG_SE_SYS_CURSOR_LR1);
@@ -1308,7 +1308,7 @@ void Config_Loop_KeyHandler(struct ConfigProc * proc)
 
             if (valueChanged)
             {
-                Proc_Start(gProcScr_RedrawConfigHelpText, proc);
+                SpawnProc(gProcScr_RedrawConfigHelpText, proc);
                 BG_EnableSyncByMask(BG0_SYNC_BIT | BG1_SYNC_BIT);
                 PlaySoundEffect(SONG_SE_SYS_CURSOR_UD1);
 
@@ -1363,7 +1363,7 @@ void Config_Loop_KeyHandler(struct ConfigProc * proc)
         break;
     }
 
-    BG_SetPosition(BG_1, 0, gConfigUiState->bg1YOffset);
+    SetBgOffset(BG_1, 0, gConfigUiState->bg1YOffset);
 
     return;
 }

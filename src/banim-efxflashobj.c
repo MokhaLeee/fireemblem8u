@@ -33,7 +33,7 @@ const u16 gFrameLut_EfxWeaponIcon[] = {
 void NewEfxWeaponIcon(s16 effective1, s16 effective2)
 {
     struct ProcEfxWeaponIcon *proc;
-    proc = Proc_Start(ProcScr_efxWeaponIcon, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxWeaponIcon, PROC_TREE_3);
 
     proc->timer = 0;
     proc->frame = 0;
@@ -128,7 +128,7 @@ void NewEfxSpellCast(void)
     if (GetBanimDragonStatusType() != EKRDRGON_TYPE_NORMAL)
         return;
     
-    proc = Proc_Start(ProcScr_efxSpellCast, PROC_TREE_4);
+    proc = SpawnProc(ProcScr_efxSpellCast, PROC_TREE_4);
     proc->done = 0;
     proc->timer = 0;
     proc->terminator = 4;
@@ -141,7 +141,7 @@ void NewEfxSpellCast(void)
     gpProcEfxSpellCast = proc;
 }
 
-void RegisterEfxSpellCastEnd(void)
+void EndEfxSpellCastAsync(void)
 {
     if (NULL == gpProcEfxSpellCast)
         return;

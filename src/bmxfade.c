@@ -62,7 +62,7 @@ void Destruct6CBMXFADE(struct BmxfadeProc *proc)
 
 void NewBMXFADE(s8 lock_game)
 {
-    struct BmxfadeProc *proc = Proc_Start(sProcScr_BMXFADE, PROC_TREE_3);
+    struct BmxfadeProc *proc = SpawnProc(sProcScr_BMXFADE, PROC_TREE_3);
     proc->game_lock = lock_game;
 
     if (0 != lock_game)
@@ -72,7 +72,7 @@ void NewBMXFADE(s8 lock_game)
 void MakeNew6CBMXFADE2(s8 lock_game, ProcPtr parent)
 {
     struct BmxfadeProc *proc = 
-        Proc_StartBlocking(sProcScr_BMXFADE, parent);
+        SpawnProcBlocking(sProcScr_BMXFADE, parent);
     
     proc->game_lock = lock_game;
 

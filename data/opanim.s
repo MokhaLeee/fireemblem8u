@@ -14,7 +14,7 @@ ProcScr_OpAnim:  @ 0x08AA71C8
     @ PROC_CALL
     .short 0x2, 0x0
     .word SetupOpAnimWorldMapfx
-    @ PROC_START_CHILD
+    @ SpawnProc_CHILD
     .short 0x5, 0x0
     .word ProcScr_OpAnimBLDALPHA
     @ PROC_WHILE
@@ -83,13 +83,13 @@ ProcScr_OpAnim:  @ 0x08AA71C8
     @ PROC_CALL
     .short 0x2, 0x0
     .word sub_80C8564
-    @ PROC_START_CHILD
+    @ SpawnProc_CHILD
     .short 0x5, 0x0
     .word gUnknown_08AA705C
     @ PROC_REPEAT
     .short 0x3, 0x0
     .word sub_80C8690
-    @ PROC_START_CHILD
+    @ SpawnProc_CHILD
     .short 0x5, 0x0
     .word gUnknown_08AA704C
     @ PROC_CALL
@@ -269,7 +269,7 @@ ProcScr_OpAnim:  @ 0x08AA71C8
     @ PROC_CALL
     .short 0x2, 0x0
     .word sub_80C8564
-    @ PROC_START_CHILD
+    @ SpawnProc_CHILD
     .short 0x5, 0x0
     .word gUnknown_08AA707C
     @ PROC_END_EACH

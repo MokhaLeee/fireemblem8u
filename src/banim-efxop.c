@@ -82,7 +82,7 @@ void SetCRSpellBgPosition(struct Anim * anim, struct AnimMagicFxBuffer * magicFx
 
     y = 88 - anim->yPosition;
 
-    BG_SetPosition(magicFx->bg, x - magicFx->xOffsetBg, y - magicFx->yOffsetBg);
+    SetBgOffset(magicFx->bg, x - magicFx->xOffsetBg, y - magicFx->yOffsetBg);
 
     return;
 }
@@ -258,7 +258,7 @@ struct ProcCmd CONST_DATA ProcScr_efxopFire[] =
 //! FE8U = 0x0806EB7C
 void StartClassReelSpellAnimFire(struct Anim * anim)
 {
-    struct ProcEfx * proc = Proc_Start(ProcScr_efxopFire, PROC_TREE_3);
+    struct ProcEfx * proc = SpawnProc(ProcScr_efxopFire, PROC_TREE_3);
     SetActiveClassReelSpell(proc);
 
     proc->anim = anim;
@@ -327,7 +327,7 @@ void StartCRSubSpell_efxopFireBG(struct Anim * anim, struct ProcEfx * parent)
     // clang-format on
 
     struct AnimMagicFxBuffer * magicFx = GetMagicEffectBufferFor(anim);
-    struct ProcEfxBG * proc = Proc_Start(ProcScr_efxopFireBG, parent);
+    struct ProcEfxBG * proc = SpawnProc(ProcScr_efxopFireBG, parent);
 
     proc->anim = anim;
     proc->timer = 0;
@@ -361,7 +361,7 @@ void efxopFireBG_Loop(struct ProcEfxBG * proc)
         if (ret == -1)
         {
             ClearCRSpellBgTmBuf(proc->anim);
-            SetDefaultColorEffects_();
+            SpellFx_ClearColorEffects();
             Proc_Break(proc);
         }
     }
@@ -387,7 +387,7 @@ void StartCRSubSpell_efxopFireOBJ(struct Anim * anim, struct ProcEfx * parent)
 
     struct AnimMagicFxBuffer * magicFx = GetMagicEffectBufferFor(anim);
 
-    struct ProcEfxOBJ * proc = Proc_Start(ProcScr_efxopFireOBJ, parent);
+    struct ProcEfxOBJ * proc = SpawnProc(ProcScr_efxopFireOBJ, parent);
     proc->anim = anim;
     proc->timer = 0;
 
@@ -447,7 +447,7 @@ struct ProcCmd CONST_DATA ProcScr_efxopThunder[] =
 //! FE8U = 0x0806ED0C
 void StartClassReelSpellAnimThunder(struct Anim * anim)
 {
-    struct ProcEfx * proc = Proc_Start(ProcScr_efxopThunder, PROC_TREE_3);
+    struct ProcEfx * proc = SpawnProc(ProcScr_efxopThunder, PROC_TREE_3);
     SetActiveClassReelSpell(proc);
 
     proc->anim = anim;
@@ -497,7 +497,7 @@ void StartCRSubSpell_efxopThunderBG(struct Anim * anim, struct ProcEfx * unused)
     // clang-format on
 
     struct AnimMagicFxBuffer * magicFx = GetMagicEffectBufferFor(anim);
-    struct ProcEfxBG * proc = Proc_Start(ProcScr_efxopThunderBG, PROC_TREE_3);
+    struct ProcEfxBG * proc = SpawnProc(ProcScr_efxopThunderBG, PROC_TREE_3);
 
     proc->anim = anim;
     proc->timer = 0;
@@ -547,7 +547,7 @@ void efxopThunderBG_Loop(struct ProcEfxBG * proc)
         if (ret == -1)
         {
             ClearCRSpellBgTmBuf(proc->anim);
-            SetDefaultColorEffects_();
+            SpellFx_ClearColorEffects();
             Proc_Break(proc);
         }
     }
@@ -595,7 +595,7 @@ void StartCRSubSpell_efxopThunderBGCOL(struct Anim * anim, struct ProcEfx * unus
     };
     // clang-format on
 
-    struct ProcEfxBGCOL * proc = Proc_Start(ProcScr_efxopThunderBGCOL, PROC_TREE_3);
+    struct ProcEfxBGCOL * proc = SpawnProc(ProcScr_efxopThunderBGCOL, PROC_TREE_3);
     SetActiveCRSpellBgColorProc(proc);
 
     proc->anim = anim;
@@ -648,7 +648,7 @@ void StartCRSubSpell_efxopThunderOBJ(struct Anim * anim, struct ProcEfx * unused
     struct Anim * frontAnim;
 
     struct AnimMagicFxBuffer * magicFx = GetMagicEffectBufferFor(anim);
-    struct ProcEfxOBJ * proc = Proc_Start(ProcScr_efxopThunderOBJ, PROC_TREE_3);
+    struct ProcEfxOBJ * proc = SpawnProc(ProcScr_efxopThunderOBJ, PROC_TREE_3);
 
     proc->anim = anim;
     proc->timer = 0;
@@ -707,7 +707,7 @@ struct ProcCmd CONST_DATA ProcScr_efxopLive[] =
 //! FE8U = 0x0806EF48
 void StartClassReelSpellAnimHeal(struct Anim * anim)
 {
-    struct ProcEfx * proc = Proc_Start(ProcScr_efxopLive, PROC_TREE_3);
+    struct ProcEfx * proc = SpawnProc(ProcScr_efxopLive, PROC_TREE_3);
 
     proc->anim = anim;
     proc->timer = 0;
@@ -762,7 +762,7 @@ void StartCRSubSpell_efxopLiveBG(struct Anim * anim, struct ProcEfx * unused)
 
     struct AnimMagicFxBuffer * magicFx = GetMagicEffectBufferFor(anim);
 
-    struct ProcEfxBG * proc = Proc_Start(ProcScr_efxopLiveBG, PROC_TREE_3);
+    struct ProcEfxBG * proc = SpawnProc(ProcScr_efxopLiveBG, PROC_TREE_3);
     SetActiveClassReelSpell(proc);
 
     proc->anim = anim;
@@ -797,7 +797,7 @@ void efxopLiveBG_Loop(struct ProcEfxBG * proc)
         if (ret == -1)
         {
             ClearCRSpellBgTmBuf(proc->anim);
-            SetDefaultColorEffects_();
+            SpellFx_ClearColorEffects();
             Proc_Break(proc);
         }
     }
@@ -845,7 +845,7 @@ void StartCRSubSpell_efxopLiveBGCOL(struct Anim * anim, struct ProcEfx * unused)
     };
     // clang-format on
 
-    struct ProcEfxBGCOL * proc = Proc_Start(ProcScr_efxopLiveBGCOL, PROC_TREE_3);
+    struct ProcEfxBGCOL * proc = SpawnProc(ProcScr_efxopLiveBGCOL, PROC_TREE_3);
     SetActiveCRSpellBgColorProc(proc);
 
     proc->anim = anim;
@@ -898,7 +898,7 @@ struct ProcCmd CONST_DATA ProcScr_efxopLiveALPHA[] =
 //! FE8U = 0x0806F0CC
 void StartCRSubSpell_efxopLiveALPHA(struct Anim * anim, int timer, int c, int d, struct ProcEfx * unused)
 {
-    struct ProcEfxALPHA * proc = Proc_Start(ProcScr_efxopLiveALPHA, PROC_TREE_3);
+    struct ProcEfxALPHA * proc = SpawnProc(ProcScr_efxopLiveALPHA, PROC_TREE_3);
     proc->anim = anim;
 
     proc->timer = timer;
@@ -965,7 +965,7 @@ void StartCRSubSpell_efxopLiveOBJ(struct Anim * anim, struct ProcEfx * unused)
     u32 * scr;
 
     struct AnimMagicFxBuffer * magicFx = GetMagicEffectBufferFor(anim);
-    struct ProcEfxOBJ * proc = Proc_Start(ProcScr_efxopLiveOBJ, PROC_TREE_3);
+    struct ProcEfxOBJ * proc = SpawnProc(ProcScr_efxopLiveOBJ, PROC_TREE_3);
 
     proc->anim = anim;
     proc->timer = 0;
@@ -1017,7 +1017,7 @@ struct ProcCmd CONST_DATA ProcScr_efxopLightning[] =
 //! FE8U = 0x0806F210
 void StartClassReelSpellAnimLight(struct Anim * anim)
 {
-    struct ProcEfx * proc = Proc_Start(ProcScr_efxopLightning, PROC_TREE_3);
+    struct ProcEfx * proc = SpawnProc(ProcScr_efxopLightning, PROC_TREE_3);
     SetActiveClassReelSpell(proc);
 
     proc->anim = anim;
@@ -1199,7 +1199,7 @@ void StartCRSubSpell_efxopLightningBG(struct Anim * anim, struct ProcEfx * paren
     // clang-format on
 
     struct AnimMagicFxBuffer * magicFx = GetMagicEffectBufferFor(anim);
-    struct ProcEfxBG * proc = Proc_Start(ProcScr_efxopLightningBG, parent);
+    struct ProcEfxBG * proc = SpawnProc(ProcScr_efxopLightningBG, parent);
 
     proc->anim = anim;
     proc->timer = 0;
@@ -1240,7 +1240,7 @@ void efxopLightningBG_Loop(struct ProcEfxBG * proc)
         if (ret == -1)
         {
             ClearCRSpellBgTmBuf(proc->anim);
-            SetDefaultColorEffects_();
+            SpellFx_ClearColorEffects();
             Proc_Break(proc);
         }
     }
@@ -1372,7 +1372,7 @@ void StartCRSubSpell_efxopMistyrainBG(struct Anim * anim, struct ProcEfx * paren
     // clang-format on
 
     struct AnimMagicFxBuffer * magicFx = GetMagicEffectBufferFor(anim);
-    struct ProcEfxBG * proc = Proc_Start(ProcScr_efxopMistyrainBG, parent);
+    struct ProcEfxBG * proc = SpawnProc(ProcScr_efxopMistyrainBG, parent);
 
     proc->anim = anim;
     proc->timer = 0;
@@ -1446,7 +1446,7 @@ void StartCRSubSpell_efxopMistyrainBG_2(struct Anim * anim, struct ProcEfx * par
     // clang-format on
 
     struct AnimMagicFxBuffer * magicFx = GetMagicEffectBufferFor(anim);
-    struct ProcEfxBG * proc = Proc_Start(ProcScr_efxopMistyrainBG, parent);
+    struct ProcEfxBG * proc = SpawnProc(ProcScr_efxopMistyrainBG, parent);
 
     proc->anim = anim;
     proc->timer = 0;
@@ -1489,7 +1489,7 @@ void efxopMistyrainBG_Loop(struct ProcEfxBG * proc)
         if (ret == -1)
         {
             ClearCRSpellBgTmBuf(proc->anim);
-            SetDefaultColorEffects_();
+            SpellFx_ClearColorEffects();
             Proc_Break(proc);
         }
     }
@@ -1524,7 +1524,7 @@ void StartCRSubSpell_efxopMistyrainOBJ(struct Anim * anim, struct ProcEfx * pare
 {
     u32 * scr;
 
-    struct ProcEfxOBJ * proc = Proc_Start(ProcScr_efxopMistyrainOBJ, parent);
+    struct ProcEfxOBJ * proc = SpawnProc(ProcScr_efxopMistyrainOBJ, parent);
     proc->anim = anim;
 
     scr = FramScr_Unk5D4F90;
@@ -1557,7 +1557,7 @@ struct ProcEfxOBJ * StartCRSubSpell_efxopMistyrainOBJ2(struct Anim * anim, struc
     struct Anim * frontAnim;
     u32 * scr;
 
-    struct ProcEfxOBJ * proc = Proc_Start(ProcScr_efxopMistyrainOBJ2, parent);
+    struct ProcEfxOBJ * proc = SpawnProc(ProcScr_efxopMistyrainOBJ2, parent);
     proc->anim = anim;
 
     scr = FramScr_Unk5D4F90;
@@ -1694,7 +1694,7 @@ struct ProcCmd CONST_DATA ProcScr_efxopMistyrain[] =
 //! FE8U = 0x0806F5BC
 void StartClassReelSpellAnimFlux(struct Anim * anim)
 {
-    struct ProcEfx * proc = Proc_Start(ProcScr_efxopMistyrain, PROC_TREE_3);
+    struct ProcEfx * proc = SpawnProc(ProcScr_efxopMistyrain, PROC_TREE_3);
     SetActiveClassReelSpell(proc);
 
     proc->anim = anim;
@@ -1756,7 +1756,7 @@ struct ProcCmd CONST_DATA ProcScr_efxopMyrrh[] =
 //! FE8U = 0x0806F648
 void StartClassReelSpellAnimMyrrh(struct Anim * anim)
 {
-    struct ProcEfx * proc = Proc_Start(ProcScr_efxopMyrrh, PROC_TREE_3);
+    struct ProcEfx * proc = SpawnProc(ProcScr_efxopMyrrh, PROC_TREE_3);
     SetActiveClassReelSpell(proc);
 
     proc->anim = anim;
@@ -1800,7 +1800,7 @@ struct ProcCmd CONST_DATA ProcScr_efxopEvilEye[] =
 //! FE8U = 0x0806F6B4
 void StartClassReelSpellAnimEvilEye(struct Anim * anim)
 {
-    struct ProcEfx * proc = Proc_Start(ProcScr_efxopEvilEye, PROC_TREE_3);
+    struct ProcEfx * proc = SpawnProc(ProcScr_efxopEvilEye, PROC_TREE_3);
     SetActiveClassReelSpell(proc);
 
     proc->anim = anim;
@@ -1961,7 +1961,7 @@ void StartCRSubSpell_efxopEvilEyeBG(struct Anim * anim, struct ProcEfx * parent)
     // clang-format on
 
     struct AnimMagicFxBuffer * magicFx = GetMagicEffectBufferFor(anim);
-    struct ProcEfxBG * proc = Proc_Start(ProcScr_efxopEvilEyeBG, parent);
+    struct ProcEfxBG * proc = SpawnProc(ProcScr_efxopEvilEyeBG, parent);
 
     proc->anim = anim;
     proc->timer = 0;
@@ -2000,7 +2000,7 @@ void efxopEvilEyeBG_Loop(struct ProcEfxBG * proc)
         if (ret == -1)
         {
             ClearCRSpellBgTmBuf(proc->anim);
-            SetDefaultColorEffects_();
+            SpellFx_ClearColorEffects();
             Proc_Break(proc);
         }
     }
@@ -2024,7 +2024,7 @@ void StartCRSubSpell_efxopEvilEyeOBJ(struct Anim * anim, struct ProcEfx * parent
     struct Anim * frontAnim;
 
     struct AnimMagicFxBuffer * unused = GetMagicEffectBufferFor(anim);
-    struct ProcEfxOBJ * proc = Proc_Start(ProcScr_efxopEvilEyeOBJ, parent);
+    struct ProcEfxOBJ * proc = SpawnProc(ProcScr_efxopEvilEyeOBJ, parent);
 
     proc->anim = anim;
     proc->timer = 0;
@@ -2075,7 +2075,7 @@ struct ProcCmd CONST_DATA ProcScr_efxopStone[] =
 //! FE8U = 0x0806F844
 void StartClassReelSpellAnimStone(struct Anim * anim)
 {
-    struct ProcEfx * proc = Proc_Start(ProcScr_efxopStone, PROC_TREE_3);
+    struct ProcEfx * proc = SpawnProc(ProcScr_efxopStone, PROC_TREE_3);
     SetActiveClassReelSpell(proc);
 
     proc->anim = anim;
@@ -2185,7 +2185,7 @@ void StartCRSubSpell_efxopStoneBG(struct Anim * anim, struct ProcEfx * parent)
     // clang-format on
 
     struct AnimMagicFxBuffer * magicFx = GetMagicEffectBufferFor(anim);
-    struct ProcEfxBG * proc = Proc_Start(ProcScr_efxopStoneBG, parent);
+    struct ProcEfxBG * proc = SpawnProc(ProcScr_efxopStoneBG, parent);
 
     proc->anim = anim;
     proc->timer = 0;
@@ -2233,7 +2233,7 @@ void efxopStoneBG_Loop(struct ProcEfxBG * proc)
         if (ret == -1)
         {
             ClearCRSpellBgTmBuf(proc->anim);
-            SetDefaultColorEffects_();
+            SpellFx_ClearColorEffects();
             Proc_Break(proc);
         }
     }
@@ -2258,7 +2258,7 @@ void StartCRSubSpell_efxopStoneOBJ(struct Anim * anim, struct ProcEfx * parent)
     u32 * scr;
 
     struct AnimMagicFxBuffer * unused = GetMagicEffectBufferFor(anim);
-    struct ProcEfxOBJ * proc = Proc_Start(ProcScr_efxopStoneOBJ, parent);
+    struct ProcEfxOBJ * proc = SpawnProc(ProcScr_efxopStoneOBJ, parent);
 
     proc->anim = anim;
     proc->timer = 0;

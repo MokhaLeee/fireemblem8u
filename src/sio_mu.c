@@ -34,7 +34,7 @@ void sub_804BED8(struct MuProc * muProc, int kind)
     muProc->sprite_anim->tileBase = muProc->config->chr + 0x6800;
     StartPalFade(gPaletteBuffer + (muProc->config->pal + 0x10) * 0x10, 0x16, 0x14, muProc);
 
-    proc = Proc_Start(ProcScr_085AA83C, muProc);
+    proc = SpawnProc(ProcScr_085AA83C, muProc);
     proc->muProc = muProc;
 
     return;
@@ -66,7 +66,7 @@ void StartLinkArenaMUDeathFade(struct MuProc * muProc)
 
     muProc->state = MU_STATE_DEATHFADE;
 
-    muEffectProc = Proc_Start(ProcScr_MuDeathFade, muProc);
+    muEffectProc = SpawnProc(ProcScr_MuDeathFade, muProc);
     muEffectProc->mu = muProc;
     muEffectProc->timeLeft = 32;
 
@@ -101,7 +101,7 @@ void sub_804BFF8(struct MuProc * muProc)
     struct MuEffectProc * muEffectProc;
 
     StartPalFade(gPaletteBuffer + (muProc->config->pal + 0x10) * 0x10, 0x16, 8, muProc);
-    muEffectProc = Proc_Start(ProcScr_MuRestorePalInfo, PROC_TREE_3);
+    muEffectProc = SpawnProc(ProcScr_MuRestorePalInfo, PROC_TREE_3);
     muEffectProc->mu = muProc;
 
     return;
@@ -201,7 +201,7 @@ struct ProcCmd CONST_DATA ProcScr_SIOWARP[] =
 //! FE8U = 0x0804C148
 void SioWarpFx_StartSioWarp(struct SioWarpProc * parent)
 {
-    struct SioWarpProc * proc = Proc_Start(ProcScr_SIOWARP, PROC_TREE_2);
+    struct SioWarpProc * proc = SpawnProc(ProcScr_SIOWARP, PROC_TREE_2);
 
     proc->x = parent->unit->xPos * 2;
     proc->y = parent->unit->yPos * 2;
@@ -306,11 +306,11 @@ ProcPtr StartSioWarpFx(struct Unit * unit, struct MuProc * muProc, int x, int y,
 
     if (parent != NULL)
     {
-        proc = Proc_StartBlocking(ProcScr_SIOWARPFX, parent);
+        proc = SpawnProcBlocking(ProcScr_SIOWARPFX, parent);
     }
     else
     {
-        proc = Proc_Start(ProcScr_SIOWARPFX, PROC_TREE_2);
+        proc = SpawnProc(ProcScr_SIOWARPFX, PROC_TREE_2);
     }
 
     proc->unit = unit;
@@ -350,11 +350,11 @@ ProcPtr sub_804C260(struct Unit * unit, struct MuProc * muProc, int x, int y, in
 
     if (parent != NULL)
     {
-        proc = Proc_StartBlocking(ProcScr_SioWarpFxPartial, parent);
+        proc = SpawnProcBlocking(ProcScr_SioWarpFxPartial, parent);
     }
     else
     {
-        proc = Proc_Start(ProcScr_SioWarpFxPartial, PROC_TREE_2);
+        proc = SpawnProc(ProcScr_SioWarpFxPartial, PROC_TREE_2);
     }
 
     proc->unit = unit;
@@ -410,7 +410,7 @@ void StartLinkArenaButtonSpriteDraw(int x, int y, ProcPtr parent)
 
     Proc_EndEach(ProcScr_LAButtonSpriteDraw);
 
-    proc = Proc_Start(ProcScr_LAButtonSpriteDraw, parent);
+    proc = SpawnProc(ProcScr_LAButtonSpriteDraw, parent);
 
     proc->x = x;
     proc->y = y;

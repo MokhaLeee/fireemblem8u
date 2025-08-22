@@ -179,7 +179,7 @@ void StartBgmFadeIn(int songId, int duration, struct MusicPlayerInfo *player)
         gSoundSt.is_song_playing = TRUE;
         gSoundSt.unk7 = 0;
         gSoundSt.songId = songId;
-        proc = Proc_Start(sMusicProc1Script, PROC_TREE_3);
+        proc = SpawnProc(sMusicProc1Script, PROC_TREE_3);
         m4aMPlayStop(&gMPlayInfo_BGM1);
         m4aMPlayStop(&gMPlayInfo_BGM2);
         PlaySong(songId, player);
@@ -254,9 +254,9 @@ void StartBgmVolumeChange(int volume, int b, int c, ProcPtr parent)
     struct MusicProc *proc;
 
     if (parent)
-        proc = Proc_StartBlocking(sMusicProc2Script, parent);
+        proc = SpawnProcBlocking(sMusicProc2Script, parent);
     else
-        proc = Proc_Start(sMusicProc2Script, PROC_TREE_3);
+        proc = SpawnProc(sMusicProc2Script, PROC_TREE_3);
     proc->vc_init_volume = volume;
     proc->vc_end_volume = b;
     proc->vc_clock = 0;
@@ -313,7 +313,7 @@ void StartSongDelayed(int songId, int delay, struct MusicPlayerInfo *player)
 {
     if (gPlaySt.config.disableBgm == 0)
     {
-        struct MusicProc *mproc = Proc_Start(gMusicProc3Script, PROC_TREE_3);
+        struct MusicProc *mproc = SpawnProc(gMusicProc3Script, PROC_TREE_3);
 
         mproc->delayCounter = delay;
         mproc->songId = songId;
@@ -422,9 +422,9 @@ void CallSomeSoundMaybe(int songId, int vc_init_volume, int vc_end_volume, int d
         return;
 
     if (parent != NULL)
-        mproc = Proc_StartBlocking(sMusicProc4Script, parent);
+        mproc = SpawnProcBlocking(sMusicProc4Script, parent);
     else
-        mproc = Proc_Start(sMusicProc4Script, PROC_TREE_3);
+        mproc = SpawnProc(sMusicProc4Script, PROC_TREE_3);
 
     mproc->unk58 = d;
 

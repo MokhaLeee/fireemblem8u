@@ -476,7 +476,7 @@ struct ProcCmd CONST_DATA ProcScr_WorldmapStatusUi[] =
     PROC_CALL(WorldmapStatus_InitDetails),
     PROC_CALL(WorldmapStatus_80C0E58),
 
-    PROC_START_CHILD(ProcScr_WmStatus_PutTimeAndGold),
+    SpawnProc_CHILD(ProcScr_WmStatus_PutTimeAndGold),
 
     PROC_REPEAT(WorldmapStatus_Loop_KeyHandler),
 

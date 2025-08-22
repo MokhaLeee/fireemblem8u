@@ -179,7 +179,7 @@ void GasTrapSpriteAnim_Init(struct TrapfxProc *proc)
 
 void StartGasTrapAnim(ProcPtr parent, int x, int y, int facing)
 {
-    struct TrapfxProc *proc = Proc_StartBlocking(ProcScr_GasTrapAnim, parent);
+    struct TrapfxProc *proc = SpawnProcBlocking(ProcScr_GasTrapAnim, parent);
 
     proc->x = x;
     proc->y = y;
@@ -205,7 +205,7 @@ void StartFireTrapAnim(ProcPtr parent, int x, int y)
     struct TrapfxProc *proc;
     
     ApplyPalette(Pal_FireTrap, 0x10 + OBJPAL_TRAPFX);
-    proc = Proc_StartBlocking(ProcScr_FireTrapAnim, parent);
+    proc = SpawnProcBlocking(ProcScr_FireTrapAnim, parent);
 
     proc->x = x;
     proc->y = y;
@@ -216,7 +216,7 @@ void StartFireTrapAnim2(ProcPtr parent, int x, int y)
     struct TrapfxProc *proc;
     
     ApplyPalette(Pal_FireTrap2, 0x10 + OBJPAL_TRAPFX);
-    proc = Proc_StartBlocking(ProcScr_FireTrapAnim, parent);
+    proc = SpawnProcBlocking(ProcScr_FireTrapAnim, parent);
 
     proc->x = x;
     proc->y = y;
@@ -262,7 +262,7 @@ void StartUnkTrapAnim(ProcPtr parent, int x, int y, int direction, int time)
     Decompress(Img_WallBreakAnim, OBJ_CHR_ADDR(OBJCHR_TRAPFX));
     ApplyPalette(Pal_WallBreakAnim, 0x10 + OBJPAL_TRAPFX);
 
-    proc = Proc_StartBlocking(ProcScr_UnkTrapAnim, parent);
+    proc = SpawnProcBlocking(ProcScr_UnkTrapAnim, parent);
     proc->direction = direction;
     proc->timer = time;
     proc->x = x;
@@ -287,7 +287,7 @@ void ArrowTrapSpriteAnim_Init(struct TrapfxProc *proc)
 
 void StartArrowTrapAnim(ProcPtr parent, int x)
 {
-    struct UnkTrapfxProc *proc = Proc_StartBlocking(ProcScr_ArrowTrapAnim, parent);
+    struct UnkTrapfxProc *proc = SpawnProcBlocking(ProcScr_ArrowTrapAnim, parent);
     proc->x = x;
 }
 
@@ -327,7 +327,7 @@ void StartShowMapChangeAnim(ProcPtr parent, int unused, int trapid)
     struct ShowMapChangeProc * proc;
     struct Trap * trap;
 
-    proc = Proc_StartBlocking(ProcScr_ShowMapChangeAnim, parent);
+    proc = SpawnProcBlocking(ProcScr_ShowMapChangeAnim, parent);
 
     trap = GetTrap(trapid);
     trap->extra ^= 1;
@@ -357,7 +357,7 @@ void PikeTrapSpriteAnim_Init(struct TrapfxProc *proc)
 
 void StartPikeTrapAnim(ProcPtr parent, int x, int y, int facing)
 {
-    struct TrapfxProc *proc = Proc_StartBlocking(ProcScr_PikeTrapAnim, parent);
+    struct TrapfxProc *proc = SpawnProcBlocking(ProcScr_PikeTrapAnim, parent);
 
     proc->x = x;
     proc->y = y;

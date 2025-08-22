@@ -1338,7 +1338,7 @@ int StartSioBigSend(void * data, u32 len, void (*func)(struct SioBigSendProc *),
 
     lastBlockLen = len % SIO_MAX_DATA;
 
-    proc = Proc_StartBlocking(gProcScr_SioBigSend, parent);
+    proc = SpawnProcBlocking(gProcScr_SioBigSend, parent);
 
     proc->data = data;
     proc->unk_34 = arg_3;
@@ -1356,7 +1356,7 @@ void StartSioBigReceive(void * data, void (*func)(struct SioBigReceiveProc *), P
 {
     struct SioBigReceiveProc * proc;
 
-    proc = Proc_StartBlocking(gProcScr_SioBigReceive, parent);
+    proc = SpawnProcBlocking(gProcScr_SioBigReceive, parent);
 
     proc->func = func;
     proc->data = data;

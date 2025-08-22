@@ -56,14 +56,14 @@ void BattleAIS_ExecCommands(void)
                     {
                         anim->pScrCurrent = anim->pScrCurrent + 1;
                     }
-                    else if (anim->state3 & ANIM_BIT3_HIT_EFFECT_APPLIED)
+                    else if (anim->state3 & ANIM_BIT3_C01_BLOCK_END_INBATTLE)
                     {
                         /* Release the anim lock after battle hitting */
                         if (CheckEkrHitDone() == true)
                         {
-                            anim->state3 &= ~(ANIM_BIT3_TAKE_BACK_ENABLE |
-                                              ANIM_BIT3_C01_BLOCKING_IN_BATTLE |
-                                              ANIM_BIT3_HIT_EFFECT_APPLIED);
+                            anim->state3 &= ~(ANIM_BIT3_C02_BLOCK_END |
+                                              ANIM_BIT3_C01_BLOCK_END_PREBATTLE |
+                                              ANIM_BIT3_C01_BLOCK_END_INBATTLE);
 
                             anim->pScrCurrent = anim->pScrCurrent + 1;
 
@@ -74,8 +74,8 @@ void BattleAIS_ExecCommands(void)
                     break;
 
                 case ANIM_CMD_WAIT_02:
-                    if (anim->state3 & ANIM_BIT3_TAKE_BACK_ENABLE) {
-                        anim->state3 &= ~ANIM_BIT3_TAKE_BACK_ENABLE;
+                    if (anim->state3 & ANIM_BIT3_C02_BLOCK_END) {
+                        anim->state3 &= ~ANIM_BIT3_C02_BLOCK_END;
                         anim->pScrCurrent = anim->pScrCurrent + 1;
                     }
                     break;
@@ -125,14 +125,14 @@ void BattleAIS_ExecCommands(void)
                         anim->state3 &= ~ANIM_BIT3_BLOCKING;
                         anim->state3 &= ~ANIM_BIT3_BLOCKEND;
                         anim->pScrCurrent = anim->pScrCurrent + 1;
-                        anim->state3 |= ANIM_BIT3_TAKE_BACK_ENABLE | ANIM_BIT3_HIT_EFFECT_APPLIED;
+                        anim->state3 |= ANIM_BIT3_C02_BLOCK_END | ANIM_BIT3_C01_BLOCK_END_INBATTLE;
 
                         /* Trigger hit effect for another side */
                         anim1 = GetAnimAnotherSide(anim);
                         type = GetAnimRoundTypeAnotherSide(anim);
                         if (CheckRoundMiss(type) == true)
                             if (anim1) {
-                                anim1->state3 |= ANIM_BIT3_TAKE_BACK_ENABLE | ANIM_BIT3_HIT_EFFECT_APPLIED;
+                                anim1->state3 |= ANIM_BIT3_C02_BLOCK_END | ANIM_BIT3_C01_BLOCK_END_INBATTLE;
 
                                 if (GetAISLayerId(anim) == 0)
                                     StartBattleAnimHitEffectsDefault(anim1, CheckRoundMiss(type));
@@ -154,7 +154,7 @@ void BattleAIS_ExecCommands(void)
                         anim->state3 &= ~ANIM_BIT3_BLOCKING;
                         anim->state3 &= ~ANIM_BIT3_BLOCKEND;
                         anim->pScrCurrent = anim->pScrCurrent + 1;
-                        anim->state3 |= ANIM_BIT3_TAKE_BACK_ENABLE | ANIM_BIT3_HIT_EFFECT_APPLIED;
+                        anim->state3 |= ANIM_BIT3_C02_BLOCK_END | ANIM_BIT3_C01_BLOCK_END_INBATTLE;
 
                         if (GetAISLayerId(anim) == 0) {
                             StartSpellAnimation(anim);
@@ -252,7 +252,7 @@ void BattleAIS_ExecCommands(void)
                         }
 
                         if (anim1) {
-                            anim1->state3 |= ANIM_BIT3_TAKE_BACK_ENABLE | ANIM_BIT3_HIT_EFFECT_APPLIED;
+                            anim1->state3 |= ANIM_BIT3_C02_BLOCK_END | ANIM_BIT3_C01_BLOCK_END_INBATTLE;
                             type = GetAnimRoundTypeAnotherSide(anim);
                             StartBattleAnimHitEffectsDefault(anim1, CheckRoundMiss(type));
                         }
@@ -282,8 +282,8 @@ void BattleAIS_ExecCommands(void)
                             SwitchAISFrameDataFromBARoundType(anim1, type);
                             SwitchAISFrameDataFromBARoundType(anim2, type);
 
-                            anim1->state3 |= ANIM_BIT3_C01_BLOCKING_IN_BATTLE;
-                            anim2->state3 |= ANIM_BIT3_C01_BLOCKING_IN_BATTLE;
+                            anim1->state3 |= ANIM_BIT3_C01_BLOCK_END_PREBATTLE;
+                            anim2->state3 |= ANIM_BIT3_C01_BLOCK_END_PREBATTLE;
 
                             type = BanimDefaultStandingTypes[gEkrDistanceType];
                             frame_front = BanimDefaultModeConfig[type * 4 + 0];
@@ -383,8 +383,8 @@ void BattleAIS_ExecCommands(void)
                  * Start of dodge toward the foreground
                  */
                 case ANIM_CMD_WAIT_18:
-                    if (anim->state3 & ANIM_BIT3_TAKE_BACK_ENABLE) {
-                        anim->state3 &= ~ANIM_BIT3_TAKE_BACK_ENABLE;
+                    if (anim->state3 & ANIM_BIT3_C02_BLOCK_END) {
+                        anim->state3 &= ~ANIM_BIT3_C02_BLOCK_END;
                         anim->pScrCurrent = anim->pScrCurrent + 1;
                         anim->oam2Base = (0xF3FF & anim->oam2Base) | OAM2_LAYER(0x1);
                         anim->drawLayerPriority = 0x8C;
@@ -400,7 +400,7 @@ void BattleAIS_ExecCommands(void)
                     if (GetAISLayerId(anim) == 0) {
                         anim1 = GetAnimAnotherSide(anim);
                         if (anim1) {
-                            anim1->state3 |= ANIM_BIT3_TAKE_BACK_ENABLE | ANIM_BIT3_HIT_EFFECT_APPLIED;
+                            anim1->state3 |= ANIM_BIT3_C02_BLOCK_END | ANIM_BIT3_C01_BLOCK_END_INBATTLE;
                             type = GetAnimRoundTypeAnotherSide(anim);
                             StartBattleAnimHitEffectsDefault(anim1, CheckRoundMiss(type));
                         }
@@ -708,12 +708,12 @@ void BattleAIS_ExecCommands(void)
                 anim1 = gAnims[GetAnimPosition(anim) * 2];
                 SwitchAISFrameDataFromBARoundType(anim1, type);
                 anim1->state3 &= ~ANIM_BIT3_NEXT_ROUND_START;
-                anim1->state3 |= ANIM_BIT3_C01_BLOCKING_IN_BATTLE;
+                anim1->state3 |= ANIM_BIT3_C01_BLOCK_END_PREBATTLE;
 
                 anim2 = gAnims[GetAnimPosition(anim) * 2 + 1];
                 SwitchAISFrameDataFromBARoundType(anim2, type);
                 anim2->state3 &= ~ANIM_BIT3_NEXT_ROUND_START;
-                anim2->state3 |= ANIM_BIT3_C01_BLOCKING_IN_BATTLE;
+                anim2->state3 |= ANIM_BIT3_C01_BLOCK_END_PREBATTLE;
 
                 anim1->nextRoundId = anim1->nextRoundId + 1;
                 anim2->nextRoundId = anim2->nextRoundId + 1;
@@ -730,39 +730,33 @@ void BattleAIS_ExecCommands(void)
                 anim2->state3 &= ~ANIM_BIT3_NEXT_ROUND_START;
             } /* ANIM_ROUND_INVALID */
         }
-        else
+        else if (anim->state3 & ANIM_BIT3_NEW_ROUND_START)
         {
-            if (anim->state3 & ANIM_BIT3_NEW_ROUND_START)
+            type = GetAnimNextRoundType(anim);
+            if (type != ANIM_ROUND_INVALID)
             {
-                type = GetAnimNextRoundType(anim);
-                if (type != ANIM_ROUND_INVALID)
-                {
-                    anim1 = gAnims[GetAnimPosition(anim) * 2];
-                    SwitchAISFrameDataFromBARoundType(anim1, type);
-                    anim1->state3 &= ~ANIM_BIT3_NEW_ROUND_START;
-                    anim1->state3 |= ANIM_BIT3_C01_BLOCKING_IN_BATTLE;
+                anim1 = gAnims[GetAnimPosition(anim) * 2];
+                SwitchAISFrameDataFromBARoundType(anim1, type);
+                anim1->state3 &= ~ANIM_BIT3_NEW_ROUND_START;
+                anim1->state3 |= ANIM_BIT3_C01_BLOCK_END_PREBATTLE;
 
-                    anim2 = gAnims[GetAnimPosition(anim) * 2 + 1];
-                    SwitchAISFrameDataFromBARoundType(anim2, type);
-                    anim2->state3 &= ~ANIM_BIT3_NEW_ROUND_START;
-                    anim2->state3 |= ANIM_BIT3_C01_BLOCKING_IN_BATTLE;
+                anim2 = gAnims[GetAnimPosition(anim) * 2 + 1];
+                SwitchAISFrameDataFromBARoundType(anim2, type);
+                anim2->state3 &= ~ANIM_BIT3_NEW_ROUND_START;
+                anim2->state3 |= ANIM_BIT3_C01_BLOCK_END_PREBATTLE;
 
-                    anim1->nextRoundId = anim1->nextRoundId + 1;
-                    anim2->nextRoundId = anim2->nextRoundId + 1;
+                anim1->nextRoundId = anim1->nextRoundId + 1;
+                anim2->nextRoundId = anim2->nextRoundId + 1;
 
-                    AnimScrAdvance(anim1);
-                    AnimScrAdvance(anim2);
-                }
+                AnimScrAdvance(anim1);
+                AnimScrAdvance(anim2);
             }
-            else
-            {
-                if (GetAISLayerId(anim) == 0)
-                {
-                    type = GetBattleAnimRoundType(anim->nextRoundId * 2 + GetAnimPosition(anim));
-                    if (type == ANIM_ROUND_INVALID)
-                        gBanimDoneFlag[GetAnimPosition(anim)] = 1;
-                }
-            }
+        }
+        else if (GetAISLayerId(anim) == 0)
+        {
+            type = GetBattleAnimRoundType(anim->nextRoundId * 2 + GetAnimPosition(anim));
+            if (type == ANIM_ROUND_INVALID)
+                gBanimDoneFlag[GetAnimPosition(anim)] = 1;
         }
     }
 }

@@ -26,7 +26,7 @@ void StartSpellAnimFireBreath(struct Anim * anim)
     SpellFx_Begin();
     SpellFx_ClearBG1Position();
 
-    proc = Proc_Start(ProcScr_efxFirebreath, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxFirebreath, PROC_TREE_3);
     proc->anim = anim;
     proc->timer = 0;
     proc->hitted = CheckRoundMiss(GetAnimRoundTypeAnotherSide(anim));
@@ -63,7 +63,7 @@ void efxFirebreath_Loop_Main(struct ProcEfx * proc)
     }
     else if (timer == 15)
     {
-        anim->state3 |= (ANIM_BIT3_TAKE_BACK_ENABLE | ANIM_BIT3_HIT_EFFECT_APPLIED);
+        anim->state3 |= (ANIM_BIT3_C02_BLOCK_END | ANIM_BIT3_C01_BLOCK_END_INBATTLE);
 
         StartBattleAnimHitEffectsDefault(anim, proc->hitted);
 
@@ -101,7 +101,7 @@ void StartSubSpell_efxFirebreathOBJ(struct Anim * anim)
 
     gEfxBgSemaphore++;
 
-    proc = Proc_Start(ProcScr_efxFirebreathOBJ, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxFirebreathOBJ, PROC_TREE_3);
     proc->anim = anim;
     proc->timer = 0;
     proc->terminator = 52;
@@ -193,7 +193,7 @@ void StartSubSpell_efxFirebreathBG(struct Anim * anim)
 
     gEfxBgSemaphore++;
 
-    proc = Proc_Start(ProcScr_efxFirebreathBG, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxFirebreathBG, PROC_TREE_3);
 
     proc->anim = anim;
     proc->timer = 0;
@@ -218,7 +218,7 @@ void efxFirebreathBG_Loop(struct ProcEfxBG * proc)
     if (proc->timer == proc->terminator)
     {
         SpellFx_ClearBG1();
-        SetDefaultColorEffects_();
+        SpellFx_ClearColorEffects();
         gEfxBgSemaphore--;
         Proc_Break(proc);
     }
@@ -308,7 +308,7 @@ void StartSubSpell_efxFirebreathBGCOL(struct Anim * anim)
 
     gEfxBgSemaphore++;
 
-    proc = Proc_Start(ProcScr_efxFirebreathBGCOL, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxFirebreathBGCOL, PROC_TREE_3);
     proc->anim = anim;
     proc->timer = 0;
 
@@ -363,7 +363,7 @@ void StartSpellAnimIceBreath(struct Anim * anim)
     NewEfxSpellCast();
     SpellFx_ClearBG1Position();
 
-    proc = Proc_Start(ProcScr_efxIcebreath, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxIcebreath, PROC_TREE_3);
     proc->anim = anim;
     proc->timer = 0;
     proc->hitted = CheckRoundMiss(GetAnimRoundTypeAnotherSide(anim));
@@ -391,7 +391,7 @@ void efxIcebreath_Loop_Main(struct ProcEfx * proc)
 
     if (timer == 4)
     {
-        anim->state3 |= (ANIM_BIT3_TAKE_BACK_ENABLE | ANIM_BIT3_HIT_EFFECT_APPLIED);
+        anim->state3 |= (ANIM_BIT3_C02_BLOCK_END | ANIM_BIT3_C01_BLOCK_END_INBATTLE);
 
         StartBattleAnimHitEffectsDefault(anim, proc->hitted);
 
@@ -407,7 +407,7 @@ void efxIcebreath_Loop_Main(struct ProcEfx * proc)
     else if (timer == 60)
     {
         SpellFx_Finish();
-        RegisterEfxSpellCastEnd();
+        EndEfxSpellCastAsync();
         Proc_Break(proc);
     }
 
@@ -438,7 +438,7 @@ void StartSubSpell_efxIcebreathOBJ(struct Anim * anim)
 
     gEfxBgSemaphore++;
 
-    proc = Proc_Start(ProcScr_efxIcebreathOBJ, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxIcebreathOBJ, PROC_TREE_3);
     proc->anim = anim;
 
     scrB = AnimScr_IcebreathOBJ_Right;
@@ -488,7 +488,7 @@ void StartSpellAnimDarkBreath(struct Anim * anim)
     SpellFx_Begin();
     SpellFx_ClearBG1Position();
 
-    proc = Proc_Start(ProcScr_efxDarkbreath, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxDarkbreath, PROC_TREE_3);
     proc->anim = anim;
     proc->timer = 0;
     proc->hitted = CheckRoundMiss(GetAnimRoundTypeAnotherSide(anim));
@@ -520,7 +520,7 @@ void efxDarkbreath_Loop_Main(struct ProcEfx * proc)
 
     if (timer == 4)
     {
-        anim->state3 |= (ANIM_BIT3_TAKE_BACK_ENABLE | ANIM_BIT3_HIT_EFFECT_APPLIED);
+        anim->state3 |= (ANIM_BIT3_C02_BLOCK_END | ANIM_BIT3_C01_BLOCK_END_INBATTLE);
 
         StartBattleAnimHitEffectsDefault(anim, proc->hitted);
 
@@ -600,7 +600,7 @@ void StartSubSpell_efxDarkbreathBG(struct Anim * anim)
 
     gEfxBgSemaphore++;
 
-    proc = Proc_Start(ProcScr_efxDarkbreathBG, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxDarkbreathBG, PROC_TREE_3);
     proc->anim = anim;
     proc->timer = 0;
     proc->frame = 0;
@@ -632,7 +632,7 @@ void efxDarkbreathBG_Loop(struct ProcEfxBG * proc)
         {
             SpellFx_ClearBG1();
             gEfxBgSemaphore--;
-            SetDefaultColorEffects_();
+            SpellFx_ClearColorEffects();
             Proc_Break(proc);
         }
     }
@@ -708,7 +708,7 @@ void StartSubSpell_efxDarkbreathBGCOL(struct Anim * anim)
 
     gEfxBgSemaphore++;
 
-    proc = Proc_Start(ProcScr_efxDarkbreathBGCOL, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxDarkbreathBGCOL, PROC_TREE_3);
     proc->anim = anim;
     proc->timer = 0;
     proc->frame = 0;
@@ -733,7 +733,7 @@ void efxDarkbreathBGCOL_Loop(struct ProcEfxBGCOL * proc)
     {
         if (ret == -1)
         {
-            SetDefaultColorEffects_();
+            SpellFx_ClearColorEffects();
             gEfxBgSemaphore--;
             Proc_Break(proc);
         }
@@ -761,7 +761,7 @@ void StartSubSpell_efxDarkbreathOBJ(struct Anim * anim)
 
     gEfxBgSemaphore++;
 
-    proc = Proc_Start(ProcScr_efxDarkbreathOBJ, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxDarkbreathOBJ, PROC_TREE_3);
     proc->anim = anim;
     proc->timer = 0;
     proc->terminator = 55;

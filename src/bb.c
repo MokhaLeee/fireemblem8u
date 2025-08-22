@@ -153,7 +153,7 @@ void SubtitleHelp_Init(struct SubtitleHelpProc * proc)
     proc->textOffset = 31;
     proc->textShowCnt = 6;
 
-    Proc_Start(gProcScr_SubtitleHelpDarkener, PROC_TREE_3);
+    SpawnProc(gProcScr_SubtitleHelpDarkener, PROC_TREE_3);
 
     return;
 }
@@ -209,7 +209,7 @@ struct ProcCmd CONST_DATA gProcScr_SubtitleHelp[] = {
 void StartSubtitleHelp(ProcPtr parent, const char * string) {
 
     if (gPlaySt.config.noSubtitleHelp != 1) {
-        struct SubtitleHelpProc* proc = Proc_Start(gProcScr_SubtitleHelp, parent);
+        struct SubtitleHelpProc* proc = SpawnProc(gProcScr_SubtitleHelp, parent);
 
         proc->string = string;
 
@@ -238,7 +238,7 @@ void sub_8035770(ProcPtr parent, const char * string)
 
     proc = Proc_Find(gProcScr_SubtitleHelp);
     if (proc == 0) {
-        proc = Proc_Start(gProcScr_SubtitleHelp, parent);
+        proc = SpawnProc(gProcScr_SubtitleHelp, parent);
     }
 
     proc->string = string;

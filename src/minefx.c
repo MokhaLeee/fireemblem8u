@@ -46,5 +46,5 @@ void StartMineAnim(ProcPtr parent, int x, int y)
     Decompress(Img_MineFx, OBJ_CHR_ADDR(OBJCHR_MINEFX));
     ApplyPalette(Pal_MineFx, OBJPAL_MINEFX);
     APProc_Create(SpritAnim_MineFx, x, y, 0x5180, 0, 0);
-    Proc_Start(ProcScr_MineFx, parent);
+    SpawnProc(ProcScr_MineFx, parent);
 }

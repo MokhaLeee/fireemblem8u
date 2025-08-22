@@ -42,7 +42,7 @@ void sub_8076464(struct ProcEkrHensei *proc);
 
 void NewEkrHenseiInitPROC(void)
 {
-    Proc_Start(ProcScr_ekrHenseiInit, PROC_TREE_3);
+    SpawnProc(ProcScr_ekrHenseiInit, PROC_TREE_3);
 }
 
 CONST_DATA struct ProcCmd ProcScr_ekrHenseiInit[] = {
@@ -112,7 +112,7 @@ CONST_DATA struct ProcCmd ProcScr_ekrHenseiEnd[] = {
 
 void NewEkrHenseiEnd(void)
 {
-    Proc_Start(ProcScr_ekrHenseiEnd, PROC_TREE_3);
+    SpawnProc(ProcScr_ekrHenseiEnd, PROC_TREE_3);
 }
 
 void sub_8076484(struct ProcEkrHensei *proc)

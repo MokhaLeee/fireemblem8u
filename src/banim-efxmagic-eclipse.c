@@ -27,7 +27,7 @@ void StartSpellAnimEclipse(struct Anim * anim)
     NewEfxSpellCast();
     SpellFx_ClearBG1Position();
 
-    proc = Proc_Start(ProcScr_efxHazymoon, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxHazymoon, PROC_TREE_3);
     proc->anim = anim;
     proc->timer = 0;
     proc->hitted = CheckRoundMiss(GetAnimRoundTypeAnotherSide(anim));
@@ -78,7 +78,7 @@ void efxHazymoon_Loop_Main(struct ProcEfx * proc)
     {
         PlaySFX(0x2E2, 0x100, anim->xPosition, 1);
         NewEfxFlashBgWhite(anim, 10);
-        anim->state3 |= (ANIM_BIT3_TAKE_BACK_ENABLE | ANIM_BIT3_HIT_EFFECT_APPLIED);
+        anim->state3 |= (ANIM_BIT3_C02_BLOCK_END | ANIM_BIT3_C01_BLOCK_END_INBATTLE);
         StartBattleAnimHitEffectsDefault(anim, proc->hitted);
         if (!proc->hitted)
         {
@@ -93,7 +93,7 @@ void efxHazymoon_Loop_Main(struct ProcEfx * proc)
     else if (proc->timer == duration + 270)
     {
         SpellFx_Finish();
-        RegisterEfxSpellCastEnd();
+        EndEfxSpellCastAsync();
         Proc_Break(proc);
     }
 
@@ -188,7 +188,7 @@ void StartSubSpell_efxHazymoonBG_A(struct Anim * anim)
 
     gEfxBgSemaphore++;
 
-    proc = Proc_Start(ProcScr_efxHazymoonBG, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxHazymoonBG, PROC_TREE_3);
     proc->anim = anim;
     proc->timer = 0;
 
@@ -263,7 +263,7 @@ void StartSubSpell_efxHazymoonBG_B(struct Anim * anim)
 
     gEfxBgSemaphore++;
 
-    proc = Proc_Start(ProcScr_efxHazymoonBG, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxHazymoonBG, PROC_TREE_3);
     proc->anim = anim;
     proc->timer = 0;
 
@@ -311,7 +311,7 @@ void StartSubSpell_efxHazymoonBG_C(struct Anim * anim)
 
     gEfxBgSemaphore++;
 
-    proc = Proc_Start(ProcScr_efxHazymoonBG, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxHazymoonBG, PROC_TREE_3);
     proc->anim = anim;
     proc->timer = 0;
 
@@ -357,7 +357,7 @@ void efxHazymoonBG_Loop(struct ProcEfxEclipseBG * proc)
         {
             SpellFx_ClearBG1();
             gEfxBgSemaphore--;
-            SetDefaultColorEffects_();
+            SpellFx_ClearColorEffects();
             Proc_Break(proc);
         }
     }
@@ -395,7 +395,7 @@ void StartSubSpell_efxHazymoonOBJ2(struct Anim * anim)
 
     gEfxBgSemaphore++;
 
-    proc = Proc_Start(ProcScr_efxHazymoonOBJ2, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxHazymoonOBJ2, PROC_TREE_3);
     proc->anim = anim;
     otherAnim = GetAnimAnotherSide(anim);
     proc->timer = 0;
@@ -526,7 +526,7 @@ void StartSubSpell_efxHazymoonOBJ3(struct Anim * anim)
 
     gEfxBgSemaphore++;
 
-    proc = Proc_Start(ProcScr_efxHazymoonOBJ3, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxHazymoonOBJ3, PROC_TREE_3);
     proc->anim = anim;
 
     proc->timer = 0;
@@ -605,7 +605,7 @@ void StartSubSpell_efxHazymoonOBJ3RND(struct Anim * anim, int x, int y)
 
     gEfxBgSemaphore++;
 
-    proc = Proc_Start(ProcScr_efxHazymoonOBJ3RND, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxHazymoonOBJ3RND, PROC_TREE_3);
     proc->anim = anim;
     proc->timer = 0;
 

@@ -39,7 +39,7 @@ void StartSubSpell_efxGespenstBG4(struct Anim * anim, int terminator)
 
     gEfxBgSemaphore++;
 
-    proc = Proc_Start(ProcScr_efxGespenstBG4, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxGespenstBG4, PROC_TREE_3);
     proc->anim = anim;
     proc->timer = 0;
     proc->terminator = terminator;
@@ -54,7 +54,7 @@ void StartSubSpell_efxGespenstBG4(struct Anim * anim, int terminator)
     BG_EnableSyncByMask(BG1_SYNC_BIT);
     SpellFx_SetSomeColorEffect();
 
-    BG_SetPosition(BG_1, 0, 0);
+    SetBgOffset(BG_1, 0, 0);
     SetWinEnable(0, 0, 0);
 
     return;
@@ -65,7 +65,7 @@ void efxGespenstBG4_OnEnd(void)
 {
     SpellFx_ClearBG1();
     gEfxBgSemaphore--;
-    SetDefaultColorEffects_();
+    SpellFx_ClearColorEffects();
     return;
 }
 
@@ -130,7 +130,7 @@ void StartSubSpell_efxGespenstBGCOL2(struct Anim * anim)
 
     gEfxBgSemaphore++;
 
-    proc = Proc_Start(ProcScr_efxGespenstBGCOL2, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxGespenstBGCOL2, PROC_TREE_3);
     proc->anim = anim;
     proc->timer = 0;
     proc->timer2 = 0;

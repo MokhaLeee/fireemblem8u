@@ -387,9 +387,9 @@ void PrepItemUse_InitDisplay(struct ProcPrepItemUse *proc)
     LoadObjUIGfx();
     ApplyUnitSpritePalettes();
 
-    BG_SetPosition(BG_0, 0,0);
-    BG_SetPosition(BG_1, 0,0);
-    BG_SetPosition(BG_2, 0,0);
+    SetBgOffset(BG_0, 0,0);
+    SetBgOffset(BG_1, 0,0);
+    SetBgOffset(BG_2, 0,0);
 
     LoadHelpBoxGfx(OBJ_VRAM1, -1);
     LoadIconPalettes(4);
@@ -741,7 +741,7 @@ void sub_809CCE0(void)
 void StartPrepItemUseScreen(struct Unit *unit, ProcPtr parent)
 {
     struct ProcPrepItemUse *proc;
-    proc = Proc_StartBlocking(ProcScr_PrepItemUseScreen, parent);
+    proc = SpawnProcBlocking(ProcScr_PrepItemUseScreen, parent);
     proc->unit = unit;
 }
 
@@ -766,11 +766,11 @@ PROC_LABEL(PROC_LABEL_PREPITEMUSE_EXEC_ITEMEFFECT),
     PROC_CALL(PrepItemUse_HandleItemEffect),
 
     // Default effect
-    PROC_START_CHILD_BLOCKING(ProcScr_PrepItemUseBooster),
+    SpawnProc_CHILD_BLOCKING(ProcScr_PrepItemUseBooster),
     PROC_GOTO(PROC_LABEL_PREPITEMUSE_MAIN),
 
 PROC_LABEL(PROC_LABEL_PREPITEMUSE_EXEC_JUNA),
-    PROC_START_CHILD_BLOCKING(ProcScr_PrepItemUseJunaFruit),
+    SpawnProc_CHILD_BLOCKING(ProcScr_PrepItemUseJunaFruit),
     PROC_GOTO(PROC_LABEL_PREPITEMUSE_MAIN),
 
 PROC_LABEL(PROC_LABEL_PREPITEMUSE_EXEC_PROMO),

@@ -28,7 +28,7 @@ void StartSpellAnimFenrir(struct Anim * anim)
     NewEfxSpellCast();
     SpellFx_ClearBG1Position();
 
-    proc = Proc_Start(ProcScr_efxFenrir, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxFenrir, PROC_TREE_3);
     proc->anim = anim;
     proc->timer = 0;
     proc->hitted = CheckRoundMiss(GetAnimRoundTypeAnotherSide(anim));
@@ -113,7 +113,7 @@ void efxFenrir_Loop_Main(struct ProcEfx * proc)
         NewEfxFlashBgWhite(anim, 10);
         StartSubSpell_efxFenrirOBJ2(anim);
 
-        anim->state3 |= (ANIM_BIT3_TAKE_BACK_ENABLE | ANIM_BIT3_HIT_EFFECT_APPLIED);
+        anim->state3 |= (ANIM_BIT3_C02_BLOCK_END | ANIM_BIT3_C01_BLOCK_END_INBATTLE);
 
         StartBattleAnimHitEffectsDefault(anim, proc->hitted);
         PlaySFX(0x133, 0x100, anim->xPosition, 1);
@@ -131,7 +131,7 @@ void efxFenrir_Loop_Main(struct ProcEfx * proc)
     else if ((proc->timer != duration + 290) && (proc->timer == duration + 300))
     {
         SpellFx_Finish();
-        RegisterEfxSpellCastEnd();
+        EndEfxSpellCastAsync();
         Proc_Break(proc);
     }
 
@@ -159,7 +159,7 @@ void StartSubSpell_efxFenrirBG(struct Anim * anim, int terminator)
 
     gEfxBgSemaphore++;
 
-    proc = Proc_Start(ProcScr_efxFenrirBG, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxFenrirBG, PROC_TREE_3);
     proc->anim = anim;
     proc->timer = 0;
     proc->terminator = terminator;
@@ -184,7 +184,7 @@ void efxFenrirBG_OnEnd(void)
 {
     SpellFx_ClearBG1();
     gEfxBgSemaphore--;
-    SetDefaultColorEffects_();
+    SpellFx_ClearColorEffects();
     return;
 }
 
@@ -248,7 +248,7 @@ void StartSubSpell_efxFenrirBGCOL(struct Anim * anim, int terminator)
 
     gEfxBgSemaphore++;
 
-    proc = Proc_Start(ProcScr_efxFenrirBGCOL, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxFenrirBGCOL, PROC_TREE_3);
     proc->anim = anim;
     proc->timer = 0;
     proc->timer2 = 0;
@@ -309,7 +309,7 @@ void StartSubSpell_efxFenrirOBJ(struct Anim * anim, int terminator)
 
     gEfxBgSemaphore++;
 
-    proc = Proc_Start(ProcScr_efxFenrirOBJ, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxFenrirOBJ, PROC_TREE_3);
     proc->anim = anim;
     proc->timer = 0;
     proc->terminator = terminator;
@@ -536,7 +536,7 @@ void StartSubSpell_efxFenrirBG2_A(struct Anim * anim)
 
     gEfxBgSemaphore++;
 
-    proc = Proc_Start(ProcScr_efxFenrirBG2, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxFenrirBG2, PROC_TREE_3);
     proc->anim = anim;
     proc->timer = 0;
 
@@ -551,17 +551,17 @@ void StartSubSpell_efxFenrirBG2_A(struct Anim * anim)
     SpellFx_RegisterBgPal(Pal_FenrirBg, PLTT_SIZE_4BPP);
     SpellFx_SetSomeColorEffect();
 
-    BG_SetPosition(BG_1, 0, 0);
+    SetBgOffset(BG_1, 0, 0);
 
     if (gEkrDistanceType != EKR_DISTANCE_CLOSE)
     {
         if (GetAnimPosition(proc->anim) == EKR_POS_L)
         {
-            BG_SetPosition(BG_1, 24, 0);
+            SetBgOffset(BG_1, 24, 0);
         }
         else
         {
-            BG_SetPosition(BG_1, 232, 0);
+            SetBgOffset(BG_1, 232, 0);
         }
     }
 
@@ -575,7 +575,7 @@ void StartSubSpell_efxFenrirBG2_B(struct Anim * anim)
 
     gEfxBgSemaphore++;
 
-    proc = Proc_Start(ProcScr_efxFenrirBG2, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxFenrirBG2, PROC_TREE_3);
     proc->anim = anim;
     proc->timer = 0;
 
@@ -594,11 +594,11 @@ void StartSubSpell_efxFenrirBG2_B(struct Anim * anim)
     {
         if (GetAnimPosition(proc->anim) == EKR_POS_L)
         {
-            BG_SetPosition(BG_1, 24, 0);
+            SetBgOffset(BG_1, 24, 0);
         }
         else
         {
-            BG_SetPosition(BG_1, 232, 0);
+            SetBgOffset(BG_1, 232, 0);
         }
     }
 
@@ -646,7 +646,7 @@ void efxFenrirBG2_Loop(struct ProcEfxEclipseBG * proc)
         {
             SpellFx_ClearBG1();
             gEfxBgSemaphore--;
-            SetDefaultColorEffects_();
+            SpellFx_ClearColorEffects();
             Proc_Break(proc);
         }
     }
@@ -672,7 +672,7 @@ void StartSubSpell_efxFenrirOBJ2(struct Anim * anim)
 
     gEfxBgSemaphore++;
 
-    proc = Proc_Start(ProcScr_efxFenrirOBJ2, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxFenrirOBJ2, PROC_TREE_3);
     proc->anim = anim;
     proc->timer = 0;
     proc->terminator = 0;
@@ -731,7 +731,7 @@ void StartSubSpell_efxFenrirOBJ2Chiri(struct Anim * anim, int idx)
 
     gEfxBgSemaphore++;
 
-    proc = Proc_Start(ProcScr_efxFenrirOBJ2Chiri, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxFenrirOBJ2Chiri, PROC_TREE_3);
     proc->anim = anim;
     proc->timer = 0;
     proc->terminator = 30;

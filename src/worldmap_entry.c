@@ -248,11 +248,11 @@ ProcPtr StartGmBaseEntry(int a, int b, ProcPtr parent)
 
     if (parent != 0)
     {
-        proc = Proc_StartBlocking(gProcScr_GmapBaseEntry, parent);
+        proc = SpawnProcBlocking(gProcScr_GmapBaseEntry, parent);
     }
     else
     {
-        proc = Proc_Start(gProcScr_GmapBaseEntry, PROC_TREE_3);
+        proc = SpawnProc(gProcScr_GmapBaseEntry, PROC_TREE_3);
     }
 
     proc->unk_29 = a;
@@ -389,11 +389,11 @@ ProcPtr sub_80BFCC8(int a, int b, ProcPtr parent)
 
     if (parent)
     {
-        proc = Proc_StartBlocking(gProcScr_GmapMuEntry1, parent);
+        proc = SpawnProcBlocking(gProcScr_GmapMuEntry1, parent);
     }
     else
     {
-        proc = Proc_Start(gProcScr_GmapMuEntry1, PROC_TREE_3);
+        proc = SpawnProc(gProcScr_GmapMuEntry1, PROC_TREE_3);
     }
 
     proc->unk_29 = a;
@@ -653,11 +653,11 @@ ProcPtr StartGmapMuEntry(ProcPtr parent)
     struct GmapMuEntryProc * proc;
     if (parent)
     {
-        proc = Proc_StartBlocking(gProcScr_GmapMuEntry2, parent);
+        proc = SpawnProcBlocking(gProcScr_GmapMuEntry2, parent);
     }
     else
     {
-        proc = Proc_Start(gProcScr_GmapMuEntry2, PROC_TREE_3);
+        proc = SpawnProc(gProcScr_GmapMuEntry2, PROC_TREE_3);
     }
 
     // return proc; // BUG

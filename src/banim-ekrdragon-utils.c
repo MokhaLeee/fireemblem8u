@@ -138,7 +138,7 @@ void NewEkrDragonQuake(struct EkrDragonQuakePriv *priv, int b, int c, ProcPtr pa
 {
     struct ProcEkrDragonQuake * proc;
     
-    proc = Proc_Start(ProcScr_ekrDragonQuake, parent);
+    proc = SpawnProc(ProcScr_ekrDragonQuake, parent);
     proc->priv = priv;
     proc->subproc = NewEfxQuakePure(c, 0);
     proc->unk2C = 0;
@@ -153,8 +153,8 @@ void EkrDragonQuakeMain(struct ProcEkrDragonQuake * proc)
     struct EkrDragonQuakePriv * priv = proc->priv;
 
     do {
-        BG_SetPosition(BG_2, gEkrBg2QuakeVec.x, gEkrBg2QuakeVec.y);
-        BG_SetPosition(
+        SetBgOffset(BG_2, gEkrBg2QuakeVec.x, gEkrBg2QuakeVec.y);
+        SetBgOffset(
             BG_0,
             gEkrBg2QuakeVec.x + gEkrBg0QuakeVec.x,
             gEkrBg2QuakeVec.y + gEkrBg0QuakeVec.y);
@@ -167,7 +167,7 @@ void EkrDragonQuakeMain(struct ProcEkrDragonQuake * proc)
             -(gEkrBg2QuakeVec.x + gEkrBg0QuakeVec.x),
             -(gEkrBg2QuakeVec.y + gEkrBg0QuakeVec.y));
     
-        BG_SetPosition(BG_3, gEkrBg2QuakeVec.x, gEkrBg2QuakeVec.y);
+        SetBgOffset(BG_3, gEkrBg2QuakeVec.x, gEkrBg2QuakeVec.y);
     } while (0);
 
     x1 = (gEkrXPosReal[POS_L] - gEkrBg2QuakeVec.x) - gEkrBgPosition;
@@ -187,11 +187,11 @@ void EkrDragonQuakeMain(struct ProcEkrDragonQuake * proc)
 
     if (++proc->unk2C > proc->unk2E)
     {
-        BG_SetPosition(BG_2, 0, 0);
-        BG_SetPosition(BG_0, gEkrBg0QuakeVec.x, gEkrBg0QuakeVec.y);
+        SetBgOffset(BG_2, 0, 0);
+        SetBgOffset(BG_0, gEkrBg0QuakeVec.x, gEkrBg0QuakeVec.y);
         EkrGauge_Setxy323A(-gEkrBg0QuakeVec.x, -gEkrBg0QuakeVec.y);
         EkrDispUP_SetPositionSync(-gEkrBg0QuakeVec.x, -gEkrBg0QuakeVec.y);
-        BG_SetPosition(BG_3, 0, 0);
+        SetBgOffset(BG_3, 0, 0);
 
         x1 = gEkrXPosReal[POS_L] - gEkrBgPosition;
         x2 = gEkrXPosReal[POS_R] - gEkrBgPosition;
@@ -225,7 +225,7 @@ struct ProcCmd CONST_DATA ProcScr_ekrWhiteINOUT[] = {
 void NewEkrWhiteINOUT(int dura1, int dura2, int dura3)
 {
     struct ProcEkrDragonScreenFlashing * proc;
-    proc = Proc_Start(ProcScr_ekrWhiteINOUT, PROC_TREE_VSYNC);
+    proc = SpawnProc(ProcScr_ekrWhiteINOUT, PROC_TREE_VSYNC);
 
     proc->timer = 0;
     proc->dura1 = dura1;

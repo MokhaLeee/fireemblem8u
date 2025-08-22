@@ -288,7 +288,7 @@ void BMapVSync_OnLoop(struct BMVSyncProc* proc) {
 
 void BMapVSync_Start(void) {
     BMapVSync_InitMapAnimations(
-        Proc_Start(sProc_BMVSync, PROC_TREE_VSYNC));
+        SpawnProc(sProc_BMVSync, PROC_TREE_VSYNC));
 
     WfxInit();
     gBmSt.gameGfxSemaphore = 0;
@@ -1061,7 +1061,7 @@ void RestartBattleMap(void) {
     BMapVSync_End();
     BMapVSync_Start();
 
-    Proc_Start(gProc_MapTask, PROC_TREE_4);
+    SpawnProc(gProc_MapTask, PROC_TREE_4);
 
     // TODO: MACRO?
     gPaletteBuffer[PAL_BACKDROP_OFFSET] = 0;
@@ -1167,7 +1167,7 @@ void BMapDispResume_FromBattleDelayed(void) {
     StartMu(&gBattleActor.unit);
     SetAutoMuDefaultFacing();
 
-    Proc_Start(sProc_DelayedBMapDispResume, PROC_TREE_3);
+    SpawnProc(sProc_DelayedBMapDispResume, PROC_TREE_3);
 }
 
 void InitMoreBMapGraphics(void) {
@@ -1188,13 +1188,13 @@ void RefreshBMapGraphics(void) {
 }
 
 struct BMapMainProc* StartBMapMain(struct GameCtrlProc* gameCtrl) {
-    struct BMapMainProc* mapMain = Proc_Start(gProc_BMapMain, PROC_TREE_2);
+    struct BMapMainProc* mapMain = SpawnProc(gProc_BMapMain, PROC_TREE_2);
 
     mapMain->gameCtrl = gameCtrl;
     gameCtrl->proc_lockCnt++;
 
     BMapVSync_Start();
-    Proc_Start(gProc_MapTask, PROC_TREE_4);
+    SpawnProc(gProc_MapTask, PROC_TREE_4);
 
     return mapMain;
 }

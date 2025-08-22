@@ -29,7 +29,7 @@ void StartSpellAnimFimbulvetr(struct Anim * anim)
 
     SpellFx_ClearBG1Position();
 
-    proc = Proc_Start(ProcScr_efxFimbulvetr, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxFimbulvetr, PROC_TREE_3);
     proc->anim = anim;
     proc->timer = 0;
     proc->hitted = CheckRoundMiss(GetAnimRoundTypeAnotherSide(anim));
@@ -72,7 +72,7 @@ void efxFimbulvetr_Loop_Main(struct ProcEfx * proc)
     }
     else if (proc->timer == duration + 88)
     {
-        anim->state3 |= (ANIM_BIT3_TAKE_BACK_ENABLE | ANIM_BIT3_HIT_EFFECT_APPLIED);
+        anim->state3 |= (ANIM_BIT3_C02_BLOCK_END | ANIM_BIT3_C01_BLOCK_END_INBATTLE);
         StartBattleAnimHitEffectsDefault(anim, proc->hitted);
 
         if (!proc->hitted)
@@ -83,7 +83,7 @@ void efxFimbulvetr_Loop_Main(struct ProcEfx * proc)
     else if ((proc->timer != duration + 136) && (proc->timer == duration + 161))
     {
         SpellFx_Finish();
-        RegisterEfxSpellCastEnd();
+        EndEfxSpellCastAsync();
         Proc_Break(proc);
     }
 
@@ -163,7 +163,7 @@ void StartSubSpell_efxFimbulvetrBGTR(struct Anim * anim)
 
     gEfxBgSemaphore++;
 
-    proc = Proc_Start(ProcScr_efxFimbulvetrBGTR, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxFimbulvetrBGTR, PROC_TREE_3);
     proc->anim = anim;
     proc->timer = 0;
     proc->frame = 0;
@@ -178,11 +178,11 @@ void StartSubSpell_efxFimbulvetrBGTR(struct Anim * anim)
     {
         if (GetAnimPosition(proc->anim) == EKR_POS_L)
         {
-            BG_SetPosition(BG_1, 24, 0);
+            SetBgOffset(BG_1, 24, 0);
         }
         else
         {
-            BG_SetPosition(BG_1, 232, 0);
+            SetBgOffset(BG_1, 232, 0);
         }
     }
 
@@ -210,7 +210,7 @@ void efxFimbulvetrBGTR_Loop(struct ProcEfxBG * proc)
         {
             SpellFx_ClearBG1();
             gEfxBgSemaphore--;
-            SetDefaultColorEffects_();
+            SpellFx_ClearColorEffects();
             Proc_Break(proc);
         }
     }
@@ -285,7 +285,7 @@ void StartSubSpell_efxFimbulvetrBG(struct Anim * anim)
 
     gEfxBgSemaphore++;
 
-    proc = Proc_Start(ProcScr_efxFimbulvetrBG, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxFimbulvetrBG, PROC_TREE_3);
     proc->anim = anim;
     proc->timer = 0;
     proc->frame = 0;
@@ -300,11 +300,11 @@ void StartSubSpell_efxFimbulvetrBG(struct Anim * anim)
     {
         if (GetAnimPosition(proc->anim) == EKR_POS_L)
         {
-            BG_SetPosition(BG_1, 232, 0);
+            SetBgOffset(BG_1, 232, 0);
         }
         else
         {
-            BG_SetPosition(BG_1, 24, 0);
+            SetBgOffset(BG_1, 24, 0);
         }
     }
 
@@ -322,11 +322,11 @@ void efxFimbulvetrBG_Loop(struct ProcEfxBG * proc)
     {
         if (GetAnimPosition(proc->anim) == EKR_POS_L)
         {
-            BG_SetPosition(BG_1, 24, 0);
+            SetBgOffset(BG_1, 24, 0);
         }
         else
         {
-            BG_SetPosition(BG_1, 232, 0);
+            SetBgOffset(BG_1, 232, 0);
         }
     }
 
@@ -346,7 +346,7 @@ void efxFimbulvetrBG_Loop(struct ProcEfxBG * proc)
         {
             SpellFx_ClearBG1();
             gEfxBgSemaphore--;
-            SetDefaultColorEffects_();
+            SpellFx_ClearColorEffects();
             Proc_Break(proc);
         }
     }
@@ -373,7 +373,7 @@ void StartSubSpell_efxFimbulvetrOBJ(struct Anim * anim)
 
     gEfxBgSemaphore++;
 
-    proc = Proc_Start(ProcScr_efxFimbulvetrOBJ, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxFimbulvetrOBJ, PROC_TREE_3);
     proc->anim = anim;
     proc->timer = 0;
 
@@ -420,7 +420,7 @@ void StartSubSpell_efxFimbulvetrOBJ2(struct Anim * anim)
 
     gEfxBgSemaphore++;
 
-    proc = Proc_Start(ProcScr_efxFimbulvetrOBJ2, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxFimbulvetrOBJ2, PROC_TREE_3);
     proc->anim = anim;
     proc->timer = 0;
     proc->terminator = 0;
@@ -472,7 +472,7 @@ void StartSubSpell_efxFimbulvetrOBJ2Fall(struct Anim * anim, int unk)
 
     gEfxBgSemaphore++;
 
-    proc = Proc_Start(ProcScr_efxFimbulvetrOBJ2Fall, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxFimbulvetrOBJ2Fall, PROC_TREE_3);
     proc->anim = anim;
     proc->timer = 0;
     proc->terminator = 100;

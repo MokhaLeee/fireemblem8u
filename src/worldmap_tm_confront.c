@@ -228,11 +228,11 @@ ProcPtr StartWorldmapSkirmishAnim(int a, int b, ProcPtr parent)
 
     if (parent != NULL)
     {
-        proc = Proc_StartBlocking(ProcScr_GmapTmConfront, parent);
+        proc = SpawnProcBlocking(ProcScr_GmapTmConfront, parent);
     }
     else
     {
-        proc = Proc_Start(ProcScr_GmapTmConfront, PROC_TREE_3);
+        proc = SpawnProc(ProcScr_GmapTmConfront, PROC_TREE_3);
     }
 
     proc->unk_2e[1] = a;

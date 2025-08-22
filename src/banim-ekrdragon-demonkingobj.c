@@ -96,7 +96,7 @@ void sub_8077EAC(int x, int y)
         break;
     }
 
-    BG_SetPosition(BG_1, x, y);
+    SetBgOffset(BG_1, x, y);
 }
 
 CONST_DATA struct ProcCmd ProcScr_08801840[] = {
@@ -108,7 +108,7 @@ CONST_DATA struct ProcCmd ProcScr_08801840[] = {
 void sub_8077EEC(int ref, ProcPtr parent)
 {
     struct Proc08801840 *proc;
-    proc = Proc_Start(ProcScr_08801840, parent);
+    proc = SpawnProc(ProcScr_08801840, parent);
     proc->ref = ref;
 }
 
@@ -194,7 +194,7 @@ void NewEkrSelfThunder(struct Anim *anim)
     struct ProcEfxDKfx *proc;
     PlaySFX(0x37E, 0x100,0x78, 0x0);
     SpellFx_ClearBG1Position();
-    proc = Proc_Start(ProcScr_ekrSelfThunder, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_ekrSelfThunder, PROC_TREE_3);
     proc->anim = anim;
     proc->timer = 0;
 }
@@ -244,7 +244,7 @@ CONST_DATA struct ProcCmd ProcScr_ekrSelfThunderBG[] = {
 void NewEkrSelfThunderBG(struct Anim *anim)
 {
     struct ProcSelfThunderBG *proc;
-    proc = Proc_Start(ProcScr_ekrSelfThunderBG, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_ekrSelfThunderBG, PROC_TREE_3);
     proc->anim = anim;
     SpellFx_SetSomeColorEffect();
 }
@@ -293,7 +293,7 @@ void EfxSelfThunderBGMain(struct ProcSelfThunderBG *proc)
 
         if (proc->timer == -1) {
             SpellFx_ClearBG1();
-            SetDefaultColorEffects_();
+            SpellFx_ClearColorEffects();
             Proc_Break(proc);
             return;
         }

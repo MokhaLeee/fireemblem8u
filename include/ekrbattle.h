@@ -409,7 +409,7 @@ extern int gEkrDebugUnk2;
 extern int gCtrlC01Blocking;
 
 #define C01_BLOCKING_PRE_BATTLE(anim) (gCtrlC01Blocking == 1)
-#define C01_BLOCKING_IN_BATTLE(anim) ((anim)->state3 & ANIM_BIT3_C01_BLOCKING_IN_BATTLE)
+#define C01_BLOCKING_IN_BATTLE(anim) ((anim)->state3 & ANIM_BIT3_C01_BLOCK_END_PREBATTLE)
 
 extern s16 gEkrXPosReal[2];
 extern s16 gEkrYPosReal[2];
@@ -848,7 +848,7 @@ void SpellFx_Finish(void);
 void SpellFx_ClearBG1Position(void);
 void SpellFx_ClearBG1(void);
 void SpellFx_SetSomeColorEffect(void);
-void SetDefaultColorEffects_(void);
+void SpellFx_ClearColorEffects(void);
 void StartBattleAnimHitEffectsDefault(struct Anim * anim, int type);
 void sub_8055288(struct Anim * anim, int type);
 void StartBattleAnimHitEffects(struct Anim * anim, int type, int a, int b);

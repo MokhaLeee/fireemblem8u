@@ -263,7 +263,7 @@ void ExecWarpStaff(ProcPtr proc) {
     BattleApplyItemEffect(proc);
     BeginBattleAnimations();
 
-    Proc_StartBlocking(ProcScr_PostWarpStaffAction, proc);
+    SpawnProcBlocking(ProcScr_PostWarpStaffAction, proc);
 
     return;
 }
@@ -1050,12 +1050,12 @@ void ActionStaffDoorChestUseItem(ProcPtr proc) {
     }
 
     if (itemId == ITEM_NIGHTMARE) {
-        Proc_StartBlocking(ProcScr_ExecNightmareStaff, proc);
+        SpawnProcBlocking(ProcScr_ExecNightmareStaff, proc);
         return;
     }
 
     if (gBattleTarget.statusOut >= 0) {
-        Proc_StartBlocking(ProcScr_SetTargetStatus, proc);
+        SpawnProcBlocking(ProcScr_SetTargetStatus, proc);
     }
 
     return;
@@ -1077,7 +1077,7 @@ void ActionPick(ProcPtr proc) {
     gBattleTarget.statusOut = -1;
 
     if (gBattleTarget.statusOut >= 0) {
-        Proc_StartBlocking(ProcScr_SetTargetStatus, proc);
+        SpawnProcBlocking(ProcScr_SetTargetStatus, proc);
     }
 
     return;

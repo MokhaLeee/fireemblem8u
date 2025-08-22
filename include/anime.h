@@ -71,7 +71,7 @@ enum Anim_state2 {
 #define ANIM_BIT2_CMD_MASK (ANIM_BIT2_COMMAND | ANIM_BIT2_FRAME | ANIM_BIT2_STOP | ANIM_BIT2_8000)
 
 enum Anim_state3 {
-    ANIM_BIT3_TAKE_BACK_ENABLE   = (1 << 0),
+    ANIM_BIT3_C02_BLOCK_END   = (1 << 0),
     ANIM_BIT3_NEXT_ROUND_START   = (1 << 1),
 
     /**
@@ -79,8 +79,8 @@ enum Anim_state3 {
      * set bit when hit effect applied
      * and then cleared after hitted
      */
-    ANIM_BIT3_C01_BLOCKING_IN_BATTLE = (1 << 2),
-    ANIM_BIT3_HIT_EFFECT_APPLIED = (1 << 3),
+    ANIM_BIT3_C01_BLOCK_END_PREBATTLE = (1 << 2),
+    ANIM_BIT3_C01_BLOCK_END_INBATTLE = (1 << 3),
     ANIM_BIT3_0010               = (1 << 4),
     ANIM_BIT3_BLOCKING           = (1 << 5),
     ANIM_BIT3_BLOCKEND           = (1 << 6),

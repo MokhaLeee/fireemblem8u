@@ -29,8 +29,8 @@ void DrawMAExpBar(int arg0, int arg1, int arg2)
 
 void ProcMAExpBar_OnDraw(struct MAExpBarProc* proc)
 {
-    BG_SetPosition(0, 0, 0);
-    BG_SetPosition(1, 0, 0);
+    SetBgOffset(0, 0, 0);
+    SetBgOffset(1, 0, 0);
 
     // TODO: ApplyTileImages macros?
     // TODO: BM_BGCHR_...?

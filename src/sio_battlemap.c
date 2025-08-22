@@ -522,7 +522,7 @@ void sub_8049828(void)
     sub_8049788();
     sub_804B38C();
 
-    Proc_Start(gProc_MapTask, PROC_TREE_4);
+    SpawnProc(gProc_MapTask, PROC_TREE_4);
     BMapVSync_Start();
     sub_80497CC();
 
@@ -565,11 +565,11 @@ void sub_8049964(ProcPtr parent)
         case 1:
             if (gPlaySt.faction == FACTION_BLUE)
             {
-                Proc_StartBlocking(gUnknown_085AA2FC, parent);
+                SpawnProcBlocking(gUnknown_085AA2FC, parent);
             }
             else
             {
-                Proc_StartBlocking(gUnknown_085AA5BC, parent);
+                SpawnProcBlocking(gUnknown_085AA5BC, parent);
             }
 
             break;
@@ -577,11 +577,11 @@ void sub_8049964(ProcPtr parent)
         case 2:
             if (gPlaySt.faction == gSioSt->selfId)
             {
-                Proc_StartBlocking(gUnknown_085AA2FC, parent);
+                SpawnProcBlocking(gUnknown_085AA2FC, parent);
             }
             else
             {
-                Proc_StartBlocking(gUnknown_085AA4CC, parent);
+                SpawnProcBlocking(gUnknown_085AA4CC, parent);
             }
 
             break;
@@ -1273,7 +1273,7 @@ PROC_LABEL(1),
 //! FE8U = 0x0804A430
 void sub_804A430(ProcPtr parent)
 {
-    Proc_StartBlocking(gUnknown_085AA1AC, parent);
+    SpawnProcBlocking(gUnknown_085AA1AC, parent);
     Proc_Break(parent);
     return;
 }
@@ -1403,7 +1403,7 @@ void sub_804A614(ProcPtr proc)
 
     gBmSt.gameStateBits |= BM_FLAG_LINKARENA;
 
-    Proc_StartBlocking(gUnknown_085AA75C, proc);
+    SpawnProcBlocking(gUnknown_085AA75C, proc);
     Proc_Break(proc);
 
     return;
@@ -1443,7 +1443,7 @@ void sub_804A6A4(ProcPtr proc)
     }
 
     sub_80492D8();
-    BG_SetPosition(2, 0, 0);
+    SetBgOffset(2, 0, 0);
 
     if ((GetUnitCurrentHp(unitA) == gBattleActor.hpInitial) && (GetUnitCurrentHp(unitB) == gBattleTarget.hpInitial))
     {
@@ -2337,7 +2337,7 @@ PROC_LABEL(1),
 //! FE8U = 0x0804B38C
 void sub_804B38C(void)
 {
-    Proc_Start(gUnknown_085AA24C, PROC_TREE_4);
+    SpawnProc(gUnknown_085AA24C, PROC_TREE_4);
     return;
 }
 
@@ -2826,7 +2826,7 @@ PROC_LABEL(2),
     PROC_CALL(sub_804B6F4),
     PROC_YIELD,
     PROC_CALL(sub_804B3D0),
-    PROC_START_CHILD_BLOCKING(gUnknown_085AA26C),
+    SpawnProc_CHILD_BLOCKING(gUnknown_085AA26C),
     PROC_YIELD,
     PROC_CALL(sub_804B480),
 PROC_LABEL(3),
@@ -2875,7 +2875,7 @@ PROC_LABEL(1),
     PROC_REPEAT(sub_804ABCC),
     PROC_GOTO(2),
 PROC_LABEL(3),
-    PROC_START_CHILD_BLOCKING(gUnknown_085AA26C),
+    SpawnProc_CHILD_BLOCKING(gUnknown_085AA26C),
     PROC_YIELD,
     PROC_WHILE_EXISTS(ProcScr_Popup),
     PROC_CALL(sub_804B554),

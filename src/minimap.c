@@ -1048,8 +1048,8 @@ void Minimap_AdjustDisplay(struct MinimapProc* proc) {
     proc->xScreen = x;
     proc->yScreen = y;
 
-    BG_SetPosition(0, -x, -y);
-    BG_SetPosition(1, -x, -y);
+    SetBgOffset(0, -x, -y);
+    SetBgOffset(1, -x, -y);
 
     return;
 }
@@ -1164,13 +1164,13 @@ void Minimap_Main(ProcPtr proc) {
 
 //! FE8U = 0x080A87C8
 void StartMinimapPlayerPhase() {
-    Proc_Start(gProcScr_Minimap, PROC_TREE_3);
+    SpawnProc(gProcScr_Minimap, PROC_TREE_3);
     return;
 }
 
 //! FE8U = 0x080A87DC
 void StartMinimapPrepPhase(ProcPtr proc) {
-    Proc_StartBlocking(gProcScr_Minimap, proc);
+    SpawnProcBlocking(gProcScr_Minimap, proc);
     return;
 }
 

@@ -265,7 +265,7 @@ void StatusHealEffect_OverlayBg_Init() {
 }
 
 void StatusHealEffect_OverlayBg_Loop() {
-    BG_SetPosition(0, gBmSt.camera.x - (gActiveUnit->xPos * 16), GetGameClock());
+    SetBgOffset(0, gBmSt.camera.x - (gActiveUnit->xPos * 16), GetGameClock());
 
     return;
 }
@@ -474,10 +474,10 @@ void StatusHealEffect_Finish() {
 }
 
 struct ProcCmd CONST_DATA sProcScr_StatusHealEffect[] = {
-    PROC_START_CHILD(sProcScr_StatusHealEffect_OverlayBg),
-    PROC_START_CHILD(sProcScr_StatusHealEffect_BlendedSprite),
-    PROC_START_CHILD(sProcScr_StatusHealEffect_BlendAnim),
-    PROC_START_CHILD(sProcScr_StatusHealEffect_PalAnim),
+    SpawnProc_CHILD(sProcScr_StatusHealEffect_OverlayBg),
+    SpawnProc_CHILD(sProcScr_StatusHealEffect_BlendedSprite),
+    SpawnProc_CHILD(sProcScr_StatusHealEffect_BlendAnim),
+    SpawnProc_CHILD(sProcScr_StatusHealEffect_PalAnim),
 
     PROC_SLEEP(66),
 
@@ -490,12 +490,12 @@ void StartStatusHealEffect(struct Unit* unit, ProcPtr proc) {
     gActiveUnit = unit;
 
     if (proc) {
-        Proc_StartBlocking(sProcScr_StatusHealEffect, proc);
+        SpawnProcBlocking(sProcScr_StatusHealEffect, proc);
         PlaySoundEffect(SONG_AA);
         return;
     }
 
-    Proc_StartBlocking(sProcScr_StatusHealEffect, PROC_TREE_3);
+    SpawnProcBlocking(sProcScr_StatusHealEffect, PROC_TREE_3);
     return;
 }
 

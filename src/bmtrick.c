@@ -23,7 +23,7 @@ struct ProcCmd CONST_DATA gProcScr_UpdateTraps[] =
     PROC_CALL(sub_802EA1C),
 
     PROC_CALL(GenerateDisplayedTrapDamageTargets),
-    PROC_START_CHILD_BLOCKING(gProcScr_TrapDamageDisplay),
+    SpawnProc_CHILD_BLOCKING(gProcScr_TrapDamageDisplay),
 
     PROC_CALL(ResetCountedDownTraps),
     PROC_CALL(RefreshEntityBmMaps),

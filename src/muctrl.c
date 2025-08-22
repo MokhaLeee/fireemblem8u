@@ -57,7 +57,7 @@ void ClearEventMoveBuffer(const struct REDA * redas)
 //! FE8U = 0x08079D74
 void MuCtr_StartDefinedMove(struct Unit * unit, const struct REDA * redas, s16 count, u16 flags)
 {
-    struct MuCtrlProc * proc = Proc_Start(ProcScr_MuCtrl, PROC_TREE_5);
+    struct MuCtrlProc * proc = SpawnProc(ProcScr_MuCtrl, PROC_TREE_5);
     switch (count) {
     case 0:
         redas = NULL;
@@ -83,7 +83,7 @@ void MuCtr_StartMoveTowards(struct Unit * unit, s8 x, s8 y, u8 flagsA, u16 flags
     int x_;
     int y_;
 
-    struct MuCtrlProc * proc = Proc_Start(ProcScr_MuCtrl, PROC_TREE_5);
+    struct MuCtrlProc * proc = SpawnProc(ProcScr_MuCtrl, PROC_TREE_5);
 
     reda = &proc->reda_cur;
 

@@ -83,7 +83,7 @@ void NewEventFadefx(u16 speed, u32 mask, u16 r, u16 g, u16 b, ProcPtr parent)
     struct EventFadeSt * st;
     struct ProcEventFade * proc;
 
-    proc = Proc_StartBlocking(ProcScr_EventFadefx, parent);
+    proc = SpawnProcBlocking(ProcScr_EventFadefx, parent);
 
     if (speed == 0)
         proc->tick = 0x100;

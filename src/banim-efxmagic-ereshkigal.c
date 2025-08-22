@@ -76,7 +76,7 @@ void StartSubSpell_efxSuperdruidBG3(struct Anim * anim)
 
     gEfxBgSemaphore++;
 
-    proc = Proc_Start(ProcScr_efxSuperdruidBG3, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxSuperdruidBG3, PROC_TREE_3);
     proc->anim = anim;
     proc->timer = 0;
 
@@ -91,7 +91,7 @@ void StartSubSpell_efxSuperdruidBG3(struct Anim * anim)
     SpellFx_RegisterBgPal(Pal_EreshkigalBg3, PLTT_SIZE_4BPP);
 
     SpellFx_SetSomeColorEffect();
-    BG_SetPosition(BG_1, 0, 0);
+    SetBgOffset(BG_1, 0, 0);
 
     return;
 }
@@ -137,7 +137,7 @@ void efxSuperdruidBG3_Loop(struct ProcEfxEclipseBG * proc)
         {
             SpellFx_ClearBG1();
             gEfxBgSemaphore--;
-            SetDefaultColorEffects_();
+            SpellFx_ClearColorEffects();
             Proc_Break(proc);
         }
     }
@@ -168,7 +168,7 @@ void StartSubSpell_efxSuperdruidOBJ2(struct Anim * anim)
 
     gEfxBgSemaphore++;
 
-    proc = Proc_Start(ProcScr_efxSuperdruidOBJ2, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxSuperdruidOBJ2, PROC_TREE_3);
     proc->anim = anim;
 
     scr = AnimScr_08752020;

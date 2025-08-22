@@ -44,7 +44,7 @@ void NewEfxStatusUnit(struct Anim *anim)
     else
         unit = &gpEkrBattleUnitRight->unit;
 
-    proc = Proc_Start(ProcScr_efxStatusUnit, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxStatusUnit, PROC_TREE_3);
 
     proc->invalid = 0;
     proc->anim = anim;

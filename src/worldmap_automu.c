@@ -252,11 +252,11 @@ ProcPtr StartGmapAutoMu_Type0(struct Sub80C3378 * input, int flag, ProcPtr paren
 
     if (parent != NULL)
     {
-        proc = Proc_StartBlocking(ProcScr_GmapAutoMu, parent);
+        proc = SpawnProcBlocking(ProcScr_GmapAutoMu, parent);
     }
     else
     {
-        proc = Proc_Start(ProcScr_GmapAutoMu, PROC_TREE_3);
+        proc = SpawnProc(ProcScr_GmapAutoMu, PROC_TREE_3);
     }
 
     proc->kind = 0;
@@ -281,11 +281,11 @@ ProcPtr StartGmapAutoMu_Type1(struct Sub80C33D4 * input, int flag, ProcPtr paren
 
     if (parent != NULL)
     {
-        proc = Proc_StartBlocking(ProcScr_GmapAutoMu, parent);
+        proc = SpawnProcBlocking(ProcScr_GmapAutoMu, parent);
     }
     else
     {
-        proc = Proc_Start(ProcScr_GmapAutoMu, PROC_TREE_3);
+        proc = SpawnProc(ProcScr_GmapAutoMu, PROC_TREE_3);
     }
 
     proc->kind = 1;

@@ -36,7 +36,7 @@ CONST_DATA struct ProcCmd ProcScr_ekrTriangle[] = {
 void NewEkrTriangle(struct Anim * anim)
 {
     struct ProcEkrTriangle *proc;
-    proc = Proc_Start(ProcScr_ekrTriangle, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_ekrTriangle, PROC_TREE_3);
     proc->anim = anim;
     gEkrTriangleInvalid = false;
 }
@@ -204,7 +204,7 @@ CONST_DATA struct ProcCmd ProcScr_ekrTriPegasusKnight[] = {
 ProcPtr NewEkrTriPegasusKnight(struct Anim * anim, u32 ekr1, u32 ekr2, u32 banim1, u32 ewtype2)
 {
     struct ProcEkrTriClass * proc;
-    proc = Proc_Start(ProcScr_ekrTriPegasusKnight, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_ekrTriPegasusKnight, PROC_TREE_3);
 
     proc->anim = anim;
     proc->timer = 0;
@@ -283,7 +283,7 @@ void NewEkrTriPegasusKnightBG(struct Anim * anim, u32 pos, u32 etype, u32 ewtype
     char * pal;
     const u16 * img;
     struct ProcEkrTriPegasusKnightBG * proc;
-    proc = Proc_Start(ProcScr_ekrTriPegasusKnightBG, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_ekrTriPegasusKnightBG, PROC_TREE_3);
     proc->anim = anim;
     proc->timer = 0;
     proc->frame = 0;
@@ -350,7 +350,7 @@ void NewEkrTriPegasusKnightOBJ(struct Anim * anim, u32 pos, u32 etype, u32 ewtyp
     u32 * scr;
     const u16 * img;
 
-    proc = Proc_Start(ProcScr_EkrTriPegasusKnightOBJ, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_EkrTriPegasusKnightOBJ, PROC_TREE_3);
     proc->anim = anim;
     proc->timer = 0;
 
@@ -401,7 +401,7 @@ CONST_DATA struct ProcCmd ProcScr_EkrTriArmorKnight[] = {
 ProcPtr NewEkrTriArmorKnight(struct Anim * anim, u32 ekr1, u32 ekr2, u32 banim1, u32 ewtype2)
 {
     struct ProcEkrTriClass * proc;
-    proc = Proc_Start(ProcScr_EkrTriArmorKnight, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_EkrTriArmorKnight, PROC_TREE_3);
 
     proc->anim = anim;
     proc->timer = 0;
@@ -466,7 +466,7 @@ void NewEkrTriArmorKnightOBJ(struct Anim *anim, u32 etype1, u32 etype2, u32 ewty
     u32 * scr;
     const u16 * img;
 
-    proc = Proc_Start(ProcScr_EkrTriArmorKnightOBJ, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_EkrTriArmorKnightOBJ, PROC_TREE_3);
     proc->anim = anim;
     proc->timer = 0;
     proc->terminator = 0x14;
@@ -584,7 +584,7 @@ void NewEkrTriArmorKnightOBJ2(struct Anim * anim, u32 pos, u32 etype, u32 ewtype
     const u16 * buf;
     int off;
 
-    proc = Proc_Start(ProcScr_EkrTriArmorKnightOBJ2, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_EkrTriArmorKnightOBJ2, PROC_TREE_3);
     proc->anim = anim;
     proc->timer = 0;
     proc->terminator = 0x5;
@@ -688,7 +688,7 @@ void NewEfxTriangleQUAKE(struct Anim * anim, int duration)
     struct ProcEfxTriagnleQUAKE * proc;
 
     gEfxBgSemaphore = gEfxBgSemaphore + 1;
-    proc = Proc_Start(ProcScr_EfxTriangleQUAKE, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_EfxTriangleQUAKE, PROC_TREE_3);
     proc->anim = anim;
     proc->qproc = NewEfxQuakePure(0, 0);
     proc->timer = 0;
@@ -700,8 +700,8 @@ void EfxTriangleQUAKEMain(struct ProcEfxTriagnleQUAKE * proc)
     s16 ix1, iy1;
     s16 ix2, iy2;
 
-    BG_SetPosition(BG_2, gEkrBg2QuakeVec.x, gEkrBg2QuakeVec.y);
-    BG_SetPosition(BG_0,
+    SetBgOffset(BG_2, gEkrBg2QuakeVec.x, gEkrBg2QuakeVec.y);
+    SetBgOffset(BG_0,
         gEkrBg2QuakeVec.x + gEkrBg0QuakeVec.x,
         gEkrBg2QuakeVec.y + gEkrBg0QuakeVec.y);
 
@@ -724,8 +724,8 @@ void EfxTriangleQUAKEMain(struct ProcEfxTriagnleQUAKE * proc)
     if (++proc->timer > proc->terminator)
     {
         gEfxBgSemaphore = gEfxBgSemaphore - 1;
-        BG_SetPosition(BG_2, 0, 0);
-        BG_SetPosition(BG_0, gEkrBg0QuakeVec.x, gEkrBg0QuakeVec.y);
+        SetBgOffset(BG_2, 0, 0);
+        SetBgOffset(BG_0, gEkrBg0QuakeVec.x, gEkrBg0QuakeVec.y);
         EkrGauge_Setxy323A(-gEkrBg0QuakeVec.x, -gEkrBg0QuakeVec.y);
         EkrDispUP_SetPositionSync(-gEkrBg0QuakeVec.x, -gEkrBg0QuakeVec.y);
 

@@ -22,7 +22,7 @@ void GmapRmUpdateDirect_Loop(struct Proc * proc)
 {
     struct ProcGmapRm * parent;
     parent = proc->proc_parent;
-    BG_SetPosition(BG_1, parent->x, parent->y);
+    SetBgOffset(BG_1, parent->x, parent->y);
 }
 
 CONST_DATA struct ProcCmd ProcScr_GmapRmUpdateExt[] = {
@@ -75,9 +75,9 @@ ProcPtr StartGmapRmUpdateExt(int x0, int y0, int x1, int y1, int speed, int dela
     struct ProcGmapRmUpdate * proc;
 
     if (parent)
-        proc = Proc_StartBlocking(ProcScr_GmapRmUpdateExt, parent);
+        proc = SpawnProcBlocking(ProcScr_GmapRmUpdateExt, parent);
     else
-        proc = Proc_Start(ProcScr_GmapRmUpdateExt, PROC_TREE_3);
+        proc = SpawnProc(ProcScr_GmapRmUpdateExt, PROC_TREE_3);
 
     proc->x0 = x0;
     proc->y0 = y0;
@@ -142,14 +142,14 @@ void GmapRm_StartUpdateDirect(struct ProcGmapRm * proc)
 {
     GM_SCREEN->gmroute->flags &= ~GM_ROUTE_FLAG_2;
 
-    BG_SetPosition(BG_1, 0, 0);
+    SetBgOffset(BG_1, 0, 0);
     Decompress(Img_EventGmap, (void *)BG_VRAM);
     ApplyPalettes(Pal_EventGmap, 5, 4);
     Decompress(Tsa_EventGmap, gGenericBuffer);
     CallARM_FillTileRect(gBG1TilemapBuffer, gGenericBuffer, 0x5000);
     BG_EnableSyncByMask(BG1_SYNC_BIT);
 
-    Proc_Start(ProcScr_GmapRmUpdateDirect, proc);
+    SpawnProc(ProcScr_GmapRmUpdateDirect, proc);
 }
 
 void GmapRm_Goto0IfFlag0(struct ProcGmapRm * proc)
@@ -297,9 +297,9 @@ ProcPtr StartGmapRm(int x, int y, u32 mask, ProcPtr parent)
 {
     struct ProcGmapRm * proc;
     if (parent)
-        proc = Proc_StartBlocking(ProcScr_GmapRM, parent);
+        proc = SpawnProcBlocking(ProcScr_GmapRM, parent);
     else
-        proc = Proc_Start(ProcScr_GmapRM, PROC_TREE_3);
+        proc = SpawnProc(ProcScr_GmapRM, PROC_TREE_3);
 
     proc->flag = (~GMAPRM_FLAG_UNBLOCK);
     proc->flag &= mask;
@@ -439,9 +439,9 @@ ProcPtr StartGmapRmBaPalAnim1(ProcPtr parent)
 {
     ProcPtr proc;
     if (parent != NULL)
-        proc = Proc_StartBlocking(ProcScr_GmapRmBaPalAnim1, parent);
+        proc = SpawnProcBlocking(ProcScr_GmapRmBaPalAnim1, parent);
     else
-        proc = Proc_Start(ProcScr_GmapRmBaPalAnim1, PROC_TREE_3);
+        proc = SpawnProc(ProcScr_GmapRmBaPalAnim1, PROC_TREE_3);
 
     return proc;
 }
@@ -732,11 +732,11 @@ ProcPtr WmShowNationHighlightedMap(int index, ProcPtr parent)
 
     if (parent != NULL)
     {
-        proc = Proc_StartBlocking(ProcScr_GmapRmBorder1, parent);
+        proc = SpawnProcBlocking(ProcScr_GmapRmBorder1, parent);
     }
     else
     {
-        proc = Proc_Start(ProcScr_GmapRmBorder1, PROC_TREE_3);
+        proc = SpawnProc(ProcScr_GmapRmBorder1, PROC_TREE_3);
     }
 
     DrawWmNationHighLightMapGfx(countMaybe, index);
@@ -951,11 +951,11 @@ ProcPtr StartWmDotPalAnim(ProcPtr parent)
 {
     if (parent != NULL)
     {
-        Proc_StartBlocking(ProcScr_WmDotPalAnim, parent);
+        SpawnProcBlocking(ProcScr_WmDotPalAnim, parent);
     }
     else
     {
-        Proc_Start(ProcScr_WmDotPalAnim, PROC_TREE_3);
+        SpawnProc(ProcScr_WmDotPalAnim, PROC_TREE_3);
     }
 
     // return; // BUG
@@ -1119,11 +1119,11 @@ ProcPtr StartWmPlaceDot(int a, int b, int x, int y, int e, ProcPtr parent)
 
     if (parent != NULL)
     {
-        proc = Proc_StartBlocking(ProcScr_WmPlaceDot, parent);
+        proc = SpawnProcBlocking(ProcScr_WmPlaceDot, parent);
     }
     else
     {
-        proc = Proc_Start(ProcScr_WmPlaceDot, PROC_TREE_3);
+        proc = SpawnProc(ProcScr_WmPlaceDot, PROC_TREE_3);
     }
 
     proc->unk_2b = a;

@@ -345,7 +345,7 @@ struct MuProc * StartMuInternal(u16 x, u16 y, u16 jid, int objTileId, unsigned p
     if (Proc_Find(ProcScr_Mu))
         delay = -2;
 
-    proc = Proc_Start(ProcScr_Mu, PROC_TREE_5);
+    proc = SpawnProc(ProcScr_Mu, PROC_TREE_5);
 
     if (!proc)
         return NULL;
@@ -502,7 +502,7 @@ void StartPlayMuStepSe(int song, int alt_offset, int x)
     proc = Proc_Find(ProcScr_MuStepSe);
 
     if (!proc)
-        proc = Proc_Start(ProcScr_MuStepSe, PROC_TREE_3);
+        proc = SpawnProc(ProcScr_MuStepSe, PROC_TREE_3);
 
     if (!proc->song1)
     {
@@ -617,7 +617,7 @@ void StartMuFogBump(int x, int y)
     ap->tileBase = OAM2_CHR(OBCHR_MU_180) + OAM2_PAL(OBPAL_MU_1);
     AP_SwitchAnimation(ap, MU_FACING_LEFT);
 
-    proc = Proc_Start(ProcScr_MuFogBump, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_MuFogBump, PROC_TREE_3);
     proc->sprite_anim = ap;
     proc->x = x + 8;
     proc->y = y - 4;
@@ -1128,7 +1128,7 @@ void MU_StartDeathFade(struct MuProc * mu)
 {
     struct MuEffectProc * proc;
     mu->state = MU_STATE_DEATHFADE;
-    proc = Proc_Start(ProcScr_MuDeathFade, mu);
+    proc = SpawnProc(ProcScr_MuDeathFade, mu);
     proc->mu = mu;
     proc->timeLeft = 0x20;
     SetBlendConfig(0, 0x10, 0x10, 0);
@@ -1177,7 +1177,7 @@ void StartBlinkMu(struct MuProc * mu)
 
     mu->state = MU_STATE_DEATHFADE;
 
-    proc = Proc_Start(ProcScr_MuBlink, mu);
+    proc = SpawnProc(ProcScr_MuBlink, mu);
 
     proc->mu = mu;
     proc->timeLeft = 0x40;
@@ -1242,7 +1242,7 @@ void MU_StartPixelEffect(struct MuProc * mu)
 
     mu->state = MU_STATE_DEATHFADE;
 
-    proc = Proc_Start(ProcScr_MuPixelEffect, mu);
+    proc = SpawnProc(ProcScr_MuPixelEffect, mu);
 
     proc->mu = mu;
 
@@ -1297,7 +1297,7 @@ void StartMuFadeFromFlash(struct MuProc * mu)
         0x15, 8, mu
     );
 
-    proc = Proc_Start(ProcScr_MuRestorePalInfo, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_MuRestorePalInfo, PROC_TREE_3);
     proc->mu = mu;
 }
 
@@ -1353,7 +1353,7 @@ void StartMuCritFlash(struct MuProc * mu, int flashType)
 {
     struct MuFlashEffectProc * proc;
     ApplyPalette(gMuFlashPalLut[flashType], 0x10 + OBPAL_MU_FADE);
-    proc = Proc_Start(ProcScr_MuCritFlash, mu);
+    proc = SpawnProc(ProcScr_MuCritFlash, mu);
     proc->mu = mu;
 }
 
@@ -1421,7 +1421,7 @@ void StartMuHitFlash(struct MuProc * mu, int flashType)
         0x15, 0x14, mu
     );
 
-    proc = Proc_Start(ProcScr_MuHitFlash, mu);
+    proc = SpawnProc(ProcScr_MuHitFlash, mu);
 
     proc->mu = mu;
 }

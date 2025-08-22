@@ -59,7 +59,7 @@ void PromoMain_SetupTraineeEvent(struct ProcPromoMain *proc)
 
 ProcPtr StartPromoTraineeEvent(ProcPtr proc)
 {
-    return Proc_StartBlocking(ProcScr_PromoSelectEvent, proc);
+    return SpawnProcBlocking(ProcScr_PromoSelectEvent, proc);
 }
 
 bool RemovePromoTraineeEventFace(void)
@@ -121,10 +121,10 @@ void PromoTrainee_OnEnd(struct ProcPromoTraineeEvent *proc)
     EndPrepSpecialCharEffect();
     APProc_DeleteAll();
     EndMuralBackground_();
-    BG_SetPosition(1, 0, 0);
-    BG_SetPosition(2, 0, 0);
-    BG_SetPosition(4, 0, 0);
-    BG_SetPosition(8, 0, 0);
+    SetBgOffset(1, 0, 0);
+    SetBgOffset(2, 0, 0);
+    SetBgOffset(4, 0, 0);
+    SetBgOffset(8, 0, 0);
     BG_EnableSyncByMask(15);
     SetDispEnable(1, 1, 1, 1, 1);
 }

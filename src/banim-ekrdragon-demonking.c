@@ -44,7 +44,7 @@ CONST_DATA struct ProcCmd ProcScr_EkrDK[] = {
 void NewEkrDragonDemonKing(struct Anim * anim)
 {
     struct EkrDragonStatus *ekrsp = GetEkrDragonStatus(anim);
-    struct ProcEkrDragon * proc = Proc_Start(ProcScr_EkrDK, PROC_TREE_3);
+    struct ProcEkrDragon * proc = SpawnProc(ProcScr_EkrDK, PROC_TREE_3);
 
     ekrsp->proc = proc;
     AddEkrDragonStatusAttr(anim, EKRDRGON_ATTR_START);
@@ -234,7 +234,7 @@ CONST_DATA struct ProcCmd ProcScr_ekrDragonBaseHide[] = {
 
 ProcPtr NewEkrDragonBaseHide(struct Anim * anim)
 {
-    struct ProcEfxDKfx * proc = Proc_Start(ProcScr_ekrDragonBaseHide, PROC_TREE_3);
+    struct ProcEfxDKfx * proc = SpawnProc(ProcScr_ekrDragonBaseHide, PROC_TREE_3);
     proc->anim = anim;
     proc->finished = false;
     proc->timer = 0;
@@ -270,7 +270,7 @@ CONST_DATA struct ProcCmd ProcScr_ekrDragonBaseAppear[] = {
 
 ProcPtr NewEkrDragonBaseAppear(struct Anim * anim)
 {
-    struct ProcEfxDKfx * proc = Proc_Start(ProcScr_ekrDragonBaseAppear, PROC_TREE_3);
+    struct ProcEfxDKfx * proc = SpawnProc(ProcScr_ekrDragonBaseAppear, PROC_TREE_3);
     proc->anim = anim;
     proc->finished = false;
     proc->timer = 0;
@@ -322,7 +322,7 @@ CONST_DATA u16 *TsaSet_DKBody[] = {
 
 ProcPtr NewEkrDragonBodyAnime(struct Anim * anim)
 {
-    struct ProcEfxDKfx * proc = Proc_Start(ProcScr_ekrDragonBodyAnime, PROC_TREE_3);
+    struct ProcEfxDKfx * proc = SpawnProc(ProcScr_ekrDragonBodyAnime, PROC_TREE_3);
 
     proc->anim = anim;
     proc->timer = 0;
@@ -736,7 +736,7 @@ void EkrDragonBodyAnimeMain(struct ProcEfxDKfx * proc)
         if (proc->unk2E == 0)
             proc->unk2E = 1;
         else if (proc->anim->state3 & ANIM_BIT_FROZEN){
-            child = Proc_Start(ProcScr_EkrDemoKingBodyShake, PROC_TREE_3);
+            child = SpawnProc(ProcScr_EkrDemoKingBodyShake, PROC_TREE_3);
             child->fxproc = proc;
             proc->timer = 0;
             proc->unk2E = 0;
@@ -762,7 +762,7 @@ void EkrDragonBodyAnimeMain(struct ProcEfxDKfx * proc)
 void NewEkrDemoKingAtk(struct Anim * anim, int round_type)
 {
     struct ProcEfxDKBody4 * proc;
-    proc = Proc_Start(ProcScr_EkrDemoKingAtk, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_EkrDemoKingAtk, PROC_TREE_3);
     proc->round_type = round_type;
     proc->anim = anim;
 }
@@ -791,7 +791,7 @@ void EkrDemoKingAtkMain(struct ProcEfxDKBody4 * proc)
             fxproc->frame_lut = BnaimFrames_DkDemonLightNormal;
         else {
             fxproc->frame_lut = BnaimFrames_DkRavagerNormal;
-            bdproc = Proc_Start(ProcScr_EkrDemoKingAtkRavagerNormal, PROC_TREE_3);
+            bdproc = SpawnProc(ProcScr_EkrDemoKingAtkRavagerNormal, PROC_TREE_3);
             bdproc->fxproc = fxproc;
         }
         break;
@@ -803,7 +803,7 @@ void EkrDemoKingAtkMain(struct ProcEfxDKBody4 * proc)
             NewEkrSelfThunder(proc->anim);
         } else {
             fxproc->frame_lut = BnaimFrames_DkRavagerCritical;
-            bdproc = Proc_Start(ProcScr_EkrDemoKingAtkRavagerCritical, PROC_TREE_3);
+            bdproc = SpawnProc(ProcScr_EkrDemoKingAtkRavagerCritical, PROC_TREE_3);
             bdproc->fxproc = fxproc;
             NewEkrSelfThunder(proc->anim);
         }
@@ -820,7 +820,7 @@ CONST_DATA struct ProcCmd ProcScr_ekrDragonBodvBlack[] = {
 ProcPtr NewEkrDragonBodvBlack(struct Anim * anim)
 {
     struct ProcEfxDKfx * proc;
-    proc = Proc_Start(ProcScr_ekrDragonBodvBlack, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_ekrDragonBodvBlack, PROC_TREE_3);
     proc->anim = anim;
     proc->timer = 0;
     proc->finished = 0;
@@ -922,7 +922,7 @@ void sub_807750C(int arg1, int arg2)
     int _a2 = arg2 >> 3;
     int b = arg2 & 7;
 
-    BG_SetPosition(BG_3, a, b);
+    SetBgOffset(BG_3, a, b);
     EfxTmCpyExt(
         EFX_TILEMAP_LOC(gTmB_Banim, _a1, _a2),
         EFX_BG_WIDTH,
@@ -934,7 +934,7 @@ void sub_807750C(int arg1, int arg2)
 CONST_DATA struct ProcCmd ProcScr_087F4518[] = {
     PROC_YIELD,
     PROC_CALL(sub_80773BC),
-    PROC_START_CHILD(ProcScr_08801810),
+    SpawnProc_CHILD(ProcScr_08801810),
     PROC_REPEAT(sub_80773E4),
     PROC_CALL(sub_8077460),
     PROC_END
@@ -943,7 +943,7 @@ CONST_DATA struct ProcCmd ProcScr_087F4518[] = {
 ProcPtr NewProc087F4518(struct Anim * anim)
 {
     struct ProcEfxDKfx * proc;
-    proc = Proc_Start(ProcScr_087F4518, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_087F4518, PROC_TREE_3);
     proc->anim = anim;
     Sound_FadeOutBGM(1);
     return proc;
@@ -961,7 +961,7 @@ CONST_DATA struct ProcCmd ProcScr_ekrDragonTunkFace[] = {
 ProcPtr NewEkrDragonTunkFace(struct Anim * anim)
 {
     struct ProcEfxDKfx * proc;
-    proc = Proc_Start(ProcScr_ekrDragonTunkFace, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_ekrDragonTunkFace, PROC_TREE_3);
     proc->anim = anim;
     return proc;
 }
@@ -1068,7 +1068,7 @@ void EfxBG3TmSetPosition(int xtile, int ytile)
     int y = ytile >> 3;
     int ybg = ytile & 7;
 
-    BG_SetPosition(BG_3, xbg, ybg);
+    SetBgOffset(BG_3, xbg, ybg);
     EfxTmCpyExt(
         EFX_TILEMAP_LOC(gTmB_Banim, x, y),
         EFX_BG_WIDTH,
@@ -1089,7 +1089,7 @@ CONST_DATA struct ProcCmd ProcScr_ekrDragonTunk[] = {
 ProcPtr NewEkrDragonTunk(struct Anim * anim)
 {
     struct ProcEkrDragonTunk * proc;
-    proc = Proc_Start(ProcScr_ekrDragonTunk, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_ekrDragonTunk, PROC_TREE_3);
     proc->anim = anim;
     proc->finished = false;
     proc->timer1 = 0;
@@ -1142,8 +1142,8 @@ void sub_807789C(struct ProcEkrDragonTunk * proc)
     if (proc->timer2 <=0x18A)
         EfxBG3TmSetPosition(gEkrBg2QuakeVec.x, gEkrBg2QuakeVec.y);
     
-    BG_SetPosition(BG_2, gEkrBg2QuakeVec.x, gEkrBg2QuakeVec.y);
-    BG_SetPosition(BG_0,
+    SetBgOffset(BG_2, gEkrBg2QuakeVec.x, gEkrBg2QuakeVec.y);
+    SetBgOffset(BG_0,
         gEkrBg2QuakeVec.x + gEkrBg0QuakeVec.x,
         gEkrBg2QuakeVec.y + gEkrBg0QuakeVec.y);
 
@@ -1205,8 +1205,8 @@ void sub_807789C(struct ProcEkrDragonTunk * proc)
         BG_Fill(gBG3TilemapBuffer, 0x601F);
         BG_EnableSyncByMask(BG3_SYNC_BIT);
 
-        BG_SetPosition(BG_2, 0, 0);
-        BG_SetPosition(BG_0, gEkrBg0QuakeVec.x, gEkrBg0QuakeVec.y);
+        SetBgOffset(BG_2, 0, 0);
+        SetBgOffset(BG_0, gEkrBg0QuakeVec.x, gEkrBg0QuakeVec.y);
         sub_8077EAC(0, 0);
         EkrGauge_Setxy323A(-gEkrBg0QuakeVec.x, -gEkrBg0QuakeVec.y);
         EkrDispUP_SetPositionSync(-gEkrBg0QuakeVec.x, -gEkrBg0QuakeVec.y);
@@ -1235,7 +1235,7 @@ CONST_DATA struct ProcCmd ProcScr_ekrWhiteOUT[] = {
 void NewEkrWhiteOUT(int a, int b, int c)
 {
     struct ProcEkrWhiteOUT * proc;
-    proc = Proc_Start(ProcScr_ekrWhiteOUT, PROC_TREE_VSYNC);
+    proc = SpawnProc(ProcScr_ekrWhiteOUT, PROC_TREE_VSYNC);
     proc->timer = 0;
     proc->max_time1 = a;
     proc->max_time2 = b;
@@ -1299,8 +1299,8 @@ void sub_8077C54(s16 x, s16 y)
     s16 ix1, iy1;
     s16 ix2, iy2;
 
-    BG_SetPosition(BG_2, x, y);
-    BG_SetPosition(BG_0, x + gEkrBg0QuakeVec.x, y + gEkrBg0QuakeVec.y);
+    SetBgOffset(BG_2, x, y);
+    SetBgOffset(BG_0, x + gEkrBg0QuakeVec.x, y + gEkrBg0QuakeVec.y);
 
     EkrGauge_Setxy323A(
         -(x + gEkrBg0QuakeVec.x),
@@ -1310,7 +1310,7 @@ void sub_8077C54(s16 x, s16 y)
         -(x + gEkrBg0QuakeVec.x),
         -(y + gEkrBg0QuakeVec.y));
 
-    BG_SetPosition(BG_3, x, y);
+    SetBgOffset(BG_3, x, y);
 
     ix1 = gEkrXPosReal[0] - x - gEkrBgPosition;
     iy1 = gEkrYPosReal[0] - y;

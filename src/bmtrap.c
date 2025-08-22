@@ -156,14 +156,14 @@ int ExecTrap(ProcPtr proc, struct Unit * unit, int exec_type)
 
     switch (GetPickTrapType(unit)) {
         case TRAP_8:
-            proc2 = Proc_StartBlocking(sProcScr_ExecTrap8, proc);
+            proc2 = SpawnProcBlocking(sProcScr_ExecTrap8, proc);
             proc2->post_exec_type = exec_type;
             proc2->unit = unit;
             break;
 
         case TRAP_MINE:
             RemoveTrap(GetTypedTrapAt(unit->xPos, unit->yPos, TRAP_MINE));
-            proc2 = Proc_StartBlocking(sProcScr_ExecTrapMine, proc);
+            proc2 = SpawnProcBlocking(sProcScr_ExecTrapMine, proc);
             proc2->post_exec_type = exec_type;
             proc2->unit = unit;
             break;

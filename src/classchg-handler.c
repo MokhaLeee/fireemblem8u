@@ -185,7 +185,7 @@ void PromoHandlerIdle(struct ProcPromoHandler *proc)
 void StartTraineePromoScreen(ProcPtr parent)
 {
     struct BattleUnit *actor, *target;
-    struct ProcPromoHandler *proc = Proc_StartBlocking(ProcScr_PromoHandler, parent);
+    struct ProcPromoHandler *proc = SpawnProcBlocking(ProcScr_PromoHandler, parent);
     proc->bmtype = PROMO_HANDLER_TYPE_TRANINEE;
     proc->u32 = 0;
     proc->unit = NULL;
@@ -222,7 +222,7 @@ void StartPrepScreenPromotion(struct ProcPrepItemUse *proc)
     actor->weapon = weapon;
     target->statusOut = -1;
 
-    new_proc = Proc_StartBlocking(ProcScr_PromoHandler, proc);
+    new_proc = SpawnProcBlocking(ProcScr_PromoHandler, proc);
     new_proc->bmtype = PROMO_HANDLER_TYPE_BM;
     new_proc->u32 = 0;
 
@@ -235,7 +235,7 @@ void StartPrepScreenPromotion(struct ProcPrepItemUse *proc)
 void StartBmPromotion(ProcPtr proc)
 {
     struct Unit *unit;
-    struct ProcPromoHandler *new_proc = Proc_StartBlocking(ProcScr_PromoHandler, proc);
+    struct ProcPromoHandler *new_proc = SpawnProcBlocking(ProcScr_PromoHandler, proc);
     new_proc->bmtype = PROMO_HANDLER_TYPE_PREP;
     new_proc->u32 = 0;
     unit = GetUnit(gActionData.subjectIndex);

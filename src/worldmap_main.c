@@ -1232,7 +1232,7 @@ void sub_80B982C(struct WorldMapMainProc * proc)
 s8 WorldMap_CallGuide(ProcPtr proc)
 {
     Proc_BlockEachMarked(PROC_MARK_WMSTUFF);
-    Proc_StartBlocking(ProcScr_E_Guide2, proc);
+    SpawnProcBlocking(ProcScr_E_Guide2, proc);
     return 0;
 }
 
@@ -1263,7 +1263,7 @@ void sub_80B98A8(struct WorldMapMainProc * proc)
 bool WorldMap_StartConfigScreen(ProcPtr proc)
 {
     Proc_BlockEachMarked(PROC_MARK_WMSTUFF);
-    Proc_StartBlocking(ProcScr_Config_WorldMap, proc);
+    SpawnProcBlocking(ProcScr_Config_WorldMap, proc);
     return false;
 }
 
@@ -1295,7 +1295,7 @@ void sub_80B9924(struct WorldMapMainProc * proc)
 s8 StartWorldmapStatusScreen(ProcPtr proc)
 {
     Proc_BlockEachMarked(PROC_MARK_WMSTUFF);
-    Proc_StartBlocking(ProcScr_WorldmapStatusUi, proc);
+    SpawnProcBlocking(ProcScr_WorldmapStatusUi, proc);
     return 0;
 }
 
@@ -1799,7 +1799,7 @@ void WmMergeFace(int timerMaybe, u8 b, int faceSlot, int fid, int e, int f, int 
 {
     struct WorldMapMainProc * parent = Proc_Find(ProcScr_WorldMapMain);
 
-    struct Proc8A3DD08 * proc = Proc_Start(ProcScr_08A3DD08, parent);
+    struct Proc8A3DD08 * proc = SpawnProc(ProcScr_08A3DD08, parent);
     proc->unk_2c = timerMaybe; // timer?
     proc->unk_30 = b;
     proc->unk_34 = faceSlot; // face slot
@@ -1858,7 +1858,7 @@ void sub_80BA198(int color)
     int i;
 
     struct WorldMapMainProc * parent = Proc_Find(ProcScr_WorldMapMain);
-    struct Proc8A3DD30 * proc = Proc_Start(ProcScr_08A3DD20, parent);
+    struct Proc8A3DD30 * proc = SpawnProc(ProcScr_08A3DD20, parent);
 
     proc->unk_30 = color & 0x1f;
     proc->unk_2c = 0;
@@ -1919,7 +1919,7 @@ void sub_80BA288(int color)
     int i;
 
     struct WorldMapMainProc * parent = Proc_Find(ProcScr_WorldMapMain);
-    struct Proc8A3DD38 * proc = Proc_Start(ProcScr_08A3DD38, parent);
+    struct Proc8A3DD38 * proc = SpawnProc(ProcScr_08A3DD38, parent);
 
     proc->unk_30 = color & 0x1f;
     proc->unk_2c = 0;
@@ -1937,7 +1937,7 @@ void sub_80BA288(int color)
 //! FE8U = 0x080BA2E4
 void NewWorldMap(void)
 {
-    struct WorldMapMainProc * proc = Proc_Start(ProcScr_WorldMapMain, PROC_TREE_3);
+    struct WorldMapMainProc * proc = SpawnProc(ProcScr_WorldMapMain, PROC_TREE_3);
 
     proc->flags_1 = 0;
 

@@ -2147,7 +2147,7 @@ void UpdateActorFromBattle(void) {
 
 void BattleApplyMiscAction(struct Proc* proc) {
     BattleApplyMiscActionExpGains();
-    Proc_StartBlocking(sProcScr_BattleAnimSimpleLock, proc);
+    SpawnProcBlocking(sProcScr_BattleAnimSimpleLock, proc);
 }
 
 void BattleApplyItemEffect(struct Proc* proc) {
@@ -2166,7 +2166,7 @@ void BattleApplyItemEffect(struct Proc* proc) {
             gBattleActor.weaponBroke = FALSE;
     }
 
-    Proc_StartBlocking(sProcScr_BattleAnimSimpleLock, proc);
+    SpawnProcBlocking(sProcScr_BattleAnimSimpleLock, proc);
 }
 
 int GetOffensiveStaffAccuracy(struct Unit* actor, struct Unit* target) {

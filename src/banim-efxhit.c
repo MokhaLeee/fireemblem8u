@@ -18,7 +18,7 @@ CONST_DATA struct ProcCmd ProcScr_efxDamageMojiEffect[] = {
 void NewEfxDamageMojiEffect(struct Anim * anim, int hitted)
 {
     struct ProcEfx * proc;
-    proc = Proc_Start(ProcScr_efxDamageMojiEffect, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxDamageMojiEffect, PROC_TREE_3);
 
     proc->anim = anim;
     proc->timer = 0;
@@ -51,7 +51,7 @@ void NewEfxDamageMojiEffectOBJ(struct Anim * anim, int hitted)
     u16 val1;
     u32 * anim_scr;
     struct ProcEfxDamageMojiEffectOBJ * proc;
-    proc = Proc_Start(ProcScr_efxDamageMojiEffectOBJ, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxDamageMojiEffectOBJ, PROC_TREE_3);
     proc->anim = anim;
     proc->timer = 0;
 
@@ -99,7 +99,7 @@ void NewEfxPierceCritical(struct Anim * anim)
         NewEfxPierceCriticalEffect(anim);
     } else {
         SpellFx_ClearBG1Position();
-        proc = Proc_Start(ProcScr_efxCriricalEffect, PROC_TREE_3);
+        proc = SpawnProc(ProcScr_efxCriricalEffect, PROC_TREE_3);
         proc->anim = anim;
         proc->timer = 0;
     }
@@ -127,7 +127,7 @@ CONST_DATA struct ProcCmd ProcScr_efxCriricalEffectBG[] = {
 void NewEfxCriricalEffectBG(struct Anim * anim)
 {
     struct ProcEfxBG * proc;
-    proc = Proc_Start(ProcScr_efxCriricalEffectBG, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxCriricalEffectBG, PROC_TREE_3);
     proc->anim = anim;
     proc->timer = 0;
 
@@ -141,7 +141,7 @@ void efxCriricalEffectBGMain(struct ProcEfxBG * proc)
 {
     if (++proc->timer == 0x11) {
         SpellFx_ClearBG1();
-        SetDefaultColorEffects_();
+        SpellFx_ClearColorEffects();
         Proc_Break(proc);
     }
 }
@@ -176,7 +176,7 @@ void NewEfxCriricalEffectBGCOL(struct Anim * anim)
     };
 
     struct ProcEfxBGCOL * proc;
-    proc = Proc_Start(ProcScr_efxCriricalEffectBGCOL, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxCriricalEffectBGCOL, PROC_TREE_3);
     proc->anim = anim;
     proc->timer = 0;
     proc->frame = 0;
@@ -216,7 +216,7 @@ void NewEfxNormalEffect(struct Anim * anim)
     if (is_pierce != 0) {
         NewEfxPierceNormalEffect(anim);
     } else {
-        proc = Proc_Start(ProcScr_efxNormalEffect, PROC_TREE_3);
+        proc = SpawnProc(ProcScr_efxNormalEffect, PROC_TREE_3);
         proc->anim = anim;
         proc->timer = 0;
     }
@@ -282,7 +282,7 @@ void NewEfxNormalEffectBG(struct Anim * anim)
 
     struct ProcEfxBG * proc;
     gEfxBgSemaphore++;
-    proc = Proc_Start(ProcScr_efxNormalEffectBG, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxNormalEffectBG, PROC_TREE_3);
     proc->anim = anim;
     proc->timer = 0;
     proc->frame = 0;
@@ -296,9 +296,9 @@ void NewEfxNormalEffectBG(struct Anim * anim)
 
     if (gEkrDistanceType != EKR_DISTANCE_CLOSE) {
         if (GetAnimPosition(proc->anim) == EKR_POS_L)
-            BG_SetPosition(BG_1, 0x18, 0);
+            SetBgOffset(BG_1, 0x18, 0);
         else
-            BG_SetPosition(BG_1, 0xE8, 0);
+            SetBgOffset(BG_1, 0xE8, 0);
     }
 }
 
@@ -316,7 +316,7 @@ void efxNormalEffectBGMain(struct ProcEfxBG * proc)
     if (ret == -1) {
         SpellFx_ClearBG1();
         gEfxBgSemaphore--;
-        SetDefaultColorEffects_();
+        SpellFx_ClearColorEffects();
         Proc_Break(proc);
     }
 }
@@ -331,7 +331,7 @@ void NewEfxPierceCriticalEffect(struct Anim * anim)
 {
     struct ProcEfx * proc;
     SpellFx_ClearBG1Position();
-    proc = Proc_Start(ProcScr_efxPierceCriticalEffect, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxPierceCriticalEffect, PROC_TREE_3);
     proc->anim = anim;
     proc->timer = 0;
 }
@@ -358,7 +358,7 @@ CONST_DATA struct ProcCmd ProcScr_efxPierceCriticalEffectBG[] = {
 void NewEfxPierceCriticalEffectBG(struct Anim * anim)
 {
     struct ProcEfxBG * proc;
-    proc = Proc_Start(ProcScr_efxPierceCriticalEffectBG, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxPierceCriticalEffectBG, PROC_TREE_3);
     proc->anim = anim;
     proc->timer = 0;
 
@@ -372,7 +372,7 @@ void efxPierceCriticalEffectBGMain(struct ProcEfxBG * proc)
 {
     if (++proc->timer == 0x11) {
         SpellFx_ClearBG1();
-        SetDefaultColorEffects_();
+        SpellFx_ClearColorEffects();
         Proc_Break(proc);
     }
 }
@@ -407,7 +407,7 @@ void NewEfxPierceCriticalEffectBGCOL(struct Anim * anim)
     };
 
     struct ProcEfxBGCOL * proc;
-    proc = Proc_Start(ProcScr_efxPierceCriticalEffectBGCOL, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxPierceCriticalEffectBGCOL, PROC_TREE_3);
     proc->anim = anim;
     proc->timer = 0;
     proc->frame = 0;
@@ -441,7 +441,7 @@ void NewEfxPierceNormalEffect(struct Anim * anim)
 {
     struct ProcEfx * proc;
     SpellFx_ClearBG1Position();
-    proc = Proc_Start(ProcScr_efxPierceNormalEffect, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxPierceNormalEffect, PROC_TREE_3);
     proc->anim = anim;
     proc->timer = 0;
 }
@@ -506,7 +506,7 @@ void NewEfxPierceNormalEffectBG(struct Anim * anim)
 
     struct ProcEfxBG * proc;
     gEfxBgSemaphore++;
-    proc = Proc_Start(ProcScr_efxPierceNormalEffectBG, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxPierceNormalEffectBG, PROC_TREE_3);
     proc->anim = anim;
     proc->timer = 0;
     proc->frame = 0;
@@ -520,9 +520,9 @@ void NewEfxPierceNormalEffectBG(struct Anim * anim)
 
     if (gEkrDistanceType != EKR_DISTANCE_CLOSE) {
         if (GetAnimPosition(proc->anim) == EKR_POS_L)
-            BG_SetPosition(BG_1, 0x18, 0);
+            SetBgOffset(BG_1, 0x18, 0);
         else
-            BG_SetPosition(BG_1, 0xE8, 0);
+            SetBgOffset(BG_1, 0xE8, 0);
     }
 }
 
@@ -540,7 +540,7 @@ void efxPierceNormalEffectBGMain(struct ProcEfxBG * proc)
     if (ret == -1) {
         SpellFx_ClearBG1();
         gEfxBgSemaphore--;
-        SetDefaultColorEffects_();
+        SpellFx_ClearColorEffects();
         Proc_Break(proc);
     }
 }

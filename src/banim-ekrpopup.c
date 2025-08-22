@@ -207,7 +207,7 @@ void DrawBattlePopup(struct ProcEkrPopup *proc, int type, u32 priv)
     }
 
     width5 = (0xE0 - (width_popupbox + 2) * 8) / 2;
-    BG_SetPosition(BG_1, -width5, 0xFFD0);
+    SetBgOffset(BG_1, -width5, 0xFFD0);
     BG_EnableSyncByMask(BG1_SYNC_BIT);
     ResetIconGraphics_();
 
@@ -279,7 +279,7 @@ void NewEkrPopup(void)
     struct ProcEkrPopup *proc;
 
     if (gEkrDistanceType == 4) {
-        gpProcEkrPopup = proc = Proc_Start(ProcScr_ekrPopup2, PROC_TREE_3);
+        gpProcEkrPopup = proc = SpawnProc(ProcScr_ekrPopup2, PROC_TREE_3);
         gEkrPopupEnded = 0;
 
         proc->lbuff = -1;
@@ -306,7 +306,7 @@ void NewEkrPopup(void)
             return;
         }
     } else {
-        gpProcEkrPopup = proc = Proc_Start(ProcScr_ekrPopup, PROC_TREE_3);
+        gpProcEkrPopup = proc = SpawnProc(ProcScr_ekrPopup, PROC_TREE_3);
         gEkrPopupEnded = 0;
     
         proc->timer = 0;

@@ -78,7 +78,7 @@ void NewShinningStonefx(struct Unit * unit)
     s16 y = (u16)unit->yPos;
     struct ProcShinningStonefx * proc;
 
-    proc = Proc_Start(ProcScr_ShinningStonefx, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_ShinningStonefx, PROC_TREE_3);
 
     proc->x = SCREEN_TILE_IX(x) + 8;
     proc->y = SCREEN_TILE_IY(y);

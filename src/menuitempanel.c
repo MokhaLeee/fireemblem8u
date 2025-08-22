@@ -60,7 +60,7 @@ void ForceMenuItemPanel(ProcPtr _menu_proc, struct Unit * unit, int x, int y)
 	struct MenuItemPanelProc * proc;
 
 	if (NULL == Proc_Find(gProcCmd_MenuItemPanel)) {
-		proc = Proc_Start(gProcCmd_MenuItemPanel, menu_proc);
+		proc = SpawnProc(gProcCmd_MenuItemPanel, menu_proc);
 		proc->unit = unit;
 		proc->x = x;
 		proc->y = y;

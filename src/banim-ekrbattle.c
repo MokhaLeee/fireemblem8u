@@ -135,7 +135,7 @@ int GetBanimLinkArenaFlag(void)
 
 void NewEkrBattleDeamon(void)
 {
-    gpProcEkrBattleDeamon = Proc_Start(gProc_ekrBattleDeamon, PROC_TREE_3);
+    gpProcEkrBattleDeamon = SpawnProc(gProc_ekrBattleDeamon, PROC_TREE_3);
     gBattleDeamonActive = true;
     LockGame();
 }
@@ -167,7 +167,7 @@ void nullsub_35(void)
 void NewEkrBattle(void)
 {
     AnimClearAll();
-    gpProcEkrBattle = Proc_Start(gProc_ekrBattle, PROC_TREE_3);
+    gpProcEkrBattle = SpawnProc(gProc_ekrBattle, PROC_TREE_3);
     SetMainUpdateRoutine(InBattleMainRoutine);
     EkrEfxStatusClear();
 
@@ -306,8 +306,8 @@ void ekrBattle_HandlePreEventMaybe(struct ProcEkrBattle *proc)
     EnableEkrGauge();
     AsyncEkrDispUP();
     CpuFastFill(0, gBG0TilemapBuffer, 0x800);
-    BG_SetPosition(BG_0, gEkrBg0QuakeVec.x, gEkrBg0QuakeVec.y);
-    BG_SetPosition(BG_1, 0, 0);
+    SetBgOffset(BG_0, gEkrBg0QuakeVec.x, gEkrBg0QuakeVec.y);
+    SetBgOffset(BG_1, 0, 0);
     BG_EnableSyncByMask(BG0_SYNC_BIT);
     EkrGauge_Set4C50();
 
@@ -690,7 +690,7 @@ void ekrBattleExecExpGain(struct ProcEkrBattle * proc)
     u16 * buf = gEkrBarfxBuf;
     u16 * buf0 = gEkrBarfxBuf + 0x80;
 
-    BG_SetPosition(BG_1, 0, 0);
+    SetBgOffset(BG_1, 0, 0);
     SetWinEnable(1, 0, 0);
     SetWin0Box(0, 0x94, 0xF0, 0x94);
     SetWin0Layers(1, 1, 1, 1, 1);

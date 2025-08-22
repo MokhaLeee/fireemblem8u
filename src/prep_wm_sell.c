@@ -196,9 +196,9 @@ void WmSell_Setup(struct WmSellProc* proc) {
     LoadUiFrameGraphics();
     LoadObjUIGfx();
 
-    BG_SetPosition(0, 0, 0);
-    BG_SetPosition(1, 0, 0);
-    BG_SetPosition(2, 0, 0);
+    SetBgOffset(0, 0, 0);
+    SetBgOffset(1, 0, 0);
+    SetBgOffset(2, 0, 0);
 
     LoadHelpBoxGfx((void*)0x06014000, -1);
     LoadIconPalettes(4);
@@ -520,7 +520,7 @@ PROC_LABEL(3),
 
 //! FE8U = 0x080A070C
 void StartWorldMapSellScreen(struct Unit* unit, ProcPtr parent) {
-    struct WmSellProc* proc = Proc_StartBlocking(gProcScr_PrepWMShopSell, parent);
+    struct WmSellProc* proc = SpawnProcBlocking(gProcScr_PrepWMShopSell, parent);
     proc->unit = unit;
 
     return;

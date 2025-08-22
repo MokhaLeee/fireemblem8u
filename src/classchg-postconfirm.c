@@ -79,7 +79,7 @@ void ExecClassChgReal(struct ProcPromoMain *proc)
 
     EndAllProcChildren(proc);
 
-    Proc_StartBlocking(ProcScr_ClassChgReal, proc);
+    SpawnProcBlocking(ProcScr_ClassChgReal, proc);
 
     if (parent->bmtype != PROMO_HANDLER_TYPE_TRANINEE) {
         slot = parent->item_slot;

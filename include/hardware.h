@@ -372,7 +372,7 @@ void SetKeyStatus_IgnoreMask(int keys);
 int GetKeyStatus_IgnoreMask(void);
 // ??? AsnycKeyStatusExt(???);
 void AsnycKeyStatus(int key);
-void BG_SetPosition(u16 bg, u16 x, u16 y);
+void SetBgOffset(u16 bg, u16 x, u16 y);
 void sub_800151C(u8 a, u8 b);
 void sub_800151C(u8 a, u8 b);
 void sub_8001530(u16 *a, u16 *b);

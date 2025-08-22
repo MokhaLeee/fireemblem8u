@@ -61,7 +61,7 @@ PROC_LABEL(0x0),
 
 void EventCallGameOverExt(ProcPtr proc)
 {
-    Proc_StartBlocking(ProcScr_BmGameOver, proc);
+    SpawnProcBlocking(ProcScr_BmGameOver, proc);
 }
 
 void GameOver_FadeOutCurrentBgm(ProcPtr proc)
@@ -108,7 +108,7 @@ CONST_DATA struct ProcCmd ProcScr_ForceAsyncButtonB[] = {
 
 void NewForceAsyncButtonB(ProcPtr proc)
 {
-    Proc_Start(ProcScr_ForceAsyncButtonB, PROC_TREE_4);
+    SpawnProc(ProcScr_ForceAsyncButtonB, PROC_TREE_4);
 }
 
 void HideAllAlliesExceptLeader(void)
@@ -243,7 +243,7 @@ void EventQuakefxHorizon_ViolentLoop(struct Proc * proc)
     } else
     {
         if (GetGameClock() % 2)
-            BG_SetPosition(3, GetGameClock() & 2, 0);
+            SetBgOffset(3, GetGameClock() & 2, 0);
     }
 }
 
@@ -262,7 +262,7 @@ void EventQuakefxHorizon_SlightLoop(struct Proc * proc)
     else
     {
         if (GetGameClock() % 2)
-            BG_SetPosition(3, GetBgXOffset(3) ^ 1, 0);
+            SetBgOffset(3, GetBgXOffset(3) ^ 1, 0);
     }
 }
 
@@ -273,7 +273,7 @@ void EventQuakefxVeritical_Loop(struct Proc * proc)
     if (0x36 == parent->unk4C)
     {
         if (GetGameClock() % 2)
-            BG_SetPosition(3, GetGameClock() & 1, 0);
+            SetBgOffset(3, GetGameClock() & 1, 0);
     }
     else
     {
@@ -295,7 +295,7 @@ void StartEventVeriticalQuakefx(ProcPtr parent)
 {
     ProcPtr proc = Proc_Find(ProcScr_EventVerticalQuakefx);
     if (!proc)
-        proc = Proc_Start(ProcScr_EventVerticalQuakefx, parent);
+        proc = SpawnProc(ProcScr_EventVerticalQuakefx, parent);
 
     Proc_Goto(proc, 0);
     PlaySoundEffect(SONG_26A);
@@ -306,7 +306,7 @@ void StartEventHorizontalQuakefxViolently(ProcPtr parent)
     ProcPtr proc = Proc_Find(ProcScr_EventHorizontalQuakefx);
     if (!proc) {
         PlaySoundEffect(SONG_26A);
-        proc = Proc_Start(ProcScr_EventHorizontalQuakefx, parent);
+        proc = SpawnProc(ProcScr_EventHorizontalQuakefx, parent);
     }
     Proc_Goto(proc, 0);
 }
@@ -316,7 +316,7 @@ void StartEventHorizontalQuakefxSlightly(ProcPtr parent)
     ProcPtr proc = Proc_Find(ProcScr_EventHorizontalQuakefx);
     if (!proc) {
         PlaySoundEffect(SONG_26A);
-        proc = Proc_Start(ProcScr_EventHorizontalQuakefx, parent);
+        proc = SpawnProc(ProcScr_EventHorizontalQuakefx, parent);
     }
     Proc_Goto(proc, 1);
 }
@@ -325,7 +325,7 @@ void StartEventHorizontalQuakefxViolentlyNoSound(ProcPtr parent)
 {
     ProcPtr proc = Proc_Find(ProcScr_EventHorizontalQuakefx);
     if (!proc)
-        proc = Proc_Start(ProcScr_EventHorizontalQuakefx, parent);
+        proc = SpawnProc(ProcScr_EventHorizontalQuakefx, parent);
     Proc_Goto(proc, 0);
 }
 
@@ -333,7 +333,7 @@ void StartEventHorizontalQuakefxSlightlyNoSound(ProcPtr parent)
 {
     ProcPtr proc = Proc_Find(ProcScr_EventHorizontalQuakefx);
     if (!proc)
-        proc = Proc_Start(ProcScr_EventHorizontalQuakefx, parent);
+        proc = SpawnProc(ProcScr_EventHorizontalQuakefx, parent);
     Proc_Goto(proc, 1);
 }
 
@@ -378,7 +378,7 @@ void EventQuakefx_Loop(struct Proc * proc)
     else
     {
         if (GetGameClock() % 2)
-            BG_SetPosition(3, GetBgXOffset(3) ^ 1, 0);
+            SetBgOffset(3, GetBgXOffset(3) ^ 1, 0);
     }
 
     if (0x10 == ++proc->unk4C)
@@ -390,7 +390,7 @@ void EventQuakefx_Loop(struct Proc * proc)
 
 void StartEventQuakefx(ProcPtr proc)
 {
-    Proc_Start(ProcScr_EventQuakefx, proc);
+    SpawnProc(ProcScr_EventQuakefx, proc);
     PlaySoundEffect(SONG_26A);
 }
 
@@ -442,7 +442,7 @@ CONST_DATA struct ProcCmd ProcScr_UnitTornOut[] = {
 void StartUnitTornOut(struct Unit * unit, ProcPtr parent)
 {
     struct ProcUnitTornOut * proc;
-    proc = Proc_Start(ProcScr_UnitTornOut, parent);
+    proc = SpawnProc(ProcScr_UnitTornOut, parent);
     proc->unit = unit;
 }
 
@@ -563,5 +563,5 @@ CONST_DATA struct ProcCmd ProcScr_WorldFlush[] = {
 
 void StartWorldFlush(struct EventEngineProc * proc)
 {
-    Proc_StartBlocking(ProcScr_WorldFlush, proc);
+    SpawnProcBlocking(ProcScr_WorldFlush, proc);
 }

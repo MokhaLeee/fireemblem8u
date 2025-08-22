@@ -564,7 +564,7 @@ PROC_LABEL(2),
 //! FE8U = 0x080AC3E0
 void NewNewGameDifficultySelect(ProcPtr parent)
 {
-    Proc_StartBlocking(ProcScr_NewGameDifficultySelect, parent);
+    SpawnProcBlocking(ProcScr_NewGameDifficultySelect, parent);
     return;
 }
 
@@ -781,5 +781,5 @@ struct ProcCmd CONST_DATA gProcScr_DrawDifficultyMenuSprites[] =
 //! FE8U = 0x080AC698
 ProcPtr StartDrawDifficultyMenuSprites(ProcPtr parent)
 {
-    return Proc_Start(gProcScr_DrawDifficultyMenuSprites, parent);
+    return SpawnProc(gProcScr_DrawDifficultyMenuSprites, parent);
 }

@@ -565,7 +565,7 @@ void sub_80CE750(ProcPtr proc, int b)
                 off = off - 0x40;
             }
 
-            child = Proc_Start(gProcScr_GuideEntryListRedraw_Up, proc);
+            child = SpawnProc(gProcScr_GuideEntryListRedraw_Up, proc);
             child->unk_34 = hm;
     }
 
@@ -614,7 +614,7 @@ void sub_80CE858(ProcPtr proc, int b)
                 off = off + 0x40;
             }
 
-            child = Proc_Start(gProcScr_GuideEntryListRedraw_Down, proc);
+            child = SpawnProc(gProcScr_GuideEntryListRedraw_Down, proc);
             child->unk_34 = hm;
     }
 
@@ -905,10 +905,10 @@ void Guide_Init(ProcPtr proc)
 
     SetDispEnable(1, 1, 1, 1, 1);
 
-    BG_SetPosition(BG_0, 0, 0);
-    BG_SetPosition(BG_1, 0, 0);
-    BG_SetPosition(BG_2, 0, 0);
-    BG_SetPosition(BG_3, 0, 0);
+    SetBgOffset(BG_0, 0, 0);
+    SetBgOffset(BG_1, 0, 0);
+    SetBgOffset(BG_2, 0, 0);
+    SetBgOffset(BG_3, 0, 0);
 
     BG_Fill(gBG0TilemapBuffer, 0);
     BG_Fill(gBG1TilemapBuffer, 0);
@@ -949,7 +949,7 @@ void Guide_Init(ProcPtr proc)
     sub_80CE414();
 
     StartMuralBackgroundExt(proc, 0, 18, 2, 0);
-    Proc_Start(gProcScr_Guide_DrawSprites, proc);
+    SpawnProc(gProcScr_Guide_DrawSprites, proc);
 
     BG_EnableSyncByMask(BG0_SYNC_BIT | BG1_SYNC_BIT | BG2_SYNC_BIT | BG3_SYNC_BIT);
 
@@ -1152,7 +1152,7 @@ void Guide_MainLoop(struct GuideProc * proc)
                         break;
 
                     case GUIDE_STATE_1:
-                        Proc_StartBlocking(gProcScr_GuideEntryListRedraw_Initial, proc_);
+                        SpawnProcBlocking(gProcScr_GuideEntryListRedraw_Initial, proc_);
                         sub_8097668();
                         return;
 
@@ -1186,7 +1186,7 @@ void Guide_MainLoop(struct GuideProc * proc)
             gGuideSt->unk_2b = 0;
             gGuideSt->unk_2c = 0;
 
-            Proc_StartBlocking(gProcScr_GuideCategoryRedraw, proc_);
+            SpawnProcBlocking(gProcScr_GuideCategoryRedraw, proc_);
 
             break;
 
@@ -1241,7 +1241,7 @@ void Guide_MainLoop(struct GuideProc * proc)
                         }
                     }
 
-                    Proc_Start(gProcScr_GuideEntryListRedraw_Initial, proc_);
+                    SpawnProc(gProcScr_GuideEntryListRedraw_Initial, proc_);
                     gGuideSt->unk_2b = 0;
                     gGuideSt->unk_2c = 0;
 
@@ -1287,7 +1287,7 @@ void Guide_MainLoop(struct GuideProc * proc)
                         if (gGuideSt->detailLinesScrolled != 0)
                         {
                             gGuideSt->detailLinesScrolled--;
-                            proc_ = Proc_StartBlocking(gProcScr_GuideDetailsRedraw, proc_);
+                            proc_ = SpawnProcBlocking(gProcScr_GuideDetailsRedraw, proc_);
                             proc_->unk_34 = gGuideSt->detailLinesScrolled;
                             proc_->unk_38 = 0;
                             flag = 1;
@@ -1299,7 +1299,7 @@ void Guide_MainLoop(struct GuideProc * proc)
                         {
                             gGuideSt->detailLinesScrolled++;
 
-                            proc_ = Proc_StartBlocking(gProcScr_GuideDetailsRedraw, proc_);
+                            proc_ = SpawnProcBlocking(gProcScr_GuideDetailsRedraw, proc_);
                             proc_->unk_34 = gGuideSt->detailLinesScrolled + 3;
                             proc_->unk_38 = 1;
 

@@ -309,7 +309,7 @@ CONST_DATA struct ProcCmd ProcScr_OpAnimfxTerminator[] = {
 
 void NewOpAnimfxTerminator(ProcPtr parent)
 {
-    Proc_Start(ProcScr_OpAnimfxTerminator, parent);
+    SpawnProc(ProcScr_OpAnimfxTerminator, parent);
 }
 
 void EndOpAnimfxTerminator(void)
@@ -380,7 +380,7 @@ void TsaModifyFirstPalMaybe(s16 end, s16 start, s16 unused, u16 bg, u16 * src1, 
         else
             SetFirstPalDirectly(src + (i & 0x1f), dst + (i & 0x1f), 0xf);
     }
-    BG_SetPosition(bg, end + 0x10, 0);
+    SetBgOffset(bg, end + 0x10, 0);
 }
 
 //! FE8U = 0x080C689C
@@ -443,7 +443,7 @@ void sub_80C689C(s16 end, s16 start, s16 offset, u16 bg, u16 * src1, u16 * src2,
         }
     }
 
-    BG_SetPosition(bg, end, 0);
+    SetBgOffset(bg, end, 0);
 
     return;
 }

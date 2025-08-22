@@ -86,7 +86,7 @@ struct ProcCmd CONST_DATA gProcScr_Shop[] = {
     PROC_CALL(LockGame),
     PROC_CALL(Shop_Init),
     PROC_CALL(Shop_InitBuyState),
-    PROC_START_CHILD(ProcScr_ShopDrawHand),
+    SpawnProc_CHILD(ProcScr_ShopDrawHand),
     PROC_CALL(FadeInBlackSpeed20),
     PROC_SLEEP(1),
     PROC_CALL(Shop_EntryDialogue),
@@ -287,9 +287,9 @@ void StartShopScreen(struct Unit * unit, const u16 * inventory, u8 shopType, Pro
     EndPlayerPhaseSideWindows();
 
     if (parent)
-        proc = Proc_StartBlocking(gProcScr_Shop, parent);
+        proc = SpawnProcBlocking(gProcScr_Shop, parent);
     else
-        proc = Proc_Start(gProcScr_Shop, PROC_TREE_3);
+        proc = SpawnProc(gProcScr_Shop, PROC_TREE_3);
 
     proc->shopType = shopType;
     proc->unit = unit;
@@ -452,7 +452,7 @@ void Shop_Loop_BuyKeyHandler(struct ProcShop * proc)
 
     Shop_TryMoveHandPage();
 
-    BG_SetPosition(2, 0, ShopSt_GetBg2Offset());
+    SetBgOffset(2, 0, ShopSt_GetBg2Offset());
 
     head_loc = proc->head_loc;
     cursor_at_head = ShopSt_GetHeadLoc() != head_loc;
@@ -659,7 +659,7 @@ void Shop_Loop_SellKeyHandler(struct ProcShop * proc)
 
     Shop_TryMoveHandPage();
 
-    BG_SetPosition(BG_2, 0, ShopSt_GetBg2Offset());
+    SetBgOffset(BG_2, 0, ShopSt_GetBg2Offset());
 
     cur = proc->head_loc;
     cursor_at_head = ShopSt_GetHeadLoc() != cur;
@@ -822,7 +822,7 @@ void Shop_Loop_UnkKeyHandler(struct ProcShop * proc)
 
     Shop_TryMoveHandPage();
 
-    BG_SetPosition(BG_2, 0, ShopSt_GetBg2Offset());
+    SetBgOffset(BG_2, 0, ShopSt_GetBg2Offset());
 
     head_loc = proc->head_loc;
     cursor_at_head = ShopSt_GetHeadLoc() != head_loc;
@@ -882,7 +882,7 @@ void Shop_Loop_UnkKeyHandler(struct ProcShop * proc)
 void StartShopFadeIn(struct ProcShop * proc)
 {
     if (!(gBmSt.gameStateBits & BM_FLAG_PREPSCREEN) && !(gGMData.state.bits.state_0))
-        Proc_StartBlocking(gProcScr_ShopFadeIn, proc);
+        SpawnProcBlocking(gProcScr_ShopFadeIn, proc);
 }
 
 void StartShopFadeOut(struct ProcShop * proc)
@@ -890,7 +890,7 @@ void StartShopFadeOut(struct ProcShop * proc)
 
     if (!(gBmSt.gameStateBits & BM_FLAG_PREPSCREEN) && !(gGMData.state.bits.state_0))
     {
-        Proc_StartBlocking(gProcScr_ShopFadeOut, proc);
+        SpawnProcBlocking(gProcScr_ShopFadeOut, proc);
         return;
     }
     ResetDialogueScreen();
@@ -973,7 +973,7 @@ void StartUiGoldBox(ProcPtr parent)
 
     Decompress(Img_ShopGoldBox, OBJ_CHR_ADDR(OBJCHR_SHOP_GOLDBOX));
 
-    proc = Proc_Start(gProcScr_GoldBox, parent);
+    proc = SpawnProc(gProcScr_GoldBox, parent);
     proc->goldbox_x = 0xAC;
     proc->goldbox_y = 0x2D;
     proc->goldbox_oam2 = OBJ_PALETTE(OBJPAL_SHOP_GOLDBOX) + OBJ_CHAR(OBJCHR_SHOP_GOLDBOX);
@@ -1018,7 +1018,7 @@ void ShopInitTexts_OnBuy(struct ProcShop * parent)
 
     parent->buy_or_sel = SHOP_ST_BUY;
 
-    proc = Proc_Start(ProcScr_ShopBuyInit, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_ShopBuyInit, PROC_TREE_3);
     proc->shopproc = parent;
 
     SetTextFont(0);
@@ -1029,7 +1029,7 @@ void ShopInitTexts_OnBuy(struct ProcShop * parent)
             &gShopItemTexts[DivRem(i, SHOP_TEXT_LINES + 1)],
             gBG2TilemapBuffer + TILEMAP_INDEX(7, ((i * 2) & 0x1F)));
 
-    BG_SetPosition(BG_2, 0, (parent->hand_idx * 0x10) - 0x48);
+    SetBgOffset(BG_2, 0, (parent->hand_idx * 0x10) - 0x48);
     BG_EnableSyncByMask(BG2_SYNC_BIT);
 }
 
@@ -1063,7 +1063,7 @@ void DrawShopSoldItems(struct ProcShop * proc)
             gBG2TilemapBuffer + TILEMAP_INDEX(7, ((i * 2) & 0x1F))
         );
     }
-    BG_SetPosition(BG_2, 0, (proc->hand_idx * 0x10) - 0x48);
+    SetBgOffset(BG_2, 0, (proc->hand_idx * 0x10) - 0x48);
     BG_EnableSyncByMask(BG2_SYNC_BIT);
 }
 
@@ -1082,7 +1082,7 @@ void ShopInitTexts_OnSell(struct ProcShop * parent)
 
     parent->buy_or_sel = SHOP_ST_SELL;
 
-    proc = Proc_Start(ProcScr_ShopSellInit, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_ShopSellInit, PROC_TREE_3);
     proc->shopproc = parent;
 
     SetTextFont(0);
@@ -1093,7 +1093,7 @@ void ShopInitTexts_OnSell(struct ProcShop * parent)
             &gShopItemTexts[DivRem(i, SHOP_TEXT_LINES + 1)],
             gBG2TilemapBuffer + TILEMAP_INDEX(7, ((i * 2) & 0x1F)));
 
-    BG_SetPosition(2, 0, -0x48);
+    SetBgOffset(2, 0, -0x48);
     BG_EnableSyncByMask(BG2_SYNC_BIT);
 }
 
@@ -1212,10 +1212,10 @@ void InitShopScreenConfig(void)
     SetDispEnable(1, 1, 1, 1, 1);
     SetWinEnable(0, 0, 0);
 
-    BG_SetPosition(BG_0, 0, 0);
-    BG_SetPosition(BG_1, 0, 0);
-    BG_SetPosition(BG_2, 0, 0);
-    BG_SetPosition(BG_3, 0, 0);
+    SetBgOffset(BG_0, 0, 0);
+    SetBgOffset(BG_1, 0, 0);
+    SetBgOffset(BG_2, 0, 0);
+    SetBgOffset(BG_3, 0, 0);
 
     BG_Fill(gBG0TilemapBuffer, 0);
     BG_Fill(gBG1TilemapBuffer, 0);

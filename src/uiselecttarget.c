@@ -146,7 +146,7 @@ ProcPtr NewTargetSelection(const struct SelectInfo* selectInfo) {
     struct SelectTargetProc* proc;
 
     LockGame();
-    proc = Proc_Start(gProcScr_TargetSelection, PROC_TREE_3);
+    proc = SpawnProc(gProcScr_TargetSelection, PROC_TREE_3);
 
     proc->flags = TARGETSELECTION_FLAG_GAMELOCK;
     proc->selectRoutines = selectInfo;

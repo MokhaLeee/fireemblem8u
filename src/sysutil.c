@@ -35,7 +35,7 @@ struct ProcCmd CONST_DATA ProcScr_ParallelFiniteLoop[] = {
 void StartParallelFiniteLoop(void * func, int count, ProcPtr parent)
 {
     struct ParallelFiniteLoopProc * proc =
-        Proc_Start(ProcScr_ParallelFiniteLoop, parent);
+        SpawnProc(ProcScr_ParallelFiniteLoop, parent);
 
     proc->maxCount = count;
     proc->func = (ParallelWorkerFunc *)func;
@@ -167,7 +167,7 @@ PROC_LABEL(1),
 ProcPtr NewSysBlackBoxHandler(ProcPtr parent)
 {
     Proc_End(Proc_Find(ProcScr_SysBlackBox));
-    return Proc_Start(ProcScr_SysBlackBox, parent);
+    return SpawnProc(ProcScr_SysBlackBox, parent);
 }
 
 void SysBlackBoxSetGfx(u32 obj_offset)
@@ -244,7 +244,7 @@ ProcPtr StartParallelWorker(void * func, ProcPtr parent)
     struct ParallelWorkerProc * proc = GetParallelWorker(func);
     if (proc == NULL)
     {
-        proc = Proc_Start(ProcScr_ParallelWorker, parent);
+        proc = SpawnProc(ProcScr_ParallelWorker, parent);
         proc->func = (ParallelWorkerFunc *)func;
     }
     return proc;
@@ -322,7 +322,7 @@ PROC_LABEL(1),
 ProcPtr ResetSysHandCursor(ProcPtr parent)
 {
     Proc_End(Proc_Find(ProcScr_SysHandCtrl));
-    return Proc_Start(ProcScr_SysHandCtrl, parent);
+    return SpawnProc(ProcScr_SysHandCtrl, parent);
 }
 
 void DisplaySysHandCursorTextShadow(u32 vobj_offset, u32 pal)
@@ -534,7 +534,7 @@ CONST_DATA struct ProcCmd ProcScr_SysGrayBox[] = {
 ProcPtr NewSysGrayBox(u32 vobj_offset, u32 pal, ProcPtr parent)
 {
     struct ProcSysGrayBox * proc =
-        Proc_Start(ProcScr_SysGrayBox, parent);
+        SpawnProc(ProcScr_SysGrayBox, parent);
 
     Decompress(Img_SysGrayBox, OBJ_VRAM0 + vobj_offset);
     ApplyPalette(PAL_BG(1), pal + 0x10);
@@ -746,7 +746,7 @@ void StartSysBrownBox(int layer, u32 vobj_offset, int pal, u16 oam2, u16 y, Proc
     struct ProcSysBrownBox * proc;
 
     EndSysBrownBox();
-    proc = Proc_Start(ProcScr_SysBrownBox, parent);
+    proc = SpawnProc(ProcScr_SysBrownBox, parent);
     Decompress(Img_SysBrownBox, OBJ_VRAM0 + vobj_offset);
     ApplyPalette(Pal_SysBrownBox, pal + 0x10);
 
@@ -842,7 +842,7 @@ void NewSysboxText(int vobj_offset, int pal, const char * str, int line, int del
     struct ProcSysboxText * proc;
     proc = Proc_Find(ProcScr_SysboxText);
     if (!proc)
-        proc = Proc_StartBlocking(ProcScr_SysboxText, parent);
+        proc = SpawnProcBlocking(ProcScr_SysboxText, parent);
 
     InitSpriteTextFont(&proc->font, OBJ_VRAM0 + vobj_offset, pal);
     proc->str = str;
@@ -1158,7 +1158,7 @@ bool FadeOutExists(void)
 void NewFadeIn(int speed, ProcPtr parent)
 {
     struct ProcFadeInOut * proc =
-        Proc_Start(ProcScr_BmFadeIN, PROC_TREE_4);
+        SpawnProc(ProcScr_BmFadeIN, PROC_TREE_4);
 
     proc->white_out = false;
     proc->speed = speed;
@@ -1168,7 +1168,7 @@ void NewFadeIn(int speed, ProcPtr parent)
 void NewFadeOut(int speed, ProcPtr parent)
 {
     struct ProcFadeInOut * proc =
-        Proc_Start(ProcScr_BmFadeOUT, PROC_TREE_4);
+        SpawnProc(ProcScr_BmFadeOUT, PROC_TREE_4);
 
     proc->white_out = false;
     proc->speed = speed;
@@ -1178,7 +1178,7 @@ void NewFadeOut(int speed, ProcPtr parent)
 void NewBlockedFadeIn(int speed, ProcPtr parent)
 {
     struct ProcFadeInOut * proc =
-        Proc_StartBlocking(ProcScr_BmFadeIN, parent);
+        SpawnProcBlocking(ProcScr_BmFadeIN, parent);
 
     proc->white_out = false;
     proc->speed = speed;
@@ -1188,7 +1188,7 @@ void NewBlockedFadeIn(int speed, ProcPtr parent)
 void NewBlockedFadeOut(int speed, ProcPtr parent)
 {
     struct ProcFadeInOut * proc =
-        Proc_StartBlocking(ProcScr_BmFadeOUT, parent);
+        SpawnProcBlocking(ProcScr_BmFadeOUT, parent);
 
     proc->white_out = false;
     proc->speed = speed;
@@ -1198,7 +1198,7 @@ void NewBlockedFadeOut(int speed, ProcPtr parent)
 void NewFadeIn2(int speed, ProcPtr parent)
 {
     struct ProcFadeInOut * proc =
-        Proc_Start(ProcScr_BmFadeIN, PROC_TREE_4);
+        SpawnProc(ProcScr_BmFadeIN, PROC_TREE_4);
 
     proc->white_out = false;
     proc->speed = speed;
@@ -1208,7 +1208,7 @@ void NewFadeIn2(int speed, ProcPtr parent)
 void NewFadeOut2(int speed, ProcPtr parent)
 {
     struct ProcFadeInOut * proc =
-        Proc_Start(ProcScr_BmFadeOUT, PROC_TREE_4);
+        SpawnProc(ProcScr_BmFadeOUT, PROC_TREE_4);
 
     proc->white_out = false;
     proc->speed = speed;
@@ -1218,7 +1218,7 @@ void NewFadeOut2(int speed, ProcPtr parent)
 void NewFadeInWhite(int speed, ProcPtr parent)
 {
     struct ProcFadeInOut * proc =
-        Proc_Start(ProcScr_BmFadeIN, PROC_TREE_4);
+        SpawnProc(ProcScr_BmFadeIN, PROC_TREE_4);
 
     proc->white_out = true;
     proc->speed = speed;
@@ -1228,7 +1228,7 @@ void NewFadeInWhite(int speed, ProcPtr parent)
 void NewFadeOutWhite(int speed, ProcPtr parent)
 {
     struct ProcFadeInOut * proc =
-        Proc_Start(ProcScr_BmFadeOUT, PROC_TREE_4);
+        SpawnProc(ProcScr_BmFadeOUT, PROC_TREE_4);
 
     proc->white_out = true;
     proc->speed = speed;
@@ -1238,7 +1238,7 @@ void NewFadeOutWhite(int speed, ProcPtr parent)
 void NewBlockedFadeInWhite(int speed, ProcPtr parent)
 {
     struct ProcFadeInOut * proc =
-        Proc_StartBlocking(ProcScr_BmFadeIN, parent);
+        SpawnProcBlocking(ProcScr_BmFadeIN, parent);
 
     proc->white_out = true;
     proc->speed = speed;
@@ -1248,7 +1248,7 @@ void NewBlockedFadeInWhite(int speed, ProcPtr parent)
 void NewBlockedFadeOutWhite(int speed, ProcPtr parent)
 {
     struct ProcFadeInOut * proc =
-        Proc_StartBlocking(ProcScr_BmFadeOUT, parent);
+        SpawnProcBlocking(ProcScr_BmFadeOUT, parent);
 
     proc->white_out = true;
     proc->speed = speed;
@@ -1258,7 +1258,7 @@ void NewBlockedFadeOutWhite(int speed, ProcPtr parent)
 void NewFadeInWhite2(int speed, ProcPtr parent)
 {
     struct ProcFadeInOut * proc =
-        Proc_Start(ProcScr_BmFadeIN, PROC_TREE_4);
+        SpawnProc(ProcScr_BmFadeIN, PROC_TREE_4);
 
     proc->white_out = true;
     proc->speed = speed;
@@ -1268,7 +1268,7 @@ void NewFadeInWhite2(int speed, ProcPtr parent)
 void NewFadeOutWhite2(int speed, ProcPtr parent)
 {
     struct ProcFadeInOut * proc =
-        Proc_Start(ProcScr_BmFadeOUT, PROC_TREE_4);
+        SpawnProc(ProcScr_BmFadeOUT, PROC_TREE_4);
 
     proc->white_out = true;
     proc->speed = speed;
@@ -1492,9 +1492,9 @@ void StartBmBgfx(struct BmBgxConf * input, int bg, int x, int y, int vram_off, i
     struct ProcBmBgfx * proc;
 
     if (parent == NULL)
-        proc = Proc_Start(ProcScr_BmBgfx, PROC_TREE_3);
+        proc = SpawnProc(ProcScr_BmBgfx, PROC_TREE_3);
     else
-        proc = Proc_Start(ProcScr_BmBgfx, parent);
+        proc = SpawnProc(ProcScr_BmBgfx, parent);
 
     proc->conf = input;
     proc->bg = bg;
@@ -1514,7 +1514,7 @@ void StartBmBgfx(struct BmBgxConf * input, int bg, int x, int y, int vram_off, i
 
     proc->callback = func;
 
-    BG_SetPosition(bg, -x & 0xff, -y & 0xff);
+    SetBgOffset(bg, -x & 0xff, -y & 0xff);
 
     for (; input->type < BMFX_CONFT_END; input++)
         proc->total_duration += input->duration;
@@ -1570,7 +1570,7 @@ struct ProcCmd CONST_DATA ProcScr_MixPalette[] =
 
 void StartMixPalette(u16 * palA, u16 * palB, int speed, int targetPalId, int palCount, ProcPtr parent)
 {
-    struct ProcMixPalette * proc = Proc_Start(ProcScr_MixPalette, parent);
+    struct ProcMixPalette * proc = SpawnProc(ProcScr_MixPalette, parent);
 
     proc->speed = speed;
     proc->targetPalId = targetPalId;

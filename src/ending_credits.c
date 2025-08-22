@@ -193,7 +193,7 @@ struct ProcCmd CONST_DATA ProcScr_EndingCredits_BlendCGMaybe[] =
 //! FE8U = 0x080C41F4
 void StartBlendCreditsCGMaybe(ProcPtr parent, const struct CreditsCG * cg)
 {
-    struct CreditsSubProc * proc = Proc_Start(ProcScr_EndingCredits_BlendCGMaybe, parent);
+    struct CreditsSubProc * proc = SpawnProc(ProcScr_EndingCredits_BlendCGMaybe, parent);
     proc->cg = cg;
     return;
 }
@@ -300,7 +300,7 @@ void sub_80C43B4(struct CreditsMainProc * proc)
         StartBlendCreditsCGMaybe(proc, proc->cg);
     }
 
-    BG_SetPosition(BG_0, 0, unk_30 & 0xff);
+    SetBgOffset(BG_0, 0, unk_30 & 0xff);
 
     proc->unk_2c = proc->unk_30;
 
@@ -354,7 +354,7 @@ void EndingCredits_Init(struct CreditsMainProc * proc)
 
     SetDefaultColorEffects();
 
-    BG_SetPosition(BG_3, 0, 0);
+    SetBgOffset(BG_3, 0, 0);
 
     proc->unk_29_0 = 0;
     proc->unk_29_1 = 0;
@@ -443,7 +443,7 @@ void EndingCredits_80C46F0(void)
     SetDispEnable(0, 0, 0, 0, 0);
     SetDefaultColorEffects();
 
-    BG_SetPosition(BG_0, 0, 0);
+    SetBgOffset(BG_0, 0, 0);
     BG_Fill(gBG3TilemapBuffer, 0);
     BG_EnableSyncByMask(BG3_SYNC_BIT);
 
@@ -551,7 +551,7 @@ PROC_LABEL(1),
 //! FE8U = 0x080C4878
 void StartEndingCredits(ProcPtr parent)
 {
-    Proc_StartBlocking(ProcScr_EndingCredits, parent);
+    SpawnProcBlocking(ProcScr_EndingCredits, parent);
     return;
 }
 

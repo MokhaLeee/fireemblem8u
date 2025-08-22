@@ -216,7 +216,7 @@ void CallEvent(const u16* events, u8 execType) {
 }
 
 struct EventEngineProc* EventEngine_Create(const u16* events, u8 execType) {
-    struct EventEngineProc* proc = Proc_Start(ProcScr_StdEventEngine, PROC_TREE_3);
+    struct EventEngineProc* proc = SpawnProc(ProcScr_StdEventEngine, PROC_TREE_3);
 
     proc->pCallback      = NULL;
 
@@ -256,7 +256,7 @@ struct EventEngineProc* EventEngine_Create(const u16* events, u8 execType) {
 }
 
 void EventEngine_CreateBattle(const u16* events) {
-    struct EventEngineProc* proc = Proc_Start(ProcScr_BattleEventEngine, PROC_TREE_3);
+    struct EventEngineProc* proc = SpawnProc(ProcScr_BattleEventEngine, PROC_TREE_3);
 
     proc->pCallback     = NULL;
 
@@ -300,7 +300,7 @@ CONST_DATA struct ProcCmd ProcScr_EventEngineDeamon[] = {
 
 void BlockProcForEventEngine(ProcPtr proc)
 {
-    Proc_StartBlocking(ProcScr_EventEngineDeamon, proc);
+    SpawnProcBlocking(ProcScr_EventEngineDeamon, proc);
 }
 
 void SetEventSlotC(unsigned value) {
@@ -484,7 +484,7 @@ ProcPtr MergeGenericProc(ProcPtr parent, ProcFunc init, ProcFunc loop, ProcFunc 
     };
 
     memcpy(gGenericProc, code, sizeof code);
-    return Proc_Start(gGenericProc, parent);
+    return SpawnProc(gGenericProc, parent);
 }
 
 void sub_800D524(void) {} // nullsub

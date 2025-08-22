@@ -201,9 +201,9 @@ struct SpriteProc* StartSpriteRefresher(ProcPtr parent, int layer, int x, int y,
     struct SpriteProc* proc;
 
     if (parent)
-        proc = Proc_Start(sProcSrc_SpriteRefresher, parent);
+        proc = SpawnProc(sProcSrc_SpriteRefresher, parent);
     else
-        proc = Proc_Start(sProcSrc_SpriteRefresher, PROC_TREE_3);
+        proc = SpawnProc(sProcSrc_SpriteRefresher, PROC_TREE_3);
 
     proc->x = x;
     proc->y = y;

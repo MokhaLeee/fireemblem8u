@@ -145,7 +145,7 @@ struct ProcCmd CONST_DATA ProcScr_LinkArenaPostBattle_DrawSprites[] =
 //! FE8U = 0x08045494
 ProcPtr StartDrawLinkArenaRankSprites(struct SioPostBattleProc * parent, int delayMaybe, u16 fid, u8 oam2, u8 ranking)
 {
-    struct SioPostBattleSpritesProc * proc = Proc_Start(ProcScr_LinkArenaPostBattle_DrawSprites, parent);
+    struct SioPostBattleSpritesProc * proc = SpawnProc(ProcScr_LinkArenaPostBattle_DrawSprites, parent);
 
     proc->unk_2c = parent;
     proc->delayMaybe = delayMaybe;
@@ -215,7 +215,7 @@ extern struct ProcCmd ProcScr_SioPostBattle_PlayMusic[];
 //! FE8U = 0x08045610
 ProcPtr SioPostBattle_StartMusicProc(struct SioPostBattleProc * parent)
 {
-    struct SioPostBattleMusicProc * proc = Proc_Start(ProcScr_SioPostBattle_PlayMusic, parent);
+    struct SioPostBattleMusicProc * proc = SpawnProc(ProcScr_SioPostBattle_PlayMusic, parent);
 
     if (parent->playerId == parent->unk_44[0].playerId)
     {
@@ -274,7 +274,7 @@ void SioPostBattle_Init(struct SioPostBattleProc * proc)
 
     proc->unk_64 = 176;
 
-    BG_SetPosition(2, 0, 176);
+    SetBgOffset(2, 0, 176);
 
     SetWinEnable(0, 0, 0);
 
@@ -297,7 +297,7 @@ void SioPostBattle_Loop_Main(struct SioPostBattleProc * proc)
     int unk_40 = proc->unk_40;
 
     proc->unk_64--;
-    BG_SetPosition(2, 0, proc->unk_64);
+    SetBgOffset(2, 0, proc->unk_64);
 
     sub_804D6D4();
 
@@ -420,7 +420,7 @@ struct ProcCmd CONST_DATA ProcScr_SIOPRA[] = {
     PROC_CALL(Set_0203DDDC),
     PROC_CALL(sub_8013F40),
     PROC_YIELD,
-    PROC_START_CHILD_BLOCKING(ProcScr_SioPostBattle),
+    SpawnProc_CHILD_BLOCKING(ProcScr_SioPostBattle),
     PROC_YIELD,
     PROC_CALL(sub_8043244),
 PROC_LABEL(4),
@@ -518,7 +518,7 @@ PROC_LABEL(3),
     PROC_YIELD,
     PROC_CALL(sub_80469B8),
     PROC_CALL(sub_8045CBC),
-    PROC_START_CHILD_BLOCKING(ProcScr_SioPostBattle),
+    SpawnProc_CHILD_BLOCKING(ProcScr_SioPostBattle),
     PROC_YIELD,
     PROC_CALL(sub_8045CE0),
     PROC_CALL(sub_8045A64),

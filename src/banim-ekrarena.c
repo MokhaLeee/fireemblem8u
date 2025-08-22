@@ -29,7 +29,7 @@ void sub_805B034(int x)
     int x1 = x >> 3;
     int x2 = x & 7;
 
-    BG_SetPosition(BG_3, x2, 0);
+    SetBgOffset(BG_3, x2, 0);
     EfxTmCpyExt(gTmB_Banim + 8 + x1, 66, gBG3TilemapBuffer, 32, 32, 22, -1, -1);
 
     BG_EnableSyncByMask(BG3_SYNC_BIT);
@@ -107,7 +107,7 @@ struct ProcCmd CONST_DATA gProc_ekrTogiInit[] =
 //! FE8U = 0x0805B0F0
 void NewEkrTogiInitPROC(void)
 {
-    Proc_Start(gProc_ekrTogiInit, PROC_TREE_3);
+    SpawnProc(gProc_ekrTogiInit, PROC_TREE_3);
     return;
 }
 
@@ -201,7 +201,7 @@ struct ProcCmd CONST_DATA gProc_ekrTogiEnd[] =
 //! FE8U = 0x0805B278
 void NewEkrTogiEndPROC(void)
 {
-    Proc_Start(gProc_ekrTogiEnd, PROC_TREE_3);
+    SpawnProc(gProc_ekrTogiEnd, PROC_TREE_3);
     EndEkrTogiColor();
     return;
 }
@@ -282,7 +282,7 @@ void NewEkrTogiColor(void)
     };
     // clang-format on
 
-    gpProcEkrTogiColor = Proc_Start(gProc_ekrTogiColor, PROC_TREE_3);
+    gpProcEkrTogiColor = SpawnProc(gProc_ekrTogiColor, PROC_TREE_3);
 
     gpProcEkrTogiColor->timer = 0;
 

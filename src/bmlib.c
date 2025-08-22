@@ -713,7 +713,7 @@ CONST_DATA struct ProcCmd gUnknown_08599FD4[] = {
 
 void sub_8013800(int a, int b, int c, int d, int e, int f, int g, int h, ProcPtr parent)
 {
-    struct Proc8599FD4 *proc = Proc_Start(gUnknown_08599FD4, parent);
+    struct Proc8599FD4 *proc = SpawnProc(gUnknown_08599FD4, parent);
 
     proc->unk2C = a;
     proc->unk30 = b;
@@ -775,7 +775,7 @@ struct ProcCmd CONST_DATA ProcScr_SpacialSeTest[] = {
 
 void StartSpacialSeTest(void)
 {
-    Proc_Start(ProcScr_SpacialSeTest, PROC_TREE_3);
+    SpawnProc(ProcScr_SpacialSeTest, PROC_TREE_3);
 }
 
 void sub_80138EC(void)
@@ -812,7 +812,7 @@ struct ProcCmd CONST_DATA ProcScr_PalFade[] =
 struct PalFadeSt * StartPalFade(u16 const *colors, int pal, int duration, ProcPtr parent)
 {
     struct PalFadeSt * st = sPalFadeSt + pal;
-    struct PalFadeProc * proc = Proc_Start(ProcScr_PalFade, parent);
+    struct PalFadeProc * proc = SpawnProc(ProcScr_PalFade, parent);
 
     CpuCopy16(gPaletteBuffer + PAL_OFFSET(pal), st->from_colors, sizeof(st->from_colors));
 
@@ -1024,37 +1024,37 @@ bool FadeExists(void)
 
 void StartFadeToBlack(int q4_speed)
 {
-    struct Proc * proc = Proc_Start(ProcScr_FadeToBlack, PROC_TREE_3);
+    struct Proc * proc = SpawnProc(ProcScr_FadeToBlack, PROC_TREE_3);
     proc->unk64 = q4_speed;
 }
 
 void StartFadeFromBlack(int q4_speed)
 {
-    struct Proc * proc = Proc_Start(ProcScr_FadeFromBlack, PROC_TREE_3);
+    struct Proc * proc = SpawnProc(ProcScr_FadeFromBlack, PROC_TREE_3);
     proc->unk64 = q4_speed;
 }
 
 void StartLockingFadeToBlack(int q4_speed, ProcPtr parent)
 {
-    struct Proc * proc = Proc_StartBlocking(ProcScr_FadeToBlack, parent);
+    struct Proc * proc = SpawnProcBlocking(ProcScr_FadeToBlack, parent);
     proc->unk64 = q4_speed;
 }
 
 void StartLockingFadeFromBlack(int q4_speed, ProcPtr parent)
 {
-    struct Proc * proc = Proc_StartBlocking(ProcScr_FadeFromBlack, parent);
+    struct Proc * proc = SpawnProcBlocking(ProcScr_FadeFromBlack, parent);
     proc->unk64 = q4_speed;
 }
 
 void StartLockingFadeToWhite(int q4_speed, ProcPtr parent)
 {
-    struct Proc * proc = Proc_StartBlocking(ProcScr_FadeToWhite, parent);
+    struct Proc * proc = SpawnProcBlocking(ProcScr_FadeToWhite, parent);
     proc->unk64 = q4_speed;
 }
 
 void StartLockingFadeFromWhite(int q4_speed, ProcPtr parent)
 {
-    struct Proc * proc = Proc_StartBlocking(ProcScr_FadeFromWhite, parent);
+    struct Proc * proc = SpawnProcBlocking(ProcScr_FadeFromWhite, parent);
     proc->unk64 = q4_speed;
 }
 
@@ -1278,14 +1278,14 @@ struct FadeKindEnt {
 
 struct FadeKindEnt const gUnknown_080D7964[] =
 {
-    { Proc_Start,         ColorFadeSetupFromBlack,        +1 }, // from black
-    { Proc_Start,         ColorFadeSetupFromColorToBlack, -1 }, // to black
-    { Proc_StartBlocking, ColorFadeSetupFromBlack,        +1 }, // from black locking
-    { Proc_StartBlocking, ColorFadeSetupFromColorToBlack, -1 }, // to black locking
-    { Proc_Start,         ColorFadeSetupFromWhite,        -1 }, // from white
-    { Proc_Start,         ColorFadeSetupFromColorToWhite, +1 }, // to white
-    { Proc_StartBlocking, ColorFadeSetupFromWhite,        -1 }, // from white locking
-    { Proc_StartBlocking, ColorFadeSetupFromColorToWhite, +1 }, // to white locking
+    { SpawnProc,         ColorFadeSetupFromBlack,        +1 }, // from black
+    { SpawnProc,         ColorFadeSetupFromColorToBlack, -1 }, // to black
+    { SpawnProcBlocking, ColorFadeSetupFromBlack,        +1 }, // from black locking
+    { SpawnProcBlocking, ColorFadeSetupFromColorToBlack, -1 }, // to black locking
+    { SpawnProc,         ColorFadeSetupFromWhite,        -1 }, // from white
+    { SpawnProc,         ColorFadeSetupFromColorToWhite, +1 }, // to white
+    { SpawnProcBlocking, ColorFadeSetupFromWhite,        -1 }, // from white locking
+    { SpawnProcBlocking, ColorFadeSetupFromColorToWhite, +1 }, // to white locking
 };
 
 struct ProcCmd CONST_DATA ProcScr_FadeCore[] = {
@@ -1414,7 +1414,7 @@ void StartTemporaryLock(ProcPtr proc, int duration)
 {
     struct Proc * gproc;
 
-    gproc = Proc_StartBlocking(ProcScr_TemporaryLock, proc);
+    gproc = SpawnProcBlocking(ProcScr_TemporaryLock, proc);
     gproc->unk58 = duration;
 }
 
@@ -1579,7 +1579,7 @@ ProcPtr StartPaletteAnimatorExt(u16 const * colors, int pal_offset, int pal_size
 {
     struct ProcPaletteAnimator * proc;
 
-    proc = Proc_Start(ProcScr_PaletteAnimator, parent);
+    proc = SpawnProc(ProcScr_PaletteAnimator, parent);
 
     proc->colors = colors;
     proc->palOffset = pal_offset;
@@ -1787,7 +1787,7 @@ struct ProcCmd CONST_DATA ProcScr_CallDelayed[] = {
 
 void CallDelayed(void (* func)(void), int delay)
 {
-    struct CallDelayedProc * proc = Proc_Start(ProcScr_CallDelayed, PROC_TREE_3);
+    struct CallDelayedProc * proc = SpawnProc(ProcScr_CallDelayed, PROC_TREE_3);
 
     proc->func = func;
     proc->clock = delay;
@@ -1800,7 +1800,7 @@ struct ProcCmd CONST_DATA ProcScr_CallDelayedArg[] = {
 
 void CallDelayedArg(void (* func)(int), int arg, int delay)
 {
-    struct CallDelayedProc * proc = Proc_Start(ProcScr_CallDelayedArg, PROC_TREE_3);
+    struct CallDelayedProc * proc = SpawnProc(ProcScr_CallDelayedArg, PROC_TREE_3);
 
     proc->func = func;
     proc->arg = arg;
@@ -1850,7 +1850,7 @@ void StartPartialGameLock(ProcPtr proc)
 {
     struct Proc * gproc;
 
-    gproc = Proc_StartBlocking(ProcScr_PartialGameLock, proc);
+    gproc = SpawnProcBlocking(ProcScr_PartialGameLock, proc);
     gproc->unk64 = GetGameLock();
 }
 

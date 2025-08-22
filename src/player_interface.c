@@ -1403,9 +1403,9 @@ void InitPlayerPhaseInterface(void)
     SetWOutLayers(1, 1, 1, 1, 1);
     gLCDControlBuffer.wincnt.wout_enableBlend = 1;
 
-    BG_SetPosition(BG_0, 0, 0);
-    BG_SetPosition(BG_1, 0, 0);
-    BG_SetPosition(BG_2, 0, 0);
+    SetBgOffset(BG_0, 0, 0);
+    SetBgOffset(BG_1, 0, 0);
+    SetBgOffset(BG_2, 0, 0);
 
     SetBlendAlpha(13, 3);
     SetBlendTargetA(0, 1, 0, 0, 0);
@@ -1425,29 +1425,29 @@ void InitPlayerPhaseInterface(void)
 
     if (gPlaySt.config.disableTerrainDisplay == 0)
     {
-        Proc_Start(gProcScr_TerrainDisplay, PROC_TREE_3);
+        SpawnProc(gProcScr_TerrainDisplay, PROC_TREE_3);
     }
 
     if (gBmSt.gameStateBits & BM_FLAG_PREPSCREEN)
     {
-        Proc_Start(gProcScr_PrepMap_MenuButtonDisplay, PROC_TREE_3);
+        SpawnProc(gProcScr_PrepMap_MenuButtonDisplay, PROC_TREE_3);
     }
     else
     {
         if ((gPlaySt.config.disableGoalDisplay == 0) && (CheckFlag(EVFLAG_OBJWINDOW_DISABLE) == 0))
         {
-            Proc_Start(gProcScr_GoalDisplay, PROC_TREE_3);
+            SpawnProc(gProcScr_GoalDisplay, PROC_TREE_3);
         }
     }
 
     if (gPlaySt.config.unitDisplayType == 0)
     {
-        Proc_Start(gProcScr_UnitDisplay_MinimugBox, PROC_TREE_3);
+        SpawnProc(gProcScr_UnitDisplay_MinimugBox, PROC_TREE_3);
     }
 
     if (gPlaySt.config.unitDisplayType == 1)
     {
-        Proc_Start(gProcScr_UnitDisplay_Burst, PROC_TREE_3);
+        SpawnProc(gProcScr_UnitDisplay_Burst, PROC_TREE_3);
     }
 
     return;
@@ -1456,7 +1456,7 @@ void InitPlayerPhaseInterface(void)
 //! FE8U = 0x0808D13C
 void StartPlayerPhaseSideWindows(void)
 {
-    Proc_Start(gProcScr_SideWindowMaker, PROC_TREE_3);
+    SpawnProc(gProcScr_SideWindowMaker, PROC_TREE_3);
     return;
 }
 

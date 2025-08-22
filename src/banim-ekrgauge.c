@@ -59,7 +59,7 @@ void NewEkrGauge(void)
 {
     u32 i, j;
 
-    gpProcEkrGauge = Proc_Start(ProcScr_ekrGauge, PROC_TREE_1);
+    gpProcEkrGauge = SpawnProc(ProcScr_ekrGauge, PROC_TREE_1);
 
     EkrGauge_Setup44(0);
     EkrGauge_Clr4C50();

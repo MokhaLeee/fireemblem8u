@@ -26,7 +26,7 @@ void StartSpellAnimWretchedAir(struct Anim * anim)
     SpellFx_Begin();
     SpellFx_ClearBG1Position();
 
-    proc = Proc_Start(ProcScr_efxDrzDrakbreath, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxDrzDrakbreath, PROC_TREE_3);
     proc->anim = anim;
     proc->timer = 0;
     proc->hitted = CheckRoundMiss(GetAnimRoundTypeAnotherSide(anim));
@@ -93,7 +93,7 @@ void StartSubSpell_efxDrzDrakbreathOBJ(struct Anim * anim)
 
     gEfxBgSemaphore++;
 
-    proc = Proc_Start(ProcScr_efxDrzDrakbreathOBJ, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxDrzDrakbreathOBJ, PROC_TREE_3);
     proc->anim = anim;
     proc->timer = 0;
     proc->terminator = 52;
@@ -185,7 +185,7 @@ void StartSubSpell_efxDrzDrakbreathBG(struct Anim * anim)
 
     gEfxBgSemaphore++;
 
-    proc = Proc_Start(ProcScr_efxDrzDrakbreathBG, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxDrzDrakbreathBG, PROC_TREE_3);
     proc->anim = anim;
     proc->timer = 0;
     proc->terminator = 112;
@@ -208,7 +208,7 @@ void efxDrzDrakbreathBG_Loop(struct ProcEfxBG * proc)
     if (proc->timer == proc->terminator)
     {
         SpellFx_ClearBG1();
-        SetDefaultColorEffects_();
+        SpellFx_ClearColorEffects();
         gEfxBgSemaphore--;
         Proc_Break(proc);
     }
@@ -300,7 +300,7 @@ void StartSubSpell_efxDrzDrakbreathBGCOL(struct Anim * anim)
 
     gEfxBgSemaphore++;
 
-    proc = Proc_Start(ProcScr_efxDrzDrakbreathBGCOL, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxDrzDrakbreathBGCOL, PROC_TREE_3);
     proc->anim = anim;
     proc->timer = 0;
     proc->frame = 0;

@@ -268,5 +268,5 @@ void nullsub_61(void)
 
 ProcPtr NewClassChgMenuSelect(ProcPtr parent)
 {
-	return Proc_Start(ProcScr_ClassChgMenuSel, parent);
+	return SpawnProc(ProcScr_ClassChgMenuSel, parent);
 }

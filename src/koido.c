@@ -98,7 +98,7 @@ static inline void Make6CKOIDO_common(struct Unit* unit, int config, struct Koid
 
 void Make6CKOIDO(struct Unit* unit, int direction, int config, ProcPtr parent)
 {
-    struct KoidoProc *proc = Proc_StartBlocking(sProcScr_KOIDO, parent);
+    struct KoidoProc *proc = SpawnProcBlocking(sProcScr_KOIDO, parent);
 
     proc->unit = unit;
     proc->direction = direction;
@@ -111,7 +111,7 @@ void Make6CKOIDO(struct Unit* unit, int direction, int config, ProcPtr parent)
 
 void Make6CKOIDOAMM(struct Unit* unit, int direction)
 {
-    struct KoidoProc *proc = Proc_Start(sProcScr_KOIDOAMM, PROC_TREE_3);
+    struct KoidoProc *proc = SpawnProc(sProcScr_KOIDOAMM, PROC_TREE_3);
 
     proc->unit = unit;
     proc->direction = direction;

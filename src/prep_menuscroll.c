@@ -312,7 +312,7 @@ void EndMenuScrollBar(void) {
 
 //! FE8U = 0x08097698
 ProcPtr StartMenuScrollBar(ProcPtr parent) {
-    return Proc_Start(ProcScr_menu_scroll, parent);
+    return SpawnProc(ProcScr_menu_scroll, parent);
 }
 
 //! FE8U = 0x080976AC
@@ -359,7 +359,7 @@ void InitMenuScrollBarImg(int chr, int pal) {
 
 //! FE8U = 0x08097748
 ProcPtr StartMenuScrollBarExt(ProcPtr parent, int x, int y, int chr, int pal) {
-    struct MenuScrollBarProc* proc = Proc_Start(ProcScr_menu_scroll, parent);
+    struct MenuScrollBarProc* proc = SpawnProc(ProcScr_menu_scroll, parent);
 
     proc->xBase = x;
     proc->yBase = y;

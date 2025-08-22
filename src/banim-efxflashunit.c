@@ -25,7 +25,7 @@ void NewEfxFlashHPBar(struct Anim * anim, int duartion, int duartion2)
     u16 _duartion = duartion;
     u16 _duartion2 = duartion2;
 
-    proc = Proc_Start(ProcScr_efxFlashHPBar, PROC_TREE_4);
+    proc = SpawnProc(ProcScr_efxFlashHPBar, PROC_TREE_4);
     proc->anim = anim;
     proc->timer = 0;
     proc->terminator = _duartion;
@@ -124,7 +124,7 @@ const u16 gFrameLut_EfxHPBarColorChange2[] = {
 void NewEfxHpBarColorChange(struct Anim * anim)
 {
     struct ProcEfxHpBarColorChange * proc;
-    gpProcEfxHpBarColorChange = proc = Proc_Start(ProcScr_efxHPBarColorChange, PROC_TREE_3);
+    gpProcEfxHpBarColorChange = proc = SpawnProc(ProcScr_efxHPBarColorChange, PROC_TREE_3);
     proc->anim = anim;
     proc->timer1 = 0;
     proc->frame1 = 0;
@@ -249,7 +249,7 @@ CONST_DATA struct ProcCmd ProcScr_efxFlashUnit[] = {
 
 void NewEfxFlashUnit(struct Anim * anim, u16 dura1, u16 dura2, int c)
 {
-    struct ProcEfxFlashing * proc = Proc_Start(ProcScr_efxFlashUnit, PROC_TREE_4);
+    struct ProcEfxFlashing * proc = SpawnProc(ProcScr_efxFlashUnit, PROC_TREE_4);
     proc->anim = anim;
     proc->timer = 0;
     proc->terminator = dura1;
@@ -309,7 +309,7 @@ void NewEfxFlashUnitEffectEnd(struct Anim * anim, int dura1, int dura2, int c)
     struct ProcEfxFlashing * proc;
     u16 duartion1 = dura1;
     u16 duartion2 = dura2;
-    proc = Proc_Start(ProcScr_efxFlashUnitEffectEnd, PROC_TREE_4);
+    proc = SpawnProc(ProcScr_efxFlashUnitEffectEnd, PROC_TREE_4);
     proc->anim = anim;
     proc->timer = 0;
     proc->terminator = duartion1;

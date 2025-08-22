@@ -80,7 +80,7 @@ struct ProcCmd CONST_DATA ProcScr_GameOverScreen[] = {
     PROC_SET_END_CB(GameOverScreen_End),
     PROC_CALL(GameOverScreen_Init),
     PROC_CALL(EndAllMus),
-    PROC_START_CHILD(ProcScr_GameOverScreen_RandomScroll),
+    SpawnProc_CHILD(ProcScr_GameOverScreen_RandomScroll),
     PROC_REPEAT(GameOverScreen_LoopFadeIn),
     PROC_CALL(GameOverScreen_BeginIdle),
     PROC_REPEAT(GameOverScreen_LoopIdle),
@@ -114,8 +114,8 @@ void GameOverScreen_RandomScroll_Loop(struct ProcGameOverScroll *proc)
     proc->bg3_xpos += proc->bg3_xdiff;
     proc->bg3_ypos += proc->bg3_ydiff;
 
-    BG_SetPosition(BG_2, -proc->bg2_xpos >> 8, -proc->bg2_ypos >> 8);
-    BG_SetPosition(BG_3, -proc->bg3_xpos >> 8, -proc->bg3_ypos >> 8);
+    SetBgOffset(BG_2, -proc->bg2_xpos >> 8, -proc->bg2_ypos >> 8);
+    SetBgOffset(BG_3, -proc->bg3_xpos >> 8, -proc->bg3_ypos >> 8);
 }
 
 void GameOverScreenHBlank(void)
@@ -158,7 +158,7 @@ void GameOverScreen_Init(struct ProcGameOverScreen *proc)
     Decompress(Img_ChapterIntroFog, BG_CHR_ADDR(BGCHR_BMFX_IMG));
     ApplyPalette(Pal_GameOverText2, BGPAL_GAMEOVER_TEXT);
 
-    BG_SetPosition(0, 0, 0);
+    SetBgOffset(0, 0, 0);
     ClearBg0Bg1();
 
     CallARM_FillTileRect(
@@ -253,7 +253,7 @@ void GameOverScreen_End(struct ProcGameOverScreen *proc)
 void StartGameOverScreen(ProcPtr parent)
 {
     if (parent)
-        Proc_StartBlocking(ProcScr_GameOverScreen, parent);
+        SpawnProcBlocking(ProcScr_GameOverScreen, parent);
     else
-        Proc_Start(ProcScr_GameOverScreen, PROC_TREE_3);
+        SpawnProc(ProcScr_GameOverScreen, PROC_TREE_3);
 }

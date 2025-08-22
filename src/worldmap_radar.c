@@ -425,9 +425,9 @@ void StartWorldMapMinimapCore(struct Proc * proc)
     SetWOutLayers(1, 1, 1, 1, 1);
     gLCDControlBuffer.wincnt.wout_enableBlend = 1;
 
-    BG_SetPosition(BG_0, 0, 0);
-    BG_SetPosition(BG_1, 0, 0);
-    BG_SetPosition(BG_2, 0, 0);
+    SetBgOffset(BG_0, 0, 0);
+    SetBgOffset(BG_1, 0, 0);
+    SetBgOffset(BG_2, 0, 0);
 
     SetBlendAlpha(14, 3);
 
@@ -441,7 +441,7 @@ void StartWorldMapMinimapCore(struct Proc * proc)
     ApplyPalette(gPal_GMapPI_ShopIcons, 0x19);
     EnablePaletteSync();
 
-    Proc_Start(ProcScr_GmapRader, proc->proc_parent);
+    SpawnProc(ProcScr_GmapRader, proc->proc_parent);
 
     return;
 }
@@ -461,7 +461,7 @@ struct ProcCmd CONST_DATA ProcScr_WorldmapMinimapWrapper[] =
 //! FE8U = 0x080C3E80
 ProcPtr StartWorldmapMinimap(ProcPtr parent)
 {
-    return Proc_Start(ProcScr_WorldmapMinimapWrapper, parent);
+    return SpawnProc(ProcScr_WorldmapMinimapWrapper, parent);
 }
 
 //! FE8U = 0x080C3E94

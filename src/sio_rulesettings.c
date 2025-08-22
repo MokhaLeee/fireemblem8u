@@ -93,7 +93,7 @@ void SioRuleSettings_Init(struct ProcSioRuleSettings * proc)
     proc->unk_30 = 0;
     proc->unk_2c = StartRuleSettingSpriteDrawInteractive(proc);
 
-    BG_SetPosition(BG_1, 254, 0);
+    SetBgOffset(BG_1, 254, 0);
 
     LoadLinkArenaRuleSettings(buf);
 

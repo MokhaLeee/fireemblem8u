@@ -445,10 +445,10 @@ void ProcPrepUnit_InitScreen(struct ProcPrepUnit *proc)
     gLCDControlBuffer.bg2cnt.priority = 1;
     gLCDControlBuffer.bg3cnt.priority = 3;
 
-    BG_SetPosition(BG_0, 0, 0);
-    BG_SetPosition(BG_1, 0, 0);
-    BG_SetPosition(BG_2, 0, proc->yDiff_cur - 0x18);
-    BG_SetPosition(BG_3, 0, 0);
+    SetBgOffset(BG_0, 0, 0);
+    SetBgOffset(BG_1, 0, 0);
+    SetBgOffset(BG_2, 0, proc->yDiff_cur - 0x18);
+    SetBgOffset(BG_3, 0, 0);
 
     PrepUnit_InitTexts();
     PrepUnit_InitGfx();
@@ -598,7 +598,7 @@ void ProcPrepUnit_Idle(struct ProcPrepUnit *proc)
         proc->list_num_pre = proc->list_num_cur;
     }
 
-    BG_SetPosition(BG_2, 0, proc->yDiff_cur - 0x18);
+    SetBgOffset(BG_2, 0, proc->yDiff_cur - 0x18);
     UpdateMenuScrollBarConfig(0xA, proc->yDiff_cur, (PrepGetUnitAmount() - 1) / 2 + 1, 6);
 }
 
@@ -610,7 +610,7 @@ void sub_809B2DC(struct ProcPrepUnit *proc)
     if (proc->unk34 == 0x20)
         Proc_Break(proc);
 
-    BG_SetPosition(BG_2, 0, proc->yDiff_cur - 0x18);
+    SetBgOffset(BG_2, 0, proc->yDiff_cur - 0x18);
 
     if (0 == proc->yDiff_cur % 0x10)
         PrepUpdateMenuTsaScroll(proc->yDiff_cur / 0x10 - 1);
@@ -627,7 +627,7 @@ void sub_809B324(struct ProcPrepUnit *proc)
     if (proc->unk34 <= 0)
         Proc_Break(proc);
 
-    BG_SetPosition(BG_2, 0, proc->yDiff_cur - 0x18);
+    SetBgOffset(BG_2, 0, proc->yDiff_cur - 0x18);
 }
 
 void nullsub_21()

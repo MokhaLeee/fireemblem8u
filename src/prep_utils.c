@@ -57,7 +57,7 @@ struct ProcCmd CONST_DATA ProcScr_ViewCounter[] = {
 //! FE8U = 0x08097D14
 void StartViewCounter(u16 frames, ProcPtr parent)
 {
-    struct ViewCounterProc* proc = Proc_Start(ProcScr_ViewCounter, parent);
+    struct ViewCounterProc* proc = SpawnProc(ProcScr_ViewCounter, parent);
 
     proc->counter = 0;
     proc->targetFrameCount = frames;
@@ -114,7 +114,7 @@ ProcPtr StartPrepErrorHelpbox(int x, int y, int msgId, ProcPtr parent) {
 
     StartHelpBox(x, y, msgId);
 
-    return Proc_StartBlocking(gProcScr_PrepHelpboxListener, parent);
+    return SpawnProcBlocking(gProcScr_PrepHelpboxListener, parent);
 }
 
 //! FE8U = 0x08097DE0

@@ -381,7 +381,7 @@ void GmapEffect_Init(struct GmapEffectProc * proc)
 
     if (Proc_Find(gProcScr_GmapEffectPal) == NULL)
     {
-        Proc_Start(gProcScr_GmapEffectPal, proc);
+        SpawnProc(gProcScr_GmapEffectPal, proc);
     }
 
     proc->unk_2e = 0;
@@ -443,22 +443,22 @@ struct GmapEffectProc * StartGmapEffect(ProcPtr parent, int unk)
         if (gGMData.state.bits.state_3)
         {
             // TODO: Was this intended to be non-blocking?
-            proc = Proc_StartBlocking(gProcScr_GmapEffect, parent);
+            proc = SpawnProcBlocking(gProcScr_GmapEffect, parent);
         }
         else
         {
-            proc = Proc_StartBlocking(gProcScr_GmapEffect, parent);
+            proc = SpawnProcBlocking(gProcScr_GmapEffect, parent);
         }
     }
     else
     {
         if (gGMData.state.bits.state_3)
         {
-            proc = Proc_Start(gProcScr_GmapEffect, PROC_TREE_3);
+            proc = SpawnProc(gProcScr_GmapEffect, PROC_TREE_3);
         }
         else
         {
-            proc = Proc_StartBlocking(gProcScr_GmapEffect, PROC_TREE_3);
+            proc = SpawnProcBlocking(gProcScr_GmapEffect, PROC_TREE_3);
         }
     }
 

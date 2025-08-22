@@ -112,11 +112,11 @@ void StartCircularFadeAnim(ProcPtr parent, int x, int y)
     SetBlendConfig(1, 0x10, 0x10, 0);
     SetBlendTargetA(1, 0, 0, 0, 0);
     SetBlendTargetB(0, 1, 1, 1, 1);
-    BG_SetPosition(0, 0, 0);
+    SetBgOffset(0, 0, 0);
     ClearBg0Bg1();
     SetBackgroundTileDataOffset(0, 0);
 
-    proc = Proc_Start(ProcScr_WhiteCircleFx, parent);
+    proc = SpawnProc(ProcScr_WhiteCircleFx, parent);
     proc->xPos = x;
     proc->yPos = y;
     proc->counter = 0;

@@ -18,9 +18,9 @@ struct ProcCmd
 #define PROC_CALL(apRoutine)                         { 0x02, 0x0000, (apRoutine) }
 #define PROC_REPEAT(apRoutine)                       { 0x03, 0x0000, (apRoutine) }
 #define PROC_SET_END_CB(apRoutine)                   { 0x04, 0x0000, (apRoutine) }
-#define PROC_START_CHILD(ap6CChild)                  { 0x05, 0x0000, (ap6CChild) }
-#define PROC_START_CHILD_BLOCKING(ap6CChild)         { 0x06, 0x0001, (ap6CChild) }
-#define PROC_START_MAIN_BUGGED(ap6CMain)             { 0x07, 0x0000, (ap6CMain) }
+#define SpawnProc_CHILD(ap6CChild)                  { 0x05, 0x0000, (ap6CChild) }
+#define SpawnProc_CHILD_BLOCKING(ap6CChild)         { 0x06, 0x0001, (ap6CChild) }
+#define SpawnProc_MAIN_BUGGED(ap6CMain)             { 0x07, 0x0000, (ap6CMain) }
 #define PROC_WHILE_EXISTS(ap6CToCheck)               { 0x08, 0x0000, (ap6CToCheck) }
 #define PROC_END_EACH(ap6CToCheck)                   { 0x09, 0x0000, (ap6CToCheck) }
 #define PROC_BREAK_EACH(ap6CToCheck)                 { 0x0A, 0x0000, (ap6CToCheck) }
@@ -133,8 +133,8 @@ enum
 extern struct Proc* gProcTreeRootArray[8];
 
 void Proc_Init(void);
-ProcPtr Proc_Start(const struct ProcCmd* script, ProcPtr parent);
-ProcPtr Proc_StartBlocking(const struct ProcCmd* script, ProcPtr parent);
+ProcPtr SpawnProc(const struct ProcCmd* script, ProcPtr parent);
+ProcPtr SpawnProcBlocking(const struct ProcCmd* script, ProcPtr parent);
 void Proc_End(ProcPtr proc);
 void Proc_Run(ProcPtr proc);
 void Proc_Break(ProcPtr proc);

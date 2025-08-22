@@ -259,7 +259,7 @@ void NewEkrBaseKaiten(int identifier)
     switch (gEkrDistanceType) {
     case EKR_DISTANCE_CLOSE:
     case EKR_DISTANCE_PROMOTION:
-        proc = Proc_Start(ProcScr_EkrBaseKaiten, PROC_TREE_3);
+        proc = SpawnProc(ProcScr_EkrBaseKaiten, PROC_TREE_3);
         proc->type = identifier;
         proc->unk29 = 0;
         proc->timer = 0;
@@ -295,7 +295,7 @@ void NewEkrBaseKaiten(int identifier)
 
     case EKR_DISTANCE_FAR:
     case EKR_DISTANCE_FARFAR:
-        proc = Proc_Start(ProcScr_EkrBaseKaiten, PROC_TREE_3);
+        proc = SpawnProc(ProcScr_EkrBaseKaiten, PROC_TREE_3);
         proc->type = identifier;
         proc->unk29 = 0;
         proc->timer = 0;
@@ -332,7 +332,7 @@ void NewEkrBaseKaiten(int identifier)
         proc->unk36 = 0;
 
         /* Another proc ? */
-        proc = Proc_Start(ProcScr_EkrBaseKaiten, PROC_TREE_3);
+        proc = SpawnProc(ProcScr_EkrBaseKaiten, PROC_TREE_3);
         proc->type = identifier;
         proc->unk29 = 1;
         proc->timer = 0;
@@ -370,7 +370,7 @@ void NewEkrBaseKaiten(int identifier)
         break;
 
     case EKR_DISTANCE_MONOCOMBAT:
-        proc = Proc_Start(ProcScr_EkrBaseKaiten, PROC_TREE_3);
+        proc = SpawnProc(ProcScr_EkrBaseKaiten, PROC_TREE_3);
         proc->type = identifier;
         proc->unk29 = 0;
         proc->timer = 0;
@@ -452,7 +452,7 @@ CONST_DATA struct ProcCmd ProcScr_ekrUnitKakudai[] = {
 void NewEkrUnitKakudai(int identifier)
 {
     struct ProcUnitKakudai * proc =
-        Proc_Start(ProcScr_ekrUnitKakudai, PROC_TREE_3);
+        SpawnProc(ProcScr_ekrUnitKakudai, PROC_TREE_3);
 
     proc->type = identifier;
     proc->valid_r = 0;
@@ -670,7 +670,7 @@ void NewEkrWindowAppear(int identifier, int duration)
     int iy;
 
     struct ProcEkrIntroWindow * proc =
-        Proc_Start(ProcScr_ekrWindowAppear, PROC_TREE_3);
+        SpawnProc(ProcScr_ekrWindowAppear, PROC_TREE_3);
 
     proc->type = identifier;
     proc->timer = 0;
@@ -728,7 +728,7 @@ void NewEkrNamewinAppear(int identifier, int duration, int delay)
     int iy;
 
     struct ProcEkrIntroWindow * proc =
-        Proc_Start(ProcScr_ekrNamewinAppear, PROC_TREE_3);
+        SpawnProc(ProcScr_ekrNamewinAppear, PROC_TREE_3);
 
     proc->type = identifier;
     proc->timer = 0;
@@ -800,16 +800,16 @@ void NewEkrBaseAppear(int identifier, int duration)
     int iy;
 
     struct ProcEkrIntroWindow * proc =
-        Proc_Start(ProcScr_ekrBaseAppear, PROC_TREE_3);
+        SpawnProc(ProcScr_ekrBaseAppear, PROC_TREE_3);
 
     proc->type = identifier;
     proc->timer = 0;
     proc->terminator = duration;
 
     if (identifier == 0)
-        BG_SetPosition(BG_2, 0, -0x58);
+        SetBgOffset(BG_2, 0, -0x58);
     else
-        BG_SetPosition(BG_2, 0, 0);
+        SetBgOffset(BG_2, 0, 0);
 
     gProcEkrBaseAppearExist = true;
 }
@@ -839,7 +839,7 @@ void EkrBaseAppearMain(struct ProcEkrIntroWindow * proc)
     else
         iy = Interpolate(4, 0, -0x50, proc->timer, proc->terminator);
 
-    BG_SetPosition(BG_2, 0, iy);
+    SetBgOffset(BG_2, 0, iy);
 }
 
 static inline s16 GetBanimAllyPosition(int faction1, int faction2)

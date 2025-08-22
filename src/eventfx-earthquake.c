@@ -37,11 +37,11 @@ void EventEarthQuakeMain(struct ProcBmFx * proc)
         case 1:
             switch (proc->position) {
             case POS_L:
-                BG_SetPosition(3, GetGameClock() & 2, 0);
+                SetBgOffset(3, GetGameClock() & 2, 0);
                 break;
             
             case POS_R:
-                BG_SetPosition(3, 0, GetGameClock() & 2);
+                SetBgOffset(3, 0, GetGameClock() & 2);
                 break;
             }
             break;
@@ -58,7 +58,7 @@ void StartEventEarthQuake(u8 type, u8 direction, s8 play_sound)
         if (1 == play_sound)
             PlaySoundEffect(SONG_26A);
         
-        proc = Proc_Start(ProcScr_EventEarthQuake, PROC_TREE_3);
+        proc = SpawnProc(ProcScr_EventEarthQuake, PROC_TREE_3);
     }
 
     proc->type = type; /* 0 to move camera, 1 to move BG position */
@@ -80,7 +80,7 @@ void EndEventEarthQuake(void)
         break;
 
     case 1:
-        BG_SetPosition(3, 0, 0);
+        SetBgOffset(3, 0, 0);
     }
 
     Proc_EndEach(ProcScr_EventEarthQuake);

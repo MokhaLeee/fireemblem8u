@@ -403,7 +403,7 @@ void BonusClaim_Init(struct BonusClaimProc * proc)
 
     proc->unk_34 = NULL;
 
-    BG_SetPosition(2, -40, (proc->unk_2c - 56) & 0xff);
+    SetBgOffset(2, -40, (proc->unk_2c - 56) & 0xff);
 
     ResetSysHandCursor(proc);
     DisplaySysHandCursorTextShadow(0x600, 1);
@@ -541,7 +541,7 @@ void BonusClaim_Loop_MainKeyHandler(struct BonusClaimProc * proc)
         proc->unk_2e = 0;
     }
 
-    BG_SetPosition(2, -40, (proc->unk_2c - 56) & 0xff);
+    SetBgOffset(2, -40, (proc->unk_2c - 56) & 0xff);
 
     UpdateMenuScrollBarConfig(8, proc->unk_2c, *gpBonusClaimItemCount, 5);
 
@@ -828,7 +828,7 @@ void BonusClaim_DrawItemSentPopup(struct BonusClaimProc * proc)
 
     BG_EnableSyncByMask(3);
 
-    BG_SetPosition(0, 0, -4);
+    SetBgOffset(0, 0, -4);
 
     return;
 }
@@ -858,7 +858,7 @@ void BonusClaim_ClearItemSentPopup(void)
     gLCDControlBuffer.dispcnt.win0_on = 0;
     gLCDControlBuffer.dispcnt.win1_on = 1;
     gLCDControlBuffer.dispcnt.objWin_on = 0;
-    BG_SetPosition(0, 0, 0);
+    SetBgOffset(0, 0, 0);
 }
 
 //! FE8U = 0x080B166C
@@ -910,5 +910,5 @@ PROC_LABEL(100),
 //! FE8U = 0x080B1688
 void StartBonusClaimScreen(ProcPtr parent)
 {
-    Proc_StartBlocking(gProcScr_BonusClaim, parent);
+    SpawnProcBlocking(gProcScr_BonusClaim, parent);
 }

@@ -35,7 +35,7 @@ CONST_DATA struct ProcCmd ProcScr_ekrClasschg[] = {
 void NewEkrClassChg(struct Anim * anim)
 {
     NewEfxSpellCast();
-    gpProcEkrClasschg = Proc_Start(ProcScr_ekrClasschg, PROC_TREE_3);
+    gpProcEkrClasschg = SpawnProc(ProcScr_ekrClasschg, PROC_TREE_3);
     gpProcEkrClasschg->anim = anim;
     gpProcEkrClasschg->timer = 0;
     gpProcEkrClasschg->done = false;
@@ -48,10 +48,10 @@ void EkrClasschgMain(struct ProcEkrClasschg * proc)
 
     if (0x01 == proc->timer)
     {
-        BG_SetPosition(BG_0, 0, 0);
-        BG_SetPosition(BG_1, 0, 0);
-        BG_SetPosition(BG_2, 0, 0);
-        BG_SetPosition(BG_3, 0, 0);
+        SetBgOffset(BG_0, 0, 0);
+        SetBgOffset(BG_1, 0, 0);
+        SetBgOffset(BG_2, 0, 0);
+        SetBgOffset(BG_3, 0, 0);
 
         DisableEfxStatusUnits(proc->anim);
         DisableEfxStatusUnits(anim1);
@@ -72,7 +72,7 @@ void EkrClasschgMain(struct ProcEkrClasschg * proc)
     else if (0x8C == proc->timer)
     {
         NewEfxFlashBgWhite(proc->anim, 0xA);
-        BG_SetPosition(BG_1, 0, 8);
+        SetBgOffset(BG_1, 0, 8);
     }
     else if (0x92 == proc->timer)
         NewEfxClasschgOBJDiffusion(proc->anim, 0);
@@ -90,10 +90,10 @@ void EkrClasschgMain(struct ProcEkrClasschg * proc)
         SetBlendConfig(0x1, 0x0, 0x10, 0x0);
         NewEfxALPHA(proc->anim, 0, 0x38, 0x0, 0x10, 0x0);
 
-        BG_SetPosition(BG_0, 0, 0);
-        BG_SetPosition(BG_1, 0, 0);
-        BG_SetPosition(BG_2, 0, 0);
-        BG_SetPosition(BG_3, 0, 0);
+        SetBgOffset(BG_0, 0, 0);
+        SetBgOffset(BG_1, 0, 0);
+        SetBgOffset(BG_2, 0, 0);
+        SetBgOffset(BG_3, 0, 0);
     }
     else if (0x11E == proc->timer)
     {
@@ -105,7 +105,7 @@ void EkrClasschgMain(struct ProcEkrClasschg * proc)
     {
         anim1->oam2Base &= 0xF3FF;
         anim1->oam2Base |= 0x400;
-        RegisterEfxSpellCastEnd();
+        EndEfxSpellCastAsync();
         NewEfxWhiteIN(anim1, 0xA, 0x46);
     }
     else if (0x144 == proc->timer)
@@ -352,7 +352,7 @@ const u16 FrameLut_080E1488[] = {
 void NewEkrClasschgBG1(struct Anim * anim)
 {
     struct ProcEfxBG * proc;
-    proc = Proc_Start(ProcScr_efxClasschgBG, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxClasschgBG, PROC_TREE_3);
     proc->anim = anim;
     proc->timer = 0;
     proc->frame = 0;
@@ -368,7 +368,7 @@ void NewEkrClasschgBG1(struct Anim * anim)
 void NewEkrClasschgBG2(struct Anim * anim)
 {
     struct ProcEfxBG * proc;
-    proc = Proc_Start(ProcScr_efxClasschgBG, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxClasschgBG, PROC_TREE_3);
     proc->anim = anim;
     proc->timer = 0;
     proc->frame = 0;
@@ -402,7 +402,7 @@ void EfxClasschgBgMain(struct ProcEfxBG * proc)
     if (ret == -1)
     {
         SpellFx_ClearBG1();
-        SetDefaultColorEffects_();
+        SpellFx_ClearColorEffects();
         Proc_End(proc);
         return;
     }
@@ -417,7 +417,7 @@ CONST_DATA struct ProcCmd ProcScr_efxClasschgBGSE00[] = {
 void NewEfxClasschgBGSE00(struct Anim * anim)
 {
     struct ProcEfxBG * proc;
-    proc = Proc_Start(ProcScr_efxClasschgBGSE00, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxClasschgBGSE00, PROC_TREE_3);
     proc->anim = anim;
     proc->timer = 0;
 }
@@ -453,7 +453,7 @@ CONST_DATA struct ProcCmd ProcScr_efxClasschgBGSE01[] = {
 void NewEfxClasschgBGSE01(struct Anim * anim)
 {
     struct ProcEfxBG * proc;
-    proc = Proc_Start(ProcScr_efxClasschgBGSE01, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxClasschgBGSE01, PROC_TREE_3);
     proc->anim = anim;
     proc->timer = 0;
 }
@@ -474,7 +474,7 @@ CONST_DATA struct ProcCmd ProcScr_efxClasschgOBJGain[] = {
 void NewEfxClasschgOBJGain(struct Anim * anim)
 {
     struct ProcEfxOBJ * proc;
-    proc = Proc_Start(ProcScr_efxClasschgOBJGain, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxClasschgOBJGain, PROC_TREE_3);
     proc->anim = anim;
     proc->anim2 = EfxCreateFrontAnim(anim, BanimScr_08792928, BanimScr_08792928, BanimScr_08792928, BanimScr_08792928);
 
@@ -498,7 +498,7 @@ CONST_DATA struct ProcCmd ProcScr_efxClasschgOBJDrop[] = {
 void NewEfxClasschgOBJDrop(struct Anim * anim)
 {
     struct ProcEfxOBJ * proc;
-    proc = Proc_Start(ProcScr_efxClasschgOBJDrop, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxClasschgOBJDrop, PROC_TREE_3);
     proc->anim = anim;
     proc->anim2 = EfxCreateFrontAnim(anim, BanimScr_08792958, BanimScr_08792958, BanimScr_08792958, BanimScr_08792958);
 
@@ -522,7 +522,7 @@ CONST_DATA struct ProcCmd ProcScr_efxClasschgOBJDiffusion[] = {
 void NewEfxClasschgOBJDiffusion(struct Anim * anim, u8 pos)
 {
     struct ProcEfxOBJ * proc;
-    proc = Proc_Start(ProcScr_efxClasschgOBJDiffusion, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxClasschgOBJDiffusion, PROC_TREE_3);
 
     if (pos == EKR_POS_L)
         proc->anim = anim;
@@ -553,7 +553,7 @@ CONST_DATA struct ProcCmd ProcScr_efxClasschgFIN[] = {
 void NewEfxClasschgFIN(struct Anim * anim, int duration)
 {
     struct ProcEfxBG * proc;
-    proc = Proc_Start(ProcScr_efxClasschgFIN, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxClasschgFIN, PROC_TREE_3);
     proc->anim = anim;
     proc->timer = 0;
     proc->terminator = duration;
@@ -586,7 +586,7 @@ void EfxClasschgFinMain(struct ProcEfxBG * proc)
     if (++proc->timer == proc->terminator)
     {
         SpellFx_ClearBG1();
-        SetDefaultColorEffects_();
+        SpellFx_ClearColorEffects();
         anim->oamBase  &= ~0x800;
         anim->oam2Base &= 0xF3FF;
         anim->oam2Base |= 0x0800;
@@ -604,7 +604,7 @@ CONST_DATA struct ProcCmd ProcScr_efxClasschgCLONE[] = {
 void NewEfxClasschgCLONE(struct Anim * anim, int duration)
 {
     struct ProcEfxBG * proc;
-    proc = Proc_Start(ProcScr_efxClasschgCLONE, PROC_TREE_4);
+    proc = SpawnProc(ProcScr_efxClasschgCLONE, PROC_TREE_4);
     proc->anim = anim;
     proc->timer = 0;
     proc->terminator = duration;
@@ -644,7 +644,7 @@ CONST_DATA struct ProcCmd ProcScr_efxBlackInOutUnit[] = {
 void NewEfxBlackInOutUnit(struct Anim * anim, int duration, int arg)
 {
     struct ProcEfxClasschgInOutUnit * proc;
-    proc = Proc_Start(ProcScr_efxBlackInOutUnit, PROC_TREE_4);
+    proc = SpawnProc(ProcScr_efxBlackInOutUnit, PROC_TREE_4);
     proc->anim = anim;
     proc->timer = 0;
     proc->terminator = duration;
@@ -690,7 +690,7 @@ CONST_DATA struct ProcCmd ProcScr_efxWhiteInOutUnit[] = {
 void NewEfxWhiteInOutUnit(struct Anim * anim, int duration, int arg)
 {
     struct ProcEfxClasschgInOutUnit * proc;
-    proc = Proc_Start(ProcScr_efxWhiteInOutUnit, PROC_TREE_4);
+    proc = SpawnProc(ProcScr_efxWhiteInOutUnit, PROC_TREE_4);
     proc->anim = anim;
     proc->timer = 0;
     proc->terminator = duration;
@@ -737,7 +737,7 @@ void NewEfxClasschgRST(struct Anim * anim, struct ProcSubEkrClasschgRST * subpro
 {
     struct ProcEkrClasschgRST * proc;
     gEfxBgSemaphore = gEfxBgSemaphore + 1;
-    proc = Proc_Start(ProcScr_efxClasschgRST, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxClasschgRST, PROC_TREE_3);
     proc->anim = anim;
     proc->timer = 0;
     proc->terminator = duration;

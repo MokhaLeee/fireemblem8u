@@ -126,7 +126,7 @@ void EkrDragonTmCpyExt(int x, int y)
     tmp3 = 7;
     _y = y >> 3;
 
-    BG_SetPosition(BG_3, x & tmp3, y & tmp3);
+    SetBgOffset(BG_3, x & tmp3, y & tmp3);
 
     buf = gTmB_Banim + 0x21 + _x;
     buf += 66 * _y;

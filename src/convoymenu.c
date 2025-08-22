@@ -111,7 +111,7 @@ void HandleNewItemGetFromDrop(struct Unit* unit, int item, ProcPtr proc)
         StartSubtitleHelp(proc, GetStringFromIndex(0x866));
 
     SetTalkChoiceResult(TALK_CHOICE_NO);
-    Proc_StartBlocking(gProcCmd_ConvoyMenu, proc);
+    SpawnProcBlocking(gProcCmd_ConvoyMenu, proc);
 }
 
 int SendToConvoyMenu_Draw(struct MenuProc* proc_menu, struct MenuItemProc* proc_cmd)

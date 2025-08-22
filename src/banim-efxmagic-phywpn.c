@@ -18,7 +18,7 @@ void StartSpellAnimDummy(struct Anim * anim)
     SpellFx_Begin();
     SpellFx_ClearBG1Position();
 
-    proc = Proc_Start(ProcScr_efxDummymagic, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxDummymagic, PROC_TREE_3);
     proc->anim = anim;
     proc->timer = 0;
 }
@@ -30,7 +30,7 @@ void EfxDummymagicMain(struct ProcEfx * proc)
 
     if (time == 1)
     {
-        animc->state3 |= ANIM_BIT3_TAKE_BACK_ENABLE | ANIM_BIT3_HIT_EFFECT_APPLIED;
+        animc->state3 |= ANIM_BIT3_C02_BLOCK_END | ANIM_BIT3_C01_BLOCK_END_INBATTLE;
         return;
     }
 
@@ -58,7 +58,7 @@ void StartSpellAnimHandAxe(struct Anim * anim)
     SpellFx_Begin();
     SpellFx_ClearBG1Position();
 
-    proc = Proc_Start(ProcScr_efxTeono, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxTeono, PROC_TREE_3);
     proc->anim = anim;
     proc->timer = 0;
     proc->hitted = CheckRoundMiss(GetAnimRoundTypeAnotherSide(anim));
@@ -75,7 +75,7 @@ void EfxTeonoMain(struct ProcEfx * proc)
 
         if (proc->timer == 1)
         {
-            animc->state3 |= ANIM_BIT3_TAKE_BACK_ENABLE | ANIM_BIT3_HIT_EFFECT_APPLIED;
+            animc->state3 |= ANIM_BIT3_C02_BLOCK_END | ANIM_BIT3_C01_BLOCK_END_INBATTLE;
             StartBattleAnimHitEffectsDefault(animc, proc->hitted);
 
             if (GetEfxHpChangeType(animc) != EFX_HPT_NOT_CHANGE)
@@ -120,7 +120,7 @@ void NewEfxTeonoOBJ(struct Anim * anim)
     struct ProcEfxMagicOBJ * proc;
 
     gEfxBgSemaphore++;
-    proc = Proc_Start(ProcScr_efxTeonoOBJ, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxTeonoOBJ, PROC_TREE_3);
     proc->anim = anim;
     proc->timer = 0;
     anim2 = EfxCreateFrontAnim(anim, AnimScr_TeonoObjCloseLeft, AnimScr_TeonoObjCloseRight, AnimScr_TeonoObjFarLeft, AnimScr_TeonoObjFarRight);
@@ -182,7 +182,7 @@ void NewEfxTeonoOBJ2(struct Anim * anim)
     struct ProcEfxMagicOBJ * proc;
 
     gEfxBgSemaphore++;
-    proc = Proc_Start(ProcScr_efxTeonoOBJ2, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxTeonoOBJ2, PROC_TREE_3);
     proc->anim = anim;
     proc->timer = 0;
     anim2 = EfxCreateFrontAnim(anim, AnimScr_TeonoObj2Left, AnimScr_TeonoObj2Right, AnimScr_TeonoObj2Left, AnimScr_TeonoObj2Right);
@@ -222,7 +222,7 @@ ProcPtr NewEfxTeonoSE(struct Anim * anim, struct Anim * anim2)
     struct ProcEfxMagicOBJ * proc;
 
     gEfxBgSemaphore++;
-    proc = Proc_Start(ProcScr_efxTeonoSE, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxTeonoSE, PROC_TREE_3);
     proc->anim = anim;
     proc->anim2 = anim2;
     proc->timer = 0;
@@ -263,7 +263,7 @@ void StartSpellAnimArrow(struct Anim * anim)
     SpellFx_Begin();
     SpellFx_ClearBG1Position();
 
-    proc = Proc_Start(ProcScr_efxArrow, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxArrow, PROC_TREE_3);
     proc->anim = anim;
     proc->timer = 0;
     proc->hitted = CheckRoundMiss(GetAnimRoundTypeAnotherSide(anim));
@@ -282,7 +282,7 @@ void EfxArrowMain(struct ProcEfx * proc)
 
         if (proc->timer == 1)
         {
-            animc->state3 |= ANIM_BIT3_TAKE_BACK_ENABLE | ANIM_BIT3_HIT_EFFECT_APPLIED;
+            animc->state3 |= ANIM_BIT3_C02_BLOCK_END | ANIM_BIT3_C01_BLOCK_END_INBATTLE;
             StartBattleAnimHitEffectsDefault(animc, proc->hitted);
 
             if (GetEfxHpChangeType(animc) != EFX_HPT_NOT_CHANGE)
@@ -326,7 +326,7 @@ void NewEfxArrowOBJ(struct Anim * anim)
     struct ProcEfxMagicOBJ * proc;
 
     gEfxBgSemaphore++;
-    proc = Proc_Start(ProcScr_efxArrowOBJ, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxArrowOBJ, PROC_TREE_3);
     proc->anim = anim;
     proc->timer = 0;
     proc->anim2 = EfxCreateFrontAnim(anim, AnimScr_ArrowCloseLeft, AnimScr_ArrowCloseRight, AnimScr_ArrowFarLeft, AnimScr_ArrowFarRight);
@@ -358,7 +358,7 @@ void StartSpellAnimJavelin(struct Anim * anim)
     SpellFx_Begin();
     SpellFx_ClearBG1Position();
 
-    proc = Proc_Start(ProcScr_efxTeyari, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxTeyari, PROC_TREE_3);
     proc->anim = anim;
     proc->timer = 0;
     proc->hitted = CheckRoundMiss(GetAnimRoundTypeAnotherSide(anim));
@@ -375,7 +375,7 @@ void StartSpellAnimJavelinCavalier(struct Anim * anim)
     SpellFx_Begin();
     SpellFx_ClearBG1Position();
 
-    proc = Proc_Start(ProcScr_efxTeyari, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxTeyari, PROC_TREE_3);
     proc->anim = anim;
     proc->timer = 0;
     proc->hitted = CheckRoundMiss(GetAnimRoundTypeAnotherSide(anim));
@@ -392,7 +392,7 @@ void StartSpellAnimJavelinSoldier(struct Anim * anim)
     SpellFx_Begin();
     SpellFx_ClearBG1Position();
 
-    proc = Proc_Start(ProcScr_efxTeyari, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxTeyari, PROC_TREE_3);
     proc->anim = anim;
     proc->timer = 0;
     proc->hitted = CheckRoundMiss(GetAnimRoundTypeAnotherSide(anim));
@@ -409,7 +409,7 @@ void StartSpellAnimJavelinPaladin(struct Anim * anim)
     SpellFx_Begin();
     SpellFx_ClearBG1Position();
 
-    proc = Proc_Start(ProcScr_efxTeyari, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxTeyari, PROC_TREE_3);
     proc->anim = anim;
     proc->timer = 0;
     proc->hitted = CheckRoundMiss(GetAnimRoundTypeAnotherSide(anim));
@@ -426,7 +426,7 @@ void StartSpellAnimJavelinPegasusKnight(struct Anim * anim)
     SpellFx_Begin();
     SpellFx_ClearBG1Position();
 
-    proc = Proc_Start(ProcScr_efxTeyari, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxTeyari, PROC_TREE_3);
     proc->anim = anim;
     proc->timer = 0;
     proc->hitted = CheckRoundMiss(GetAnimRoundTypeAnotherSide(anim));
@@ -443,7 +443,7 @@ void StartSpellAnimJavelinFalcon(struct Anim * anim)
     SpellFx_Begin();
     SpellFx_ClearBG1Position();
 
-    proc = Proc_Start(ProcScr_efxTeyari, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxTeyari, PROC_TREE_3);
     proc->anim = anim;
     proc->timer = 0;
     proc->hitted = CheckRoundMiss(GetAnimRoundTypeAnotherSide(anim));
@@ -460,7 +460,7 @@ void StartSpellAnimJavelinWyvernRider(struct Anim * anim)
     SpellFx_Begin();
     SpellFx_ClearBG1Position();
 
-    proc = Proc_Start(ProcScr_efxTeyari, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxTeyari, PROC_TREE_3);
     proc->anim = anim;
     proc->timer = 0;
     proc->hitted = CheckRoundMiss(GetAnimRoundTypeAnotherSide(anim));
@@ -477,7 +477,7 @@ void StartSpellAnimJavelinWyvernLord(struct Anim * anim)
     SpellFx_Begin();
     SpellFx_ClearBG1Position();
 
-    proc = Proc_Start(ProcScr_efxTeyari, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxTeyari, PROC_TREE_3);
     proc->anim = anim;
     proc->timer = 0;
     proc->hitted = CheckRoundMiss(GetAnimRoundTypeAnotherSide(anim));
@@ -494,7 +494,7 @@ void StartSpellAnimJavelinGenerial(struct Anim * anim)
     SpellFx_Begin();
     SpellFx_ClearBG1Position();
 
-    proc = Proc_Start(ProcScr_efxTeyari, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxTeyari, PROC_TREE_3);
     proc->anim = anim;
     proc->timer = 0;
     proc->hitted = CheckRoundMiss(GetAnimRoundTypeAnotherSide(anim));
@@ -511,7 +511,7 @@ void StartSpellAnimJavelinUnk(struct Anim * anim)
     SpellFx_Begin();
     SpellFx_ClearBG1Position();
 
-    proc = Proc_Start(ProcScr_efxTeyari, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxTeyari, PROC_TREE_3);
     proc->anim = anim;
     proc->timer = 0;
     proc->hitted = CheckRoundMiss(GetAnimRoundTypeAnotherSide(anim));
@@ -528,7 +528,7 @@ void StartSpellAnimJavelinPaladinF(struct Anim * anim)
     SpellFx_Begin();
     SpellFx_ClearBG1Position();
 
-    proc = Proc_Start(ProcScr_efxTeyari, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxTeyari, PROC_TREE_3);
     proc->anim = anim;
     proc->timer = 0;
     proc->hitted = CheckRoundMiss(GetAnimRoundTypeAnotherSide(anim));
@@ -548,7 +548,7 @@ void EfxTeyariMain(struct ProcEfx * proc)
         if (proc->timer == 1)
         {
             struct Anim * animc = GetAnimAnotherSide(proc->anim);
-            animc->state3 |= ANIM_BIT3_TAKE_BACK_ENABLE | ANIM_BIT3_HIT_EFFECT_APPLIED;
+            animc->state3 |= ANIM_BIT3_C02_BLOCK_END | ANIM_BIT3_C01_BLOCK_END_INBATTLE;
             StartBattleAnimHitEffectsDefault(animc, proc->hitted);
 
             if (GetEfxHpChangeType(animc) != EFX_HPT_NOT_CHANGE)
@@ -593,7 +593,7 @@ void NewEfxTeyariOBJ(struct Anim * anim, int type)
     u32 * scr1, * scr2;
 
     gEfxBgSemaphore++;
-    proc = Proc_Start(ProcScr_efxTeyariOBJ, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxTeyariOBJ, PROC_TREE_3);
     proc->anim = anim;
     proc->timer = 0;
 

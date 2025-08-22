@@ -391,7 +391,7 @@ struct ProcEfxSpellCast {
 extern struct ProcEfxSpellCast * gpProcEfxSpellCast;
 
 void NewEfxSpellCast(void);
-void RegisterEfxSpellCastEnd(void);
+void EndEfxSpellCastAsync(void);
 void EndEfxSpellCast(void);
 void sub_8055038(struct ProcEfxSpellCast * proc);
 void sub_805509C(struct ProcEfxSpellCast * proc);

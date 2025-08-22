@@ -350,9 +350,9 @@ void sub_809D914(struct PrepItemSupplyProc * proc)
     LoadUiFrameGraphics();
     LoadObjUIGfx();
 
-    BG_SetPosition(0, 0, 0);
-    BG_SetPosition(1, 0, 0);
-    BG_SetPosition(2, 0, proc->yOffsetPerPage[proc->currentPage] - 0x28);
+    SetBgOffset(0, 0, 0);
+    SetBgOffset(1, 0, 0);
+    SetBgOffset(2, 0, proc->yOffsetPerPage[proc->currentPage] - 0x28);
 
     LoadHelpBoxGfx((void*)0x06013000, -1);
     LoadIconPalettes(4);
@@ -629,7 +629,7 @@ void PrepItemSupply_SwitchPageLeft(struct PrepItemSupplyProc * proc)
         x = (tmp * 0x60 * tmp) / (four * four);
     }
 
-    BG_SetPosition(2, (x & 0xff), proc->yOffsetPerPage[proc->currentPage] - 40);
+    SetBgOffset(2, (x & 0xff), proc->yOffsetPerPage[proc->currentPage] - 40);
 
     if (proc->unk_34 == four * 2) {
         Proc_Goto(proc, 4);
@@ -666,7 +666,7 @@ void PrepItemSupply_SwitchPageRight(struct PrepItemSupplyProc * proc)
         x = -((tmp * 0x60 * tmp) / (four * four));
     }
 
-    BG_SetPosition(2, (x & 0xff), proc->yOffsetPerPage[proc->currentPage] - 40);
+    SetBgOffset(2, (x & 0xff), proc->yOffsetPerPage[proc->currentPage] - 40);
 
     if (proc->unk_34 == four * 2) {
         Proc_Goto(proc, 4);
@@ -693,7 +693,7 @@ void sub_809E100(struct PrepItemSupplyProc * proc)
         }
     }
 
-    BG_SetPosition(2, 0, proc->yOffsetPerPage[proc->currentPage] - 0x28);
+    SetBgOffset(2, 0, proc->yOffsetPerPage[proc->currentPage] - 0x28);
 
     return;
 }
@@ -743,7 +743,7 @@ void PrepItemSupply_ScrollVertical(struct PrepItemSupplyProc * proc, int amount)
 
     proc->yOffsetPerPage[proc->currentPage] += amount;
 
-    BG_SetPosition(2, 0, proc->yOffsetPerPage[proc->currentPage] - 40);
+    SetBgOffset(2, 0, proc->yOffsetPerPage[proc->currentPage] - 40);
 
     return;
 }
@@ -896,7 +896,7 @@ void sub_809E420(struct PrepItemSupplyProc * proc)
             proc->yOffsetPerPage[proc->currentPage] += proc->scrollAmount;
         }
 
-        BG_SetPosition(2, 0, proc->yOffsetPerPage[proc->currentPage] - 40);
+        SetBgOffset(2, 0, proc->yOffsetPerPage[proc->currentPage] - 40);
     }
 
     if (idx != proc->idxPerPage[proc->currentPage]) {
@@ -1169,7 +1169,7 @@ PROC_LABEL(9),
 //! FE8U = 0x0809EAD8
 void StartPrepItemSupplyProc(struct Unit * unit, ProcPtr parent)
 {
-    struct PrepItemSupplyProc* proc = Proc_StartBlocking(ProcScr_PrepItemSupplyScreen, parent);
+    struct PrepItemSupplyProc* proc = SpawnProcBlocking(ProcScr_PrepItemSupplyScreen, parent);
     proc->unit = unit;
     proc->unk_30 = 0;
     return;
@@ -1278,7 +1278,7 @@ PROC_LABEL(9),
 
 //! FE8U = 0x0809EB38
 void StartBmSupply(struct Unit* unit, ProcPtr unused) {
-    struct PrepItemSupplyProc* proc = Proc_Start(ProcScr_BmSupplyScreen, PROC_TREE_3);
+    struct PrepItemSupplyProc* proc = SpawnProc(ProcScr_BmSupplyScreen, PROC_TREE_3);
     proc->unit = unit;
     proc->unk_30 = 1;
     return;
@@ -1287,7 +1287,7 @@ void StartBmSupply(struct Unit* unit, ProcPtr unused) {
 //! FE8U = 0x0809EB58
 void MaybeStartSelectConvoyItemProc(struct Unit * unit, ProcPtr unused)
 {
-    struct PrepItemSupplyProc* proc = Proc_Start(ProcScr_BmSupplyScreen, PROC_TREE_3);
+    struct PrepItemSupplyProc* proc = SpawnProc(ProcScr_BmSupplyScreen, PROC_TREE_3);
     proc->unit = unit;
     proc->unk_30 = 2;
     return;

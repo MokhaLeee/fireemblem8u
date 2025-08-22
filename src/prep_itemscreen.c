@@ -131,7 +131,7 @@ struct ProcCmd CONST_DATA gProcScr_DrawPrepFundsSprite[] = {
 
 //! FE8U = 0x080984A8
 void StartDrawPrepFundsSprite(int x, int y, int pal, ProcPtr parent) {
-    struct DrawFundsSpriteProc* proc = Proc_Start(gProcScr_DrawPrepFundsSprite, parent);
+    struct DrawFundsSpriteProc* proc = SpawnProc(gProcScr_DrawPrepFundsSprite, parent);
     proc->visible = false;
     proc->x = x;
     proc->y = y;
@@ -203,7 +203,7 @@ struct ProcCmd CONST_DATA gProcScr_DrawUnitInfoBgSprites[] = {
 //! FE8U = 0x08098554
 void StartDrawPrepUnitInfoBgSprites(ProcPtr parent)
 {
-    struct DrawPrepUnitInfoBgProc* proc = Proc_Start(gProcScr_DrawUnitInfoBgSprites, parent);
+    struct DrawPrepUnitInfoBgProc* proc = SpawnProc(gProcScr_DrawUnitInfoBgSprites, parent);
     proc->visible = false;
     proc->x = 0;
     proc->y = 0;
@@ -331,9 +331,9 @@ void PrepItemScreen_SetupGfx(struct PrepItemScreenProc * proc)
     SetWin0Layers(1, 1, 1, 1, 1);
     SetWOutLayers(1, 1, 0, 1, 1);
 
-    BG_SetPosition(0, 4, -4);
-    BG_SetPosition(1, 0, 4);
-    BG_SetPosition(2, -40, (proc->unk_34 - 4) & 0xff);
+    SetBgOffset(0, 4, -4);
+    SetBgOffset(1, 0, 4);
+    SetBgOffset(2, -40, (proc->unk_34 - 4) & 0xff);
     BG_EnableSyncByMask(7);
 
     ApplyUnitSpritePalettes();
@@ -533,7 +533,7 @@ void sub_8098CC0(struct PrepItemScreenProc * proc)
 {
     LoadUiFrameGraphics();
 
-    BG_SetPosition(1, 0, 4);
+    SetBgOffset(1, 0, 4);
 
     sub_809A08C(proc);
 
@@ -659,7 +659,7 @@ void sub_8098FAC(struct PrepItemScreenProc* proc) {
 
     if (((a - proc->unk_34) > 32) && ((proc->unk_34 + 48) < b)) {
         proc->unk_34 += proc->scrollAmount;
-        BG_SetPosition(2, -40, (proc->unk_34 - 4) & 0xff);
+        SetBgOffset(2, -40, (proc->unk_34 - 4) & 0xff);
         if (proc->selectedUnitIdx != 0xFF) {
             SetUiCursorHandConfig(
                 0,
@@ -673,7 +673,7 @@ void sub_8098FAC(struct PrepItemScreenProc* proc) {
 
     if (((a - proc->unk_34) < 16) && (proc->unk_34 != 0)) {
         proc->unk_34 -= proc->scrollAmount;
-        BG_SetPosition(2, -40, (proc->unk_34 - 4) & 0xff);
+        SetBgOffset(2, -40, (proc->unk_34 - 4) & 0xff);
         if (proc->selectedUnitIdx != 0xFF) {
             SetUiCursorHandConfig(
                 0,
@@ -1132,7 +1132,7 @@ void sub_8099AA0(struct PrepItemScreenProc* proc) {
 
 //! FE8U = 0x08099AF8
 void sub_8099AF8(struct PrepItemScreenProc* proc) {
-    BG_SetPosition(1, 0, 4);
+    SetBgOffset(1, 0, 4);
 
     BG_Fill(BG_GetMapBuffer(1), 0);
     BG_Fill(BG_GetMapBuffer(2), 0);
@@ -1531,7 +1531,7 @@ void EndPrepItemScreenFace(int slot) {
 
 //! FE8U = 0x08099F68
 ProcPtr StartPrepItemScreen(ProcPtr proc) {
-    return Proc_StartBlocking(ProcScr_PrepItemScreen, proc);
+    return SpawnProcBlocking(ProcScr_PrepItemScreen, proc);
 }
 
 //! FE8U = 0x08099F7C
@@ -1598,7 +1598,7 @@ void sub_809A08C(struct PrepItemScreenProc* proc) {
         }
     }
 
-    BG_SetPosition(2, -40, (proc->unk_34 - 4) & 0xff);
+    SetBgOffset(2, -40, (proc->unk_34 - 4) & 0xff);
     UpdateMenuScrollBarConfig(6, proc->unk_34, ((PrepGetUnitAmount() - 1) / 3) + 1, 4);
     return;
 }

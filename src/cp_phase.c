@@ -57,7 +57,7 @@ static void AiPhaseInit(struct Proc* proc)
     UpdateAllPhaseHealingAIStatus();
     SetupUnitInventoryAIFlags();
 
-    Proc_StartBlocking(gProcScr_CpOrder, proc);
+    SpawnProcBlocking(gProcScr_CpOrder, proc);
 }
 
 static void AiPhaseBerserkInit(struct Proc* proc)
@@ -75,7 +75,7 @@ static void AiPhaseBerserkInit(struct Proc* proc)
     UpdateAllPhaseHealingAIStatus();
     SetupUnitInventoryAIFlags();
 
-    Proc_StartBlocking(gProcScr_BerserkCpOrder, proc);
+    SpawnProcBlocking(gProcScr_BerserkCpOrder, proc);
 }
 
 static void AiPhaseCleanup(struct Proc* proc)

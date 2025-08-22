@@ -460,7 +460,7 @@ void HelpBoxIntroDrawTexts(struct ProcHelpBoxIntro * proc)
 
     Proc_EndEach(gProcScr_HelpBoxTextScroll);
 
-    otherProc = Proc_Start(gProcScr_HelpBoxTextScroll, PROC_TREE_3);
+    otherProc = SpawnProc(gProcScr_HelpBoxTextScroll, PROC_TREE_3);
     otherProc->font = &gHelpBoxSt.font;
 
     otherProc->texts[0] = &gHelpBoxSt.text[0];
@@ -512,7 +512,7 @@ struct ProcCmd CONST_DATA ProcScr_HelpBoxIntro[] = {
 //! FE8U = 0x0808A0FC
 void StartHelpBoxTextInit(int item, int msgId)
 {
-    struct ProcHelpBoxIntro * proc = Proc_Start(ProcScr_HelpBoxIntro, PROC_TREE_3);
+    struct ProcHelpBoxIntro * proc = SpawnProc(ProcScr_HelpBoxIntro, PROC_TREE_3);
 
     proc->item = item;
     proc->msg = msgId;
@@ -612,7 +612,7 @@ void sub_808A200(const struct HelpBoxInfo* info) {
     struct HelpBoxProc * proc = Proc_Find(ProcScr_Helpbox_bug_08A01678);
 
     if (!proc) {
-        proc = Proc_Start(ProcScr_Helpbox_bug_08A01678, PROC_TREE_3);
+        proc = SpawnProc(ProcScr_Helpbox_bug_08A01678, PROC_TREE_3);
 
         PlaySoundEffect(SONG_70);
 
@@ -707,7 +707,7 @@ PROC_LABEL(0),
 
 //! FE8U = 0x0808A354
 void sub_808A354(const struct HelpBoxInfo* info) {
-    struct HelpBoxProc * proc = Proc_Start(gUnknown_08A01698, PROC_TREE_3);
+    struct HelpBoxProc * proc = SpawnProc(gUnknown_08A01698, PROC_TREE_3);
 
     proc->info = info;
 
@@ -831,7 +831,7 @@ s8 StartHelpoxDirect(int msgId, ProcPtr parent) {
 
     sub_808A1E0(GetUiHandPrevDisplayX(), GetUiHandPrevDisplayY(), msgId);
 
-    Proc_StartBlocking(gUnknown_08A016C8, parent);
+    SpawnProcBlocking(gUnknown_08A016C8, parent);
 
     return 1;
 }
@@ -1159,9 +1159,9 @@ void sub_808AA04(int x, int y, int msgId, ProcPtr parent) {
     SetDialogueBoxConfig(0);
 
     if (!parent) {
-        proc = Proc_Start(gProcScr_BoxDialogue, PROC_TREE_3);
+        proc = SpawnProc(gProcScr_BoxDialogue, PROC_TREE_3);
     } else {
-        proc = Proc_StartBlocking(gProcScr_BoxDialogue, parent);
+        proc = SpawnProcBlocking(gProcScr_BoxDialogue, parent);
     }
 
     proc->x = x;
@@ -1170,7 +1170,7 @@ void sub_808AA04(int x, int y, int msgId, ProcPtr parent) {
     proc->pad_idx = 0xff;
     proc->unk_38 = 1;
 
-    Proc_Start(ProcScr_TalkBoxIdle, 0);
+    SpawnProc(ProcScr_TalkBoxIdle, 0);
 
     return;
 }
@@ -1184,9 +1184,9 @@ void sub_808AA6C(int x, int y, int msgId, u16* unkA, int unkB, ProcPtr parent) {
     SetDialogueBoxConfig(0);
 
     if (!parent) {
-        proc = Proc_Start(gProcScr_BoxDialogue, PROC_TREE_3);
+        proc = SpawnProc(gProcScr_BoxDialogue, PROC_TREE_3);
     } else {
-        proc = Proc_StartBlocking(gProcScr_BoxDialogue, parent);
+        proc = SpawnProcBlocking(gProcScr_BoxDialogue, parent);
     }
 
     proc->x = x;
@@ -1196,7 +1196,7 @@ void sub_808AA6C(int x, int y, int msgId, u16* unkA, int unkB, ProcPtr parent) {
     proc->unk_3c = unkA;
     proc->unk_38 = 1;
 
-    Proc_Start(ProcScr_TalkBoxIdle, 0);
+    SpawnProc(ProcScr_TalkBoxIdle, 0);
 
     return;
 }
@@ -1383,7 +1383,7 @@ void DrawBoxDialogueText(int x, int y, int msg) {
 
     Proc_EndEach(ProcScr_MergeBoxDialogue);
 
-    proc = Proc_Start(ProcScr_MergeBoxDialogue, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_MergeBoxDialogue, PROC_TREE_3);
 
     SetHelpBoxInitPosition(proc, x, y);
     ResetHelpBoxInitSize(proc);
@@ -1984,7 +1984,7 @@ void sub_808B928(struct HelpBox8A01800Proc * proc) {
     SetTextFont(NULL);
 
     Proc_EndEach(ProcScr_BoxDialogueDrawTextExt);
-    otherProc = Proc_Start(ProcScr_BoxDialogueDrawTextExt, PROC_TREE_3);
+    otherProc = SpawnProc(ProcScr_BoxDialogueDrawTextExt, PROC_TREE_3);
 
     otherProc->unk_30 = &gBoxDialogueConf.font;
     otherProc->texts[0] = &gBoxDialogueConf.texts[0];
@@ -2023,7 +2023,7 @@ struct ProcCmd CONST_DATA gUnknown_08A01800[] = {
 
 //! FE8U = 0x0808BA60
 void sub_808BA60(int msgId, int x, int y) {
-    struct HelpBox8A01800Proc* proc = Proc_Start(gUnknown_08A01800, PROC_TREE_3);
+    struct HelpBox8A01800Proc* proc = SpawnProc(gUnknown_08A01800, PROC_TREE_3);
 
     proc->unk_5c = msgId;
 
@@ -2078,7 +2078,7 @@ struct ProcCmd CONST_DATA ProcScr_TalkBoxIdle[] = {
 
 //! FE8U = 0x0808BB44
 void sub_808BB44(void) {
-    Proc_Start(ProcScr_TalkBoxIdle, PROC_TREE_VSYNC);
+    SpawnProc(ProcScr_TalkBoxIdle, PROC_TREE_VSYNC);
     return;
 }
 

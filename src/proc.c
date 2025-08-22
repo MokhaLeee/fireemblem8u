@@ -58,7 +58,7 @@ void Proc_Init(void)
         ROOT_PROC(i) = NULL;
 }
 
-ProcPtr Proc_Start(const struct ProcCmd* script, ProcPtr parent)
+ProcPtr SpawnProc(const struct ProcCmd* script, ProcPtr parent)
 {
     struct Proc* proc = AllocateProcess();
 
@@ -89,9 +89,9 @@ ProcPtr Proc_Start(const struct ProcCmd* script, ProcPtr parent)
 }
 
 // Creates a child process and puts the parent into a wait state
-ProcPtr Proc_StartBlocking(const struct ProcCmd *script, ProcPtr parent)
+ProcPtr SpawnProcBlocking(const struct ProcCmd *script, ProcPtr parent)
 {
-    struct Proc *proc = Proc_Start(script, parent);
+    struct Proc *proc = SpawnProc(script, parent);
 
     if (proc->proc_script == NULL)
         return NULL;
@@ -513,7 +513,7 @@ static s8 ProcCmd_SET_DESTRUCTOR(struct Proc *proc)
 
 static s8 ProcCmd_NEW_CHILD(struct Proc* proc)
 {
-    Proc_Start(proc->proc_scrCur->dataPtr, proc);
+    SpawnProc(proc->proc_scrCur->dataPtr, proc);
     proc->proc_scrCur++;
 
     return TRUE;
@@ -521,7 +521,7 @@ static s8 ProcCmd_NEW_CHILD(struct Proc* proc)
 
 static s8 ProcCmd_NEW_CHILD_BLOCKING(struct Proc* proc)
 {
-    Proc_StartBlocking(proc->proc_scrCur->dataPtr, proc);
+    SpawnProcBlocking(proc->proc_scrCur->dataPtr, proc);
     proc->proc_scrCur++;
 
     return FALSE;
@@ -529,7 +529,7 @@ static s8 ProcCmd_NEW_CHILD_BLOCKING(struct Proc* proc)
 
 static s8 ProcCmd_NEW_MAIN_BUGGED(struct Proc *proc)
 {
-    Proc_Start(proc->proc_scrCur->dataPtr, (struct Proc *)(u32) proc->proc_sleepTime);  // Why are we using sleepTime here?
+    SpawnProc(proc->proc_scrCur->dataPtr, (struct Proc *)(u32) proc->proc_sleepTime);  // Why are we using sleepTime here?
     proc->proc_scrCur++;
 
     return TRUE;

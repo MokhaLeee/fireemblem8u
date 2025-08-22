@@ -150,7 +150,7 @@ CONST_DATA struct ProcCmd gProc_DebugPrintWithProc[] = {
 
 void DebugPrint(int x, int y, int width, const char *text)
 {
-    struct DebugPrintProc *proc = Proc_Start(gProc_DebugPrintWithProc, PROC_TREE_3);
+    struct DebugPrintProc *proc = SpawnProc(gProc_DebugPrintWithProc, PROC_TREE_3);
     proc->x = x;
     proc->y = y;
     proc->text = text;
@@ -786,7 +786,7 @@ struct ProcCmd CONST_DATA gProcScr_DebugStartNameEntry[] = {
 
 //! FE8U = 0x0801C63C
 u8 sub_801C63C(void) {
-    Proc_Start(gProcScr_DebugStartNameEntry, PROC_TREE_3);
+    SpawnProc(gProcScr_DebugStartNameEntry, PROC_TREE_3);
     return (MENU_ACT_SKIPCURSOR | MENU_ACT_END | MENU_ACT_SND6A | MENU_ACT_CLEAR);
 }
 

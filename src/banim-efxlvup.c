@@ -33,7 +33,7 @@ CONST_DATA struct ProcCmd ProcScr_EfxPartsofScroll[] = {
 ProcPtr NewEfxPartsofScroll(void)
 {
     struct ProcEfx * proc =
-        Proc_Start(ProcScr_EfxPartsofScroll, PROC_TREE_3);
+        SpawnProc(ProcScr_EfxPartsofScroll, PROC_TREE_3);
 
     proc->timer = 0;
     proc->step = 0;
@@ -97,7 +97,7 @@ CONST_DATA struct ProcCmd ProcScr_EfxPartsofScroll2[] = {
 ProcPtr NewEfxPartsofScroll2(void)
 {
     struct ProcEfx * proc =
-        Proc_Start(ProcScr_EfxPartsofScroll2, PROC_TREE_3);
+        SpawnProc(ProcScr_EfxPartsofScroll2, PROC_TREE_3);
 
     proc->timer = 0;
     proc->step = 0;
@@ -212,7 +212,7 @@ ProcPtr NewEfxleveluphb(void)
     buf = gpBg1ScrollOffsetStart;
     gpBg1ScrollOffset = buf;
 
-    proc = Proc_Start(v, PROC_TREE_VSYNC);
+    proc = SpawnProc(v, PROC_TREE_VSYNC);
     proc->timer = 0;
     return proc;
 }
@@ -329,7 +329,7 @@ CONST_DATA u16 * ImgLut_EfxLvupBG[] = {
 void NewEfxlvupbg(struct Anim * anim)
 {
     struct ProcEfxBG * proc =
-        Proc_Start(ProcScr_Efxlvupbg, PROC_TREE_3);
+        SpawnProc(ProcScr_Efxlvupbg, PROC_TREE_3);
 
     proc->anim = anim;
     proc->timer = 0;
@@ -360,7 +360,7 @@ void EfxlvupbgMain(struct ProcEfxBG * proc)
     if (ret == -1)
     {
         SpellFx_ClearBG1();
-        SetDefaultColorEffects_();
+        SpellFx_ClearColorEffects();
         Proc_Break(proc);
     }
 }
@@ -393,7 +393,7 @@ const u16 FrameConfig_EfxLvupBG2[] = {
 void NewEfxLvupBG2(struct Anim * anim)
 {
     struct ProcEfxBG * proc =
-        Proc_Start(ProcScr_efxLvupBG2, PROC_TREE_3);
+        SpawnProc(ProcScr_efxLvupBG2, PROC_TREE_3);
 
     proc->anim = anim;
     proc->timer = 0;
@@ -433,7 +433,7 @@ void NewEfxLvupOBJ2(struct Anim * anim, int x, int y)
 {
     struct Anim * anim3;
     struct ProcEfxOBJ * proc =
-        Proc_Start(ProcScr_efxLvupOBJ2, PROC_TREE_3);
+        SpawnProc(ProcScr_efxLvupOBJ2, PROC_TREE_3);
 
     proc->anim = anim;
     anim3 = EfxCreateFrontAnim(anim, AnimScr_EfxLvupOBJ2, AnimScr_EfxLvupOBJ2, AnimScr_EfxLvupOBJ2, AnimScr_EfxLvupOBJ2);
@@ -480,7 +480,7 @@ const u16 FrameLut_EfxLvupBGCOL[] = {
 void NewEfxLvupBGCOL(struct Anim * anim)
 {
     struct ProcEfxBGCOL * proc =
-        Proc_Start(ProcScr_efxLvupBGCOL, PROC_TREE_3);
+        SpawnProc(ProcScr_efxLvupBGCOL, PROC_TREE_3);
 
     proc->anim = anim;
     proc->timer = 0;
@@ -575,7 +575,7 @@ void NewEkrLvupApfx(int chr, int pal)
     pal_bank = pal + 0x11;
     ApplyPalette(pal_src, pal_bank);
 
-    proc = Proc_Start(ProcScr_EkrLvupApfx, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_EkrLvupApfx, PROC_TREE_3);
     proc->pal = pal;
     gEkrLvupApfxUnexist = false;
 }
@@ -671,7 +671,7 @@ void BanimDrawStatupAp(int chr, int pal, int x, int y, int index, int gain)
     if (index == 0)
         return;
 
-    proc = Proc_Start(ProcScr_eobjLvup, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_eobjLvup, PROC_TREE_3);
 
     if (gain >= 0)
     {

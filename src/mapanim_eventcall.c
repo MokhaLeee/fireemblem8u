@@ -329,9 +329,9 @@ CONST_DATA struct ProcCmd ProcScr_089A434C[] =
 void sub_807F878(ProcPtr proc)
 {
     if (proc)
-        Proc_StartBlocking(ProcScr_089A434C, proc);
+        SpawnProcBlocking(ProcScr_089A434C, proc);
     else
-        Proc_Start(ProcScr_089A434C, PROC_TREE_3);
+        SpawnProc(ProcScr_089A434C, PROC_TREE_3);
 }
 
 void sub_807F89C(struct MAEffectProc * proc)
@@ -354,8 +354,8 @@ void sub_807F89C(struct MAEffectProc * proc)
 
     SetBlendAlpha(16, 16);
 
-    BG_SetPosition(BG_0, 0, 0);
-    BG_SetPosition(BG_2, 0, 0);
+    SetBgOffset(BG_0, 0, 0);
+    SetBgOffset(BG_2, 0, 0);
 
     proc->frame = 0;
     proc->timer = 0;
@@ -539,9 +539,9 @@ CONST_DATA struct ProcCmd ProcScr_089A4394[] =
 void sub_807FCC0(ProcPtr proc)
 {
     if (proc)
-        Proc_StartBlocking(ProcScr_089A4394, proc);
+        SpawnProcBlocking(ProcScr_089A4394, proc);
     else
-        Proc_Start(ProcScr_089A4394, PROC_TREE_3);
+        SpawnProc(ProcScr_089A4394, PROC_TREE_3);
 }
 
 void sub_807FCE4(struct MAEffectProc * proc)
@@ -564,8 +564,8 @@ void sub_807FCE4(struct MAEffectProc * proc)
 
     SetBlendAlpha(16, 16);
 
-    BG_SetPosition(BG_0, 0, 0);
-    BG_SetPosition(BG_2, 0, 0);
+    SetBgOffset(BG_0, 0, 0);
+    SetBgOffset(BG_2, 0, 0);
 
     PAL_BG_COLOR(3, 15) = RGB(31, 31, 31);
     EnablePaletteSync();
@@ -678,9 +678,9 @@ void sub_807FFF0(void)
 void sub_8080014(ProcPtr proc)
 {
     if (proc)
-        Proc_StartBlocking(ProcScr_089A4434, proc);
+        SpawnProcBlocking(ProcScr_089A4434, proc);
     else
-        Proc_Start(ProcScr_089A4434, PROC_TREE_3);
+        SpawnProc(ProcScr_089A4434, PROC_TREE_3);
 }
 
 void sub_8080038(void)
@@ -711,7 +711,7 @@ void sub_8080050(struct MAEffectProc * proc)
 
     SetBlendAlpha(16, 16);
 
-    BG_SetPosition(BG_2, 0, 0);
+    SetBgOffset(BG_2, 0, 0);
 
     proc->frame = 0;
     proc->timer = 0;
@@ -719,7 +719,7 @@ void sub_8080050(struct MAEffectProc * proc)
 
     gUnknown_03001C7C = 0;
 
-    vsync = Proc_Start(ProcScr_089A448C, PROC_TREE_VSYNC);
+    vsync = SpawnProc(ProcScr_089A448C, PROC_TREE_VSYNC);
 
     vsync->unk29 = 0;
     vsync->unk2A = 0;
@@ -1038,11 +1038,11 @@ void sub_8080474(ProcPtr parent)
 
     if (parent != NULL)
     {
-        Proc_StartBlocking(gUnknown_089A45DC, parent);
+        SpawnProcBlocking(gUnknown_089A45DC, parent);
     }
     else
     {
-        Proc_Start(gUnknown_089A45DC, PROC_TREE_3);
+        SpawnProc(gUnknown_089A45DC, PROC_TREE_3);
     }
 
     return;
@@ -1308,9 +1308,9 @@ void sub_8080660(struct MAEffectProc * proc)
 
     SetBlendAlpha(16, 16);
 
-    BG_SetPosition(BG_2, 8, 8);
+    SetBgOffset(BG_2, 8, 8);
 
-    proc->img = Proc_Start(gUnknown_089A4644, proc);
+    proc->img = SpawnProc(gUnknown_089A4644, proc);
     proc->frame = 0;
     proc->timer = 0;
     proc->unk44 = 0;
@@ -1661,7 +1661,7 @@ void sub_8080B18(struct MAEffectSummonProc * proc)
 //! FE8U = 0x08080B84
 void sub_8080B84(void)
 {
-    BG_SetPosition(BG_2, 0, 0);
+    SetBgOffset(BG_2, 0, 0);
     BG_Fill(gBG2TilemapBuffer, 0);
 
     BG_EnableSyncByMask(BG0_SYNC_BIT | BG1_SYNC_BIT | BG2_SYNC_BIT);
@@ -1770,7 +1770,7 @@ void sub_8080BD8(struct MAEffectSummonProc * proc)
         gBmSt.camera.x = proc->unk_2c;
         gBmSt.camera.y = proc->unk_2e;
 
-        BG_SetPosition(BG_2, 8, 8);
+        SetBgOffset(BG_2, 8, 8);
 
         return;
     }
@@ -1813,7 +1813,7 @@ void sub_8080BD8(struct MAEffectSummonProc * proc)
     gBmSt.camera.x = proc->unk_2c + proc->unk_30;
     gBmSt.camera.y = proc->unk_2e + proc->unk_32;
 
-    BG_SetPosition(BG_2, proc->unk_30 + 8, proc->unk_32 + 8);
+    SetBgOffset(BG_2, proc->unk_30 + 8, proc->unk_32 + 8);
 
     proc->unk_38++;
 
@@ -1842,7 +1842,7 @@ struct ProcCmd CONST_DATA gUnknown_089A4644[] =
 //! FE8U = 0x0807AD08
 void New6C_SummonGfx(ProcPtr parent, int xBase, int yBase)
 {
-    struct MAEffectProc * proc = Proc_StartBlocking(gUnknown_089A46AC, parent);
+    struct MAEffectProc * proc = SpawnProcBlocking(gUnknown_089A46AC, parent);
 
     proc->xDisplay = ((xBase - (gBmSt.camera.x >> 4)) * 2 + 1) * 8;
     proc->yDisplay = ((yBase - (gBmSt.camera.y >> 4)) * 2 + 1) * 8;
@@ -1855,7 +1855,7 @@ void sub_8080D6C(struct MAEffectProc * proc)
 {
     SetDefaultMapAnimScreenConf();
 
-    BG_SetPosition(BG_2, 0, 0);
+    SetBgOffset(BG_2, 0, 0);
 
     Decompress(gUnknown_089E714C, (void *)(0x06002C00 + GetBackgroundTileDataOffset(BG_2)));
     ApplyPalette(gUnknown_089E7DEC, 4);
@@ -1972,7 +1972,7 @@ struct ProcCmd CONST_DATA gUnknown_089A46AC[] =
 //! FE8U = 0x08080E9C
 void sub_8080E9C(ProcPtr parent, struct Unit * unit)
 {
-    struct MAEffectProc * proc = Proc_StartBlocking(gUnknown_089A46DC, parent);
+    struct MAEffectProc * proc = SpawnProcBlocking(gUnknown_089A46DC, parent);
 
     proc->unit = unit;
     proc->xDisplay = (((unit->xPos - (gBmSt.camera.x >> 4)) * 2) + 1) * 8;
@@ -1986,7 +1986,7 @@ void sub_8080EE4(struct MAEffectProc * proc)
 {
     SetDefaultMapAnimScreenConf();
 
-    BG_SetPosition(BG_2, 0, 0);
+    SetBgOffset(BG_2, 0, 0);
 
     Decompress(gUnknown_089E714C, (void *)(0x06002C00 + GetBackgroundTileDataOffset(BG_2)));
     ApplyPalette(gUnknown_089E7DEC, 4);
@@ -2078,7 +2078,7 @@ struct ProcCmd CONST_DATA gUnknown_089A46DC[] =
 //! FE8U = 0x08081020
 void StartGlowingCross(ProcPtr parent, struct Unit * unit)
 {
-    struct MAEffectProc * proc = Proc_Start(ProcScr_GlowingCross, parent);
+    struct MAEffectProc * proc = SpawnProc(ProcScr_GlowingCross, parent);
 
     proc->unit = unit;
     proc->xDisplay = (((unit->xPos - (gBmSt.camera.x >> 4)) * 2) + 1) * 8;
@@ -2104,7 +2104,7 @@ void sub_8081078(struct MAEffectProc * proc)
     gLCDControlBuffer.bg2cnt.priority = 3;
     gLCDControlBuffer.bg3cnt.priority = 3;
 
-    BG_SetPosition(BG_2, 0, 0);
+    SetBgOffset(BG_2, 0, 0);
 
     Decompress(gUnknown_089E714C, (void *)(0x06002C00 + GetBackgroundTileDataOffset(BG_2)));
     ApplyPalette(gUnknown_089E7DEC, 4);
@@ -2186,7 +2186,7 @@ struct ProcCmd CONST_DATA ProcScr_GlowingCross[] =
 //! FE8U = 0x080811D0
 void RemoveGlowingCrossDirectlyWithAnim(ProcPtr parent, int timer)
 {
-    struct MAEffectProc * proc = Proc_StartBlocking(ProcScr_GlowCrossExit, parent);
+    struct MAEffectProc * proc = SpawnProcBlocking(ProcScr_GlowCrossExit, parent);
     proc->timer = timer;
     return;
 }

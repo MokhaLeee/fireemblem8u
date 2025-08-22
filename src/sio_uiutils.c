@@ -139,7 +139,7 @@ void StartLinkArenaTitleBanner(ProcPtr parent, int size, int chr)
     struct LinkArenaTitleBannerProc * proc;
 
     Proc_EndEach(ProcScr_LinkArenaTitleBanner);
-    proc = Proc_Start(ProcScr_LinkArenaTitleBanner, parent);
+    proc = SpawnProc(ProcScr_LinkArenaTitleBanner, parent);
 
     proc->unk_58 = size;
     proc->chr = chr;
@@ -386,7 +386,7 @@ struct ProcCmd CONST_DATA ProcScr_085AA9C0[] =
 //! FE8U = 0x0804C758
 ProcPtr sub_804C758(ProcPtr parent, u8 xBase, u8 yBase, u8 d, u8 e)
 {
-    struct SioProc85AA9C0 * proc = Proc_Start(ProcScr_085AA9C0, parent);
+    struct SioProc85AA9C0 * proc = SpawnProc(ProcScr_085AA9C0, parent);
 
     proc->xBase = xBase;
     proc->yBase = yBase;
@@ -683,7 +683,7 @@ ProcPtr sub_804CAEC(struct SioTeamListProc * parent, int numActiveOptions, u8 * 
     int i;
 
     Proc_EndEach(ProcScr_085AAA78);
-    proc = Proc_Start(ProcScr_085AAA78, parent);
+    proc = SpawnProc(ProcScr_085AAA78, parent);
 
     proc->unk_2c = numActiveOptions;
     proc->unk_44 = 1;
@@ -755,7 +755,7 @@ void PutLinkArenaTeamSprites(int x, int y, int yMax, int yMin, int count, ProcPt
     struct LATeamSpriteDrawProc * proc;
 
     Proc_EndEach(ProcScr_LinkArenaTeamSpriteDraw);
-    proc = Proc_Start(ProcScr_LinkArenaTeamSpriteDraw, parent);
+    proc = SpawnProc(ProcScr_LinkArenaTeamSpriteDraw, parent);
 
     proc->numTeams = count;
 
@@ -920,7 +920,7 @@ ProcPtr StartNameEntrySpriteDraw(ProcPtr parent, int x, int y)
     struct NameEntrySpriteDrawProc * proc;
 
     Proc_EndEach(ProcScr_NameEntrySpriteDraw);
-    proc = Proc_Start(ProcScr_NameEntrySpriteDraw, parent);
+    proc = SpawnProc(ProcScr_NameEntrySpriteDraw, parent);
 
     proc->xNew = x;
     proc->xCurrent = x;
@@ -1033,7 +1033,7 @@ ProcPtr StartRuleSettingSpriteDrawInteractive(ProcPtr parent)
     struct RuleSettingSpriteDrawProc * proc;
 
     Proc_EndEach(ProcScr_RuleSettingSpriteDraw_Interactive);
-    proc = Proc_Start(ProcScr_RuleSettingSpriteDraw_Interactive, parent);
+    proc = SpawnProc(ProcScr_RuleSettingSpriteDraw_Interactive, parent);
 
     proc->yPrevious = 0;
 
@@ -1054,7 +1054,7 @@ struct ProcCmd CONST_DATA ProcScr_RuleSettingSpriteDraw_Static[] =
 //! FE8U = 0x0804CEB0
 void StartRuleSettingSpriteDrawStatic(void)
 {
-    Proc_Start(ProcScr_RuleSettingSpriteDraw_Static, PROC_TREE_3);
+    SpawnProc(ProcScr_RuleSettingSpriteDraw_Static, PROC_TREE_3);
     return;
 }
 
@@ -1189,7 +1189,7 @@ struct ProcCmd CONST_DATA ProcScr_SioMenuBurstFx[] =
 //! FE8U = 0x0804CFB8
 ProcPtr StartSioMenuBurstFx(ProcPtr parent, int x, int y)
 {
-    struct SioMenuBurstFxProc * proc = Proc_Start(ProcScr_SioMenuBurstFx, parent);
+    struct SioMenuBurstFxProc * proc = SpawnProc(ProcScr_SioMenuBurstFx, parent);
 
     proc->xBase = x;
     proc->yBase = y;
@@ -1324,7 +1324,7 @@ void StartLinkArenaMenuScrollBar(int xBase, int yBase, u8 c, u8 d, u8 e, ProcPtr
     struct LAMenuScrollBarProc * proc;
 
     Proc_EndEach(ProcScr_LinkArenaMenuScrollBar);
-    proc = Proc_Start(ProcScr_LinkArenaMenuScrollBar, parent);
+    proc = SpawnProc(ProcScr_LinkArenaMenuScrollBar, parent);
 
     proc->xBase = xBase;
     proc->yBase = yBase;
@@ -1432,9 +1432,9 @@ struct ProcCmd CONST_DATA ProcScr_LinkArenaPhaseIntro[] =
     PROC_CALL(LAPhaseIntro_Init),
     PROC_YIELD,
 
-    PROC_START_CHILD(gProcScr_PhaseIntroText),
-    PROC_START_CHILD(gProcScr_PhaseIntroSquares),
-    PROC_START_CHILD(gProcScr_PhaseIntroBlendBox),
+    SpawnProc_CHILD(gProcScr_PhaseIntroText),
+    SpawnProc_CHILD(gProcScr_PhaseIntroSquares),
+    SpawnProc_CHILD(gProcScr_PhaseIntroBlendBox),
 
     PROC_CALL(PhaseIntro_InitDisp),
     PROC_REPEAT(PhaseIntro_WaitForEnd),
@@ -1631,7 +1631,7 @@ ProcPtr StartLinkArenaVersusSpriteDraw(int x, int y, ProcPtr parent)
     int i;
 
     Proc_EndEach(ProcScr_LAVersusSpriteDraw);
-    proc = Proc_Start(ProcScr_LAVersusSpriteDraw, parent);
+    proc = SpawnProc(ProcScr_LAVersusSpriteDraw, parent);
 
     proc->x = x;
     proc->yBase = y;
@@ -1764,7 +1764,7 @@ ProcPtr sub_804D7DC(int x, int y, ProcPtr parent)
     struct SioProc85AABD8 * proc;
 
     Proc_EndEach(ProcScr_085AABD8);
-    proc = Proc_Start(ProcScr_085AABD8, parent);
+    proc = SpawnProc(ProcScr_085AABD8, parent);
 
     proc->x = x;
     proc->y = y;

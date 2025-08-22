@@ -126,7 +126,7 @@ void StartManimLevelUpStatGainLabels(int chr, int pal, int sprite_layer, ProcPtr
     struct ManimLevelUpStatGainLabelProc * proc_a;
     struct ManimLevelUpLabelColorProc * proc_b;
 
-    proc_a = Proc_Start(ProcScr_ManimLevelUpStatGainLabel, parent);
+    proc_a = SpawnProc(ProcScr_ManimLevelUpStatGainLabel, parent);
 
     proc_a->chr = chr;
     proc_a->pal = pal;
@@ -136,7 +136,7 @@ void StartManimLevelUpStatGainLabels(int chr, int pal, int sprite_layer, ProcPtr
     ApplyPalette(Pal_ManimLevelUp, 0x10 + pal);
     ApplyPalette(Pal_ManimLevelUp, 0x10 + pal + 1);
 
-    proc_b = Proc_Start(ProcScr_ManimLevelUpLabelColor, proc_a);
+    proc_b = SpawnProc(ProcScr_ManimLevelUpLabelColor, proc_a);
     proc_b->pal = pal;
 }
 

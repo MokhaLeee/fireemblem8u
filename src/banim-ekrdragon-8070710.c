@@ -71,7 +71,7 @@ void sub_80707C0(struct ProcEkrDragon_08758720 * proc)
     proc->unk3D = gLCDControlBuffer.blendCoeffB;
     proc->unk34 = GetEkrDragonPalette();
 
-    SetDefaultColorEffects_();
+    SpellFx_ClearColorEffects();
     SpellFx_ClearBG1();
 
     return;
@@ -115,7 +115,7 @@ void sub_80708A0(void)
     if (GetBanimDragonStatusType() != EKRDRGON_TYPE_NORMAL && GetBanimDragonStatusType() != EKRDRGON_TYPE_MYRRH)
     {
         struct ProcEkrDragon_08758720 * proc;
-        proc = Proc_Start(ProcScr_EkrDragon_08758720, PROC_TREE_3);
+        proc = SpawnProc(ProcScr_EkrDragon_08758720, PROC_TREE_3);
         proc->unk38 = gUnknown_08758740;
     }
 }

@@ -43,7 +43,7 @@ struct ProcCmd CONST_DATA gProcScr_PhaseIntroText[] = {
     PROC_CALL(PhaseIntroInitText),
     PROC_SLEEP(0x06),
     PROC_CALL(PhaseIntroText_PutText),
-    PROC_START_CHILD(gProcScr_PhaseIntroUnk),
+    SpawnProc_CHILD(gProcScr_PhaseIntroUnk),
     PROC_REPEAT(PhaseIntroText_InLoop),
     PROC_SLEEP(0x1E),
     PROC_REPEAT(PhaseIntroText_OutLoop),
@@ -68,9 +68,9 @@ struct ProcCmd CONST_DATA gProcScr_PhaseIntroBlendBox[] = {
 struct ProcCmd CONST_DATA ProcScr_PhaseIntro[] = {
     PROC_CALL(PhaseIntro_EndIfNoUnits),
     PROC_CALL(PhaseIntro_InitGraphics),
-    PROC_START_CHILD(gProcScr_PhaseIntroText),
-    PROC_START_CHILD(gProcScr_PhaseIntroSquares),
-    PROC_START_CHILD(gProcScr_PhaseIntroBlendBox),
+    SpawnProc_CHILD(gProcScr_PhaseIntroText),
+    SpawnProc_CHILD(gProcScr_PhaseIntroSquares),
+    SpawnProc_CHILD(gProcScr_PhaseIntroBlendBox),
     PROC_CALL(PhaseIntro_InitDisp),
     PROC_REPEAT(PhaseIntro_WaitForEnd),
     PROC_CALL(StartMapSongBgm),
@@ -155,7 +155,7 @@ void PhaseIntroText_InLoop(struct PhaseIntroSubProc *proc)
         lo = -0x1C;
     }
 
-    BG_SetPosition(0, Interpolate(INTERPOLATE_RCUBIC, lo, hi, proc->timer, 0x10), 0);
+    SetBgOffset(0, Interpolate(INTERPOLATE_RCUBIC, lo, hi, proc->timer, 0x10), 0);
 
     gBmSt.altBlendACa++;
     gBmSt.altBlendACb--;
@@ -181,7 +181,7 @@ void PhaseIntroText_OutLoop(struct PhaseIntroSubProc *proc)
         lo = -0x38;
     }
 
-    BG_SetPosition(0, Interpolate(INTERPOLATE_CUBIC, lo, hi, proc->timer, 0x10), 0);
+    SetBgOffset(0, Interpolate(INTERPOLATE_CUBIC, lo, hi, proc->timer, 0x10), 0);
 
     gBmSt.altBlendACa--;
     gBmSt.altBlendACb++;
@@ -407,9 +407,9 @@ void PhaseIntro_InitGraphics(ProcPtr proc)
     Decompress(Img_PhaseChangeUnk, BG_CHR_ADDR(0xA00));
     Decompress(Img_PhaseChangeSquares, BG_CHR_ADDR(BGCHR_PHASE_CHANGE_SQUARES));
 
-    BG_SetPosition(0, 0, 0);
-    BG_SetPosition(1, 0, 0);
-    BG_SetPosition(2, 0, 0);
+    SetBgOffset(0, 0, 0);
+    SetBgOffset(1, 0, 0);
+    SetBgOffset(2, 0, 0);
 
     switch (gPlaySt.faction)
     {
@@ -472,9 +472,9 @@ void PhaseIntro_WaitForEnd(ProcPtr proc)
 
         SetInterrupt_LCDVCountMatch(NULL);
 
-        BG_SetPosition(0, 0, 0);
-        BG_SetPosition(1, 0, 0);
-        BG_SetPosition(2, 0, 0);
+        SetBgOffset(0, 0, 0);
+        SetBgOffset(1, 0, 0);
+        SetBgOffset(2, 0, 0);
 
         Proc_Break(proc);
     }

@@ -17,10 +17,10 @@ void ReputConvoBg_unused(int index)
 {
     ResetDialogueScreen();
 
-    BG_SetPosition(0, 0, 0);
-    BG_SetPosition(1, 0, 0);
-    BG_SetPosition(2, 0, 0);
-    BG_SetPosition(3, 0, 0);
+    SetBgOffset(0, 0, 0);
+    SetBgOffset(1, 0, 0);
+    SetBgOffset(2, 0, 0);
+    SetBgOffset(3, 0, 0);
 
     Decompress(
         gConvoBackgroundData[index].gfx,

@@ -141,7 +141,7 @@ void LetsEmitStars(struct ProcEmitStars *proc)
         return;
 
     while (1) {
-        child = Proc_Start(ProcScr_EmitSingleStar, proc);
+        child = SpawnProc(ProcScr_EmitSingleStar, proc);
         child->loc_x = (proc->xloc * 0x10000)
                      + (AdvanceGetLCGRNValue() % 0x10000) * 0x10;
         child->loc_y = (proc->yloc + 8) * 0x10000
@@ -168,7 +168,7 @@ void LetsEmitStars(struct ProcEmitStars *proc)
     if (proc->counter > 0x28)
         return;
 
-    child = Proc_Start(ProcScr_EmitSingleStar, proc);
+    child = SpawnProc(ProcScr_EmitSingleStar, proc);
     child->loc_x = (proc->xloc - 0x8) * 0x10000
                      + (AdvanceGetLCGRNValue() % 0x10000) * 0x20;
     child->loc_y = (proc->yloc + 8) * 0x10000
@@ -215,7 +215,7 @@ void StartEmitStarsAnim(ProcPtr parent, int xloc, int yloc, int xdiff, int ydiff
         0x20
     );
 
-    proc = Proc_Start(ProcScr_EmitStars, parent);
+    proc = SpawnProc(ProcScr_EmitStars, parent);
 
     proc->xloc = xloc;
     proc->yloc = yloc;

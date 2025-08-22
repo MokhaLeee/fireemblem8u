@@ -70,7 +70,7 @@ void UnitInfoWindow_OnLoop(struct UnitInfoWindowProc* proc) {
 
 //! FE8U = 0x080347A8
 struct UnitInfoWindowProc* NewUnitInfoWindow(ProcPtr parent) {
-    struct UnitInfoWindowProc* proc = Proc_Start(gProcScr_UnitInfoWindow, parent);
+    struct UnitInfoWindowProc* proc = SpawnProc(gProcScr_UnitInfoWindow, parent);
 
     InitTextDb(&proc->name, 6);
 

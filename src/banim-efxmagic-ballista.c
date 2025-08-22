@@ -27,7 +27,7 @@ void StartSpellAnimBallista(struct Anim * anim)
     SpellFx_Begin();
     SpellFx_ClearBG1Position();
 
-    proc = Proc_Start(ProcScr_efxShooter, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxShooter, PROC_TREE_3);
     proc->anim = anim;
     proc->timer = 0;
     proc->hitted = CheckRoundMiss(GetAnimRoundTypeAnotherSide(anim));
@@ -63,7 +63,7 @@ void efxShooter_Loop_Main(struct ProcEfx * proc)
         }
         else if (timer == 45)
         {
-            anim->state3 |= (ANIM_BIT3_TAKE_BACK_ENABLE | ANIM_BIT3_HIT_EFFECT_APPLIED);
+            anim->state3 |= (ANIM_BIT3_C02_BLOCK_END | ANIM_BIT3_C01_BLOCK_END_INBATTLE);
 
             StartBattleAnimHitEffectsDefault(anim, proc->hitted);
 
@@ -122,7 +122,7 @@ void StartSubSpell_efxShooterOBJ(struct Anim * anim)
 
     gEfxBgSemaphore++;
 
-    proc = Proc_Start(ProcScr_efxShooterOBJ, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxShooterOBJ, PROC_TREE_3);
     proc->anim = anim;
     proc->timer = 0;
 

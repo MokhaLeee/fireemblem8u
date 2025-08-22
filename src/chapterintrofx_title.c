@@ -32,10 +32,10 @@ void ChapterIntroTitle_InitBgImg(struct ChapterIntroFXProc *proc)
 
     InitBmBgLayers();
 
-    BG_SetPosition(BG_0, 0, 0);
-    BG_SetPosition(BG_1, 0, 0);
-    BG_SetPosition(BG_2, 0, 0);
-    BG_SetPosition(BG_3, 0, 0);
+    SetBgOffset(BG_0, 0, 0);
+    SetBgOffset(BG_1, 0, 0);
+    SetBgOffset(BG_2, 0, 0);
+    SetBgOffset(BG_3, 0, 0);
 
     BG_Fill(gBG0TilemapBuffer, 0);
     BG_Fill(gBG1TilemapBuffer, 0);
@@ -105,7 +105,7 @@ struct ProcCmd CONST_DATA gProcScr_ChapterIntroTitleOnly[] =
 
     PROC_CALL(ChapterIntroTitle_InitBgImg),
 
-    PROC_START_CHILD(sProcScr_ChapterIntro_KeyListen),
+    SpawnProc_CHILD(sProcScr_ChapterIntro_KeyListen),
 
     PROC_CALL(StartMidFadeFromBlack),
     PROC_REPEAT(WaitForFade),

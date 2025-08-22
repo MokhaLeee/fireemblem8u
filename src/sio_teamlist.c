@@ -174,7 +174,7 @@ extern struct Text gUnk_Sio_0203DA88[];
 //! FE8U = 0x08043308
 void StartLinkArenaTeamList(ProcPtr parent)
 {
-    Proc_StartBlocking(ProcScr_SioTeamList, parent);
+    SpawnProcBlocking(ProcScr_SioTeamList, parent);
     return;
 }
 
@@ -548,7 +548,7 @@ void SioTeamList_SetupGfx(struct SioTeamListProc * proc)
 
     proc->unk_5c = 0;
 
-    BG_SetPosition(BG_1, 0, proc->yBg1);
+    SetBgOffset(BG_1, 0, proc->yBg1);
 
     SetWinEnable(1, 1, 0);
 
@@ -744,7 +744,7 @@ void SioTeamList_8043D8C(struct SioTeamListProc * proc)
         proc->yBg1 -= 4;
         proc->unk_4c--;
 
-        BG_SetPosition(BG_1, 0, proc->yBg1);
+        SetBgOffset(BG_1, 0, proc->yBg1);
 
         if (proc->pSioHoldProc != NULL)
         {
@@ -763,7 +763,7 @@ void SioTeamList_8043D8C(struct SioTeamListProc * proc)
         proc->yBg1 += 4;
         proc->unk_4c++;
 
-        BG_SetPosition(BG_1, 0, proc->yBg1);
+        SetBgOffset(BG_1, 0, proc->yBg1);
 
         if (proc->pSioHoldProc != NULL)
         {
@@ -938,7 +938,7 @@ void SioTeamList_8043D8C(struct SioTeamListProc * proc)
             proc->unk_4c = +3;
             proc->unk_40--;
 
-            BG_SetPosition(BG_1, 0, proc->yBg1);
+            SetBgOffset(BG_1, 0, proc->yBg1);
 
             UpdateLinkArenaMenuScrollBar(proc->unk_38, proc->yBg1 + 40);
         }
@@ -968,7 +968,7 @@ void SioTeamList_8043D8C(struct SioTeamListProc * proc)
             proc->unk_4c = -3;
             proc->unk_40++;
 
-            BG_SetPosition(BG_1, 0, proc->yBg1);
+            SetBgOffset(BG_1, 0, proc->yBg1);
 
             UpdateLinkArenaMenuScrollBar(proc->unk_38, proc->yBg1 + 40);
         }
@@ -1027,7 +1027,7 @@ void SioTeamList_804429C(struct SioTeamListProc * proc)
     }
     else
     {
-        BG_SetPosition(BG_0, xPos, 0);
+        SetBgOffset(BG_0, xPos, 0);
         sub_8044280(unk_2C, xPos);
     }
 
@@ -1060,7 +1060,7 @@ void SioTeamList_8044324(struct SioTeamListProc * proc)
     }
     else
     {
-        BG_SetPosition(BG_0, xPos, 0);
+        SetBgOffset(BG_0, xPos, 0);
         sub_8044280(unk_2C, xPos);
     }
 

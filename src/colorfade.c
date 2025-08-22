@@ -140,7 +140,7 @@ struct ProcCmd CONST_DATA ProcScr_ColFadeOut[] =
 //! FE8U = 0x080B272C
 void NewColFadeOut(int speed, int kind, int color, ProcPtr parent)
 {
-    struct ColFadeProc * proc = Proc_StartBlocking(ProcScr_ColFadeOut, parent);
+    struct ColFadeProc * proc = SpawnProcBlocking(ProcScr_ColFadeOut, parent);
 
     proc->speed = speed;
     proc->color = color;
@@ -192,7 +192,7 @@ void NewColFadeIn(int speed, int kind, int color, ProcPtr parent)
 {
     int i;
 
-    struct ColFadeProc * proc = Proc_StartBlocking(ProcScr_ColFadeIn, parent);
+    struct ColFadeProc * proc = SpawnProcBlocking(ProcScr_ColFadeIn, parent);
 
     proc->speed = speed;
     proc->color = color;

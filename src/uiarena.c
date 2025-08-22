@@ -41,13 +41,13 @@ s8 sub_80B5730(void) {
 //! FE8U = 0x080B576C
 void StartArenaScreen(void) {
     ArenaBegin(gActiveUnit);
-    Proc_Start(gProcScr_ArenaUiMain, PROC_TREE_3);
+    SpawnProc(gProcScr_ArenaUiMain, PROC_TREE_3);
     return;
 }
 
 //! FE8U = 0x080B578C
 void StartArenaResultsScreen(void) {
-    Proc_Start(gProcScr_ArenaUiResults, PROC_TREE_3);
+    SpawnProc(gProcScr_ArenaUiResults, PROC_TREE_3);
     return;
 }
 
@@ -464,7 +464,7 @@ PROC_LABEL(1),
     PROC_CALL(BMapDispSuspend),
     PROC_SLEEP(0),
 
-    PROC_START_CHILD(gProcScr_ArenaUiResultBgm),
+    SpawnProc_CHILD(gProcScr_ArenaUiResultBgm),
 
     PROC_CALL(ArenaUi_Init),
 

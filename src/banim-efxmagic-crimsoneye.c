@@ -27,7 +27,7 @@ void StartSpellAnimCrimsonEye(struct Anim * anim)
     NewEfxSpellCast();
     SpellFx_ClearBG1Position();
 
-    proc = Proc_Start(ProcScr_efxCrimsonEye, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxCrimsonEye, PROC_TREE_3);
     proc->anim = anim;
     proc->timer = 0;
     proc->hitted = CheckRoundMiss(GetAnimRoundTypeAnotherSide(anim));
@@ -88,7 +88,7 @@ void efxCrimsonEye_Loop_Main(struct ProcEfx * proc)
     else if (proc->timer == duration + 311)
     {
         SpellFx_Finish();
-        RegisterEfxSpellCastEnd();
+        EndEfxSpellCastAsync();
         Proc_Break(proc);
     }
 
@@ -168,7 +168,7 @@ void StartSubSpell_efxCrimsonEyeBGFinish1(struct Anim * anim)
 
     gEfxBgSemaphore++;
 
-    proc = Proc_Start(ProcScr_efxCrimsonEyeBGFinish1, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxCrimsonEyeBGFinish1, PROC_TREE_3);
     proc->anim = anim;
     proc->timer = 0;
     proc->terminator = 0;
@@ -181,7 +181,7 @@ void StartSubSpell_efxCrimsonEyeBGFinish1(struct Anim * anim)
 
     SpellFx_RegisterBgPal(Pal_efxCrimsonEyeBGFinish1, PLTT_SIZE_4BPP);
 
-    BG_SetPosition(BG_1, 0, 0);
+    SetBgOffset(BG_1, 0, 0);
 
     SetPrimaryHBlankHandler(OnHBlank_806B088);
 
@@ -262,7 +262,7 @@ void StartSubSpell_efxCrimsonEyeOBJFinishPiece(struct Anim * anim, int terminato
 
     gEfxBgSemaphore++;
 
-    proc = Proc_Start(ProcScr_efxCrimsonEyeOBJFinishPiece, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxCrimsonEyeOBJFinishPiece, PROC_TREE_3);
     proc->anim = anim;
     proc->timer = 1;
     proc->terminator = terminator + 1;
@@ -454,7 +454,7 @@ void StartSubSpell_efxCrimsonEyeOBJFinish(struct Anim * anim)
 
     gEfxBgSemaphore++;
 
-    proc = Proc_Start(ProcScr_efxCrimsonEyeOBJFinish, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxCrimsonEyeOBJFinish, PROC_TREE_3);
     proc->anim = anim;
     proc->timer = 0;
 
@@ -468,7 +468,7 @@ void StartSubSpell_efxGorgonBGFinish_(struct Anim * anim)
 
     gEfxBgSemaphore++;
 
-    proc = Proc_Start(ProcScr_efxGorgonBGFinish, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxGorgonBGFinish, PROC_TREE_3);
     proc->anim = anim;
     proc->timer = 0;
 
@@ -482,16 +482,16 @@ void StartSubSpell_efxGorgonBGFinish_(struct Anim * anim)
     {
         if (GetAnimPosition(anim) == 0)
         {
-            BG_SetPosition(BG_1, 24, 0);
+            SetBgOffset(BG_1, 24, 0);
         }
         else
         {
-            BG_SetPosition(BG_1, -24, 0);
+            SetBgOffset(BG_1, -24, 0);
         }
     }
     else
     {
-        BG_SetPosition(BG_1, 0, 0);
+        SetBgOffset(BG_1, 0, 0);
     }
 
     SpellFx_RegisterBgPal(Pal_efxGorgonBGFinish, PLTT_SIZE_4BPP);
@@ -565,7 +565,7 @@ void StartSubSpell_efxCrimsonEyeBG(struct Anim * anim)
 
     gEfxBgSemaphore++;
 
-    proc = Proc_Start(ProcScr_efxCrimsonEyeBG, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxCrimsonEyeBG, PROC_TREE_3);
     proc->anim = anim;
     proc->timer = 0;
 
@@ -581,16 +581,16 @@ void StartSubSpell_efxCrimsonEyeBG(struct Anim * anim)
     {
         if (GetAnimPosition(proc->anim) == 0)
         {
-            BG_SetPosition(BG_1, 24, 0);
+            SetBgOffset(BG_1, 24, 0);
         }
         else
         {
-            BG_SetPosition(BG_1, -24, 0);
+            SetBgOffset(BG_1, -24, 0);
         }
     }
     else
     {
-        BG_SetPosition(BG_1, 0, 0);
+        SetBgOffset(BG_1, 0, 0);
     }
 
     SpellFx_SetSomeColorEffect();
@@ -1144,7 +1144,7 @@ void StartSubSpell_efxCrimsonEyeOBJ(struct Anim * anim)
 
     gEfxBgSemaphore++;
 
-    proc = Proc_Start(ProcScr_efxCrimsonEyeOBJ, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxCrimsonEyeOBJ, PROC_TREE_3);
     proc->anim = anim;
     proc->timer = 0;
     proc->terminator = 0;

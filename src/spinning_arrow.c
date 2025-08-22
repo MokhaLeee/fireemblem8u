@@ -176,7 +176,7 @@ struct ProcCmd CONST_DATA gProcScr_UiSpinningArrows[] =
 //! FE8U = 0x080ACCE0
 ProcPtr StartUiSpinningArrows(ProcPtr parent)
 {
-    return Proc_Start(gProcScr_UiSpinningArrows, parent);
+    return SpawnProc(gProcScr_UiSpinningArrows, parent);
 }
 
 //! FE8U = 0x080ACCF4

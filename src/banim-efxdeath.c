@@ -22,7 +22,7 @@ CONST_DATA struct ProcCmd ProcScr_efxDeadEvent[] = {
 void NewEfxDeadEvent(struct Anim *anim1, struct Anim *anim2)
 {
     struct ProcEfxDead *proc;
-    proc = Proc_Start(ProcScr_efxDeadEvent, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxDeadEvent, PROC_TREE_3);
     proc->anim1 = anim1;
     proc->anim2 = anim2;
 
@@ -68,8 +68,8 @@ void sub_8052EAC(struct ProcEfxDead *proc)
         AsyncEkrDispUP();
 
         CpuFastFill(0, gBG0TilemapBuffer, 0x800);
-        BG_SetPosition(BG_0, gEkrBg0QuakeVec.x, gEkrBg0QuakeVec.y);
-        BG_SetPosition(BG_1, 0, 0);
+        SetBgOffset(BG_0, gEkrBg0QuakeVec.x, gEkrBg0QuakeVec.y);
+        SetBgOffset(BG_1, 0, 0);
         BG_EnableSyncByMask(BG0_SYNC_BIT);
 
         EkrGauge_Set4C50();
@@ -119,7 +119,7 @@ void NewEfxDead(struct Anim *anim1, struct Anim *anim2)
     gEkrHpBarCount++;
     gEkrDeadExist = 1;
 
-    proc = Proc_Start(ProcScr_efxDead, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxDead, PROC_TREE_3);
     proc->anim1 = anim1;
     proc->anim2 = anim2;
     proc->timer = 0;
@@ -189,7 +189,7 @@ CONST_DATA struct ProcCmd ProcScr_efxDeadPika[] = {
 void NewEfxDeadPika(struct Anim *anim1, struct Anim *anim2)
 {
     struct ProcEfxDead *proc;
-    proc = Proc_Start(ProcScr_efxDeadPika, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxDeadPika, PROC_TREE_3);
     
     proc->anim1 = anim1;
     proc->anim2 = anim2;
@@ -229,7 +229,7 @@ CONST_DATA struct ProcCmd ProcScr_efxDeadAlpha[] = {
 void NewEfxDeadAlpha(struct Anim *anim1, struct Anim *anim2)
 {
     struct ProcEfxDead *proc;
-    proc = Proc_Start(ProcScr_efxDeadAlpha, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxDeadAlpha, PROC_TREE_3);
     
     proc->anim1 = anim1;
     proc->anim2 = anim2;
@@ -283,7 +283,7 @@ CONST_DATA struct ProcCmd ProcScr_efxDeadDragonAlpha[] = {
 void NewEfxDeadDragonAlpha(struct Anim *anim1, struct Anim *anim2)
 {
     struct ProcEfxDead *proc;
-    proc = Proc_Start(ProcScr_efxDeadDragonAlpha, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxDeadDragonAlpha, PROC_TREE_3);
 
     proc->anim1 = anim1;
     proc->anim2 = anim2;

@@ -117,7 +117,7 @@ void SioResult_Init(struct SioResultProc * proc)
     proc->unk_38 = 0;
     proc->unk_34 = 0;
 
-    BG_SetPosition(BG_1, 0, proc->unk_36);
+    SetBgOffset(BG_1, 0, proc->unk_36);
 
     for (i = 0; i < 10; i++)
     {
@@ -166,7 +166,7 @@ void SioResult_Loop_Main(struct SioResultProc * proc)
         proc->unk_36 -= 4;
         proc->unk_38--;
 
-        BG_SetPosition(BG_1, 0, proc->unk_36);
+        SetBgOffset(BG_1, 0, proc->unk_36);
         UpdateLinkArenaMenuScrollBar(10, proc->unk_36 + 56);
 
         return;
@@ -177,7 +177,7 @@ void SioResult_Loop_Main(struct SioResultProc * proc)
         proc->unk_36 += 4;
         proc->unk_38++;
 
-        BG_SetPosition(BG_1, 0, proc->unk_36);
+        SetBgOffset(BG_1, 0, proc->unk_36);
         UpdateLinkArenaMenuScrollBar(10, proc->unk_36 + 56);
 
         return;
@@ -192,7 +192,7 @@ void SioResult_Loop_Main(struct SioResultProc * proc)
 
         proc->unk_38 = 3;
 
-        BG_SetPosition(BG_1, 0, proc->unk_36);
+        SetBgOffset(BG_1, 0, proc->unk_36);
         UpdateLinkArenaMenuScrollBar(10, proc->unk_36 + 56);
     }
 
@@ -205,7 +205,7 @@ void SioResult_Loop_Main(struct SioResultProc * proc)
 
         proc->unk_38 = -3;
 
-        BG_SetPosition(BG_1, 0, proc->unk_36);
+        SetBgOffset(BG_1, 0, proc->unk_36);
         UpdateLinkArenaMenuScrollBar(10, proc->unk_36 + 56);
     }
 
@@ -268,7 +268,7 @@ void SioResult_NewHS_Init(struct SioResultProc * proc)
     proc->unk_35 = sub_8047308(proc->unk_3c);
     proc->unk_40 = 0;
 
-    BG_SetPosition(BG_1, 0, proc->unk_36);
+    SetBgOffset(BG_1, 0, proc->unk_36);
 
     for (i = 0; i < 10; i++)
     {
@@ -331,7 +331,7 @@ void SioResult_NewHS_LoopScroll(struct SioResultProc * proc)
         proc->unk_36 -= 2;
         proc->unk_38--;
 
-        BG_SetPosition(BG_1, 0, proc->unk_36);
+        SetBgOffset(BG_1, 0, proc->unk_36);
         UpdateLinkArenaMenuScrollBar(10, proc->unk_36 + 56);
 
         otherProc->unk_30 += 2;
@@ -345,7 +345,7 @@ void SioResult_NewHS_LoopScroll(struct SioResultProc * proc)
 
             proc->unk_38 = 7;
 
-            BG_SetPosition(BG_1, 0, proc->unk_36);
+            SetBgOffset(BG_1, 0, proc->unk_36);
             UpdateLinkArenaMenuScrollBar(10, proc->unk_36 + 56);
 
             otherProc->unk_30 += 2;
@@ -427,7 +427,7 @@ struct ProcCmd CONST_DATA ProcScr_SIORESULT_NewHighScore[] =
 //! FE8U = 0x08047654
 void StartSioResultNewHighScore(int value, ProcPtr parent)
 {
-    struct SioResultProc * proc = Proc_StartBlocking(ProcScr_SIORESULT_NewHighScore, parent);
+    struct SioResultProc * proc = SpawnProcBlocking(ProcScr_SIORESULT_NewHighScore, parent);
 
     proc->unk_3c = value;
 

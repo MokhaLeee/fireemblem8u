@@ -237,7 +237,7 @@ s8 ActionDrop(ProcPtr proc) {
         gActionData.yOther
     );
 
-    child = Proc_StartBlocking(sProcScr_AfterDropAction, proc);
+    child = SpawnProcBlocking(sProcScr_AfterDropAction, proc);
     child->unit = target;
 
     return 0;
@@ -288,14 +288,14 @@ s8 ActionCombat(ProcPtr proc) {
         BattleGenerateReal(GetUnit(gActionData.subjectIndex), target);
     }
 
-    Proc_StartBlocking(sProcScr_CombatAction, proc);
+    SpawnProcBlocking(sProcScr_CombatAction, proc);
 
     return 0;
 }
 
 //! FE8U = 0x08032344
 s8 ActionArena(ProcPtr proc) {
-    Proc_StartBlocking(sProcScr_ArenaAction, proc);
+    SpawnProcBlocking(sProcScr_ArenaAction, proc);
     return 0;
 }
 
@@ -481,7 +481,7 @@ void DropRescueOnDeath(ProcPtr proc, struct Unit* unit) {
         return;
     }
 
-    child = Proc_StartBlocking(sProcScr_DeathDropAnim, proc);
+    child = SpawnProcBlocking(sProcScr_DeathDropAnim, proc);
 
     child->unit = GetUnit(unit->rescue);
 

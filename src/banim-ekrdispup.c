@@ -12,7 +12,7 @@ CONST_DATA struct ProcCmd gProc_ekrDispUP[] = {
 
 void NewEkrDispUP(void)
 {
-    gpProcEkrDispUP = Proc_Start(gProc_ekrDispUP, PROC_TREE_5);
+    gpProcEkrDispUP = SpawnProc(gProc_ekrDispUP, PROC_TREE_5);
     EkrDispUP_SetPositionUnsync(0, 0);
     EkrDispUpClear4C50();
     UnAsyncEkrDispUP();
@@ -141,9 +141,9 @@ void EfxClearScreenFx(void)
     SetDispEnable(1, 1, 1, 1, 1);
     gLCDControlBuffer.dispcnt.obj1dMap = 0;
 
-    BG_SetPosition(BG_0, 0, 0);
-    BG_SetPosition(BG_1, 0, 0);
-    BG_SetPosition(BG_2, 0, 0);
+    SetBgOffset(BG_0, 0, 0);
+    SetBgOffset(BG_1, 0, 0);
+    SetBgOffset(BG_2, 0, 0);
 
     SetBackgroundTileDataOffset(BG_0, 0);
     SetBackgroundTileDataOffset(BG_1, 0);
@@ -296,7 +296,7 @@ void EfxPrepareScreenFx(void)
 
     gEkrBg0QuakeVec.x = 0;
     gEkrBg0QuakeVec.y = 0;
-    BG_SetPosition(BG_0, 0, 0);
+    SetBgOffset(BG_0, 0, 0);
 }
 
 int GetBanimInitPosReal(void)

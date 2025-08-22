@@ -27,7 +27,7 @@ void StartSpellAnimStone(struct Anim * anim)
     NewEfxSpellCast();
     SpellFx_ClearBG1Position();
 
-    proc = Proc_Start(ProcScr_efxStone, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxStone, PROC_TREE_3);
     proc->anim = anim;
     proc->timer = 0;
     proc->hitted = CheckRoundMiss(GetAnimRoundTypeAnotherSide(anim));
@@ -54,7 +54,7 @@ void efxStone_Loop_Main(struct ProcEfx * proc)
     }
     else if (proc->timer == duration + 72)
     {
-        anim->state3 |= (ANIM_BIT3_TAKE_BACK_ENABLE | ANIM_BIT3_HIT_EFFECT_APPLIED);
+        anim->state3 |= (ANIM_BIT3_C02_BLOCK_END | ANIM_BIT3_C01_BLOCK_END_INBATTLE);
 
         if (!proc->hitted)
         {
@@ -73,7 +73,7 @@ void efxStone_Loop_Main(struct ProcEfx * proc)
     else if (proc->timer == duration + 236)
     {
         SpellFx_Finish();
-        RegisterEfxSpellCastEnd();
+        EndEfxSpellCastAsync();
         Proc_Break(proc);
     }
 
@@ -170,7 +170,7 @@ void StartSubSpell_efxStoneBG(struct Anim * anim)
 
     gEfxBgSemaphore++;
 
-    proc = Proc_Start(ProcScr_efxStoneBG, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxStoneBG, PROC_TREE_3);
     proc->anim = GetAnimAnotherSide(anim);
     proc->timer = 0;
     proc->frame = 0;
@@ -188,11 +188,11 @@ void StartSubSpell_efxStoneBG(struct Anim * anim)
     {
         if (GetAnimPosition(proc->anim) == 0)
         {
-            BG_SetPosition(BG_1, 232, 0);
+            SetBgOffset(BG_1, 232, 0);
         }
         else
         {
-            BG_SetPosition(BG_1, 24, 0);
+            SetBgOffset(BG_1, 24, 0);
         }
     }
 
@@ -229,7 +229,7 @@ void efxStoneBG_Loop(struct ProcEfxBG * proc)
         {
             SpellFx_ClearBG1();
             gEfxBgSemaphore--;
-            SetDefaultColorEffects_();
+            SpellFx_ClearColorEffects();
             Proc_Break(proc);
         }
     }
@@ -257,7 +257,7 @@ void StartSubSpell_efxStoneOBJ(struct Anim * anim, int terminator)
 
     gEfxBgSemaphore++;
 
-    proc = Proc_Start(ProcScr_efxStoneOBJ, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxStoneOBJ, PROC_TREE_3);
     proc->anim = GetAnimAnotherSide(anim);
     proc->timer = 0;
     proc->terminator = terminator;

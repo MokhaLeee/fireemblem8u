@@ -330,7 +330,7 @@ ProcPtr APProc_Create(const void* apDefinition, int xPos, int yPos, int tileBase
     handle->tileBase = tileBase;
 
     // Making Proc
-    proc = Proc_Start(ProcScr_ApProc, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_ApProc, PROC_TREE_3);
 
     // Setting up proc
     proc->pHandle = handle;

@@ -75,18 +75,18 @@ PROC_LABEL(3),
     // fallthrough
 
 PROC_LABEL(9),
-    PROC_START_CHILD(gProcScr_ResetCursorPosition),
-    PROC_START_CHILD_BLOCKING(ProcScr_PhaseIntro),
+    SpawnProc_CHILD(gProcScr_ResetCursorPosition),
+    SpawnProc_CHILD_BLOCKING(ProcScr_PhaseIntro),
     PROC_WHILE_EXISTS(ProcScr_CamMove),
 
     PROC_CALL(TickActiveFactionTurn),
 
-    PROC_START_CHILD_BLOCKING(gProcScr_StatusDecayDisplay),
-    PROC_START_CHILD_BLOCKING(gProcScr_TerrainHealDisplay),
-    PROC_START_CHILD_BLOCKING(gProcScr_PoisonDamageDisplay),
-    PROC_START_CHILD_BLOCKING(gProcScr_GorgonEggHatchDisplay),
+    SpawnProc_CHILD_BLOCKING(gProcScr_StatusDecayDisplay),
+    SpawnProc_CHILD_BLOCKING(gProcScr_TerrainHealDisplay),
+    SpawnProc_CHILD_BLOCKING(gProcScr_PoisonDamageDisplay),
+    SpawnProc_CHILD_BLOCKING(gProcScr_GorgonEggHatchDisplay),
 
-    PROC_START_CHILD_BLOCKING(gProcScr_ResetCursorPosition),
+    SpawnProc_CHILD_BLOCKING(gProcScr_ResetCursorPosition),
 
     PROC_CALL_2(sub_8015434),
 
@@ -94,7 +94,7 @@ PROC_LABEL(9),
 
 PROC_LABEL(5),
     PROC_REPEAT(BmMain_StartPhase),
-    PROC_START_CHILD_BLOCKING(gProcScr_BerserkCpPhase),
+    SpawnProc_CHILD_BLOCKING(gProcScr_BerserkCpPhase),
 
     PROC_CALL_2(BmMain_UpdateTraps),
 
@@ -103,7 +103,7 @@ PROC_LABEL(5),
 PROC_LABEL(2),
     PROC_CALL(sub_80155C4),
     PROC_SLEEP(0),
-    PROC_START_CHILD_BLOCKING(gProcScr_ChapterIntroTitleOnly),
+    SpawnProc_CHILD_BLOCKING(gProcScr_ChapterIntroTitleOnly),
     PROC_SLEEP(0),
 
     PROC_GOTO(1),
@@ -126,7 +126,7 @@ PROC_LABEL(6),
 
     PROC_REPEAT(BmMain_ResumePlayerPhase),
 
-    PROC_START_CHILD_BLOCKING(gProcScr_BerserkCpPhase),
+    SpawnProc_CHILD_BLOCKING(gProcScr_BerserkCpPhase),
 
     PROC_GOTO(3),
 
@@ -134,7 +134,7 @@ PROC_LABEL(10),
     PROC_SLEEP(0),
 
     PROC_REPEAT(BmMain_ResumePlayerPhase),
-    PROC_START_CHILD_BLOCKING(gProcScr_BerserkCpPhase),
+    SpawnProc_CHILD_BLOCKING(gProcScr_BerserkCpPhase),
 
     PROC_GOTO(3),
 
@@ -154,7 +154,7 @@ PROC_LABEL(7),
     PROC_CALL(StartMidFadeFromBlack),
     PROC_REPEAT(WaitForFade),
 
-    PROC_START_CHILD_BLOCKING(gProcScr_BerserkCpPhase),
+    SpawnProc_CHILD_BLOCKING(gProcScr_BerserkCpPhase),
 
     PROC_GOTO(3),
 
@@ -439,15 +439,15 @@ void BmMain_StartPhase(ProcPtr proc)
 {
     switch (gPlaySt.faction) {
     case FACTION_BLUE:
-        Proc_StartBlocking(gProcScr_PlayerPhase, proc);
+        SpawnProcBlocking(gProcScr_PlayerPhase, proc);
         break;
 
     case FACTION_RED:
-        Proc_StartBlocking(gProcScr_CpPhase, proc);
+        SpawnProcBlocking(gProcScr_CpPhase, proc);
         break;
 
     case FACTION_GREEN:
-        Proc_StartBlocking(gProcScr_CpPhase, proc);
+        SpawnProcBlocking(gProcScr_CpPhase, proc);
         break;
     }
 
@@ -457,7 +457,7 @@ void BmMain_StartPhase(ProcPtr proc)
 //! FE8U = 0x080154A4
 void BmMain_ResumePlayerPhase(ProcPtr proc)
 {
-    Proc_Goto(Proc_StartBlocking(gProcScr_PlayerPhase, proc), 7);
+    Proc_Goto(SpawnProcBlocking(gProcScr_PlayerPhase, proc), 7);
     Proc_Break(proc);
 }
 
@@ -467,7 +467,7 @@ int BmMain_UpdateTraps(ProcPtr proc)
     if (gPlaySt.faction != FACTION_GREEN)
         return 1;
 
-    Proc_StartBlocking(gProcScr_UpdateTraps, proc);
+    SpawnProcBlocking(gProcScr_UpdateTraps, proc);
     DecayTraps();
 
     return 0;
@@ -489,7 +489,7 @@ void BmMain_StartIntroFx(ProcPtr proc)
     if (gPlaySt.chapterIndex == 0x06 && CheckFlag(0x88))
         return;
 
-    Proc_StartBlocking(gProcScr_ChapterIntro, proc);
+    SpawnProcBlocking(gProcScr_ChapterIntro, proc);
 }
 
 //! FE8U = 0x08015544
@@ -1023,9 +1023,9 @@ s8 sub_8015D84(ProcPtr parent, int x, int y) {
     }
 
     if (parent != 0) {
-        proc = Proc_StartBlocking(ProcScr_CamMove, parent);
+        proc = SpawnProcBlocking(ProcScr_CamMove, parent);
     } else {
-        proc = Proc_Start(ProcScr_CamMove, PROC_TREE_3);
+        proc = SpawnProc(ProcScr_CamMove, PROC_TREE_3);
     }
 
     proc->from.x = gBmSt.camera.x;
@@ -1056,9 +1056,9 @@ s8 EnsureCameraOntoPosition(ProcPtr parent, int x, int y) {
     }
 
     if (parent) {
-        proc = Proc_StartBlocking(ProcScr_CamMove, parent);
+        proc = SpawnProcBlocking(ProcScr_CamMove, parent);
     } else {
-        proc = Proc_Start(ProcScr_CamMove, PROC_TREE_3);
+        proc = SpawnProc(ProcScr_CamMove, PROC_TREE_3);
     }
 
     proc->from.x = gBmSt.camera.x;
@@ -1098,9 +1098,9 @@ s8 CameraMove_8015EDC(ProcPtr parent) {
     }
 
     if (parent) {
-        proc = Proc_StartBlocking(ProcScr_CamMove, parent);
+        proc = SpawnProcBlocking(ProcScr_CamMove, parent);
     } else {
-        proc = Proc_Start(ProcScr_CamMove, PROC_TREE_3);
+        proc = SpawnProc(ProcScr_CamMove, PROC_TREE_3);
     }
 
     proc->from.x = gBmSt.camera.x;
@@ -1134,7 +1134,7 @@ void UnkMapCursor_OnLoop(struct UnkMapCursorProc* proc) {
 void sub_8015F90(int x, int y, int duration) {
     struct UnkMapCursorProc* proc;
 
-    proc = Proc_Start(ProcScr_UnkMapCursor, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_UnkMapCursor, PROC_TREE_3);
 
     proc->to.x = gBmSt.playerCursor.x << 4;
     proc->to.y = gBmSt.playerCursor.y << 4;
@@ -1231,9 +1231,9 @@ void sub_8016140(ProcPtr parent, int x, int y, int distance) {
     struct CamMoveProc* proc;
 
     if (parent != 0) {
-        proc = Proc_StartBlocking(gProcScr_0859A580, parent);
+        proc = SpawnProcBlocking(gProcScr_0859A580, parent);
     } else {
-        proc = Proc_Start(gProcScr_0859A580, PROC_TREE_3);
+        proc = SpawnProc(gProcScr_0859A580, PROC_TREE_3);
     }
 
     proc->from.x = gBmSt.camera.x;

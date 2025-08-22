@@ -23,7 +23,7 @@ static struct MADebugInfo MADebugInfoData;
 
 void StartMADebug6C(void)
 {
-    Proc_Start(ProcScr_MADebug, PROC_TREE_3);
+    SpawnProc(ProcScr_MADebug, PROC_TREE_3);
 }
 
 void MADebug_FormatPrint(int num, int index, int color)

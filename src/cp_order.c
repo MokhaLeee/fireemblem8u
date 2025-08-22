@@ -81,7 +81,7 @@ void CpOrderBerserkInit(ProcPtr proc)
 
         AiDecideMainFunc = AiDecideMain;
 
-        Proc_StartBlocking(gProcScr_CpDecide, proc);
+        SpawnProcBlocking(gProcScr_CpDecide, proc);
     }
 }
 
@@ -98,7 +98,7 @@ void CpOrderFunc_BeginDecide(ProcPtr proc)
 
         AiDecideMainFunc = AiDecideMain;
 
-        Proc_StartBlocking(gProcScr_CpDecide, proc);
+        SpawnProcBlocking(gProcScr_CpDecide, proc);
     }
 }
 

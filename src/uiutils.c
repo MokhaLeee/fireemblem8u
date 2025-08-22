@@ -431,8 +431,8 @@ void DrawUiFrame2(int x, int y, int width, int height, int style)
         gBG1TilemapBuffer[TILEMAP_INDEX2(xMax, yMax)] = model[15]; // bottom right tile
     }
 
-    BG_SetPosition(0, 0, 0);
-    BG_SetPosition(1, 0, 0);
+    SetBgOffset(0, 0, 0);
+    SetBgOffset(1, 0, 0);
 
     BG_EnableSyncByMask(BG0_SYNC_BIT | BG1_SYNC_BIT);
 }

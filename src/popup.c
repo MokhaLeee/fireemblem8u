@@ -391,7 +391,7 @@ void PopupProc_GfxDraw(struct PopupProc * proc)
 
     if (0xFFFF != proc->iconId) {
         struct PopupIconUpdateProc *child =
-            Proc_Start(ProcScr_PopupUpdateIcon, proc);
+            SpawnProc(ProcScr_PopupUpdateIcon, proc);
 
         child->unk_2C = (proc->xTileReal + 1) * 8 + proc->iconX;
         child->unk_30 = (proc->yTileReal + 1) * 8;
@@ -459,8 +459,8 @@ ProcPtr NewPopupCore(const struct PopupInstruction *inst,
     struct PopupProc * proc;
 
     proc = (0 != parent)
-         ? Proc_StartBlocking(ProcScr_Popup, parent)
-         : Proc_Start(ProcScr_Popup, PROC_TREE_3);
+         ? SpawnProcBlocking(ProcScr_Popup, parent)
+         : SpawnProc(ProcScr_Popup, PROC_TREE_3);
 
     proc->clock = clock;
     proc->pDefinition = inst;
@@ -496,8 +496,8 @@ void NewPopup_ItemGot(ProcPtr parent, struct Unit *unit, u16 item)
     struct GotItemPopupProc * proc;
 
     proc = (PROC_IS_ROOT(parent))
-         ? Proc_Start(ProcScr_GotItem, parent)
-         : Proc_StartBlocking(ProcScr_GotItem, parent);
+         ? SpawnProc(ProcScr_GotItem, parent)
+         : SpawnProcBlocking(ProcScr_GotItem, parent);
 
     proc->item = item;
     proc->unit = unit;
@@ -781,7 +781,7 @@ void StartBrownTextBoxCore(int x, int y, int textId, int chr, int pal, ProcPtr p
     int r6 = 0;
     int r4;
 
-    struct BrownTextBoxProc * proc = Proc_Start(ProcScr_BrownTextBox, parent);
+    struct BrownTextBoxProc * proc = SpawnProc(ProcScr_BrownTextBox, parent);
     const char * str = GetStringFromIndex(textId);
 
     proc->x = x;
@@ -830,5 +830,5 @@ struct ProcCmd CONST_DATA ProcScr_08592530[] = {
 void StartBrownTextBox(int textId, s16 x, s16 y, ProcPtr parent)
 {
     StartBrownTextBoxCore(x, y, textId, 0x5000, 9, parent);
-    Proc_StartBlocking(ProcScr_08592530, parent);
+    SpawnProcBlocking(ProcScr_08592530, parent);
 }

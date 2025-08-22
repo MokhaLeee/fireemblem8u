@@ -1207,7 +1207,7 @@ void sub_800E640(struct EventEngineProc * proc)
     {
         ClearTalkBubble();
         Proc_ForEach(gProcScr_E_FACE, (ProcFunc)StartFaceFadeOut);
-        Proc_StartBlocking(gUnknown_08591DE8, proc);
+        SpawnProcBlocking(gUnknown_08591DE8, proc);
     }
 }
 
@@ -1315,10 +1315,10 @@ u8 Event20_(struct EventEngineProc * proc)
 //! FE8U = 0x0800E7D0
 u8 EventShowTextBgDirect(u8 mode, u16 bgIndex)
 {
-    BG_SetPosition(BG_0, 0, 0);
-    BG_SetPosition(BG_1, 0, 0);
-    BG_SetPosition(BG_2, 0, 0);
-    BG_SetPosition(BG_3, 0, 0);
+    SetBgOffset(BG_0, 0, 0);
+    SetBgOffset(BG_1, 0, 0);
+    SetBgOffset(BG_2, 0, 0);
+    SetBgOffset(BG_3, 0, 0);
 
     switch (mode)
     {
@@ -1415,7 +1415,7 @@ u8 Event21_TextBg(struct EventEngineProc * proc)
                     if (EVENT_IS_SKIPPING(proc))
                         return EVC_ADVANCE_CONTINUE;
 
-                    otherProc = Proc_StartBlocking(gUnknown_08591E58, proc);
+                    otherProc = SpawnProcBlocking(gUnknown_08591E58, proc);
                     otherProc->fadeType = 1;
 
                     break;
@@ -1434,7 +1434,7 @@ u8 Event21_TextBg(struct EventEngineProc * proc)
                 if (EVENT_IS_SKIPPING(proc))
                     return Event22_ClearScreen(proc); // CLEAN
 
-                otherProc = Proc_StartBlocking(gUnknown_08591EB0, proc);
+                otherProc = SpawnProcBlocking(gUnknown_08591EB0, proc);
                 otherProc->fadeType = 2;
 
                 break;
@@ -1444,7 +1444,7 @@ u8 Event21_TextBg(struct EventEngineProc * proc)
                 if (EVENT_IS_SKIPPING(proc))
                     return EVC_ADVANCE_CONTINUE;
 
-                otherProc = Proc_StartBlocking(gUnknown_08591E00, proc);
+                otherProc = SpawnProcBlocking(gUnknown_08591E00, proc);
                 otherProc->fadeType = 0;
 
                 break;
@@ -1494,7 +1494,7 @@ void sub_800EA84(struct ConvoBackgroundFadeProc * proc)
 {
     SetDispEnable(FALSE, FALSE, FALSE, TRUE, TRUE);
 
-    BG_SetPosition(BG_2, 0, 0);
+    SetBgOffset(BG_2, 0, 0);
 
     switch (proc->fadeType)
     {
@@ -1758,7 +1758,7 @@ void sub_800EF48(struct ConvoBackgroundFadeProc * proc)
     gLCDControlBuffer.bg2cnt.priority = 2;
     gLCDControlBuffer.bg3cnt.priority = 3;
 
-    BG_SetPosition(BG_2, 0, 0);
+    SetBgOffset(BG_2, 0, 0);
 
     SetBlendNone();
 
@@ -3777,7 +3777,7 @@ u8 Event3B_DisplayCursor(struct EventEngineProc * proc)
         return EVC_ADVANCE_YIELD;
     }
 
-    childProc = Proc_Start(ProcScr_EventDisplayCursor, proc);
+    childProc = SpawnProc(ProcScr_EventDisplayCursor, proc);
     childProc->x = x;
     childProc->y = y;
     childProc->subcmd = subcmd;
@@ -3894,7 +3894,7 @@ u8 Event3E_PrepScreenCall(struct EventEngineProc * proc)
 {
     HideAllUnits();
     ClearFlag(0x84);
-    Proc_StartBlocking(gProcScr_SALLYCURSOR, proc);
+    SpawnProcBlocking(gProcScr_SALLYCURSOR, proc);
 
     return EVC_ADVANCE_YIELD;
 }
@@ -3980,7 +3980,7 @@ u8 Event3F_ScriptBattle(struct EventEngineProc * proc)
         else
         {
             scripted = 1;
-            childProc = Proc_StartBlocking(ProcScr_ScriptBattleDeamon, proc);
+            childProc = SpawnProcBlocking(ProcScr_ScriptBattleDeamon, proc);
             childProc->evtproc = proc;
             childProc->lock = GetGameLock();
             Proc_SetMark(proc, PROC_MARK_EVENT_ANIM);
@@ -4040,7 +4040,7 @@ u8 Event40_PromoteUnit(struct EventEngineProc * proc)
     u16 jid = EVT_CMD_ARGV(proc->pEventCurrent)[1];
     u16 itemId = EVT_CMD_ARGV(proc->pEventCurrent)[2];
 
-    struct ProcEventPromote * childProc = Proc_StartBlocking(ProcScr_EventPromoteUnit, proc);
+    struct ProcEventPromote * childProc = SpawnProcBlocking(ProcScr_EventPromoteUnit, proc);
     childProc->event_engine = proc;
     childProc->lock = GetGameLock();
 

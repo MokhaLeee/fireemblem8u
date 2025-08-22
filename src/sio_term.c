@@ -231,7 +231,7 @@ void sub_8046D6C(struct SioTermProc * proc)
     ApplyUnitSpritePalettes();
     sub_80496A4();
 
-    BG_SetPosition(BG_1, 0, 0);
+    SetBgOffset(BG_1, 0, 0);
 
     return;
 }
@@ -294,6 +294,6 @@ void sub_8046E0C(ProcPtr proc)
 //! FE8U = 0x08046E4C
 void sub_8046E4C(void)
 {
-    BG_SetPosition(1, 0, 0);
+    SetBgOffset(1, 0, 0);
     return;
 }

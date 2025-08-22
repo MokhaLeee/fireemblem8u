@@ -24,9 +24,9 @@ CONST_DATA struct ProcCmd ProcScr_MapAnimStartSpellAssocFade[] = {
 void MapAnimStartSpellAssocFadeExt(ProcPtr proc)
 {
     if (proc)
-        Proc_StartBlocking(ProcScr_MapAnimStartSpellAssocFade, proc);
+        SpawnProcBlocking(ProcScr_MapAnimStartSpellAssocFade, proc);
     else
-        Proc_Start(ProcScr_MapAnimStartSpellAssocFade, PROC_TREE_3);
+        SpawnProc(ProcScr_MapAnimStartSpellAssocFade, PROC_TREE_3);
 }
 
 void SpellAssocFadeMain(ProcPtr proc)
@@ -48,9 +48,9 @@ CONST_DATA struct ProcCmd ProcScr_MapAnimSpellAssocResetPal[] = {
 void MapAnimSpellAssocResetPalExt(ProcPtr proc)
 {
     if (proc)
-        Proc_StartBlocking(ProcScr_MapAnimSpellAssocResetPal, proc);
+        SpawnProcBlocking(ProcScr_MapAnimSpellAssocResetPal, proc);
     else
-        Proc_Start(ProcScr_MapAnimSpellAssocResetPal, PROC_TREE_3);
+        SpawnProc(ProcScr_MapAnimSpellAssocResetPal, PROC_TREE_3);
 }
 
 void SpellAssocResetPalMain(ProcPtr proc)
@@ -68,7 +68,7 @@ CONST_DATA struct ProcCmd ProcScr_MapAnimBgShaker[] = {
 
 void NewBG0Shaker(void)
 {
-    Proc_Start(ProcScr_MapAnimBgShaker, PROC_TREE_3);
+    SpawnProc(ProcScr_MapAnimBgShaker, PROC_TREE_3);
 }
 
 void BG0Shaker_Init(struct MAFrameShakeProc * proc)
@@ -78,18 +78,18 @@ void BG0Shaker_Init(struct MAFrameShakeProc * proc)
 
 void BG0Shaker_Loop(struct MAFrameShakeProc * proc)
 {
-    BG_SetPosition(0,
+    SetBgOffset(0,
         DivRem(AdvanceGetLCGRNValue(), 9) - 4,
         DivRem(AdvanceGetLCGRNValue(), 9) - 4);
 
-    BG_SetPosition(1,
+    SetBgOffset(1,
         DivRem(AdvanceGetLCGRNValue(), 9) - 4,
         DivRem(AdvanceGetLCGRNValue(), 9) - 4);
 
     if (proc->timer++ > 15)
     {
-        BG_SetPosition(BG_0, 0, 0);
-        BG_SetPosition(BG_1, 0, 0);
+        SetBgOffset(BG_0, 0, 0);
+        SetBgOffset(BG_1, 0, 0);
 
         Proc_Break(proc);
     }
@@ -182,7 +182,7 @@ CONST_DATA struct ProcCmd ProcScr_MapAnimSpellAssocRotationEffect[] = {
 void StartStarRotationEffect(int xCenter, int yCenter, int lo, int hi, int start, int end, int terminator)
 {
     struct MAStarProc * proc =
-        Proc_Start(ProcScr_MapAnimSpellAssocRotationEffect, PROC_TREE_3);
+        SpawnProc(ProcScr_MapAnimSpellAssocRotationEffect, PROC_TREE_3);
 
     proc->xCenter = xCenter;
     proc->yCenter = yCenter;

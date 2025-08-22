@@ -121,7 +121,7 @@ ProcPtr NewefxRestRST(struct Anim *anim, int unk44, int unk48, int frame, int sp
     struct ProcEfx *proc;
 
     gEfxBgSemaphore++;
-    proc = Proc_Start(ProcScr_efxRestRST, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxRestRST, PROC_TREE_3);
 
     proc->anim = anim;
     proc->timer = 0,
@@ -174,7 +174,7 @@ void NewEfxTwobaiRST(struct Anim *anim, int unk44)
     u32 i, j;
     u16 *buf;
     struct ProcEfx *proc;
-    proc = Proc_Start(ProcScr_efxTwobaiRST, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxTwobaiRST, PROC_TREE_3);
 
     proc->anim = anim;
     proc->timer = 0;
@@ -207,7 +207,7 @@ void NewDummvRST(struct Anim *anim, int unk44)
     struct ProcEfx *proc;
 
     gEfxBgSemaphore++;
-    proc = Proc_Start(ProcScr_DummvRST, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_DummvRST, PROC_TREE_3);
 
     proc->anim = anim;
     proc->timer = 0;
@@ -248,7 +248,7 @@ void NewEfxRestWIN(struct Anim *anim, int unk44, void *unk54, void *unk58)
     struct ProcEfx *proc;
 
     gEfxBgSemaphore++;
-    proc = Proc_Start(ProcScr_EfxRestWIN, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_EfxRestWIN, PROC_TREE_3);
 
     proc->anim = anim;
     proc->timer = 0;
@@ -398,7 +398,7 @@ void NewEfxRestWINH(struct Anim *anim, int a, s16 b, u32 c)
         break;
     }
 
-    proc = Proc_Start(ProcScr_EfxRestWINH, PROC_TREE_VSYNC);
+    proc = SpawnProc(ProcScr_EfxRestWINH, PROC_TREE_VSYNC);
     proc->anim = anim;
     proc->timer = 0;
     proc->unk44 = a;
@@ -465,7 +465,7 @@ void NewEfxALPHA(struct Anim * anim, int a, int b, int c, int d, int e)
 
     gEfxBgSemaphore++;
 
-    proc = Proc_Start(ProcScr_efxALPHA, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxALPHA, PROC_TREE_3);
     proc->anim = anim;
     proc->timer = 0;
     proc->unk2E = a;
@@ -533,7 +533,7 @@ void sub_805BB24(struct Anim * anim, int terminator, u16 * c, u16 d, u16 e)
 
     gEfxBgSemaphore++;
 
-    proc = Proc_Start(ProcScr_efxCircleWIN, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxCircleWIN, PROC_TREE_3);
 
     proc->anim = anim;
 
@@ -646,7 +646,7 @@ void StartSpellThing_MagicQuake(struct Anim * anim, int terminator, int c)
 
     gEfxBgSemaphore++;
 
-    proc = Proc_Start(ProcScr_efxMagicQUAKE, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxMagicQUAKE, PROC_TREE_3);
     proc->anim = anim;
     proc->pQuakePureProc = NewEfxQuakePure(c, 0);
     proc->timer = 0;
@@ -663,15 +663,15 @@ void Loop6C_efxMagicQUAKE(struct ProcEfxMagicQuake * proc)
     s16 x2;
     s16 y2;
 
-    BG_SetPosition(2, gEkrBg2QuakeVec.x, gEkrBg2QuakeVec.y);
-    BG_SetPosition(0, gEkrBg2QuakeVec.x + gEkrBg0QuakeVec.x, gEkrBg2QuakeVec.y + gEkrBg0QuakeVec.y);
+    SetBgOffset(2, gEkrBg2QuakeVec.x, gEkrBg2QuakeVec.y);
+    SetBgOffset(0, gEkrBg2QuakeVec.x + gEkrBg0QuakeVec.x, gEkrBg2QuakeVec.y + gEkrBg0QuakeVec.y);
 
     EkrGauge_Setxy323A(-(gEkrBg2QuakeVec.x + gEkrBg0QuakeVec.x), -(gEkrBg2QuakeVec.y + gEkrBg0QuakeVec.y));
     EkrDispUP_SetPositionSync(-(gEkrBg2QuakeVec.x + gEkrBg0QuakeVec.x), -(gEkrBg2QuakeVec.y + gEkrBg0QuakeVec.y));
 
     if (GetBanimDragonStatusType() != EKRDRGON_TYPE_NORMAL)
     {
-        BG_SetPosition(BG_3, gEkrBg2QuakeVec.x, gEkrBg2QuakeVec.y);
+        SetBgOffset(BG_3, gEkrBg2QuakeVec.x, gEkrBg2QuakeVec.y);
     }
 
     if (GetBanimDragonStatusType() != EKRDRGON_TYPE_NORMAL)
@@ -697,15 +697,15 @@ void Loop6C_efxMagicQUAKE(struct ProcEfxMagicQuake * proc)
     {
         gEfxBgSemaphore--;
 
-        BG_SetPosition(BG_2, 0, 0);
-        BG_SetPosition(BG_0, gEkrBg0QuakeVec.x, gEkrBg0QuakeVec.y);
+        SetBgOffset(BG_2, 0, 0);
+        SetBgOffset(BG_0, gEkrBg0QuakeVec.x, gEkrBg0QuakeVec.y);
 
         EkrGauge_Setxy323A(-gEkrBg0QuakeVec.x, -gEkrBg0QuakeVec.y);
         EkrDispUP_SetPositionSync(-gEkrBg0QuakeVec.x, -gEkrBg0QuakeVec.y);
 
         if (GetBanimDragonStatusType() != EKRDRGON_TYPE_NORMAL)
         {
-            BG_SetPosition(BG_3, 0, 0);
+            SetBgOffset(BG_3, 0, 0);
         }
 
         x1 = (gEkrXPosReal[0] - gEkrBgPosition);

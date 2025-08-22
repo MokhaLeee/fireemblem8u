@@ -505,7 +505,7 @@ void GmMu_OnInit(struct GMapMuProc * proc)
 
     for (i = 0; i < 7; i++)
     {
-        proc->unk_2c[i] = Proc_Start(ProcScr_GMapMuPrim, proc->proc_parent);
+        proc->unk_2c[i] = SpawnProc(ProcScr_GMapMuPrim, proc->proc_parent);
     }
 
     return;
@@ -531,7 +531,7 @@ struct ProcCmd CONST_DATA ProcScr_GMapMu[] =
 //! FE8U = 0x080BDC28
 ProcPtr StartGmMu(ProcPtr parent)
 {
-    return Proc_Start(ProcScr_GMapMu, parent);
+    return SpawnProc(ProcScr_GMapMu, parent);
 }
 
 // clang-format off

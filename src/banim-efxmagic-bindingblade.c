@@ -33,7 +33,7 @@ void StartSpellAnimBindingBlade(struct Anim * anim)
     NewEfxSpellCast();
     SpellFx_ClearBG1Position();
 
-    proc = Proc_Start(ProcScr_efxHurtmut, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxHurtmut, PROC_TREE_3);
     proc->anim = anim;
     proc->timer = 0;
     proc->hitted = CheckRoundMiss(GetAnimRoundTypeAnotherSide(anim));
@@ -61,7 +61,7 @@ void efxHurtmut_Loop_Main(struct ProcEfx * proc)
 
         NewEfxFlashBgWhite(proc->anim, 6);
 
-        anim->state3 |= (ANIM_BIT3_TAKE_BACK_ENABLE | ANIM_BIT3_HIT_EFFECT_APPLIED);
+        anim->state3 |= (ANIM_BIT3_C02_BLOCK_END | ANIM_BIT3_C01_BLOCK_END_INBATTLE);
 
         StartBattleAnimHitEffectsDefault(anim, proc->hitted);
 
@@ -81,7 +81,7 @@ void efxHurtmut_Loop_Main(struct ProcEfx * proc)
     else if (proc->timer == duration + 55)
     {
         SpellFx_Finish();
-        RegisterEfxSpellCastEnd();
+        EndEfxSpellCastAsync();
         Proc_Break(proc);
     }
 
@@ -107,7 +107,7 @@ void StartSubSpell_efxHurtmutOBJ(struct Anim * anim)
 
     gEfxBgSemaphore++;
 
-    proc = Proc_Start(ProcScr_efxHurtmutOBJ, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxHurtmutOBJ, PROC_TREE_3);
     proc->anim = anim;
     proc->timer = 0;
     proc->terminator = 52;

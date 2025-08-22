@@ -26,7 +26,7 @@ void SioHold_Loop(struct ProcSioHold * proc)
 ProcPtr StartSioHold(ProcPtr parent, int x, int y, int y_max, int y_min)
 {
     struct ProcSioHold * proc;
-    proc = Proc_Start(ProcScr_HOLD, parent);
+    proc = SpawnProc(ProcScr_HOLD, parent);
     proc->x = x;
     proc->y = y;
     proc->y_max = y_max;
@@ -46,10 +46,10 @@ void sub_804303C(ProcPtr proc, int num)
 
 void ClearSioBG(void)
 {
-    BG_SetPosition(BG_0, 0, 0);
-    BG_SetPosition(BG_1, 0, 0);
-    BG_SetPosition(BG_2, 0, 0);
-    BG_SetPosition(BG_3, 0, 0);
+    SetBgOffset(BG_0, 0, 0);
+    SetBgOffset(BG_1, 0, 0);
+    SetBgOffset(BG_2, 0, 0);
+    SetBgOffset(BG_3, 0, 0);
 
     BG_Fill(gBG0TilemapBuffer, 0);
     BG_Fill(gBG1TilemapBuffer, 0);
@@ -60,10 +60,10 @@ void ClearSioBG(void)
 
 void sub_804309C(void)
 {
-    BG_SetPosition(BG_0, 0, 0);
-    BG_SetPosition(BG_1, 0, 0);
-    BG_SetPosition(BG_2, 0, 0);
-    BG_SetPosition(BG_3, 0, 0);
+    SetBgOffset(BG_0, 0, 0);
+    SetBgOffset(BG_1, 0, 0);
+    SetBgOffset(BG_2, 0, 0);
+    SetBgOffset(BG_3, 0, 0);
 
     BG_Fill(gBG0TilemapBuffer, 0);
     BG_Fill(gBG1TilemapBuffer, 0);

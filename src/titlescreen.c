@@ -124,7 +124,7 @@ struct ProcCmd CONST_DATA gProcScr_SkipTitleFxKeyListener[] = {
 
 //! FE8U = 0x080C55A4
 void Title_StartSkipFxListener(ProcPtr proc) {
-    Proc_Start(gProcScr_SkipTitleFxKeyListener, proc);
+    SpawnProc(gProcScr_SkipTitleFxKeyListener, proc);
 
     return;
 }
@@ -170,10 +170,10 @@ void Title_Init(struct TitleScreenProc* proc) {
     gLCDControlBuffer.bg2cnt.priority = 2;
     gLCDControlBuffer.bg3cnt.priority = 3;
 
-    BG_SetPosition(0, 0, 0);
-    BG_SetPosition(1, 0, 0);
-    BG_SetPosition(2, 0, 0);
-    BG_SetPosition(3, 0, 0);
+    SetBgOffset(0, 0, 0);
+    SetBgOffset(1, 0, 0);
+    SetBgOffset(2, 0, 0);
+    SetBgOffset(3, 0, 0);
 
     BG_Fill(gBG0TilemapBuffer, 0);
     BG_Fill(gBG1TilemapBuffer, 0);
@@ -251,7 +251,7 @@ void TitleScreenTryJumpIntroAnim(struct TitleScreenProc * proc)
     if (proc->mode != 0)
         Proc_Goto(proc, 0);
     else
-        Proc_Start(gProcScr_DrawTitleSprites, proc);
+        SpawnProc(gProcScr_DrawTitleSprites, proc);
 }
 
 //! FE8U = 0x080C5870
@@ -845,7 +845,7 @@ void sub_80C62DC(struct TitleScreenProc* proc) {
     gLCDControlBuffer.dispcnt.bg3_on = 0;
     gLCDControlBuffer.dispcnt.obj_on = 1;
 
-    Proc_Start(gProcScr_DrawTitleSprites, proc);
+    SpawnProc(gProcScr_DrawTitleSprites, proc);
 
     SetBlendConfig(1, 8, 8, 0);
 
@@ -985,7 +985,7 @@ PROC_LABEL(5),
 void StartTitleScreen_WithMusic(ProcPtr parent) {
     struct TitleScreenProc* proc;
 
-    proc = Proc_StartBlocking(gProcScr_TitleScreen, parent);
+    proc = SpawnProcBlocking(gProcScr_TitleScreen, parent);
     proc->mode = 0;
 
     StartBgmExt(SONG_MAIN_THEME, 0, 0);
@@ -995,7 +995,7 @@ void StartTitleScreen_WithMusic(ProcPtr parent) {
 void StartTitleScreen_FlagFalse(ProcPtr parent) {
     struct TitleScreenProc* proc;
 
-    proc = Proc_StartBlocking(gProcScr_TitleScreen, parent);
+    proc = SpawnProcBlocking(gProcScr_TitleScreen, parent);
     proc->mode = 0;
 }
 
@@ -1003,6 +1003,6 @@ void StartTitleScreen_FlagFalse(ProcPtr parent) {
 void StartTitleScreen_FlagTrue(ProcPtr parent) {
     struct TitleScreenProc* proc;
 
-    proc = Proc_StartBlocking(gProcScr_TitleScreen, parent);
+    proc = SpawnProcBlocking(gProcScr_TitleScreen, parent);
     proc->mode = 1;
 }

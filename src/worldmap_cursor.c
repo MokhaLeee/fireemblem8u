@@ -121,7 +121,7 @@ struct ProcCmd CONST_DATA gProcScr_GmapCursor[] =
 //! FE8U = 0x080BBBC4
 ProcPtr NewGmapCursor(ProcPtr parent, int chr, int pal, ProcPtr pScreenProc)
 {
-    struct GmapCursorProc * proc = Proc_Start(gProcScr_GmapCursor, parent);
+    struct GmapCursorProc * proc = SpawnProc(gProcScr_GmapCursor, parent);
 
     proc->chr = chr;
     proc->pal = pal;

@@ -52,7 +52,7 @@ void StartStoneShatterAnim(struct Unit * unit, ProcPtr proc)
     s16 x;
     s16 y;
 
-    ProcPtr child = Proc_StartBlocking(gProcScr_StoneShatterEvent, proc);
+    ProcPtr child = SpawnProcBlocking(gProcScr_StoneShatterEvent, proc);
 
     do
     {

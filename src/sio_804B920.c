@@ -192,7 +192,7 @@ struct ProcCmd CONST_DATA ProcScr_085AA7B4[] =
 //! FE8U = 0x0804BC84
 void sub_804BC84(u16 a, ProcPtr parent)
 {
-    struct SioProc85AA7B4 * proc = Proc_StartBlocking(ProcScr_085AA7B4, parent);
+    struct SioProc85AA7B4 * proc = SpawnProcBlocking(ProcScr_085AA7B4, parent);
     proc->unk_64 = a;
 
     SetDispEnable(1, 1, 1, 1, 1);
@@ -272,7 +272,7 @@ struct ProcCmd CONST_DATA ProcScr_085AA7EC[] =
 //! FE8U = 0x0804BDFC
 void sub_804BDFC(u16 a, ProcPtr parent)
 {
-    struct SioProc85AA7B4 * proc = Proc_StartBlocking(ProcScr_085AA7EC, parent);
+    struct SioProc85AA7B4 * proc = SpawnProcBlocking(ProcScr_085AA7EC, parent);
     proc->unk_64 = a;
 
     SetWinEnable(0, 1, 0);

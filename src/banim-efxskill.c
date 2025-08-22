@@ -125,7 +125,7 @@ CONST_DATA u16 *PalLut_EfxSkill[] = {
 void NewEfxSkillType01BG(struct Anim *anim)
 {
     struct ProcEfxSkill *proc;
-    proc = Proc_Start(ProcScr_efxSkillType01BG, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxSkillType01BG, PROC_TREE_3);
 
     proc->anim = anim;
     proc->timer = 0;
@@ -141,9 +141,9 @@ void NewEfxSkillType01BG(struct Anim *anim)
 
     if (gEkrDistanceType != EKR_DISTANCE_CLOSE) {
         if (GetAnimPosition(proc->anim) == EKR_POS_L)
-            BG_SetPosition(BG_1, 0x18, 0);
+            SetBgOffset(BG_1, 0x18, 0);
         else
-            BG_SetPosition(BG_1, 0xE8, 0);
+            SetBgOffset(BG_1, 0xE8, 0);
     }
 
     EfxSkillSetAnimState(proc->anim);
@@ -182,7 +182,7 @@ void EfxSkillType01BGMain(struct ProcEfxSkill *proc)
         return;
 
     SpellFx_ClearBG1();
-    SetDefaultColorEffects_();
+    SpellFx_ClearColorEffects();
 
     EfxSkillResetAnimState(proc->anim);
     EfxSkillResetAnimState(GetAnimAnotherSide(proc->anim));
@@ -204,7 +204,7 @@ CONST_DATA struct ProcCmd ProcScr_efxSkillCommonBG[] = {
 void NewEfxSkillCommonBG(struct Anim *anim, u8 debuff)
 {
     struct ProcEfxSkill *proc;
-    proc = Proc_Start(ProcScr_efxSkillCommonBG, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxSkillCommonBG, PROC_TREE_3);
 
     proc->anim = anim;
     proc->timer = 0;
@@ -222,9 +222,9 @@ void NewEfxSkillCommonBG(struct Anim *anim, u8 debuff)
     anim = GetAnimAnotherSide(proc->anim);
     if (gEkrDistanceType != EKR_DISTANCE_CLOSE) {
         if (GetAnimPosition(anim) == EKR_POS_L)
-            BG_SetPosition(BG_1, 0x18, 0);
+            SetBgOffset(BG_1, 0x18, 0);
         else
-            BG_SetPosition(BG_1, 0xE8, 0);
+            SetBgOffset(BG_1, 0xE8, 0);
     }
 }
 
@@ -266,7 +266,7 @@ void sub_806E638(struct ProcEfxSkill *proc)
         SetUnitEfxDebuff(anim, UNIT_STATUS_12);
 
     SpellFx_ClearBG1();
-    SetDefaultColorEffects_();
+    SpellFx_ClearColorEffects();
     Proc_Break(proc);
 }
 

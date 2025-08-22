@@ -265,7 +265,7 @@ struct ProcCmd CONST_DATA gProcScr_SoundRoomSongChange[] =
 //! FE8U = 0x080AEF24
 void PlayNextShuffledSong(struct SoundRoomProc * proc)
 {
-    Proc_Start(gProcScr_SoundRoomSongChange, proc);
+    SpawnProc(gProcScr_SoundRoomSongChange, proc);
 
     proc->shuffleIndex++;
 
@@ -678,8 +678,8 @@ void SoundRoomUi_Init(struct SoundRoomProc * proc)
     Decompress(Img_PlayStatusSprites, (void *)0x06016000);
     ApplyPalette(Pal_PlayStatusSprites, 0x1C);
 
-    BG_SetPosition(BG_0, 0, 0);
-    BG_SetPosition(BG_2, -4, 0);
+    SetBgOffset(BG_0, 0, 0);
+    SetBgOffset(BG_2, -4, 0);
 
     SetWinEnable(1, 0, 0);
 
@@ -702,7 +702,7 @@ void SoundRoomUi_Init(struct SoundRoomProc * proc)
 
     InitSoundRoomVolumeGraph();
     StartParallelWorker(TickCurrentSongTime, proc);
-    Proc_Start(gProcScr_VolumeGraphBuffer, proc);
+    SpawnProc(gProcScr_VolumeGraphBuffer, proc);
 
     return;
 }
@@ -843,7 +843,7 @@ void SoundRoomUi_Loop_MainKeyHandler(struct SoundRoomProc * proc)
 
         proc->bgYOffset = proc->unk_37 * proc->unk_38 + proc->bgYOffset;
 
-        BG_SetPosition(2, -4, proc->bgYOffset & 0xff);
+        SetBgOffset(2, -4, proc->bgYOffset & 0xff);
 
         tmp = proc->bgYOffset;
         if ((tmp & 0xf) == 0)
@@ -1227,7 +1227,7 @@ PROC_LABEL(3),
 //! FE8U = 0x080AFF1C
 ProcPtr StartSoundRoomScreen(ProcPtr parent)
 {
-    return Proc_StartBlocking(gProcScr_SoundRoomUi, parent);
+    return SpawnProcBlocking(gProcScr_SoundRoomUi, parent);
 }
 
 //! FE8U = 0x080AFF30
@@ -1615,5 +1615,5 @@ struct ProcCmd CONST_DATA gProcScr_SoundRoom_DrawSprites[] =
 //! FE8U = 0x080B0444
 ProcPtr DrawSoundRoomSprites(ProcPtr parent)
 {
-    return Proc_Start(gProcScr_SoundRoom_DrawSprites, parent);
+    return SpawnProc(gProcScr_SoundRoom_DrawSprites, parent);
 }

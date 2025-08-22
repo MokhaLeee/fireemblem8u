@@ -665,7 +665,7 @@ CONST_DATA struct ProcCmd ProcScr_ekrsubAnimeEmulator[] = {
 struct ProcEkrSubAnimeEmulator * NewEkrsubAnimeEmulator(int x, int y, u32 * anim_scr, int type, int oam2Base, int oamBase, ProcPtr parent)
 {
     struct ProcEkrSubAnimeEmulator * proc =
-        Proc_Start(ProcScr_ekrsubAnimeEmulator, parent);
+        SpawnProc(ProcScr_ekrsubAnimeEmulator, parent);
 
     proc->timer = 0;
     proc->scr_cur = 0;

@@ -166,11 +166,11 @@ ProcPtr StartGmapLineFade(int unk, ProcPtr parent)
 
     if (parent != NULL)
     {
-        proc = Proc_StartBlocking(ProcScr_GmapLineFade, parent);
+        proc = SpawnProcBlocking(ProcScr_GmapLineFade, parent);
     }
     else
     {
-        proc = Proc_Start(ProcScr_GmapLineFade, PROC_TREE_3);
+        proc = SpawnProc(ProcScr_GmapLineFade, PROC_TREE_3);
     }
 
     proc->unk_29 = unk;

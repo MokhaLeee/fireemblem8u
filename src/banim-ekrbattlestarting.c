@@ -97,7 +97,7 @@ void MainUpdate_8055C68(void)
 
 void NewEkrBattleStarting(void)
 {
-    Proc_Start(ProcScr_ekrBattleStarting, PROC_TREE_3);
+    SpawnProc(ProcScr_ekrBattleStarting, PROC_TREE_3);
 }
 
 void ekrBaStart_InitScreen(struct ProcEkrBattleStarting *proc)

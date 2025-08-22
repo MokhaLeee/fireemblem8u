@@ -25,7 +25,7 @@ void SpellFx_Finish(void)
 
 void SpellFx_ClearBG1Position(void)
 {
-    BG_SetPosition(BG_1, 0, 0);
+    SetBgOffset(BG_1, 0, 0);
 }
 
 void SpellFx_ClearBG1(void)
@@ -49,7 +49,7 @@ void SpellFx_SetSomeColorEffect(void)
     gLCDControlBuffer.bldcnt.target2_bd_on = 1;
 }
 
-void SetDefaultColorEffects_(void)
+void SpellFx_ClearColorEffects(void)
 {
     SetDefaultColorEffects();
 }
@@ -528,7 +528,7 @@ CONST_DATA struct ProcCmd ProcScr_efxSPDQuake[] = {
 void NewEfxspdquake(struct Anim *anim)
 {
     struct ProcEfxSpdQuake *proc;
-    proc = Proc_Start(ProcScr_efxSPDQuake, PROC_TREE_1);
+    proc = SpawnProc(ProcScr_efxSPDQuake, PROC_TREE_1);
     proc->anim = anim;
     proc->timer = 0;
     proc->vecs = gEfxQuakeVecs;
@@ -586,7 +586,7 @@ void sub_8055B38(struct ProcEfxSpdQuake *proc)
 
     switch (gEkrDistanceType) {
     case EKR_DISTANCE_CLOSE:
-        BG_SetPosition(BG_2, 0, 0);
+        SetBgOffset(BG_2, 0, 0);
         break;
     
     case EKR_DISTANCE_FAR:

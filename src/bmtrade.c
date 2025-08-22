@@ -62,7 +62,7 @@ CONST_DATA struct ProcCmd ProcScr_TradeMenu[] = {
     PROC_CALL(TradeMenu_InitItemDisplay),
     PROC_CALL(TradeMenu_InitUnitNameDisplay),
 
-    PROC_START_CHILD(ProcScr_TradeMenu_HighlightUpdater),
+    SpawnProc_CHILD(ProcScr_TradeMenu_HighlightUpdater),
 
 PROC_LABEL(L_TRADEMENU_LOADFORCED),
     PROC_CALL(CallTradeTutEventStart),
@@ -407,7 +407,7 @@ void TradeMenu_OnLoopUnselected(struct TradeMenuProc * proc)
         }
         else if (gKeyStatusPtr->newKeys & R_BUTTON)
         {
-            Proc_StartBlocking(ProcScr_TradeMenu_HelpBox, proc);
+            SpawnProcBlocking(ProcScr_TradeMenu_HelpBox, proc);
         }
     }
 }
@@ -473,7 +473,7 @@ void TradeMenu_OnLoopSelected(struct TradeMenuProc * proc)
         }
         else if (gKeyStatusPtr->newKeys & R_BUTTON)
         {
-            Proc_StartBlocking(ProcScr_TradeMenu_HelpBox, proc);
+            SpawnProcBlocking(ProcScr_TradeMenu_HelpBox, proc);
         }
     }
 }
@@ -597,7 +597,7 @@ struct Proc * StartTradeMenu(struct Unit* lUnit, struct Unit* rUnit, int unused)
 {
     int itemCount;
 
-    struct TradeMenuProc * proc = Proc_Start(ProcScr_TradeMenu, PROC_TREE_3);
+    struct TradeMenuProc * proc = SpawnProc(ProcScr_TradeMenu, PROC_TREE_3);
 
     proc->units[0] = lUnit;
     proc->units[1] = rUnit;
@@ -647,12 +647,12 @@ void TradeMenu_DoubleTutorialHandCursor_Update(void)
 
 void StartTradeMenuTutorialHandCursor(void)
 {
-    Proc_Start(ProcScr_TradeMenu_TutorialHandCursor, PROC_TREE_3);
+    SpawnProc(ProcScr_TradeMenu_TutorialHandCursor, PROC_TREE_3);
 }
 
 void StartDoubleTradeMenuTutorialHandCursor(void)
 {
-    Proc_Start(ProcScr_TradeMenu_DoubleTutorialHandCursor, PROC_TREE_3);
+    SpawnProc(ProcScr_TradeMenu_DoubleTutorialHandCursor, PROC_TREE_3);
 }
 
 void EndTradeMenuTutorialHandCursor(void)
@@ -682,7 +682,7 @@ void TradeMenuHandSTAL(struct Proc * ee)
 {
     if (gpTradeMenuProc->tradeTutorialState != 3 && gpTradeMenuProc->tradeTutorialState != 5 && gpTradeMenuProc->tradeTutorialState != 8)
     {
-        Proc_StartBlocking(ProcScr_TradeMenu_TutorialWait, ee);
+        SpawnProcBlocking(ProcScr_TradeMenu_TutorialWait, ee);
     }
 }
 
@@ -816,7 +816,7 @@ s8 AreKeysHeld(void)
 
 void TradeMenu_StartTutorialEventLock(struct TradeMenuProc * proc)
 {
-    Proc_StartBlocking(ProcScr_TradeMenu_TutorialEventLock, proc);
+    SpawnProcBlocking(ProcScr_TradeMenu_TutorialEventLock, proc);
 }
 
 CONST_DATA EventScr EventScr_TradeTutStart[] = {

@@ -266,7 +266,7 @@ void EkrLvup_DrawPreLevelValue(struct ProcEkrLevelup *proc)
 void NewEkrLevelup(struct Anim *ais)
 {
     struct ProcEkrLevelup *proc;
-    gpProcEkrLevelup = proc = Proc_Start(ProcScr_EkrLevelup, PROC_TREE_3);
+    gpProcEkrLevelup = proc = SpawnProc(ProcScr_EkrLevelup, PROC_TREE_3);
 
     proc->ais_main = ais;
     proc->ais_core = GetAnimAnotherSide(ais);
@@ -309,7 +309,7 @@ void EkrLvup_OnPrepare(struct ProcEkrLevelup *proc)
     }
 
     if (timer == 73) {
-        RegisterEfxSpellCastEnd();
+        EndEfxSpellCastAsync();
         return;
     }
 
@@ -386,8 +386,8 @@ void EkrLvup_InitScreen(struct ProcEkrLevelup *proc)
     gEkrLvupScrollPos1 = 0x90;
     gEkrLvupScrollPos2 = 0x90;
 
-    BG_SetPosition(2, 0, 8);
-    BG_SetPosition(1, 0, 8);
+    SetBgOffset(2, 0, 8);
+    SetBgOffset(1, 0, 8);
 
     SetBackgroundMapDataOffset(0, 0x6000);
     SetBackgroundMapDataOffset(1, 0x6800);
@@ -723,7 +723,7 @@ void EkrLvup_ResetScreen(struct ProcEkrLevelup *proc)
     buf->unk10 = gEkrSnowWeather;
 
     if (GetBattleAnimArenaFlag() == false && GetBanimDragonStatusType() != EKRDRGON_TYPE_DEMON_KING) {
-        BG_SetPosition(2, 0, 0);
+        SetBgOffset(2, 0, 0);
         sub_805AA68(&_buf);
     }
 

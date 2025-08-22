@@ -17,7 +17,7 @@ CONST_DATA struct ProcCmd ProcScr_efxFlashBG[] = {
 void NewEfxFlashBgWhite(struct Anim * anim, int duartion)
 {
     struct ProcEfxFlashing * proc;
-    proc = Proc_Start(ProcScr_efxFlashBG, PROC_TREE_VSYNC);
+    proc = SpawnProc(ProcScr_efxFlashBG, PROC_TREE_VSYNC);
     proc->anim = anim;
     proc->timer = 0;
     proc->terminator = duartion;
@@ -27,7 +27,7 @@ void NewEfxFlashBgWhite(struct Anim * anim, int duartion)
 void NewEfxFlashBgRed(struct Anim * anim, int duartion)
 {
     struct ProcEfxFlashing * proc;
-    proc = Proc_Start(ProcScr_efxFlashBG, PROC_TREE_VSYNC);
+    proc = SpawnProc(ProcScr_efxFlashBG, PROC_TREE_VSYNC);
     proc->anim = anim;
     proc->timer = 0;
     proc->terminator = duartion;
@@ -37,7 +37,7 @@ void NewEfxFlashBgRed(struct Anim * anim, int duartion)
 void NewEfxFlashBgBlack(struct Anim * anim, int duartion)
 {
     struct ProcEfxFlashing * proc;
-    proc = Proc_Start(ProcScr_efxFlashBG, PROC_TREE_VSYNC);
+    proc = SpawnProc(ProcScr_efxFlashBG, PROC_TREE_VSYNC);
     proc->anim = anim;
     proc->timer = 0;
     proc->terminator = duartion;
@@ -47,7 +47,7 @@ void NewEfxFlashBgBlack(struct Anim * anim, int duartion)
 void NewEfxFlashBgDirectly(struct Anim * anim, int duartion)
 {
     struct ProcEfxFlashing * proc;
-    proc = Proc_Start(ProcScr_efxFlashBG, PROC_TREE_VSYNC);
+    proc = SpawnProc(ProcScr_efxFlashBG, PROC_TREE_VSYNC);
     proc->anim = anim;
     proc->timer = 0;
     proc->terminator = duartion;
@@ -82,7 +82,7 @@ CONST_DATA struct ProcCmd ProcScr_efxWhiteOUT[] = {
 void NewEfxWhiteOUT(struct Anim * anim, int duartion, int duartion2)
 {
     struct ProcEfxFlashing * proc;
-    proc = Proc_Start(ProcScr_efxWhiteOUT, PROC_TREE_VSYNC);
+    proc = SpawnProc(ProcScr_efxWhiteOUT, PROC_TREE_VSYNC);
     proc->anim = anim;
     proc->timer = 0;
     proc->terminator = duartion;
@@ -132,7 +132,7 @@ CONST_DATA struct ProcCmd ProcScr_efxWhiteIN[] = {
 void NewEfxWhiteIN(struct Anim * anim, int duartion, int duartion2)
 {
     struct ProcEfxFlashing * proc;
-    proc = Proc_Start(ProcScr_efxWhiteIN, PROC_TREE_VSYNC);
+    proc = SpawnProc(ProcScr_efxWhiteIN, PROC_TREE_VSYNC);
     proc->anim = anim;
     proc->timer = 0;
     proc->terminator = duartion;
@@ -182,7 +182,7 @@ CONST_DATA struct ProcCmd ProcScr_efxBlackOUT[] = {
 void NewEfxBlackOUT(struct Anim * anim, int duartion, int duartion2)
 {
     struct ProcEfxFlashing * proc;
-    proc = Proc_Start(ProcScr_efxBlackOUT, PROC_TREE_VSYNC);
+    proc = SpawnProc(ProcScr_efxBlackOUT, PROC_TREE_VSYNC);
     proc->anim = anim;
     proc->timer = 0;
     proc->terminator = duartion;
@@ -232,7 +232,7 @@ CONST_DATA struct ProcCmd ProcScr_efxBlackIN[] = {
 void NewEfxBlackIN(struct Anim * anim, int duartion, int duartion2)
 {
     struct ProcEfxFlashing * proc;
-    proc = Proc_Start(ProcScr_efxBlackIN, PROC_TREE_VSYNC);
+    proc = SpawnProc(ProcScr_efxBlackIN, PROC_TREE_VSYNC);
     proc->anim = anim;
     proc->timer = 0;
     proc->terminator = duartion;

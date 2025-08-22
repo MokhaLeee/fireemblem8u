@@ -417,7 +417,7 @@ struct ProcCmd CONST_DATA gProcScr_SupportScreen_DrawBannerSprites[] = {
 
 //! FE8U = 0x080A1140
 void StartDrawSupportBannerSprites(int x, int y, int palIdx, ProcPtr parent) {
-    struct Proc* proc = Proc_Start(gProcScr_SupportScreen_DrawBannerSprites, parent);
+    struct Proc* proc = SpawnProc(gProcScr_SupportScreen_DrawBannerSprites, parent);
     proc->x = x;
     proc->y = y;
     proc->unk34 = palIdx;
@@ -508,9 +508,9 @@ void SupportScreen_SetupGraphics(struct SupportScreenProc* proc) {
 
     sub_80A11E0(proc);
 
-    BG_SetPosition(0, 0, 0);
-    BG_SetPosition(1, 0, 2);
-    BG_SetPosition(2, 0x0000FFD8, proc->unk_34 - 36);
+    SetBgOffset(0, 0, 0);
+    SetBgOffset(1, 0, 2);
+    SetBgOffset(2, 0x0000FFD8, proc->unk_34 - 36);
 
     StartMuralBackgroundExt(proc, 0, 18, 2, 0);
 
@@ -748,7 +748,7 @@ void SupportScreen_Loop_KeyHandler(struct SupportScreenProc* proc) {
 
         UpdateMenuScrollBarConfig(10, proc->unk_34, ((GetSupportScreenUnitCount() - 1) / 3) + 1, 6);
 
-        BG_SetPosition(2, 0x0000FFD8, (proc->unk_34 - 36) & 0xff);
+        SetBgOffset(2, 0x0000FFD8, (proc->unk_34 - 36) & 0xff);
         return;
     }
 
@@ -827,14 +827,14 @@ PROC_LABEL(3),
 
 //! FE8U = 0x080A196C
 void StartSupportScreenFromPrepScreen(ProcPtr parent) {
-    struct SupportScreenProc* proc = Proc_StartBlocking(gProcScr_SupportScreen, parent);
+    struct SupportScreenProc* proc = SpawnProcBlocking(gProcScr_SupportScreen, parent);
     proc->fromPrepScreen = 1;
     return;
 }
 
 //! FE8U = 0x080A1984
 void StartSupportScreen(ProcPtr parent) {
-    struct SupportScreenProc* proc = Proc_StartBlocking(gProcScr_SupportScreen, parent);
+    struct SupportScreenProc* proc = SpawnProcBlocking(gProcScr_SupportScreen, parent);
     proc->fromPrepScreen = 0;
     return;
 }
@@ -1339,9 +1339,9 @@ void SupportSubScreen_SetupGraphics(struct SubScreenProc* proc) {
         }
     }
 
-    BG_SetPosition(0, 4, 0);
-    BG_SetPosition(1, 4, 0);
-    BG_SetPosition(2, 0, 0);
+    SetBgOffset(0, 4, 0);
+    SetBgOffset(1, 4, 0);
+    SetBgOffset(2, 0, 0);
 
     SetBlendConfig(1, 0xd, 3, 0);
     SetBlendTargetA(0, 1, 0, 0, 0);
@@ -1814,7 +1814,7 @@ PROC_LABEL(3),
 
 //! FE8U = 0x080A2C08
 void StartSupportUnitSubScreen(s8 fromPrepScreen, int unitIndex, ProcPtr parent) {
-    struct SubScreenProc* proc = Proc_StartBlocking(gProcScr_SupportUnitSubScreen, parent);
+    struct SubScreenProc* proc = SpawnProcBlocking(gProcScr_SupportUnitSubScreen, parent);
 
     proc->fromPrepScreen = fromPrepScreen;
     proc->unitIdx = unitIndex;

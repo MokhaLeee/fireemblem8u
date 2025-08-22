@@ -391,7 +391,7 @@ void RenderBmMap(void) {
                 (short) gBmSt.mapRenderOrigin.x + ix, (short) gBmSt.mapRenderOrigin.y + iy);
 
     BG_EnableSyncByMask(1 << 3);
-    BG_SetPosition(3, 0, 0);
+    SetBgOffset(3, 0, 0);
 
     gLCDControlBuffer.dispcnt.bg0_on = TRUE;
     gLCDControlBuffer.dispcnt.bg1_on = TRUE;
@@ -414,7 +414,7 @@ void RenderBmMapOnBg2(void) {
                 (short) gBmSt.mapRenderOrigin.x + ix, (short) gBmSt.mapRenderOrigin.y + iy);
 
     BG_EnableSyncByMask(1 << 2);
-    BG_SetPosition(2, 0, 0);
+    SetBgOffset(2, 0, 0);
 }
 
 void UpdateBmMapDisplay(void) {
@@ -442,14 +442,14 @@ void UpdateBmMapDisplay(void) {
 
     gBmSt.cameraPrevious = gBmSt.camera;
 
-    BG_SetPosition(3,
+    SetBgOffset(3,
         gBmSt.camera.x - gBmSt.mapRenderOrigin.x * 16,
         gBmSt.camera.y - gBmSt.mapRenderOrigin.y * 16
     );
 
     // TODO: GAME STATE BITS CONSTANTS
     if (gBmSt.gameStateBits & 1) {
-        BG_SetPosition(2,
+        SetBgOffset(2,
             gBmSt.camera.x - gBmSt.mapRenderOrigin.x * 16,
             gBmSt.camera.y - gBmSt.mapRenderOrigin.y * 16
         );

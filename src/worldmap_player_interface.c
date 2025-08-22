@@ -814,9 +814,9 @@ void StartWorldMapPlayerInterface(struct Proc * parent)
     SetWOutLayers(1, 1, 1, 1, 1);
     gLCDControlBuffer.wincnt.wout_enableBlend = 1;
 
-    BG_SetPosition(BG_0, 0, 0);
-    BG_SetPosition(BG_1, 0, 0);
-    BG_SetPosition(BG_2, 0, 0);
+    SetBgOffset(BG_0, 0, 0);
+    SetBgOffset(BG_1, 0, 0);
+    SetBgOffset(BG_2, 0, 0);
 
     SetBlendAlpha(14, 3);
 
@@ -832,7 +832,7 @@ void StartWorldMapPlayerInterface(struct Proc * parent)
     ApplyPalette(gPal_GMapPI_ShopIcons, 3);
 
     ResetTextFont();
-    Proc_Start(ProcScr_GMapPlayerInterface, parent->proc_parent);
+    SpawnProc(ProcScr_GMapPlayerInterface, parent->proc_parent);
 
     return;
 }
@@ -856,7 +856,7 @@ ProcPtr sub_80BF13C(ProcPtr parent)
 {
     ResetText();
     sub_80C09B8();
-    return Proc_Start(gUnknown_08A3E4D4, parent);
+    return SpawnProc(gUnknown_08A3E4D4, parent);
 }
 
 //! FE8U = 0x080BF15C

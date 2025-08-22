@@ -181,21 +181,21 @@ struct MenuProc* StartMenuCore(
     int xTileInner = rect.x + 1;
     int yTileInner = rect.y + 1;
 
-    BG_SetPosition(frontBg, 0, 0);
-    BG_SetPosition(backBg, 0, 0);
+    SetBgOffset(frontBg, 0, 0);
+    SetBgOffset(backBg, 0, 0);
 
     PlaySoundEffect(SONG_68);
 
     if (parent)
     {
-        proc = Proc_StartBlocking(sProc_Menu, parent);
+        proc = SpawnProcBlocking(sProc_Menu, parent);
         proc->state = 0;
     }
     else
     {
         LockGame();
 
-        proc = Proc_Start(sProc_Menu, PROC_TREE_3);
+        proc = SpawnProc(sProc_Menu, PROC_TREE_3);
         proc->state = MENU_STATE_GAMELOCKING;
     }
 
@@ -211,7 +211,7 @@ struct MenuProc* StartMenuCore(
 
         if (availability != MENU_NOTSHOWN)
         {
-            struct MenuItemProc* item = Proc_Start(sProc_MenuItem, proc);
+            struct MenuItemProc* item = SpawnProc(sProc_MenuItem, proc);
             proc->menuItems[itemCount++] = item;
 
             item->def = &def->menuItems[i];
@@ -264,8 +264,8 @@ struct Proc* EndMenu(struct MenuProc* proc)
 
     Proc_End(proc);
 
-    BG_SetPosition(proc->frontBg, 0, 0);
-    BG_SetPosition(proc->backBg, 0, 0);
+    SetBgOffset(proc->frontBg, 0, 0);
+    SetBgOffset(proc->backBg, 0, 0);
 
     return proc->proc_parent;
 }
@@ -677,8 +677,8 @@ void ApplyMenuCursorVScroll(struct MenuProc* proc, int* xRef, int* yRef)
 
     off = (proc->itemCount*16 - 9*16) * proc->itemCurrent / 9;
 
-    BG_SetPosition(proc->frontBg, 0, off);
-    BG_SetPosition(proc->backBg, 0, off);
+    SetBgOffset(proc->frontBg, 0, off);
+    SetBgOffset(proc->backBg, 0, off);
 
     *yRef -= off;
 }

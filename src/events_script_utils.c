@@ -823,7 +823,7 @@ void DisplayCongratulationsMapAnim(ProcPtr proc)
 
 void DisplayEventMapAnim(ProcPtr parent, int val)
 {
-    struct ProcEventMapAnim * proc = Proc_StartBlocking(ProcScr_EventMapAnim, parent);
+    struct ProcEventMapAnim * proc = SpawnProcBlocking(ProcScr_EventMapAnim, parent);
 
 #ifndef NONMATCHING
     asm("add r2, r0, #0");
@@ -833,8 +833,8 @@ void DisplayEventMapAnim(ProcPtr parent, int val)
     SetDispEnable(0, 0, 1, 1, 1);
     FlushLCDControl();
     
-    BG_SetPosition(0, 0, 0xFFD4);
-    BG_SetPosition(1, 0, 0);
+    SetBgOffset(0, 0, 0xFFD4);
+    SetBgOffset(1, 0, 0);
 
     BG_Fill(gBG0TilemapBuffer, 0);
     BG_Fill(gBG1TilemapBuffer, 0);
@@ -933,7 +933,7 @@ void sub_8085E94(struct ProcEventMapAnim * proc)
 
     if (0x1C == proc->timer) {
         proc->timer = 0;
-        child = Proc_Start(gUnknown_089EEA28, proc);
+        child = SpawnProc(gUnknown_089EEA28, proc);
         child->mode = proc->mode;
         Proc_Break(proc);
     }
@@ -1015,7 +1015,7 @@ void sub_808609C(struct ProcEventMapAnim * proc)
 
 void sub_8086100(struct ProcEventMapAnim * proc)
 {
-    BG_SetPosition(0, 0, 0);
+    SetBgOffset(0, 0, 0);
     BG_Fill(gBG0TilemapBuffer, 0);
     BG_Fill(gBG1TilemapBuffer, 0);
     BG_EnableSyncByMask(3);

@@ -64,10 +64,10 @@ void ClassReel_Init(struct OpInfoProc* proc) {
     gLCDControlBuffer.dispcnt.bg3_on = 0;
     gLCDControlBuffer.dispcnt.obj_on = 0;
 
-    BG_SetPosition(0, 0, 0);
-    BG_SetPosition(1, 0, 0);
-    BG_SetPosition(2, 0, 0);
-    BG_SetPosition(3, 0, 0);
+    SetBgOffset(0, 0, 0);
+    SetBgOffset(1, 0, 0);
+    SetBgOffset(2, 0, 0);
+    SetBgOffset(3, 0, 0);
 
     proc->index = 0;
     proc->mode = 2;
@@ -191,7 +191,7 @@ PROC_LABEL(5),
 };
 
 void StartClassReel(u8 classSet, ProcPtr parent) {
-    struct OpInfoProc* proc = Proc_StartBlocking(gProcScr_opinfo, parent);
+    struct OpInfoProc* proc = SpawnProcBlocking(gProcScr_opinfo, parent);
     proc->classSet = classSet;
 
     return;
@@ -381,7 +381,7 @@ void ClassIntro_LoopIn(struct OpInfoEnterProc* proc) {
 
     if (proc->timer == 60) {
         proc->iconProc = StartClassNameIntroIcon(proc, proc->classReelEnt->classId);
-        Proc_Start(gProcScr_ClassIntro_FlareFX, proc);
+        SpawnProc(gProcScr_ClassIntro_FlareFX, proc);
     }
 
     if (proc->timer >= 96) {
@@ -479,7 +479,7 @@ PROC_LABEL(4),
 };
 
 ProcPtr StartClassNameIntro(ProcPtr parent, struct ClassReelEnt* entry) {
-    struct OpInfoEnterProc* proc = Proc_Start(gProcScr_opinfoenter, parent);
+    struct OpInfoEnterProc* proc = SpawnProc(gProcScr_opinfoenter, parent);
 
     proc->parentProc = parent;
     proc->classReelEnt = entry;
@@ -569,7 +569,7 @@ struct ProcCmd CONST_DATA gProcScr_opinfoview[] = {
 };
 
 ProcPtr StartClassNameIntroLetter(ProcPtr parent, u8 index) {
-    struct OpInfoViewProc* proc = Proc_Start(gProcScr_opinfoview, parent);
+    struct OpInfoViewProc* proc = SpawnProc(gProcScr_opinfoview, parent);
 
     proc->charIndex = index;
 
@@ -711,7 +711,7 @@ PROC_LABEL(4),
 ProcPtr StartClassNameIntroIcon(ProcPtr parent, u8 classId) {
     struct OpInfoIconProc* proc;
 
-    proc = Proc_Start(gProcScr_opinfoicon, parent);
+    proc = SpawnProc(gProcScr_opinfoicon, parent);
     proc->classId = classId;
 
     return proc;
@@ -783,7 +783,7 @@ struct ProcCmd CONST_DATA gProcScr_ClassIntro_FlareFX[] = {
 
     PROC_CALL(ClassIntroFlare_Init),
 
-    PROC_START_CHILD(gProcScr_ClassIntro_BurstFX),
+    SpawnProc_CHILD(gProcScr_ClassIntro_BurstFX),
 
     PROC_REPEAT(ClassIntroFlare_Loop),
     PROC_SLEEP(30),
@@ -1042,10 +1042,10 @@ void ClassInfoDisplay_Init(struct OpInfoClassDisplayProc* proc) {
     gLCDControlBuffer.bg2cnt.priority = 2;
     gLCDControlBuffer.bg3cnt.priority = 3;
 
-    BG_SetPosition(0, 0, 0);
-    BG_SetPosition(1, 0, 0);
-    BG_SetPosition(2, 0, 0);
-    BG_SetPosition(3, 0, 0);
+    SetBgOffset(0, 0, 0);
+    SetBgOffset(1, 0, 0);
+    SetBgOffset(2, 0, 0);
+    SetBgOffset(3, 0, 0);
 
     Decompress(gUnknown_08A30E2C, (void *)(GetBackgroundTileDataOffset(3) + 0x6000000));
     ApplyPalettes(gUnknown_08A3593C, 7, 8);
@@ -1363,7 +1363,7 @@ PROC_LABEL(8),
 };
 
 ProcPtr StartClassAnimDisplay(ProcPtr parent, struct ClassReelEnt* entry) {
-    struct OpInfoClassDisplayProc* proc = Proc_Start(gProcScr_ClassInfoDisplay, parent);
+    struct OpInfoClassDisplayProc* proc = SpawnProc(gProcScr_ClassInfoDisplay, parent);
 
     proc->unk_30 = parent;
     proc->classReelEnt = entry;
@@ -1497,7 +1497,7 @@ struct ProcCmd CONST_DATA gProcScr_opinfogaugedraw[] ={
 };
 
 ProcPtr StartClassStatsDisplay(ProcPtr proc) {
-    return Proc_Start(gProcScr_opinfogaugedraw, proc);
+    return SpawnProc(gProcScr_opinfogaugedraw, proc);
 }
 
 void sub_80B40E4(ProcPtr proc, int unk) {

@@ -73,7 +73,7 @@ PROC_LABEL(1),
     PROC_CALL(SetAllUnitNotBackSprite),
     PROC_CALL(RefreshUnitSprites),
 
-    PROC_START_CHILD_BLOCKING(gProcScr_0859ACE8),
+    SpawnProc_CHILD_BLOCKING(gProcScr_0859ACE8),
 
     PROC_CALL(PlayerPhase_InitUnitMovementSelect),
     PROC_SLEEP(1),
@@ -115,7 +115,7 @@ PROC_LABEL(5),
     // fallthrough
 
 PROC_LABEL(10),
-    PROC_START_CHILD_BLOCKING(gProcScr_ADJUSTSFROMXI),
+    SpawnProc_CHILD_BLOCKING(gProcScr_ADJUSTSFROMXI),
 
     PROC_GOTO(9),
 
@@ -193,7 +193,7 @@ struct ProcCmd CONST_DATA sProcScr_MoveLimitView[] =
 
     PROC_SET_END_CB(MoveLimitView_OnEnd),
 
-    PROC_START_CHILD(sProcScr_MoveLimitViewChange),
+    SpawnProc_CHILD(sProcScr_MoveLimitViewChange),
 
     PROC_CALL(MoveLimitView_OnInit),
     PROC_REPEAT(MoveLimitView_OnLoop),
@@ -1288,7 +1288,7 @@ void MoveLimitView_OnInit(ProcPtr proc)
     }
 
     BG_EnableSyncByMask(BG2_SYNC_BIT);
-    BG_SetPosition(BG_2, 0, 0);
+    SetBgOffset(BG_2, 0, 0);
 
     SetBlendAlpha(10, 6);
 
@@ -1360,7 +1360,7 @@ void DisplayMoveRangeGraphics(int flags)
         return;
     }
 
-    proc = Proc_Start(sProcScr_MoveLimitView, PROC_TREE_4);
+    proc = SpawnProc(sProcScr_MoveLimitView, PROC_TREE_4);
     proc->flags = flags;
 
     return;

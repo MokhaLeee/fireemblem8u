@@ -483,7 +483,7 @@ void SioMenu_End(struct SioMenuProc * proc)
     else
     {
         gLinkArenaSt.unk_01 = gLinkArenaSt.unk_00;
-        Proc_StartBlocking(SioMenuProcLut[gLinkArenaSt.unk_00], proc);
+        SpawnProcBlocking(SioMenuProcLut[gLinkArenaSt.unk_00], proc);
     }
 
     return;
@@ -555,8 +555,8 @@ void StartLinkArenaMainMenu(ProcPtr parent)
     gPlaySt.chapterStateBits &= ~PLAY_FLAG_COMPLETE;
     gPlaySt.config.windowColor = 0;
 
-    Proc_StartBlocking(ProcScr_SIOMENU, parent);
-    Proc_Start(ProcScr_DebugMonitor, PROC_TREE_3);
+    SpawnProcBlocking(ProcScr_SIOMENU, parent);
+    SpawnProc(ProcScr_DebugMonitor, PROC_TREE_3);
 
     return;
 }

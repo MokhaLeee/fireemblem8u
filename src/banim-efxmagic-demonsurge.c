@@ -28,7 +28,7 @@ void StartSpellAnimDemonSurge(struct Anim * anim)
     NewEfxSpellCast();
     SpellFx_ClearBG1Position();
 
-    proc = Proc_Start(ProcScr_efxGorgon, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxGorgon, PROC_TREE_3);
     proc->anim = anim;
     proc->timer = 0;
     proc->hitted = CheckRoundMiss(GetAnimRoundTypeAnotherSide(anim));
@@ -97,7 +97,7 @@ void efxGorgon_Loop_Main(struct ProcEfx * proc)
     else if (proc->timer == duration + 169)
     {
         SpellFx_Finish();
-        RegisterEfxSpellCastEnd();
+        EndEfxSpellCastAsync();
         Proc_Break(proc);
     }
 
@@ -151,7 +151,7 @@ void StartSubSpell_efxGorgon_806B680(struct Anim * anim)
 
     gEfxBgSemaphore++;
 
-    proc = Proc_Start(ProcScr_085D8B24, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_085D8B24, PROC_TREE_3);
     proc->anim = anim;
 
     scr = AnimScr_086EAE24;
@@ -217,7 +217,7 @@ void efxGorgonBGDirt_Loop(struct ProcEfxBG * proc)
         {
             SpellFx_ClearBG1();
             gEfxBgSemaphore--;
-            SetDefaultColorEffects_();
+            SpellFx_ClearColorEffects();
             Proc_Break(proc);
         }
     }
@@ -304,7 +304,7 @@ void StartSubSpell_efxGorgonBGDirt(struct Anim * anim)
 
     gEfxBgSemaphore++;
 
-    proc = Proc_Start(ProcScr_efxGorgonBGDirt, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxGorgonBGDirt, PROC_TREE_3);
     proc->anim = anim;
     proc->timer = 0;
 
@@ -319,16 +319,16 @@ void StartSubSpell_efxGorgonBGDirt(struct Anim * anim)
     {
         if (GetAnimPosition(anim) == 0)
         {
-            BG_SetPosition(BG_1, 24, 0);
+            SetBgOffset(BG_1, 24, 0);
         }
         else
         {
-            BG_SetPosition(BG_1, -24, 0);
+            SetBgOffset(BG_1, -24, 0);
         }
     }
     else
     {
-        BG_SetPosition(BG_1, 0, 0);
+        SetBgOffset(BG_1, 0, 0);
     }
 
     SpellFx_SetSomeColorEffect();
@@ -415,7 +415,7 @@ void StartSubSpell_efxGorgonBGTwister(struct Anim * anim)
 
     gEfxBgSemaphore++;
 
-    proc = Proc_Start(ProcScr_efxGorgonBGTwister, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxGorgonBGTwister, PROC_TREE_3);
     proc->anim = anim;
     proc->timer = 0;
 
@@ -430,22 +430,22 @@ void StartSubSpell_efxGorgonBGTwister(struct Anim * anim)
     {
         if (GetAnimPosition(anim) == 0)
         {
-            BG_SetPosition(BG_1, 40, 0);
+            SetBgOffset(BG_1, 40, 0);
         }
         else
         {
-            BG_SetPosition(BG_1, -24, 0);
+            SetBgOffset(BG_1, -24, 0);
         }
     }
     else
     {
         if (GetAnimPosition(anim) == 0)
         {
-            BG_SetPosition(BG_1, 16, 0);
+            SetBgOffset(BG_1, 16, 0);
         }
         else
         {
-            BG_SetPosition(BG_1, 0, 0);
+            SetBgOffset(BG_1, 0, 0);
         }
     }
 
@@ -622,7 +622,7 @@ struct ProcCmd CONST_DATA ProcScr_085D8C24[] =
 //! FE8U = 0x0806BBDC
 void sub_806BBDC(void)
 {
-    Proc_Start(ProcScr_085D8C24, PROC_TREE_VSYNC);
+    SpawnProc(ProcScr_085D8C24, PROC_TREE_VSYNC);
     return;
 }
 
@@ -690,7 +690,7 @@ void StartSubSpell_efxGorgonOBJTwisterPiece(struct Anim * anim, int flag, int c,
 
     gEfxBgSemaphore++;
 
-    proc = Proc_Start(ProcScr_efxGorgonOBJTwisterPiece, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxGorgonOBJTwisterPiece, PROC_TREE_3);
     proc->anim = anim;
     proc->timer = 0;
     proc->terminator = terminator;
@@ -830,7 +830,7 @@ void StartSubSpell_efxGorgonOBJTwister(struct Anim * anim)
 
     gEfxBgSemaphore++;
 
-    proc = Proc_Start(ProcScr_efxGorgonOBJTwister, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxGorgonOBJTwister, PROC_TREE_3);
     proc->anim = anim;
     proc->timer = 0;
 
@@ -900,7 +900,7 @@ void efxGorgonBGFinish_Loop(struct ProcEfxBG * proc)
         {
             SpellFx_ClearBG1();
             gEfxBgSemaphore--;
-            SetDefaultColorEffects_();
+            SpellFx_ClearColorEffects();
             Proc_Break(proc);
         }
     }
@@ -967,7 +967,7 @@ void StartSubSpell_efxGorgonBGFinish(struct Anim * anim)
 
     gEfxBgSemaphore++;
 
-    proc = Proc_Start(ProcScr_efxGorgonBGFinish, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxGorgonBGFinish, PROC_TREE_3);
     proc->anim = anim;
     proc->timer = 0;
 
@@ -981,16 +981,16 @@ void StartSubSpell_efxGorgonBGFinish(struct Anim * anim)
     {
         if (GetAnimPosition(anim) == 0)
         {
-            BG_SetPosition(BG_1, 24, 0);
+            SetBgOffset(BG_1, 24, 0);
         }
         else
         {
-            BG_SetPosition(BG_1, -24, 0);
+            SetBgOffset(BG_1, -24, 0);
         }
     }
     else
     {
-        BG_SetPosition(BG_1, 0, 0);
+        SetBgOffset(BG_1, 0, 0);
     }
 
     SpellFx_RegisterBgPal(Pal_086FDA44, PLTT_SIZE_4BPP);
@@ -1207,7 +1207,7 @@ struct ProcCmd CONST_DATA ProcScr_085D8CE4[] =
 //! FE8U = 0x0806C464
 void sub_806C464(void)
 {
-    Proc_Start(ProcScr_085D8CE4, PROC_TREE_VSYNC);
+    SpawnProc(ProcScr_085D8CE4, PROC_TREE_VSYNC);
     return;
 }
 
@@ -1312,6 +1312,6 @@ struct ProcCmd CONST_DATA ProcScr_085D8D14[] =
 //! FE8U = 0x0806C608
 void sub_806C608(void)
 {
-    Proc_Start(ProcScr_085D8D14, PROC_TREE_VSYNC);
+    SpawnProc(ProcScr_085D8D14, PROC_TREE_VSYNC);
     return;
 }

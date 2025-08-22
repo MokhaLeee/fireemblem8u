@@ -26,7 +26,7 @@ void StartSpellAnimFillasMight(struct Anim * anim)
     SpellFx_Begin();
     SpellFx_ClearBG1Position();
 
-    proc = Proc_Start(ProcScr_efxDancepara, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxDancepara, PROC_TREE_3);
     proc->anim = anim;
     proc->timer = 0;
     proc->unk44 = 1;
@@ -43,7 +43,7 @@ void StartSpellAnimThorsIre(struct Anim * anim)
     SpellFx_Begin();
     SpellFx_ClearBG1Position();
 
-    proc = Proc_Start(ProcScr_efxDancepara, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxDancepara, PROC_TREE_3);
     proc->anim = anim;
     proc->timer = 0;
     proc->unk44 = 2;
@@ -60,7 +60,7 @@ void StartSpellAnimNinisGrace(struct Anim * anim)
     SpellFx_Begin();
     SpellFx_ClearBG1Position();
 
-    proc = Proc_Start(ProcScr_efxDancepara, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxDancepara, PROC_TREE_3);
     proc->anim = anim;
     proc->timer = 0;
     proc->unk44 = 3;
@@ -77,7 +77,7 @@ void StartSpellAnimSetsLitany(struct Anim * anim)
     SpellFx_Begin();
     SpellFx_ClearBG1Position();
 
-    proc = Proc_Start(ProcScr_efxDancepara, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxDancepara, PROC_TREE_3);
     proc->anim = anim;
     proc->timer = 0;
     proc->unk44 = 4;
@@ -109,7 +109,7 @@ void efxDancepara_Loop(struct ProcEfx * proc)
     }
     if (proc->timer == 125)
     {
-        anim->state3 |= (ANIM_BIT3_TAKE_BACK_ENABLE | ANIM_BIT3_HIT_EFFECT_APPLIED);
+        anim->state3 |= (ANIM_BIT3_C02_BLOCK_END | ANIM_BIT3_C01_BLOCK_END_INBATTLE);
     }
     else if (proc->timer == 165)
     {

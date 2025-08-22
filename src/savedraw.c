@@ -318,7 +318,7 @@ void SaveDraw_ScrollFogBG(struct SaveDrawProc * proc)
         angle += 12;
     }
 
-    BG_SetPosition(BG_2, x, bg_y);
+    SetBgOffset(BG_2, x, bg_y);
 
     FlipBgVerticalScroll();
 }
@@ -693,7 +693,7 @@ struct ProcCmd CONST_DATA ProcScr_savedraw[] =
 //! FE8U = 0x080AB300
 struct SaveDrawProc * StartSaveDraw(ProcPtr parent)
 {
-    return Proc_Start(ProcScr_savedraw, parent);
+    return SpawnProc(ProcScr_savedraw, parent);
 }
 
 //! FE8U = 0x080AB314
@@ -838,7 +838,7 @@ struct ProcCmd CONST_DATA gProcScr_SaveDrawCursor[] = {
 //! FE8U = 0x080AB534
 struct SaveMenuCursorProc* StartSaveDrawCursor(ProcPtr parent)
 {
-    return Proc_Start(gProcScr_SaveDrawCursor, parent);
+    return SpawnProc(gProcScr_SaveDrawCursor, parent);
 }
 
 //! FE8U = 0x080AB548
@@ -955,7 +955,7 @@ struct ProcCmd CONST_DATA gProcScr_08A206F8[] = {
 
 //! FE8U = 0x080AB760
 void sub_80AB760(void* unused) {
-    Proc_Start(gProcScr_08A206F8, PROC_TREE_3);
+    SpawnProc(gProcScr_08A206F8, PROC_TREE_3);
     StartBgVerticalScroll(EWRAM_ENTRY);
     return;
 }
@@ -1230,7 +1230,7 @@ void StartSqMask(struct SaveMenuProc * parent, int b, int c)
     u8 castB = b;
     u8 castC = c;
 
-    struct SqMaskProc* proc = Proc_StartBlocking(gProcScr_SqMask, parent);
+    struct SqMaskProc* proc = SpawnProcBlocking(gProcScr_SqMask, parent);
     proc->unk_2a = castB;
     proc->unk_2b = castC;
 
@@ -1258,5 +1258,5 @@ struct ProcCmd CONST_DATA gProcScr_SaveBgUp[] = {
 //! FE8U = 0x080ABC00
 ProcPtr StartSaveBgUp(ProcPtr parent)
 {
-    return Proc_Start(gProcScr_SaveBgUp, parent);
+    return SpawnProc(gProcScr_SaveBgUp, parent);
 }

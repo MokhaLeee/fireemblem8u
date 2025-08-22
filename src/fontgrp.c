@@ -1021,7 +1021,7 @@ char *StartTextPrint(struct Text *text, char * str, int interval, int char_per_t
     if (char_per_tick == 0)
         char_per_tick = 1;
 
-    proc = Proc_Start(ProcScr_TextPrint, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_TextPrint, PROC_TREE_3);
 
     proc->text = text;
     proc->str = str;
@@ -1062,9 +1062,9 @@ struct ProcCmd ProcScr_GreenTextColor[] =
 void StartGreenText(ProcPtr parent)
 {
     if (parent != NULL)
-        Proc_Start(ProcScr_GreenTextColor, parent);
+        SpawnProc(ProcScr_GreenTextColor, parent);
     else
-        Proc_Start(ProcScr_GreenTextColor, PROC_TREE_3);
+        SpawnProc(ProcScr_GreenTextColor, PROC_TREE_3);
 }
 
 void EndGreenText(void)

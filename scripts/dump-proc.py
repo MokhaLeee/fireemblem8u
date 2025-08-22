@@ -58,15 +58,15 @@ def main(args):
                 continue
 
             if opc == 0x05:
-                print(f"    PROC_START_CHILD({sym}),")
+                print(f"    SpawnProc_CHILD({sym}),")
                 continue
 
             if opc == 0x06:
-                print(f"    PROC_START_CHILD_BLOCKING({sym}),")
+                print(f"    SpawnProc_CHILD_BLOCKING({sym}),")
                 continue
 
             if opc == 0x07:
-                print(f"    PROC_START_MAIN_BUGGED({sym}),")
+                print(f"    SpawnProc_MAIN_BUGGED({sym}),")
                 continue
 
             if opc == 0x08:

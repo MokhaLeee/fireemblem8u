@@ -378,7 +378,7 @@ struct FaceProc* StartFace(int slot, int fid, int x, int y, int disp) {
         return NULL;
     }
 
-    proc = Proc_Start(gProcScr_E_FACE, PROC_TREE_5);
+    proc = SpawnProc(gProcScr_E_FACE, PROC_TREE_5);
 
     gFaces[slot] = proc;
 
@@ -405,8 +405,8 @@ struct FaceProc* StartFace(int slot, int fid, int x, int y, int disp) {
         proc->unk_44 = NULL;
         proc->pBlinkProc = NULL;
     } else {
-        proc->unk_44 = Proc_Start(gProcScr_0859124C, proc);
-        proc->pBlinkProc = Proc_Start(gProcScr_FaceBlink, proc);
+        proc->unk_44 = SpawnProc(gProcScr_0859124C, proc);
+        proc->pBlinkProc = SpawnProc(gProcScr_FaceBlink, proc);
     }
 
     proc->displayBits = ~disp;
@@ -633,7 +633,7 @@ void StartFaceChibiSpr(int x, int y, int fid, int chr, int pal, s8 isFlipped, Pr
 
     UnpackFaceChibiSprGraphics(fid, chr, pal);
 
-    proc = Proc_Start(gProcScr_FaceChibiSpr, parent);
+    proc = SpawnProc(gProcScr_FaceChibiSpr, parent);
 
     proc->xPos = x;
     proc->yPos = y;
@@ -858,7 +858,7 @@ void EndFacePtr(struct DeleteFaceProc* proc) {
 
 //! FE8U = 0x08005ED8
 void EndFaceIn8Frames(struct FaceProc* target) {
-    struct DeleteFaceProc* proc = Proc_Start(gProcScr_FaceEndIn8Frames, PROC_TREE_3);
+    struct DeleteFaceProc* proc = SpawnProc(gProcScr_FaceEndIn8Frames, PROC_TREE_3);
 
     proc->target = target;
 
@@ -1326,7 +1326,7 @@ struct FaceProc* StartFace2(int slot, int fid, int x, int y, int disp) {
         return NULL;
     }
 
-    proc = Proc_Start(gProcScr_E_FACE_ExtraFrame, PROC_TREE_5);
+    proc = SpawnProc(gProcScr_E_FACE_ExtraFrame, PROC_TREE_5);
 
     gFaces[slot] = proc;
 
@@ -1438,7 +1438,7 @@ void sub_80066A8(struct UnkFaceProc* proc) {
 
 //! FE8U = 0x080066E0
 void sub_80066E0(struct FaceProc* parent, int fid) {
-    struct UnkFaceProc* proc = Proc_Start(gProcScr_08591304, parent);
+    struct UnkFaceProc* proc = SpawnProc(gProcScr_08591304, parent);
 
     proc->pFaceProc = parent;
     proc->faceId = fid;

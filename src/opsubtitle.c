@@ -641,7 +641,7 @@ void OpSubtitle_SetupBackgrounds(void) {
         SetBackgroundMapDataOffset(bg, *bgConfig++);
         SetBackgroundScreenSize(bg, *bgConfig++);
 
-        BG_SetPosition(bg, 0, 0);
+        SetBgOffset(bg, 0, 0);
     }
 
     return;
@@ -666,10 +666,10 @@ void sub_80C5218(struct OpSubtitleProc* proc) {
     SetBlendBackdropA(0);
     SetBlendBackdropB(0);
 
-    BG_SetPosition(0, 0, 0);
-    BG_SetPosition(1, -3, -3);
-    BG_SetPosition(2, 0, 0);
-    BG_SetPosition(3, 0, 0);
+    SetBgOffset(0, 0, 0);
+    SetBgOffset(1, -3, -3);
+    SetBgOffset(2, 0, 0);
+    SetBgOffset(3, 0, 0);
 
     sub_80C488C(3);
     sub_80C48F0(3);
@@ -755,7 +755,7 @@ void sub_80C5400(void) {
 
 //! FE8U = 0x080C540C
 void sub_80C540C(void) {
-    BG_SetPosition(1, 0, 0);
+    SetBgOffset(1, 0, 0);
 
     return;
 }
@@ -783,8 +783,8 @@ PROC_LABEL(0), // loop used for the first two "slides"
     PROC_GOTO(0),
 
 PROC_LABEL(1),
-    PROC_START_CHILD(gProcScr_OpSubtitle_LightFlareFx),
-    PROC_START_CHILD(gProcScr_08AA2184),
+    SpawnProc_CHILD(gProcScr_OpSubtitle_LightFlareFx),
+    SpawnProc_CHILD(gProcScr_08AA2184),
 
     PROC_CALL(sub_80C50A0),
     PROC_REPEAT(OpSubtitle_AwaitTimer2a),
@@ -859,7 +859,7 @@ PROC_LABEL(7),
 
 //! FE8U = 0x080C541C
 void StartIntroMonologue(ProcPtr proc) {
-    Proc_StartBlocking(gProcScr_OpSubtitle, proc);
+    SpawnProcBlocking(gProcScr_OpSubtitle, proc);
 
     return;
 }

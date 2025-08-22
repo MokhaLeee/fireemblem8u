@@ -278,10 +278,10 @@ struct ProcCmd CONST_DATA gProcScr_StatScreen[] =
 
     PROC_CALL(StatScreen_Display),
 
-    PROC_START_CHILD(gProcScr_SSGlowyBlendCtrl),
-    PROC_START_CHILD(gProcScr_SSPageNameCtrl),
-    PROC_START_CHILD(gProcScr_SSPageNumCtrl),
-    PROC_START_CHILD(gProcScr_SSBgOffsetCtrl),
+    SpawnProc_CHILD(gProcScr_SSGlowyBlendCtrl),
+    SpawnProc_CHILD(gProcScr_SSPageNameCtrl),
+    SpawnProc_CHILD(gProcScr_SSPageNumCtrl),
+    SpawnProc_CHILD(gProcScr_SSBgOffsetCtrl),
 
     PROC_GOTO(1),
 
@@ -1047,7 +1047,7 @@ void StartPageSlide(u16 key, int newPage, struct Proc* parent)
 
     PlaySoundEffect(SONG_6F);
 
-    proc = (void*) Proc_StartBlocking(gProcScr_SSPageSlide, parent);
+    proc = (void*) SpawnProcBlocking(gProcScr_SSPageSlide, parent);
 
     proc->timer = 0;
     proc->newItem = newPage;
@@ -1093,7 +1093,7 @@ void GlowBlendCtrl_OnLoop(struct StatScreenEffectProc* proc)
 
 void StartGlowBlendCtrl(void)
 {
-    Proc_Start(gProcScr_SSGlowyBlendCtrl, PROC_TREE_3);
+    SpawnProc(gProcScr_SSGlowyBlendCtrl, PROC_TREE_3);
 }
 
 void EndGlowBlendCtrl(struct StatScreenEffectProc* proc)
@@ -1215,7 +1215,7 @@ void ClearSlide(struct Proc* proc)
 
 void StartUnitSlide(struct Unit* unit, int direction, struct Proc* parent)
 {
-    struct StatScreenEffectProc* proc = (void*) Proc_StartBlocking(gProcScr_SSUnitSlide, parent);
+    struct StatScreenEffectProc* proc = (void*) SpawnProcBlocking(gProcScr_SSUnitSlide, parent);
 
     proc->newItem = unit->index;
     proc->direction = direction;
@@ -1729,8 +1729,8 @@ void BgOffCtrl_OnLoop(void)
 {
     int yBg = 0xFF & -gStatScreen.yDispOff;
 
-    BG_SetPosition(0, 0, yBg);
-    BG_SetPosition(2, 0, yBg);
+    SetBgOffset(0, 0, yBg);
+    SetBgOffset(2, 0, yBg);
 }
 
 void StartStatScreen(struct Unit* unit, ProcPtr parent)
@@ -1747,7 +1747,7 @@ void StartStatScreen(struct Unit* unit, ProcPtr parent)
 
     PlaySoundEffect(SONG_SE_SYS_WINDOW_SELECT1); // TODO: song ids
 
-    Proc_StartBlocking(gProcScr_StatScreen, parent);
+    SpawnProcBlocking(gProcScr_StatScreen, parent);
 }
 
 void StartStatScreenHelp(int pageid, struct Proc* proc)
@@ -2027,7 +2027,7 @@ void StartHelpBoxExt(const struct HelpBoxInfo* info, int unk)
 
     if (!proc)
     {
-        proc = (void*) Proc_Start(gProcScr_HelpBox, PROC_TREE_3);
+        proc = (void*) SpawnProc(gProcScr_HelpBox, PROC_TREE_3);
 
         proc->unk52 = unk;
 
@@ -2072,7 +2072,7 @@ void StartHelpBoxExt_Unk(int x, int y, int mid)
     struct HelpBoxProc* proc;
     int wContent, hContent;
 
-    proc = (void*) Proc_Start(gProcScr_HelpBox, PROC_TREE_3);
+    proc = (void*) SpawnProc(gProcScr_HelpBox, PROC_TREE_3);
 
     proc->unk52 = TRUE;
 
@@ -2178,7 +2178,7 @@ void HbMoveCtrl_OnEnd(struct HelpBoxProc* proc)
 
 void StartMovingHelpBox(const struct HelpBoxInfo* info, struct Proc* parent)
 {
-    struct HelpBoxProc* proc = (void*) Proc_StartBlocking(gProcScr_HelpBoxMoveCtrl, parent);
+    struct HelpBoxProc* proc = (void*) SpawnProcBlocking(gProcScr_HelpBoxMoveCtrl, parent);
 
     sHbOrigin.x = 0;
     sHbOrigin.y = 0;
@@ -2188,7 +2188,7 @@ void StartMovingHelpBox(const struct HelpBoxInfo* info, struct Proc* parent)
 
 void StartMovingHelpBoxExt(const struct HelpBoxInfo* info, struct Proc* parent, int x, int y)
 {
-    struct HelpBoxProc* proc = (void*) Proc_StartBlocking(gProcScr_HelpBoxMoveCtrl, parent);
+    struct HelpBoxProc* proc = (void*) SpawnProcBlocking(gProcScr_HelpBoxMoveCtrl, parent);
 
     sHbOrigin.x = x;
     sHbOrigin.y = y;
@@ -2371,7 +2371,7 @@ int StartLockingHelpBox_Unused(int mid, ProcPtr parent)
     LoadHelpBoxGfx(NULL, -1);
 
     StartHelpBox(GetUiHandPrevDisplayX(), GetUiHandPrevDisplayY(), mid);
-    Proc_StartBlocking(gProcScr_HelpBoxLock, parent);
+    SpawnProcBlocking(gProcScr_HelpBoxLock, parent);
 
     return TRUE;
 }
@@ -2388,7 +2388,7 @@ struct Proc* StartHelpPromptSprite_Unused(int x, int y, ProcPtr parent)
     struct HelpPromptSprProc* proc = (void*) Proc_Find(gProcScr_HelpPromptSpr);
 
     if (!proc)
-        proc = (void*) Proc_Start(gProcScr_HelpPromptSpr, parent);
+        proc = (void*) SpawnProc(gProcScr_HelpPromptSpr, parent);
 
     proc->xDisplay = x;
     proc->yDisplay = y;
@@ -2404,7 +2404,7 @@ struct Proc* StartHelpPromptSprite(int x, int y, int palid, ProcPtr parent)
     ApplyPalette(Pal_MapBattleInfoNum, palid + 0x10);
 
     if (!proc)
-        proc = (void*) Proc_Start(gProcScr_HelpPromptSpr, parent);
+        proc = (void*) SpawnProc(gProcScr_HelpPromptSpr, parent);
 
     proc->xDisplay = x;
     proc->yDisplay = y;
@@ -2418,7 +2418,7 @@ struct Proc* StartHelpPromptSprite_Unused2(int x, int y, ProcPtr parent)
     struct HelpPromptSprProc* proc = (void*) Proc_Find(gProcScr_HelpPromptSpr);
 
     if (!proc)
-        proc = (void*) Proc_StartBlocking(gProcScr_HelpPromptSpr, parent);
+        proc = (void*) SpawnProcBlocking(gProcScr_HelpPromptSpr, parent);
 
     proc->xDisplay = x;
     proc->yDisplay = y;

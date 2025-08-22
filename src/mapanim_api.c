@@ -142,7 +142,7 @@ void BeginMapAnimForPoisonDmg(void)
     MapAnim_AdvanceBattleRound();
 
     SetupMapBattleAnim(&gBattleActor, &gBattleTarget, gBattleHitArray);
-    Proc_Start(ProcScr_MapAnimPoisonDmg, PROC_TREE_3);
+    SpawnProc(ProcScr_MapAnimPoisonDmg, PROC_TREE_3);
 }
 
 void BeginMapAnimForEggDmg(void)
@@ -157,7 +157,7 @@ void BeginMapAnimForEggDmg(void)
     MapAnim_AdvanceBattleRound();
 
     SetupMapBattleAnim(&gBattleActor, &gBattleTarget, gBattleHitArray);
-    Proc_Start(ProcScr_MapAnimEggDmg, PROC_TREE_3);
+    SpawnProc(ProcScr_MapAnimEggDmg, PROC_TREE_3);
 }
 
 void BeginMapAnimForCritAtk(void)
@@ -172,7 +172,7 @@ void BeginMapAnimForCritAtk(void)
     MapAnim_AdvanceBattleRound();
 
     SetupMapBattleAnim(&gBattleActor, &gBattleTarget, gBattleHitArray);
-    Proc_Start(ProcScr_MapAnimCritAtk, PROC_TREE_3);
+    SpawnProc(ProcScr_MapAnimCritAtk, PROC_TREE_3);
 }
 
 void BeginMapAnimForSteal(void)
@@ -187,7 +187,7 @@ void BeginMapAnimForSteal(void)
     gManimSt.targetActorId = 1;
 
     SetupMapBattleAnim(&gBattleActor, &gBattleTarget, gBattleHitArray);
-    Proc_Start(ProcScr_MapAnimSteal, PROC_TREE_3);
+    SpawnProc(ProcScr_MapAnimSteal, PROC_TREE_3);
 }
 
 void BeginMapAnimForSummon(void)
@@ -202,7 +202,7 @@ void BeginMapAnimForSummon(void)
     gManimSt.targetActorId = 1;
 
     SetupMapBattleAnim(&gBattleActor, &gBattleTarget, gBattleHitArray);
-    Proc_Start(ProcScr_MapAnimSummon, PROC_TREE_3);
+    SpawnProc(ProcScr_MapAnimSummon, PROC_TREE_3);
 }
 
 void BeginMapAnimForSummonDK(void)
@@ -217,7 +217,7 @@ void BeginMapAnimForSummonDK(void)
     gManimSt.targetActorId = 1;
 
     SetupMapBattleAnim(&gBattleActor, &gBattleTarget, gBattleHitArray);
-    Proc_Start(ProcScr_MapAnimSumDK, PROC_TREE_3);
+    SpawnProc(ProcScr_MapAnimSumDK, PROC_TREE_3);
 }
 
 void BeginMapAnimForDance(void)
@@ -232,7 +232,7 @@ void BeginMapAnimForDance(void)
     gManimSt.targetActorId = 0;
 
     SetupMapBattleAnim(&gBattleActor, &gBattleTarget, gBattleHitArray);
-    Proc_Start(ProcScr_MapAnimDance, PROC_TREE_3);
+    SpawnProc(ProcScr_MapAnimDance, PROC_TREE_3);
 }
 
 void BeginBattleMapAnims(void)
@@ -249,9 +249,9 @@ void BeginBattleMapAnims(void)
     SetupMapBattleAnim(&gBattleActor, &gBattleTarget, gBattleHitArray);
 
     if (!EventEngineExists())
-        Proc_Start(ProcScr_MapAnimBattle, PROC_TREE_3);
+        SpawnProc(ProcScr_MapAnimBattle, PROC_TREE_3);
     else
-        Proc_Start(ProcScr_MapAnimEventBattle, PROC_TREE_3);
+        SpawnProc(ProcScr_MapAnimEventBattle, PROC_TREE_3);
 }
 
 void SetupMapAnimSpellData(struct BattleUnit* actor, struct BattleUnit* target, struct BattleHit* hit)

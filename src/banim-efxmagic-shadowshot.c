@@ -27,7 +27,7 @@ void StartSpellAnimShadowshot(struct Anim * anim)
     NewEfxSpellCast();
     SpellFx_ClearBG1Position();
 
-    proc = Proc_Start(ProcScr_efxDarkLongMons, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxDarkLongMons, PROC_TREE_3);
     proc->anim = anim;
     proc->timer = 0;
     proc->hitted = CheckRoundMiss(GetAnimRoundTypeAnotherSide(anim));
@@ -80,7 +80,7 @@ void efxDarkLongMons_Loop_Main(struct ProcEfx * proc)
         if (proc->hitted)
         {
             SpellFx_Finish();
-            RegisterEfxSpellCastEnd();
+            EndEfxSpellCastAsync();
             Proc_Break(proc);
         }
     }
@@ -99,7 +99,7 @@ void efxDarkLongMons_Loop_Main(struct ProcEfx * proc)
     }
     else if (proc->timer == duration + 272)
     {
-        RegisterEfxSpellCastEnd();
+        EndEfxSpellCastAsync();
     }
     else if (proc->timer == duration + 299)
     {
@@ -144,7 +144,7 @@ void efxDarkLongMonsBG01_Loop_A(struct ProcEfxBG * proc)
         {
             SpellFx_ClearBG1();
             gEfxBgSemaphore--;
-            SetDefaultColorEffects_();
+            SpellFx_ClearColorEffects();
             Proc_Break(proc);
         }
     }
@@ -262,7 +262,7 @@ void StartSubSpell_efxDarkLongMonsBG01(struct Anim * anim)
 
     gEfxBgSemaphore++;
 
-    proc = Proc_Start(ProcScr_efxDarkLongMonsBG01, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxDarkLongMonsBG01, PROC_TREE_3);
     proc->anim = anim;
     proc->timer = 0;
 
@@ -273,7 +273,7 @@ void StartSubSpell_efxDarkLongMonsBG01(struct Anim * anim)
     proc->img = ImgArray_efxDarkLongMonsBG01;
     proc->pal = PalArray_efxDarkLongMonsBG01;
 
-    BG_SetPosition(BG_1, 0, 0);
+    SetBgOffset(BG_1, 0, 0);
 
     SetPrimaryHBlankHandler(OnHBlank_806B088);
 
@@ -354,7 +354,7 @@ void StartSubSpell_efxDarkLongMonsBG02(struct Anim * anim)
 
     gEfxBgSemaphore++;
 
-    proc = Proc_Start(ProcScr_efxDarkLongMonsBG02, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxDarkLongMonsBG02, PROC_TREE_3);
     proc->anim = anim;
     proc->timer = 0;
 
@@ -366,7 +366,7 @@ void StartSubSpell_efxDarkLongMonsBG02(struct Anim * anim)
     SpellFx_RegisterBgGfx(Img_086E7EB0, 32 * 8 * CHR_SIZE);
     SpellFx_RegisterBgPal(Pal_086E91B8, PLTT_SIZE_4BPP);
 
-    BG_SetPosition(BG_1, 0, 0);
+    SetBgOffset(BG_1, 0, 0);
 
     SpellFx_SetSomeColorEffect();
 
@@ -439,7 +439,7 @@ void StartSubSpell_efxDarkLongMonsOBJ(struct Anim * anim)
 
     gEfxBgSemaphore++;
 
-    proc = Proc_Start(ProcScr_efxDarkLongMonsOBJ, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxDarkLongMonsOBJ, PROC_TREE_3);
     proc->anim = anim;
     proc->timer = 0;
     proc->terminator = 188;
@@ -571,6 +571,6 @@ struct ProcCmd CONST_DATA ProcScr_085D8AEC[] =
 //! FE8U = 0x0806B4E4
 void sub_806B4E4(void)
 {
-    Proc_Start(ProcScr_085D8AEC, PROC_TREE_VSYNC);
+    SpawnProc(ProcScr_085D8AEC, PROC_TREE_VSYNC);
     return;
 }

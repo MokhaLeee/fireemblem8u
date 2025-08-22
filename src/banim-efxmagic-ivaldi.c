@@ -27,7 +27,7 @@ void StartSpellAnimIvaldi(struct Anim * anim)
     NewEfxSpellCast();
     SpellFx_ClearBG1Position();
 
-    proc = Proc_Start(ProcScr_efxIvaldi, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxIvaldi, PROC_TREE_3);
     proc->anim = anim;
     proc->timer = 0;
     proc->hitted = CheckRoundMiss(GetAnimRoundTypeAnotherSide(anim));
@@ -126,7 +126,7 @@ void efxIvaldi_Loop_Main(struct ProcEfx * proc)
         else if (proc->timer == r2 + ({ duration + 0x64; }))
         {
             SpellFx_Finish();
-            RegisterEfxSpellCastEnd();
+            EndEfxSpellCastAsync();
             Proc_Break(proc);
         }
     }
@@ -187,7 +187,7 @@ void StartSpellBG_IvaldiBG1(struct Anim * anim)
 
     gEfxBgSemaphore++;
 
-    proc = Proc_Start(ProcScr_efxIvaldiBG1, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxIvaldiBG1, PROC_TREE_3);
     proc->anim = anim;
     proc->timer = 0;
 
@@ -200,7 +200,7 @@ void StartSpellBG_IvaldiBG1(struct Anim * anim)
     SpellFx_RegisterBgGfx(Img_IvaldiBg1, 32 * 8 * CHR_SIZE);
     SpellFx_RegisterBgPal(Pal_IvaldiBg1, PLTT_SIZE_4BPP);
 
-    BG_SetPosition(BG_1, 0, 0);
+    SetBgOffset(BG_1, 0, 0);
     SpellFx_SetSomeColorEffect();
 
     return;
@@ -215,7 +215,7 @@ void efxIvaldiBG1_Loop(struct ProcEfxBG * proc)
 
     ret = EfxAdvanceFrameLut((s16 *)&proc->timer, (s16 *)&proc->frame, proc->frame_config);
 
-    BG_SetPosition(1, 0, 0);
+    SetBgOffset(1, 0, 0);
 
     if (ret >= 0)
     {
@@ -229,7 +229,7 @@ void efxIvaldiBG1_Loop(struct ProcEfxBG * proc)
         {
             SpellFx_ClearBG1();
             gEfxBgSemaphore--;
-            SetDefaultColorEffects_();
+            SpellFx_ClearColorEffects();
             Proc_Break(proc);
         }
     }
@@ -278,7 +278,7 @@ void StartSpellBG_IvaldiBG2(struct Anim * anim)
 
     gEfxBgSemaphore++;
 
-    proc = Proc_Start(ProcScr_efxIvaldiBG2, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxIvaldiBG2, PROC_TREE_3);
 
     proc->anim = GetAnimAnotherSide(anim);
     proc->timer = 0;
@@ -292,7 +292,7 @@ void StartSpellBG_IvaldiBG2(struct Anim * anim)
     SpellFx_RegisterBgGfx(Img_IvaldiBg2, 32 * 8 * CHR_SIZE);
     SpellFx_RegisterBgPal(Pal_IvaldiBg2, PLTT_SIZE_4BPP);
 
-    BG_SetPosition(BG_1, 0, 0);
+    SetBgOffset(BG_1, 0, 0);
 
     SpellFx_SetSomeColorEffect();
 
@@ -304,7 +304,7 @@ void efxIvaldiBG2_Loop(struct ProcEfxBG * proc)
 {
     s16 ret = EfxAdvanceFrameLut((s16 *)&proc->timer, (s16 *)&proc->frame, proc->frame_config);
 
-    BG_SetPosition(BG_1, 0, 0);
+    SetBgOffset(BG_1, 0, 0);
 
     if (ret >= 0)
     {
@@ -318,7 +318,7 @@ void efxIvaldiBG2_Loop(struct ProcEfxBG * proc)
         {
             SpellFx_ClearBG1();
             gEfxBgSemaphore--;
-            SetDefaultColorEffects_();
+            SpellFx_ClearColorEffects();
             Proc_Break(proc);
         }
     }
@@ -406,11 +406,11 @@ void StartSpellBG_IvaldiBG3(struct Anim * anim)
     struct ProcEfxBG * proc;
 
     SpellFx_ClearBG1();
-    SetDefaultColorEffects_();
+    SpellFx_ClearColorEffects();
 
     gEfxBgSemaphore++;
 
-    proc = Proc_Start(ProcScr_efxIvaldiBG3, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxIvaldiBG3, PROC_TREE_3);
 
     proc->anim = anim;
     proc->timer = 0;
@@ -424,7 +424,7 @@ void StartSpellBG_IvaldiBG3(struct Anim * anim)
 
     proc->pal = PalArray_IvaldiBg3;
 
-    BG_SetPosition(BG_1, 0, 0);
+    SetBgOffset(BG_1, 0, 0);
 
     SpellFx_SetSomeColorEffect();
 
@@ -436,7 +436,7 @@ void efxIvaldiBG3_Loop(struct ProcEfxBG * proc)
 {
     s16 ret = EfxAdvanceFrameLut((s16 *)&proc->timer, (s16 *)&proc->frame, proc->frame_config);
 
-    BG_SetPosition(BG_1, 0, 0);
+    SetBgOffset(BG_1, 0, 0);
 
     if (ret >= 0)
     {
@@ -456,7 +456,7 @@ void efxIvaldiBG3_Loop(struct ProcEfxBG * proc)
         {
             SpellFx_ClearBG1();
             gEfxBgSemaphore--;
-            SetDefaultColorEffects_();
+            SpellFx_ClearColorEffects();
             Proc_Break(proc);
         }
     }
@@ -495,7 +495,7 @@ void StartSpellBG_IvaldiBG4(struct Anim * anim)
 
     gEfxBgSemaphore++;
 
-    proc = Proc_Start(ProcScr_efxIvaldiBG4, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxIvaldiBG4, PROC_TREE_3);
     proc->anim = anim;
     proc->timer = 0;
 
@@ -511,7 +511,7 @@ void StartSpellBG_IvaldiBG4(struct Anim * anim)
     SpellFx_RegisterBgGfx(Img_IvaldiBg4, 32 * 8 * CHR_SIZE);
     SpellFx_RegisterBgPal(Pal_IvaldiBg4, PLTT_SIZE_4BPP);
 
-    BG_SetPosition(BG_1, 0, 0);
+    SetBgOffset(BG_1, 0, 0);
 
     SpellFx_SetSomeColorEffect();
 
@@ -527,7 +527,7 @@ void efxIvaldiBG4_Loop(struct ProcEfxBG * proc)
 
     ret = EfxAdvanceFrameLut((s16 *)&proc->timer, (s16 *)&proc->frame, proc->frame_config);
 
-    BG_SetPosition(BG_1, proc->unk34, proc->unk3C);
+    SetBgOffset(BG_1, proc->unk34, proc->unk3C);
     BG_EnableSyncByMask(BG1_SYNC_BIT);
 
     if (ret >= 0)
@@ -564,7 +564,7 @@ void efxIvaldiBG4_Loop(struct ProcEfxBG * proc)
         {
             SpellFx_ClearBG1();
             gEfxBgSemaphore--;
-            SetDefaultColorEffects_();
+            SpellFx_ClearColorEffects();
             Proc_Break(proc);
         }
     }
@@ -603,7 +603,7 @@ void StartSpellOBJ_IvaldiFall(struct Anim * anim, int terminator)
 
     gEfxBgSemaphore++;
 
-    proc = Proc_Start(ProcScr_efxIvaldiOBJFall, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxIvaldiOBJFall, PROC_TREE_3);
     proc->anim = GetAnimAnotherSide(anim);
     proc->timer = 0;
     proc->terminator = terminator;
@@ -693,7 +693,7 @@ void StartSpellOBJ_IvaldiSideWash(struct Anim * anim, int terminator)
 
     gEfxBgSemaphore++;
 
-    proc = Proc_Start(ProcScr_efxIvaldiOBJSideWash, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxIvaldiOBJSideWash, PROC_TREE_3);
     proc->anim = GetAnimAnotherSide(anim);
     proc->timer = 0;
     proc->terminator = terminator;
@@ -776,7 +776,7 @@ void StartSubSpell_efxIvaldiOBJUprise(struct Anim * anim, int terminator)
 
     gEfxBgSemaphore++;
 
-    proc = Proc_Start(ProcScr_efxIvaldiOBJUprise, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxIvaldiOBJUprise, PROC_TREE_3);
     proc->anim = GetAnimAnotherSide(anim);
     proc->timer = 0;
     proc->terminator = terminator;
@@ -922,7 +922,7 @@ void StartSubSpell_efxIvaldiOBJ1(struct Anim * anim, int terminator, s16 x, s16 
 
     gEfxBgSemaphore++;
 
-    proc = Proc_Start(ProcScr_efxIvaldiOBJ1, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxIvaldiOBJ1, PROC_TREE_3);
 
     proc->anim = GetAnimAnotherSide(anim);
     proc->timer = 0;
@@ -1015,7 +1015,7 @@ void StartSubSpell_efxIvaldiOBJ2(struct Anim * anim, int terminator, s16 x, s16 
 
     gEfxBgSemaphore++;
 
-    proc = Proc_Start(ProcScr_efxIvaldiOBJ2, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxIvaldiOBJ2, PROC_TREE_3);
 
     proc->anim = GetAnimAnotherSide(anim);
     proc->timer = 0;
@@ -1081,7 +1081,7 @@ void StartSubSpell_efxIvaldiWOUT(struct Anim * anim, int duration, int terminato
 
     gEfxBgSemaphore++;
 
-    proc = Proc_Start(ProcScr_efxIvaldiWOUT, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxIvaldiWOUT, PROC_TREE_3);
     proc->anim = anim;
     proc->timer = 0;
     proc->terminator = terminator;

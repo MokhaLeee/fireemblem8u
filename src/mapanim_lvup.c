@@ -15,7 +15,7 @@ void StartManimLevelUp(int actor_id, ProcPtr parent)
 {
     struct ManimLevelUpProc * proc;
 
-    proc = Proc_StartBlocking(ProcScr_ManimLevelUp, parent);
+    proc = SpawnProcBlocking(ProcScr_ManimLevelUp, parent);
     proc->actor_id = actor_id;
 }
 
@@ -58,8 +58,8 @@ void ManimLevelUp_InitMainScreen(struct ManimLevelUpProc *proc)
     SetDefaultColorEffects();
     SetWinEnable(0, 0, 0);
 
-    BG_SetPosition(BG_0, 0, proc->y_scroll_offset);
-    BG_SetPosition(BG_1, 0, proc->y_scroll_offset);
+    SetBgOffset(BG_0, 0, proc->y_scroll_offset);
+    SetBgOffset(BG_1, 0, proc->y_scroll_offset);
 
     StartFace(0, gManimSt.actor[proc->actor_id].unit->pCharacterData->portraitId,
         184, 32 - proc->y_scroll_offset, 0x1042);
@@ -97,8 +97,8 @@ void ManimLevelUp_ScrollIn(struct ManimLevelUpProc *proc)
 {
     proc->y_scroll_offset += 8;
 
-    BG_SetPosition(BG_0, 0, proc->y_scroll_offset);
-    BG_SetPosition(BG_1, 0, proc->y_scroll_offset);
+    SetBgOffset(BG_0, 0, proc->y_scroll_offset);
+    SetBgOffset(BG_1, 0, proc->y_scroll_offset);
 
     // NOTE: this is inconsistent with math in ManimLevelUp_InitMainScreen
     gFaces[0]->yPos = 32 - proc->y_scroll_offset;
@@ -111,8 +111,8 @@ void ManimLevelUp_ScrollOut(struct ManimLevelUpProc *proc)
 {
     proc->y_scroll_offset -= 8;
 
-    BG_SetPosition(BG_0, 0, proc->y_scroll_offset);
-    BG_SetPosition(BG_1, 0, proc->y_scroll_offset);
+    SetBgOffset(BG_0, 0, proc->y_scroll_offset);
+    SetBgOffset(BG_1, 0, proc->y_scroll_offset);
 
     // NOTE: this is inconsistent with math in ManimLevelUp_InitMainScreen
     gFaces[0]->yPos = 32 - proc->y_scroll_offset;

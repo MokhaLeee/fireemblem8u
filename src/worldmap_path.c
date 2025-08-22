@@ -711,7 +711,7 @@ void sub_80BBF60(struct GmRouteProc * proc)
         proc->flags &= ~1;
     }
 
-    BG_SetPosition(proc->bgA, x & 0x1FF, y & 0xff);
+    SetBgOffset(proc->bgA, x & 0x1FF, y & 0xff);
 
     return;
 }
@@ -744,7 +744,7 @@ int sub_80BC0F4(struct GmRouteProc * proc)
     *&x = ((struct GmScreenProc *)(proc->proc_parent))->x;
     *&y = ((struct GmScreenProc *)(proc->proc_parent))->y;
 
-    BG_SetPosition(proc->bgB, x & 0x1FF, y & 0xff);
+    SetBgOffset(proc->bgB, x & 0x1FF, y & 0xff);
 
     return 0;
 }
@@ -781,7 +781,7 @@ void MapRoute_TransitionLoop(struct GmRouteProc * proc)
 //! FE8U = 0x080BC228
 int MapRoute_TransitionEnd(struct GmRouteProc * proc)
 {
-    BG_SetPosition(proc->bgB, 0, 0);
+    SetBgOffset(proc->bgB, 0, 0);
     BG_Fill(BG_GetMapBuffer(proc->bgB), 0);
     BG_SetPriority(proc->bgB, proc->bgPriority);
     BG_EnableSyncByMask((1 << proc->bgA) | (1 << proc->bgB));
@@ -833,7 +833,7 @@ void MapRoute_80BC2DC(struct GmRouteProc * proc)
     sub_80BBC54(proc);
 
     sub_80BBCC8(x / 8, y / 8, proc->bgA);
-    BG_SetPosition(proc->bgB, 0, 0);
+    SetBgOffset(proc->bgB, 0, 0);
     BG_Fill(BG_GetMapBuffer(proc->bgB), 0);
     BG_SetPriority(proc->bgB, proc->bgPriority);
     BG_EnableSyncByMask((1 << proc->bgA) | (1 << proc->bgB));
@@ -888,7 +888,7 @@ PROC_LABEL(2),
 //! FE8U = 0x080BC3A4
 ProcPtr StartGMapRoute(ProcPtr parent, struct OpenPaths * pPaths, int c, int d)
 {
-    struct GmRouteProc * proc = Proc_Start(ProcScr_GMapRoute, parent);
+    struct GmRouteProc * proc = SpawnProc(ProcScr_GMapRoute, parent);
     proc->chr = c;
     proc->pal = d;
     proc->pOpenPaths = pPaths;

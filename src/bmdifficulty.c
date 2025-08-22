@@ -432,7 +432,7 @@ struct ProcCmd CONST_DATA sProcScr_DisplayDungeonRecord_FromMenu[] = {
 };
 
 void StartDungeonRecordProcFromMenu(ProcPtr proc) {
-    Proc_StartBlocking(sProcScr_DisplayDungeonRecord_FromMenu, proc);
+    SpawnProcBlocking(sProcScr_DisplayDungeonRecord_FromMenu, proc);
     return;
 }
 
@@ -451,7 +451,7 @@ struct ProcCmd CONST_DATA sProcScr_DisplayDungeonRecord_AfterDungeonClear[] = {
     PROC_WHILE(FadeInExists),
 
     PROC_SLEEP(30),
-    PROC_START_CHILD_BLOCKING(sProcScr_DungeonRecord_UpdateNewRecordValues),
+    SpawnProc_CHILD_BLOCKING(sProcScr_DungeonRecord_UpdateNewRecordValues),
     PROC_REPEAT(DungeonRecordUi_KeyListener),
 
     PROC_CALL_ARG(NewFadeOut, 8),
@@ -470,7 +470,7 @@ struct ProcCmd CONST_DATA sProcScr_DisplayDungeonRecord_AfterDungeonClear[] = {
 // StartDungeonRecordProcAfterDungeonClear?
 void RecordDisplayAfterTowerCleared(ProcPtr proc)
 {
-    Proc_StartBlocking(sProcScr_DisplayDungeonRecord_AfterDungeonClear, proc);
+    SpawnProcBlocking(sProcScr_DisplayDungeonRecord_AfterDungeonClear, proc);
     return;
 }
 
@@ -513,10 +513,10 @@ void SetupDungeonRecordUi(ProcPtr proc) {
     gLCDControlBuffer.dispcnt.bg3_on = 1;
     gLCDControlBuffer.dispcnt.obj_on = 1;
 
-    BG_SetPosition(0, 0, 0);
-    BG_SetPosition(1, 0, 0);
-    BG_SetPosition(2, 0, 0);
-    BG_SetPosition(3, 0, 0);
+    SetBgOffset(0, 0, 0);
+    SetBgOffset(1, 0, 0);
+    SetBgOffset(2, 0, 0);
+    SetBgOffset(3, 0, 0);
 
     SetBlendTargetA(0, 0, 1, 0, 0);
     SetBlendTargetB(0, 0, 0, 1, 0);
@@ -1198,9 +1198,9 @@ struct BMDifficultyProc* DungeonRecordUi_SpawnUpdateValueProc(int label, int val
     struct BMDifficultyProc* proc;
 
     if (parent != 0) {
-        proc = Proc_StartBlocking(sProcScr_DungeonRecord_UpdateValue, parent);
+        proc = SpawnProcBlocking(sProcScr_DungeonRecord_UpdateValue, parent);
     } else {
-        proc = Proc_Start(sProcScr_DungeonRecord_UpdateValue, PROC_TREE_3);
+        proc = SpawnProc(sProcScr_DungeonRecord_UpdateValue, PROC_TREE_3);
     }
 
     proc->labelIndex = label;

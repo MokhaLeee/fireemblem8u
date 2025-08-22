@@ -100,7 +100,7 @@ struct ProcCmd CONST_DATA gProcScr_BonusClaimHelpBox[] =
 //! FE8U = 0x080AEBCC
 void StartBonusClaimHelpBox(int x, int y, int msgId, ProcPtr parent)
 {
-    struct BonusClaimHelpBoxProc * proc = Proc_StartBlocking(gProcScr_BonusClaimHelpBox, parent);
+    struct BonusClaimHelpBoxProc * proc = SpawnProcBlocking(gProcScr_BonusClaimHelpBox, parent);
     proc->x = x;
     proc->y = y;
     proc->msgId = msgId;

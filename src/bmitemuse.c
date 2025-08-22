@@ -754,7 +754,7 @@ void WarpSelect_OnCancel(struct WarpSelectProc* proc)
         gActiveUnit->xPos,
         gActiveUnit->yPos);
 
-    Proc_Start(gProcScr_BackToUnitMenu, PROC_TREE_3);
+    SpawnProc(gProcScr_BackToUnitMenu, PROC_TREE_3);
 }
 
 void WarpSelect_OnEnd(struct WarpSelectProc* proc)
@@ -769,7 +769,7 @@ u8 WarpOnSelectTarget(ProcPtr proc, struct SelectTarget* target)
 
     gActionData.targetIndex = target->uid;
 
-    Proc_Start(gProcScr_SquareSelectWarp, PROC_TREE_3);
+    SpawnProc(gProcScr_SquareSelectWarp, PROC_TREE_3);
 
     return TARGETSELECTION_ACTION_SE_6A;
 }
@@ -1078,7 +1078,7 @@ void TorchSelect_OnIdle(struct WarpSelectProc* proc)
 
 void DoUseTorchStaff(struct Unit* unit)
 {
-    Proc_Start(gProcScr_SquareSelectTorch, PROC_TREE_3);
+    SpawnProc(gProcScr_SquareSelectTorch, PROC_TREE_3);
     PlaySoundEffect(SONG_SE_SYS_WINDOW_SELECT1);
 }
 

@@ -18,7 +18,7 @@ void StartSpellAnimThunder(struct Anim *anim)
     NewEfxSpellCast();
     SpellFx_ClearBG1Position();
 
-    proc = Proc_Start(ProcScr_efxThunder, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxThunder, PROC_TREE_3);
     proc->anim = anim;
     proc->timer = 0;
     proc->hitted = CheckRoundMiss(GetAnimRoundTypeAnotherSide(anim));
@@ -41,7 +41,7 @@ void Loop6C_efxThunder(struct ProcEfx * proc)
     }
 
     if (cur == (frame + 4)) {
-        animc->state3 |= ANIM_BIT3_TAKE_BACK_ENABLE | ANIM_BIT3_HIT_EFFECT_APPLIED;
+        animc->state3 |= ANIM_BIT3_C02_BLOCK_END | ANIM_BIT3_C01_BLOCK_END_INBATTLE;
         StartBattleAnimHitEffectsDefault(animc, proc->hitted);
         PlaySFX(0xF5, 0x100, animc->xPosition, 1);
 
@@ -56,7 +56,7 @@ void Loop6C_efxThunder(struct ProcEfx * proc)
     
     if (cur == (frame + 0x60)) {
         SpellFx_Finish();
-        RegisterEfxSpellCastEnd();
+        EndEfxSpellCastAsync();
         Proc_Break(proc);
     }
 }
@@ -85,7 +85,7 @@ void NewEfxThunderBG(struct Anim *anim)
 
     struct ProcEfxBG *proc;
     gEfxBgSemaphore++;
-    proc = Proc_Start(ProcScr_efxThunderBG, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxThunderBG, PROC_TREE_3);
     proc->anim = anim;
     proc->timer = 0;
     proc->frame = 0;
@@ -98,9 +98,9 @@ void NewEfxThunderBG(struct Anim *anim)
 
     if (gEkrDistanceType != EKR_DISTANCE_CLOSE) {
         if (GetAnimPosition(proc->anim) == EKR_POS_L)
-            BG_SetPosition(BG_1, 0x18, 0x0);
+            SetBgOffset(BG_1, 0x18, 0x0);
         else
-            BG_SetPosition(BG_1, 0xE8, 0x0);
+            SetBgOffset(BG_1, 0xE8, 0x0);
     }
 }
 
@@ -128,7 +128,7 @@ void EfxThunderBGMain(struct ProcEfxBG * proc)
     if (ret == -1) {
         SpellFx_ClearBG1();
         gEfxBgSemaphore--;
-        SetDefaultColorEffects_();
+        SpellFx_ClearColorEffects();
         Proc_Break(proc);
     }
 }
@@ -152,7 +152,7 @@ void NewEfxThunderBGCOL(struct Anim * anim)
 
     struct ProcEfxBGCOL *proc;
     gEfxBgSemaphore++;
-    proc = Proc_Start(ProcScr_efxThunderBGCOL, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxThunderBGCOL, PROC_TREE_3);
     proc->anim = anim;
     proc->timer = 0;
     proc->frame = 0;
@@ -171,7 +171,7 @@ void EfxThunderBGCOL_Loop(struct ProcEfxBGCOL * proc)
     }
 
     if (ret == -1) {
-        SetDefaultColorEffects_();
+        SpellFx_ClearColorEffects();
         gEfxBgSemaphore--;
         Proc_Break(proc);
     }
@@ -181,7 +181,7 @@ void NewEfxThunderOBJ(struct Anim *anim)
 {
     struct ProcEfxOBJ *proc;
     gEfxBgSemaphore++;
-    proc = Proc_Start(ProcScr_efxThunderOBJ, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxThunderOBJ, PROC_TREE_3);
     proc->anim = anim;
     proc->timer = 0;
     proc->anim2 = EfxCreateFrontAnim(anim, AnimScr_EfxThunderOBJ_L, AnimScr_EfxThunderOBJ_R, AnimScr_EfxThunderOBJ_L, AnimScr_EfxThunderOBJ_R);

@@ -27,7 +27,7 @@ CONST_DATA struct ProcCmd ProcScr_ekrBattleEnding[] = {
 void NewEkrbattleending(void)
 {
     struct ProcEkrBattleEnding * proc;
-    proc = Proc_Start(ProcScr_ekrBattleEnding, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_ekrBattleEnding, PROC_TREE_3);
     proc->timer = 0;
 }
 
@@ -81,7 +81,7 @@ void ekrBattleEnding_8056170(struct ProcEkrBattleEnding * proc)
     UnpackChapterMapGraphics(gPlaySt.chapterIndex);
     EfxChapterMapFadeOUT(0x10);
     RenderBmMap();
-    BG_SetPosition(BG_3, 0, 0);
+    SetBgOffset(BG_3, 0, 0);
     Proc_Break(proc);
 }
 

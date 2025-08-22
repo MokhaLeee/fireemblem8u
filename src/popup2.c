@@ -87,7 +87,7 @@ void NewPopup2_PlanA(ProcPtr parent, int IconIndex, char *str)
 
     ResetTextFont();
     PutDrawText(NULL, TILEMAP_LOCATED(gBG0TilemapBuffer, x + 1, 9), TEXT_COLOR_SYSTEM_WHITE, 0, 0x14, str);
-    Proc_StartBlocking(ProcScr_Popup2, parent);
+    SpawnProcBlocking(ProcScr_Popup2, parent);
 }
 
 void NewPopup2_PlanB(ProcPtr proc, int icon_index, char *str0, int num, char *str1)
@@ -159,7 +159,7 @@ void NewPopup2_PlanB(ProcPtr proc, int icon_index, char *str0, int num, char *st
     }
 
     PutText(&th, TILEMAP_LOCATED(gBG0TilemapBuffer, x + 1, 9));
-    Proc_StartBlocking(ProcScr_Popup2, proc);
+    SpawnProcBlocking(ProcScr_Popup2, proc);
 }
 
 void NewPopup2_PlanC(ProcPtr parent, int item, int msg)
@@ -196,7 +196,7 @@ void NewPopup2_PlanC(ProcPtr parent, int item, int msg)
     );
 
     PutText(&th, TILEMAP_LOCATED(gBG0TilemapBuffer, x + 3, 9));
-    Proc_StartBlocking(ProcScr_Popup2, parent);
+    SpawnProcBlocking(ProcScr_Popup2, parent);
 
 }
 
@@ -267,7 +267,7 @@ void NewPopup2_PlanD(ProcPtr parent, int item, int msg0, int msg1)
         GetItemIconId(item),
         TILEREF(0, 0x4)
     );
-    Proc_StartBlocking(ProcScr_Popup2, parent);
+    SpawnProcBlocking(ProcScr_Popup2, parent);
 }
 
 void NewPopup2_DropItem(ProcPtr parent, int item)

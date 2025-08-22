@@ -100,7 +100,7 @@ void PrepUnitSwapProc_OnEnd(struct PrepUnitSwapProc *proc)
 
 void StartPrepUnitSwap(ProcPtr parent, struct Unit *unit, int x_dest, int y_dest)
 {
-    struct PrepUnitSwapProc *proc = Proc_Start(sProcScr_PrepUnitSwap, parent);
+    struct PrepUnitSwapProc *proc = SpawnProc(sProcScr_PrepUnitSwap, parent);
 
     proc->unit = unit;
     proc->x_tile_dest = x_dest * 16;

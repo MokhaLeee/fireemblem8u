@@ -210,7 +210,7 @@ void FortuneSubMenu_HandleOptionSwitch(struct PrepProcA1962C* proc) {
 
 //! FE8U = 0x080A0944
 void StartFortuneSubMenu(int option, ProcPtr parent) {
-    struct PrepProcA1962C* proc = Proc_StartBlocking(gProcScr_FortuneSubMenu, parent);
+    struct PrepProcA1962C* proc = SpawnProcBlocking(gProcScr_FortuneSubMenu, parent);
     proc->unk_29 = option;
     return;
 }

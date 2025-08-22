@@ -102,7 +102,7 @@ void OnMain_SioError(void) {
     m4aSoundInit();
     Proc_Init();
 
-    BG_SetPosition(0, 0, 0);
+    SetBgOffset(0, 0, 0);
 
     gLCDControlBuffer.dispcnt.bg0_on = 1;
     gLCDControlBuffer.dispcnt.bg1_on = 0;

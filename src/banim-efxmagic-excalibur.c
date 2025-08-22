@@ -27,7 +27,7 @@ void StartSpellAnimExcalibur(struct Anim * anim)
     NewEfxSpellCast();
     SpellFx_ClearBG1Position();
 
-    proc = Proc_Start(ProcScr_efxExcalibur, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxExcalibur, PROC_TREE_3);
     proc->anim = anim;
     proc->timer = 0;
     proc->hitted = CheckRoundMiss(GetAnimRoundTypeAnotherSide(anim));
@@ -84,7 +84,7 @@ void efxExcalibur_Loop_Main(struct ProcEfx * proc)
         if (proc->timer == duration + 146)
         {
             NewEfxFlashBgWhite(anim, 5);
-            anim->state3 |= (ANIM_BIT3_TAKE_BACK_ENABLE | ANIM_BIT3_HIT_EFFECT_APPLIED);
+            anim->state3 |= (ANIM_BIT3_C02_BLOCK_END | ANIM_BIT3_C01_BLOCK_END_INBATTLE);
             StartBattleAnimHitEffectsDefault(anim, proc->hitted);
             EfxPlayHittedSFX(anim);
         }
@@ -96,7 +96,7 @@ void efxExcalibur_Loop_Main(struct ProcEfx * proc)
         if (proc->timer == duration + 167)
         {
             SpellFx_Finish();
-            RegisterEfxSpellCastEnd();
+            EndEfxSpellCastAsync();
             Proc_Break(proc);
         }
     }
@@ -104,13 +104,13 @@ void efxExcalibur_Loop_Main(struct ProcEfx * proc)
     {
         if (proc->timer == duration + 110)
         {
-            anim->state3 |= (ANIM_BIT3_TAKE_BACK_ENABLE | ANIM_BIT3_HIT_EFFECT_APPLIED);
+            anim->state3 |= (ANIM_BIT3_C02_BLOCK_END | ANIM_BIT3_C01_BLOCK_END_INBATTLE);
             StartBattleAnimHitEffectsDefault(anim, proc->hitted);
         }
         if (proc->timer == duration + 111)
         {
             SpellFx_Finish();
-            RegisterEfxSpellCastEnd();
+            EndEfxSpellCastAsync();
             Proc_Break(proc);
         }
     }
@@ -142,7 +142,7 @@ void StartSubSpell_efxExcaliburBG(struct Anim * anim)
 
     gEfxBgSemaphore++;
 
-    proc = Proc_Start(ProcScr_efxExcaliburBG, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxExcaliburBG, PROC_TREE_3);
     proc->anim = anim;
     proc->timer = 0;
     proc->terminator = 40;
@@ -164,7 +164,7 @@ void efxExcaliburBG_OnEnd(void)
 {
     SpellFx_ClearBG1();
     gEfxBgSemaphore--;
-    SetDefaultColorEffects_();
+    SpellFx_ClearColorEffects();
     return;
 }
 
@@ -278,7 +278,7 @@ void StartSubSpell_efxExcaliburBGCOL(struct Anim * anim)
 
     gEfxBgSemaphore++;
 
-    proc = Proc_Start(ProcScr_efxExcaliburBGCOL, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxExcaliburBGCOL, PROC_TREE_3);
 
     proc->anim = anim;
     proc->timer = 0;
@@ -342,7 +342,7 @@ struct ProcCmd CONST_DATA ProcScr_efxExcaliburSCR2[] =
 //! FE8U = 0x080646FC
 void StartSubSpell_efxExcaliburSCR(int unk)
 {
-    struct ProcEfx * proc = Proc_Start(ProcScr_efxExcaliburSCR, PROC_TREE_3);
+    struct ProcEfx * proc = SpawnProc(ProcScr_efxExcaliburSCR, PROC_TREE_3);
     proc->timer = 0;
     proc->step = 0;
     proc->unk44 = 0;
@@ -415,7 +415,7 @@ void efxExcaliburSCR_Loop(struct ProcEfx * proc)
 //! FE8U = 0x080647D0
 void StartSubSpell_efxExcaliburSCR2(struct ProcEfx * proc, int b)
 {
-    struct ProcEfxSCR * childProc = Proc_Start(ProcScr_efxExcaliburSCR2, PROC_TREE_3);
+    struct ProcEfxSCR * childProc = SpawnProc(ProcScr_efxExcaliburSCR2, PROC_TREE_3);
     childProc->timer = 0;
     childProc->unk2E = b;
     childProc->unk5C = proc;
@@ -462,7 +462,7 @@ void StartSubSpell_efxExcaliburBG2(struct Anim * anim)
 
     gEfxBgSemaphore++;
 
-    proc = Proc_Start(ProcScr_efxExcaliburBG2, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxExcaliburBG2, PROC_TREE_3);
     proc->anim = anim;
     proc->timer = 0;
     proc->terminator = 12;
@@ -491,7 +491,7 @@ void StartSubSpell_efxExcaliburBG2(struct Anim * anim)
     BG_EnableSyncByMask(BG1_SYNC_BIT);
     SpellFx_SetSomeColorEffect();
 
-    BG_SetPosition(BG_1, 0, 0);
+    SetBgOffset(BG_1, 0, 0);
     SetWinEnable(0, 0, 0);
 
     return;
@@ -502,7 +502,7 @@ void efxExcaliburBG2_OnEnd(void)
 {
     SpellFx_ClearBG1();
     gEfxBgSemaphore--;
-    SetDefaultColorEffects_();
+    SpellFx_ClearColorEffects();
     return;
 }
 
@@ -551,7 +551,7 @@ void StartSubSpell_efxExcaliburBGCOL2(struct Anim * anim)
 
     gEfxBgSemaphore++;
 
-    proc = Proc_Start(ProcScr_efxExcaliburBGCOL2, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxExcaliburBGCOL2, PROC_TREE_3);
     proc->anim = anim;
     proc->timer = 0;
     proc->timer2 = 0;
@@ -608,7 +608,7 @@ void StartSubSpell_efxExcaliburBG3(struct Anim * anim)
 
     gEfxBgSemaphore++;
 
-    proc = Proc_Start(ProcScr_efxExcaliburBG3, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxExcaliburBG3, PROC_TREE_3);
     proc->anim = anim;
     proc->timer = 0;
     proc->terminator = 12;
@@ -637,7 +637,7 @@ void StartSubSpell_efxExcaliburBG3(struct Anim * anim)
     BG_EnableSyncByMask(BG1_SYNC_BIT);
     SpellFx_SetSomeColorEffect();
 
-    BG_SetPosition(BG_1, 0, 0);
+    SetBgOffset(BG_1, 0, 0);
     SetWinEnable(0, 0, 0);
 
     return;
@@ -648,7 +648,7 @@ void efxExcaliburBG3_OnEnd(void)
 {
     SpellFx_ClearBG1();
     gEfxBgSemaphore--;
-    SetDefaultColorEffects_();
+    SpellFx_ClearColorEffects();
     return;
 }
 
@@ -697,7 +697,7 @@ void StartSubSpell_efxExcaliburBGCOL3(struct Anim * anim)
 
     gEfxBgSemaphore++;
 
-    proc = Proc_Start(ProcScr_efxExcaliburBGCOL3, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxExcaliburBGCOL3, PROC_TREE_3);
     proc->anim = anim;
     proc->timer = 0;
     proc->timer2 = 0;
@@ -753,7 +753,7 @@ void StartSubSpell_efxExcaliburOBJ(struct Anim * anim)
 
     gEfxBgSemaphore++;
 
-    proc = Proc_Start(ProcScr_efxExcaliburOBJ, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxExcaliburOBJ, PROC_TREE_3);
     proc->anim = anim;
     proc->timer = 0;
     proc->terminator = 40;
@@ -821,7 +821,7 @@ void StartSubSpell_efxExcaliburBG0(struct Anim * anim)
 
     gEfxBgSemaphore++;
 
-    proc = Proc_Start(ProcScr_efxExcaliburBG0, PROC_TREE_3);
+    proc = SpawnProc(ProcScr_efxExcaliburBG0, PROC_TREE_3);
     proc->anim = anim;
     proc->timer = 0;
 
@@ -846,7 +846,7 @@ void efxExcaliburBG0_Loop(struct ProcEfxBG * proc)
     s16 ret;
 
     proc->unk32 = (proc->unk32 + 16) % DISPLAY_WIDTH;
-    BG_SetPosition(BG_1, proc->unk32, 0);
+    SetBgOffset(BG_1, proc->unk32, 0);
 
     ret = EfxAdvanceFrameLut((s16 *)&proc->timer, (s16 *)&proc->frame, proc->frame_config);
 
@@ -863,7 +863,7 @@ void efxExcaliburBG0_Loop(struct ProcEfxBG * proc)
         {
             SpellFx_ClearBG1();
             gEfxBgSemaphore--;
-            SetDefaultColorEffects_();
+            SpellFx_ClearColorEffects();
             Proc_End(proc);
         }
     }

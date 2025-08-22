@@ -403,9 +403,9 @@ ProcPtr StartTalkExt(int x, int y, const char* str, ProcPtr parent) {
     sTalkState->activeWidth = Div(GetStrTalkLen(sTalkState->str, 0) + 7, 8) + 2;
 
     if (parent) {
-        return Proc_StartBlocking(gProcScr_Talk, parent);
+        return SpawnProcBlocking(gProcScr_Talk, parent);
     } else {
-        return Proc_Start(gProcScr_Talk, PROC_TREE_3);
+        return SpawnProc(gProcScr_Talk, PROC_TREE_3);
     }
 }
 
@@ -532,11 +532,11 @@ void Talk_OnInit(void) {
     if (!CheckTalkFlag(TALK_FLAG_SPRITE)) {
         LoadObjUIGfx();
 
-        BG_SetPosition(BG_0, 0, 0);
-        BG_SetPosition(BG_1, 0, 0);
+        SetBgOffset(BG_0, 0, 0);
+        SetBgOffset(BG_1, 0, 0);
     }
 
-    Proc_Start(gProcScr_TalkSkipListener, PROC_TREE_3);
+    SpawnProc(gProcScr_TalkSkipListener, PROC_TREE_3);
 
     return;
 }
@@ -641,7 +641,7 @@ s8 TalkPrepNextChar(ProcPtr proc) {
 
     if (sTalkState->lineActive >= sTalkState->lines) {
         sTalkState->instantScroll = 0;
-        Proc_StartBlocking(gProcScr_TalkShiftClear, proc);
+        SpawnProcBlocking(gProcScr_TalkShiftClear, proc);
         return 1;
     }
 
@@ -668,7 +668,7 @@ s8 TalkSpritePrepNextChar(ProcPtr proc) {
 
     if (sTalkState->lineActive >= sTalkState->lines) {
         sTalkState->instantScroll = 0;
-        Proc_StartBlocking(ProcScr_TalkSpriteShiftClear, proc);
+        SpawnProcBlocking(ProcScr_TalkSpriteShiftClear, proc);
         return 1;
     }
 
@@ -681,7 +681,7 @@ s8 TalkSpritePrepNextChar(ProcPtr proc) {
 
 //! FE8U = 0x08006EC4
 void LockTalk(ProcPtr proc) {
-    Proc_StartBlocking(gProcScr_TalkLock, proc);
+    SpawnProcBlocking(gProcScr_TalkLock, proc);
     return;
 }
 
@@ -763,7 +763,7 @@ int TalkInterpret(ProcPtr proc) {
                     return 2;
                 }
 
-                unkProc = Proc_StartBlocking(gProcScr_TalkPause, proc);
+                unkProc = SpawnProcBlocking(gProcScr_TalkPause, proc);
                 unkProc->unk64 = GetTalkPauseCmdDuration(4);
                 return 3;
             }
@@ -798,7 +798,7 @@ int TalkInterpret(ProcPtr proc) {
                 TalkFlushAllLine();
                 sTalkState->str++;
             } else if (!CheckTalkFlag(TALK_FLAG_INSTANTSHIFT)) {
-                Proc_StartBlocking(gProcScr_TalkShiftClearAll, proc);
+                SpawnProcBlocking(gProcScr_TalkShiftClearAll, proc);
             } else {
                 ClearTalkText();
             }
@@ -828,7 +828,7 @@ int TalkInterpret(ProcPtr proc) {
                 return 2;
             }
 
-            unkProc = Proc_StartBlocking(gProcScr_TalkPause, proc);
+            unkProc = SpawnProcBlocking(gProcScr_TalkPause, proc);
             unkProc->unk64 = GetTalkPauseCmdDuration(*sTalkState->str);
 
             sTalkState->str++;
@@ -1317,7 +1317,7 @@ void StartTalkFaceMove(int talkFaceFrom, int talkFaceTo, s8 isSwap) {
         return;
     }
 
-    proc = Proc_Start(gProcScr_TalkFaceMove, gFaces[slot]);
+    proc = SpawnProc(gProcScr_TalkFaceMove, gFaces[slot]);
 
     proc->unk64 = slot;
     proc->unk66 = talkFaceTo;
@@ -1424,7 +1424,7 @@ void sub_8007CD4(void) {
 
 //! FE8U = 0x08007CD8
 void StartTalkWaitForInput(ProcPtr parent, int x, int y) {
-    struct Proc* proc = Proc_StartBlocking(gProcScr_TalkWaitForInput, parent);
+    struct Proc* proc = SpawnProcBlocking(gProcScr_TalkWaitForInput, parent);
 
     proc->unk64 = x;
     proc->unk66 = y;
@@ -1435,7 +1435,7 @@ void StartTalkWaitForInput(ProcPtr parent, int x, int y) {
 
 //! FE8U = 0x08007D04
 void StartTalkWaitForInputUnk(ProcPtr parent, int x, int y, int unk) {
-    struct Proc* proc = Proc_StartBlocking(gProcScr_TalkWaitForInput, parent);
+    struct Proc* proc = SpawnProcBlocking(gProcScr_TalkWaitForInput, parent);
 
     proc->unk64 = x;
     proc->unk66 = y;
@@ -1473,10 +1473,10 @@ void TalkShiftClearAll_OnInit(struct Proc* proc) {
 void TalkShiftClearAll_OnIdle(struct Proc* proc) {
     proc->unk64++;
 
-    BG_SetPosition(0, 0, proc->unk64);
+    SetBgOffset(0, 0, proc->unk64);
 
     if (proc->unk64 >= proc->unk66) {
-        BG_SetPosition(0, 0, 0);
+        SetBgOffset(0, 0, 0);
         ClearPutTalkText();
 
         Proc_Break(proc);
@@ -1499,7 +1499,7 @@ void StartTalkChoice(const struct ChoiceEntryInfo* choices, struct Text* text, u
 
     TalkBgSync(1);
 
-    proc = Proc_StartBlocking(gProcScr_TalkChoice, parent);
+    proc = SpawnProcBlocking(gProcScr_TalkChoice, parent);
 
     proc->selectedChoice = defaultChoice;
 
@@ -1584,13 +1584,13 @@ void TalkShiftClear_OnIdle(struct Proc* proc) {
 
     proc->unk64++;
 
-    BG_SetPosition(0, 0, proc->unk64);
+    SetBgOffset(0, 0, proc->unk64);
 
     if (proc->unk64 >= 16) {
         sTalkState->lineActive--;
         sTalkState->topTextNum++;
 
-        BG_SetPosition(0, 0, 0);
+        SetBgOffset(0, 0, 0);
 
         for (i = 0; i < sTalkState->lines - 1; i++) {
             PutText(
@@ -1810,7 +1810,7 @@ void PutTalkBubble(int xAnchor, int yAnchor, int width, int height) {
 
 //! FE8U = 0x080083E0
 void StartOpenTalkBubble(void) {
-    struct Proc* proc = Proc_Start(gProcScr_TalkBubbleOpen, PROC_TREE_3);
+    struct Proc* proc = SpawnProc(gProcScr_TalkBubbleOpen, PROC_TREE_3);
     proc->unk64 = 0;
 
     return;
@@ -1996,7 +1996,7 @@ void TalkOpen_OnIdle(struct Proc* proc) {
 
     var = Interpolate(INTERPOLATE_RSQUARE, -30, 0, proc->unk58, 12);
 
-    BG_SetPosition(BG_1, 0, var / 2);
+    SetBgOffset(BG_1, 0, var / 2);
 
     if (!CheckTalkFlag(TALK_FLAG_8)) {
         SetBlendAlpha(var / 2 + 16, 1 - var / 2);
@@ -2012,7 +2012,7 @@ void TalkOpen_OnIdle(struct Proc* proc) {
 //! FE8U = 0x080088A8
 void StartTalkOpen(int talkFace, ProcPtr parent) {
 
-    struct Proc* proc = Proc_StartBlocking(gProcScr_TalkOpen, parent);
+    struct Proc* proc = SpawnProcBlocking(gProcScr_TalkOpen, parent);
 
     proc->unk64 = GetTalkFaceHPos(talkFace);
     proc->unk66 = 8;
@@ -2485,12 +2485,12 @@ void sub_8008F54(void)
 //! FE8U = 0x08008F64
 void sub_8008F64(int chr, int b, int c, ProcPtr parent)
 {
-    struct TalkDebugProc * proc = Proc_Start(ProcScr_08591624, PROC_TREE_VSYNC);
+    struct TalkDebugProc * proc = SpawnProc(ProcScr_08591624, PROC_TREE_VSYNC);
 
     proc->unk_4c = (0x3FF & chr) * CHR_SIZE + 0x06010000;
     proc->unk_54 = b;
     proc->unk_58 = c;
-    Proc_StartBlocking(ProcScr_0859160C, parent);
+    SpawnProcBlocking(ProcScr_0859160C, parent);
 
     return;
 }
@@ -2609,7 +2609,7 @@ void ScreenFlash_FadeOut(struct ProcScreenFlashing * proc)
 
 void StartScreenFlashing(int mask, int duration, int speed_fadein, int speed_fadeout, int r, int g, int b, ProcPtr parent)
 {
-    struct ProcScreenFlashing * proc = Proc_StartBlocking(ProcScr_ScreenFlashing, parent);
+    struct ProcScreenFlashing * proc = SpawnProcBlocking(ProcScr_ScreenFlashing, parent);
 
     proc->duration = duration;
     proc->mask = mask;

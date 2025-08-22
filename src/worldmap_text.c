@@ -140,7 +140,7 @@ void HideWmText(void)
 //! FE8U = 0x080C368C
 ProcPtr StartWmTextHandler(ProcPtr parent)
 {
-    return Proc_Start(ProcScr_WorldMapTextHandler, parent);
+    return SpawnProc(ProcScr_WorldMapTextHandler, parent);
 }
 
 //! FE8U = 0x080C36A0
